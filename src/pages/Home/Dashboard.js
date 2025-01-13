@@ -14,7 +14,7 @@ export default function Dashboard(){
   return (
     <div className="p-4">
       {/* Header Section */}
-      <div className="flex flex-col md:flex-row justify-between items-center mb-4 space-y-4 md:space-y-0">
+      <div className="flex items-center justify-between items-center mb-4 space-y-4 md:space-y-0">
         <h1 className="text-xl font-bold">Overview</h1>
         <div className="flex flex-wrap items-center space-x-2">
           <select className="border rounded p-2">
