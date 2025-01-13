@@ -1,20 +1,7 @@
 import React from "react";
 
-export default function ShipmentTable(){
-    const shipments = [
-      { id: 'SHP-001', title: 'Electronics Delivery', pickup: 'New York, NY', delivery: 'Los Angeles, CA', status: 'In Transit', shipmentDate: '2024-12-01', expectedDelivery: '2024-12-08' },
-      { id: 'SHP-002', title: 'Furniture Delivery', pickup: 'Chicago, IL', delivery: 'Houston, TX', status: 'Delivered', shipmentDate: '2024-11-15', expectedDelivery: '2024-11-20' },
-      { id: 'SHP-003', title: 'Clothing Shipment', pickup: 'Miami, FL', delivery: 'Boston, MA', status: 'Pending', shipmentDate: '2024-12-03', expectedDelivery: '2024-12-09' },
-      { id: 'SHP-004', title: 'Food Delivery', pickup: 'Las Vegas, NV', delivery: 'San Diego, CA', status: 'Cancelled', shipmentDate: '2024-11-25', expectedDelivery: '2024-11-28' },
-      { id: 'SHP-004', title: 'Food Delivery', pickup: 'Las Vegas, NV', delivery: 'San Diego, CA', status: 'Cancelled', shipmentDate: '2024-11-25', expectedDelivery: '2024-11-28' },
-      { id: 'SHP-004', title: 'Food Delivery', pickup: 'Las Vegas, NV', delivery: 'San Diego, CA', status: 'Cancelled', shipmentDate: '2024-11-25', expectedDelivery: '2024-11-28' },
-      { id: 'SHP-004', title: 'Food Delivery', pickup: 'Las Vegas, NV', delivery: 'San Diego, CA', status: 'Cancelled', shipmentDate: '2024-11-25', expectedDelivery: '2024-11-28' },
-      { id: 'SHP-004', title: 'Food Delivery', pickup: 'Las Vegas, NV', delivery: 'San Diego, CA', status: 'Cancelled', shipmentDate: '2024-11-25', expectedDelivery: '2024-11-28' },
-
-    ];
+export default function ShipmentTable({shipments}){
     return (
-      <div className="container mx-auto">
-        <h2 className="text-lg font-medium mb-3">Shipment Listing </h2>
         <div className="overflow-x-auto">
         <table className="table-auto border-gray-200">
           <thead>
@@ -52,7 +39,6 @@ export default function ShipmentTable(){
             ))}
           </tbody>
         </table>
-        </div>
       </div>
     );
   };
