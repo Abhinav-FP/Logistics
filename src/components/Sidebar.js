@@ -38,7 +38,7 @@ export default function Sidebar() {
         {!isOpen && <IoIosMenu size={24}/> }
       </button>}
 
-      <div className={`w-64 h-screen bg-white shadow-md text-[#727272] ${isOpen ? "block" : "hidden"} md:block`}>
+      <div className={`w-64 bg-white shadow-md text-[#727272] ${isOpen ? "block" : "hidden"} md:block`}>
         <div className="p-4 flex gap-2 items-center border-b border-gray-200">
           <img src="/Logo.png" alt="FriegtFlow Logo" className="h-[41px] w-[98px]" />
           <div className="flex flex-col">
