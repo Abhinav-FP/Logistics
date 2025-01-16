@@ -16,25 +16,25 @@ export default function ShipmentTable({shipments}){
             </tr>
           </thead>
           <tbody>
-            {shipments.map((shipment) => (
+            {shipments && shipments?.map((shipment) => (
               <tr key={shipment.id} className="border border-gray-200 font-medium">
-                <td className="px-4 py-2">{shipment.id}</td>
-                <td className="px-4 py-2">{shipment.title}</td>
-                <td className="px-4 py-2">{shipment.pickup}</td>
-                <td className="px-4 py-2">{shipment.delivery}</td>
+                <td className="px-4 py-2">{shipment?.id}</td>
+                <td className="px-4 py-2">{shipment?.title}</td>
+                <td className="px-4 py-2">{shipment?.pickup}</td>
+                <td className="px-4 py-2">{shipment?.delivery}</td>
                 {/* {shipment?.status === ""} */}
                 <td className="px-4 py-2">
                 <div className={`px-2 py-1 ${
-                  shipment.status === "In Transit" ? "bg-[#C2970A1A] text-[#C2970A]" :
-                  shipment.status === "Delivered" ? "bg-green-300 text-green-700" :
-                  shipment.status === "Cancelled" ? "bg-red-400 text-red-700" : 
-                  shipment.status === "Pending" ? "bg-orange-300 text-orange-500" : ""
+                  shipment?.status === "In Transit" ? "bg-[#C2970A1A] text-[#C2970A]" :
+                  shipment?.status === "Delivered" ? "bg-green-300 text-green-700" :
+                  shipment?.status === "Cancelled" ? "bg-red-400 text-red-700" : 
+                  shipment?.status === "Pending" ? "bg-orange-300 text-orange-500" : ""
                   } flex justify-center items-center rounded-md`}>
-                  {shipment.status}
+                  {shipment?.status}
                 </div>
                   </td>
-                <td className="px-4 py-2">{shipment.shipmentDate}</td>
-                <td className="px-4 py-2">{shipment.expectedDelivery}</td>
+                <td className="px-4 py-2">{shipment?.shipmentDate}</td>
+                <td className="px-4 py-2">{shipment?.expectedDelivery}</td>
               </tr>
             ))}
           </tbody>

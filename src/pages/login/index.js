@@ -2,6 +2,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 import Details from "../api/Listing/Details";
 import toast from "react-hot-toast";
+import { useRouter } from "next/router";
 
 export default function Index() {
   const [formData, setFormData] = useState({
@@ -9,6 +10,7 @@ export default function Index() {
     password: "",
   });
   const[loading,setLoading]=useState(false);
+  const router = useRouter();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -31,13 +33,13 @@ export default function Index() {
         if (res && res?.data && res?.data?.status) {
           toast.success(res.data.message);
           localStorage && localStorage.setItem("token", res?.data?.token);
-          router.push("/admin/banner");
+          router.push("/");
           setLoading(false);
         } else {
           toast.error(res.data.message);
           setLoading(false);
         }
-        setRecord({
+        setFormData({
           email: "",
           password: "",
         });
@@ -45,7 +47,7 @@ export default function Index() {
       })
       .catch((error) => {
         toast.error(error?.response?.data?.message);
-        // console.log("error", error);
+        console.log("error", error);
         setLoading(false);
       });
   };
