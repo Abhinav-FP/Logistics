@@ -20,56 +20,58 @@ function SideBar() {
     <>
       {isOpen && 
       <button
-        className="md:hidden p-2 absolute left-[207px] top-16 text-red-700 border border-red-700 z-[99]"
+        className="lg:hidden p-2 absolute left-[250px] top-3 text-red-700 border border-red-700 z-[99] rounded"
         onClick={() => setIsOpen(false)}
       >
      <IoMdArrowRoundBack size={24}/>
       </button>}
       {!isOpen &&
       <button
-        className="md:hidden  p-2 fixed font-bold top-3 text-[#727272] z-[99]"
+        className="lg:hidden p-2 fixed font-bold top-3 text-[#727272] z-[99]"
         onClick={() => setIsOpen(true)}
       >
         <IoIosMenu size={24}/>
       </button>}
 
       <div
-        className={`z-50 custom_scroll w-[260px] md:w-[304px] fixed left-0 top-0 bottom-0 overflow-y-auto bg-white transition-transform transform ${
+        className={`z-50 custom_scroll border border-r border-black border-opacity-10 w-[260px] md:w-[304px] fixed left-0 top-0 bottom-0 overflow-y-auto bg-white transition-transform transform ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         } lg:translate-x-0 lg:block`}
       >
-        <div className="p-4 flex gap-2 items-center border-b border-gray-200">
-          <img src="/Logo.png" alt="FriegtFlow Logo" className="h-[41px] w-[98px]" />
-          <div className="flex flex-col">
-            <span className="text-xl font-medium text-[#151517]">FriegtFlow</span>
-            <span className="text-sm font-medium text-[#727272]">User</span>
+        <div className="px-3 md:px-4 lg:px-6">
+          <div className="flex items-center border-b border-gray-200  py-4 lg:py-6 ">
+              <img src="/Logo.png" alt="FriegtFlow Logo" className="h-[41px] w-[98px] mr-2" />
+              <div className="flex flex-col">
+                <span className="text-lg font-medium text-[#151547] tracking-[-0.04em] mb-1 leading-tight">FriegtFlow</span>
+                <span className="text-xs font-medium text-[#727272] tracking-[-0.06em] ">User</span>
+              </div>
           </div>
         </div>
 
-        <div className="p-4">
-          <div className="flex items-center mb-4 shadow-md py-4 pl-3">
-            <div className="h-12 w-12 bg-gray-300 rounded-full"></div>
-            <div className="ml-2">
-              <div className="text-md text-[#151517] font-medium">Ismael Maddox</div>
-              <div className="text-xs">User</div>
+        <div className="px-3 md:px-4 lg:px-6 py-4 lg:py-5">
+          <div className="flex items-center mb-5 md:mb-6 lg:mb-10 box-shadow1 p-2.5 rounded md:rounded-lg lg:rounded-xl">
+            <div className="h-8 w-8 lg:h-11 lg:w-11 bg-gray-300 rounded-full">            
+            </div>
+            <div className="ml-2 lg:ml-3">
+              <div className="text-sm text-[#151547] font-medium tracking-[-0.06em] leading-tight mb-1">Ismael Maddox</div>
+              <div className="text-xs text-[#7A7A7A] tracking-[-0.04em] leading-[15px] font-normal">User</div>
             </div>
           </div>
-
+ 
           <div className="mb-4 font-medium">
-            <div className="text-xs">MAIN MENU</div>
-            <ul className="mt-2">
+            <div className="uppercase text-[#808080] text-sm font-medium mb-4 lg:mb-5">MAIN MENU</div>
+            <ul className="mt-2 space-y-1 mb-10">
               <Link
                 href="/"
-                className={`flex items-center p-2 gap-2 ${
-                  pathname === "/" ? "text-blue-500 bg-blue-100" : "hover:bg-gray-100"
-                } rounded-md`}
+                className={`flex items-center py-2.5 px-2.5 gap-2 text-[#727272] text-base font-medium tracking-[-0.06em] ${
+                  pathname === "/" ? "text-blue-500 bg-blue-100" : "hover:bg-gray-100"} rounded-md`}
               >
                 <RxDashboard size={20} />
                 Dashboard
               </Link>
               <Link
                 href="/shipment"
-                className={`flex items-center p-2 gap-2 ${
+                className={`flex items-center py-2.5 px-2.5 gap-2 text-[#727272] text-base font-medium tracking-[-0.06em] ${
                   pathname === "/shipment"
                     ? "text-blue-500 bg-blue-100"
                     : "hover:bg-gray-100"
@@ -80,7 +82,7 @@ function SideBar() {
               </Link>
               <Link
                 href="/drivers"
-                className={`flex items-center p-2 gap-2 ${
+                className={`flex items-center py-2.5 px-2.5 gap-2 text-[#727272] text-base font-medium tracking-[-0.06em] ${
                   pathname === "/drivers" ? "text-blue-500 bg-blue-100" : "hover:bg-gray-100"
                 } rounded-md`}
               >
@@ -89,7 +91,7 @@ function SideBar() {
               </Link>
               <Link
                 href="/users"
-                className={`flex items-center p-2 gap-2 ${
+                className={`flex items-center py-2.5 px-2.5 gap-2 text-[#727272] text-base font-medium tracking-[-0.06em] ${
                   pathname === "/users" ? "text-blue-500 bg-blue-100" : "hover:bg-gray-100"
                 } rounded-md`}
               >
@@ -98,7 +100,7 @@ function SideBar() {
               </Link>
               <Link
                 href="/carriers"
-                className={`flex items-center p-2 gap-2 ${
+                className={`flex items-center py-2.5 px-2.5 gap-2 text-[#727272] text-base font-medium tracking-[-0.06em] ${
                   pathname === "/carriers" ? "text-blue-500 bg-blue-100" : "hover:bg-gray-100"
                 } rounded-md`}
               >
@@ -107,7 +109,7 @@ function SideBar() {
               </Link>
               <Link
                 href="/analytics"
-                className={`flex items-center p-2 gap-2 ${
+                className={`flex items-center py-2.5 px-2.5 gap-2 text-[#727272] text-base font-medium tracking-[-0.06em] ${
                   pathname === "/analytics"
                     ? "text-blue-500 bg-blue-100"
                     : "hover:bg-gray-100"
@@ -118,7 +120,7 @@ function SideBar() {
               </Link>
               <Link
                 href="/settings"
-                className={`flex items-center p-2 gap-2 ${
+                className={`flex items-center py-2.5 px-2.5 gap-2 text-[#727272] text-base font-medium tracking-[-0.06em] ${
                   pathname === "/settings"
                     ? "text-blue-500 bg-blue-100"
                     : "hover:bg-gray-100"
@@ -131,11 +133,11 @@ function SideBar() {
           </div>
 
           <div>
-            <div className="text-xs font-medium">PAYMENT</div>
-            <ul className="mt-2">
+            <div className="uppercase text-[#808080] text-sm font-medium mb-4 lg:mb-5">PAYMENT</div>
+            <ul className="mt-2 space-y-1">
               <Link
                 href="/taxes"
-                className={`flex items-center p-2 gap-2 ${
+                className={`flex items-center py-2.5 px-2.5 gap-2 text-[#727272] text-base font-medium tracking-[-0.06em] ${
                   pathname === "/taxes" ? "text-blue-500 bg-blue-100" : "hover:bg-gray-100"
                 } rounded-md`}
               >
@@ -144,7 +146,7 @@ function SideBar() {
               </Link>
               <Link
                 href="/payments"
-                className={`flex items-center p-2 gap-2 ${
+                className={`flex items-center py-2.5 px-2.5 gap-2 text-[#727272] text-base font-medium tracking-[-0.06em] ${
                   pathname === "/payments"
                     ? "text-blue-500 bg-blue-100"
                     : "hover:bg-gray-100"
