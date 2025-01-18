@@ -58,12 +58,12 @@ export default function Index() {
         <img
           src="/Login-img.png"
           alt="Logistics Illustration"
-          className="max-w-full h-full"
+          className="w-full h-full object-cover"
         />
       </div>
-      <div className="flex flex-col justify-center md:w-1/2 py-8 px-24 bg-white">
-        <h2 className="text-2xl font-bold text-[#262626] mb-2">SIGN IN</h2>
-        <p className="text-[#727272] mb-6 font-normal">
+      <div className="flex flex-col justify-center w-full md:w-1/2 py-8 px-6 md:px-12 lg:px-[76px] bg-white">
+        <h2 className="text-xl lg:text-[22px] tracking-[-0.03em] font-semibold text-[#262626] mb-1">SIGN IN</h2>
+        <p className="text-[#727272] mb-8 md:mb-12 lg:mb-20 font-normal max-w-[380px]">
           Welcome to logistics supply chain platform Register as a member to
           experience
         </p>
@@ -71,7 +71,7 @@ export default function Index() {
           <div className="mb-4">
             <label
               htmlFor="email"
-              className="block text-sm font-medium text-[#727272]"
+              className="block text-sm lg:text-base font-medium text-[#727272] tracking-[-0.06em] mb-2"
             >
               Email
             </label>
@@ -81,14 +81,14 @@ export default function Index() {
               name="email"
               value={formData.email}
               onChange={handleChange}
-              className="mt-1 block w-full px-3 py-3 bg-gray-100 text-[#727272] border border-transparent rounded-md shadow-sm sm:text-sm"
+              className="block w-full h-12 lg:h-[65px] px-3 py-3 bg-gray-100 text-[#727272] border border-transparent rounded-lg lg:rounded-[15px] sm:text-sm"
               required
             />
           </div>
-          <div className="mb-4">
+          <div className="mb-5">
             <label
               htmlFor="password"
-              className="block text-sm font-medium text-[#727272]"
+              className="block text-sm lg:text-base font-medium text-[#727272] tracking-[-0.06em] mb-2"
             >
               Password
             </label>
@@ -98,7 +98,7 @@ export default function Index() {
               name="password"
               value={formData.password}
               onChange={handleChange}
-              className="mt-1 block w-full px-3 py-3 bg-gray-100 text-[#727272] border border-transparent rounded-md shadow-sm sm:text-sm"
+              className="block w-full h-12 lg:h-[65px] px-3 py-3 bg-gray-100 text-[#727272] border border-transparent rounded-lg lg:rounded-[15px] sm:text-sm"
               required
             />
           </div>
@@ -112,7 +112,7 @@ export default function Index() {
           </div>
           <button
             type="submit"
-            className="w-full py-4 px-4 bg-[#1C5FE8] text-white font-medium rounded-lg"
+            className="w-full py-3.5 px-4 bg-[#1C5FE8] text-white font-medium rounded-md lg:rounded-xl"
           >
             {loading ? "Signing In..." : "Sign In"}
           </button>

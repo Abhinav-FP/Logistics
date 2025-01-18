@@ -15,24 +15,24 @@ export default function Dashboard(){
   return (
     <div>
       {/* Header Section */}
-      <div className="flex items-center justify-between items-center mb-4 space-y-4 md:space-y-0">
+      <div className="flex md:items-center justify-between flex-col md:flex-row  mb-4 space-y-4 md:space-y-0">
         <h1 className="text-[#151547] text-lg tracking-[-0.04em] font-medium m-0">Overview</h1>
-        <div className="flex flex-wrap items-center space-x-2">
-            <select className="border border-black rounded-md lg:rounded-xl bg-white border-opacity-10 w-[105px] h-12 px-3.5 text-[#151547] font-medium text-base tracking-[-0.04em]">
+        <div className="flex flex-wrap items-center justify-between space-x-2">
+            <select className="border border-black rounded-md lg:rounded-xl bg-white border-opacity-10 w-[105px] h-11 lg:h-12 px-2.5 lg:px-3.5 text-[#151547] font-medium text-base tracking-[-0.04em]">
               <option>Week</option>
             </select>
-          <Link href="/shipment/CreateShipment" className="bg-[#1C5FE8] hover:bg-[#0a3fab] inline-block font-medium text-base text-white tracking-[-0.04em] rounded-lg lg:rounded-xl px-5 py-3  ">
+          <Link href="/shipment/CreateShipment" className="bg-[#1C5FE8] hover:bg-[#0a3fab] inline-block font-medium text-base text-white tracking-[-0.04em] rounded-lg lg:rounded-xl px-5 py-2.5 lg:py-3  ">
            <span className="mr-1">+</span> New Shipments
           </Link>
         </div>
       </div>
 
       {/* Metrics Section */}
-      <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-4">
         {metrics.map((metric, index) => (
           <div
             key={index}
-            className="bg-white lg:p-5 border border-black border-opacity-10 rounded-md lg:rounded-xl"
+            className="bg-white p-4 lg:p-5 border border-black border-opacity-10 rounded-md lg:rounded-xl"
           >
             <div className="flex justify-between">
               <h2 className="text-sm font-normal text-[#7A7A7A] tracking-[-0.04em]">
