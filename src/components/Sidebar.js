@@ -49,14 +49,14 @@ function SideBar() {
         </div>
 
         <div className="px-3 md:px-4 lg:px-6 py-4 lg:py-5">
-          <div className="flex items-center mb-5 md:mb-6 lg:mb-10 box-shadow1 p-2.5 rounded md:rounded-lg lg:rounded-xl">
+          {/* <div className="flex items-center mb-5 md:mb-6 lg:mb-10 box-shadow1 p-2.5 rounded md:rounded-lg lg:rounded-xl">
             <div className="h-8 w-8 lg:h-11 lg:w-11 bg-gray-300 rounded-full">            
             </div>
             <div className="ml-2 lg:ml-3">
-              <div className="text-sm text-[#151547] font-medium tracking-[-0.06em] leading-tight mb-1">Ismael Maddox</div>
+              <div className="text-sm text-[#151547] font-medium tracking-[-0.06em] leading-tight mb-1">{user?.email}</div>
               <div className="text-xs text-[#7A7A7A] tracking-[-0.04em] leading-[15px] font-normal">User</div>
             </div>
-          </div>
+          </div> */}
  
           <div className="mb-4 font-medium">
             <div className="uppercase text-[#808080] text-sm font-medium mb-4 lg:mb-5">MAIN MENU</div>
@@ -78,7 +78,7 @@ function SideBar() {
                 } rounded-md`}
               >
                 <FiTruck size={20} />
-                <span className="ml-2">Shipment</span>
+                Shipment
               </Link>
               <Link
                 href="/drivers"

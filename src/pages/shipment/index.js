@@ -1,6 +1,8 @@
 import Layout from '@/layout/Layout'
 import React from 'react'
 import ShipmentTable from '../Home/ShipmentTable';
+import Link from 'next/link';
+import Api from '../api/Listing/Api';
 
 export default function index() {
     const data = [
@@ -14,16 +16,36 @@ export default function index() {
         { id: 'SHP-008', title: 'Toy Shipment', pickup: 'Atlanta, GA', delivery: 'Orlando, FL', status: 'Delivered', shipmentDate: '2024-11-20', expectedDelivery: '2024-11-24' },
         { id: 'SHP-009', title: 'Sporting Goods', pickup: 'Philadelphia, PA', delivery: 'Washington, DC', status: 'In Transit', shipmentDate: '2024-12-08', expectedDelivery: '2024-12-14' },
         { id: 'SHP-010', title: 'Office Supplies', pickup: 'Boston, MA', delivery: 'Newark, NJ', status: 'Pending', shipmentDate: '2024-12-02', expectedDelivery: '2024-12-05' }
-      ]; 
+      ];
+
+      //PDF download logic
+      // const handleClick = async () => {
+      //   try {
+      //     const response = await Api.get("/shipment/get-BOL", {
+      //       responseType: "blob",
+      //     });
+      //     const blob = new Blob([response.data], { type: "application/pdf" });
+      //     const url = window.URL.createObjectURL(blob);
+      //     const a = document.createElement("a");
+      //     a.href = url;
+      //     a.download = "BOL.pdf"; 
+      //     document.body.appendChild(a);
+      //     a.click();
+      //     window.URL.revokeObjectURL(url);
+      //     document.body.removeChild(a);
+      //   } catch (error) {
+      //     console.error("Error downloading the PDF:", error);
+      //   }
+      // };
 
   return (
     <Layout page={"Shipment"}>
         <div className='mt-20'>
           <div className='flex justify-between items-center mb-5'>
             <h2 className="text-lg font-medium mb-3">Shipment Listing </h2>
-            <button className="bg-[#1C5FE8] text-white p-2 rounded-md">
+            <Link href="/shipment/add" className="bg-[#1C5FE8] text-white p-2 rounded-md">
             + New Shipments
-          </button>
+          </Link>
           </div>
         <ShipmentTable shipments={data}/>
         </div>

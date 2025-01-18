@@ -1,8 +1,43 @@
 import Sidebar from "@/components/Sidebar";
-import React from "react";
+import React, { useEffect } from "react";
 import Link from 'next/link';
+import { useRole } from "@/context/RoleContext";
+import Details from "@/pages/api/Listing/Details";
+import toast from "react-hot-toast";
+import { useRouter } from "next/router";
 
 export default function Layout({ children, page }) {
+  const { user, setUser } = useRole();
+  const router = useRouter(); // Corrected variable name
+  console.log("user", user);
+
+  const fetchData = async (signal) => {
+    const main = new Details();
+    const response = main.profileVerify(signal);
+    response
+      .then((res) => {
+        if (res.data) {
+          setUser(res?.data?.data);
+        } else {
+        }
+      }).catch((error) => {
+        console.log("error",error);
+        localStorage && localStorage.removeItem("token");
+        router.push("/login");
+        toast.error("Please log in first.");
+      });
+  };
+
+  useEffect(() => {
+    const controller = new AbortController();
+    const { signal } = controller;
+    fetchData(signal);
+    return () => {
+      console.log("Aborting fetch...");
+      controller.abort();
+    };
+  }, []);
+
   return (
     <div className="md:flex flex-wrap  bg-[#F5F6FB] items-start">
       <Sidebar />

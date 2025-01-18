@@ -10,6 +10,10 @@ class Details extends Component {
     return Api.get(`/user/get/${data}`);
   }
 
+  async profileVerify() {
+    return Api.get("/user/get-role");
+  }
+
   render() {
     return (
       <div>
