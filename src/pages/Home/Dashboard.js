@@ -21,7 +21,7 @@ export default function Dashboard(){
             <select className="border border-black rounded-md lg:rounded-xl bg-white border-opacity-10 w-[105px] h-12 px-3.5 text-[#151547] font-medium text-base tracking-[-0.04em]">
               <option>Week</option>
             </select>
-          <Link href="/shipment/CreateShipment" className="bg-[#1C5FE8] hover:bg-[#0a3fab] inline-block font-medium text-base text-white tracking-[-0.04em] rounded-lg lg:rounded-xl px-5 py-3  ">
+          <Link href="/shipment/add" className="bg-[#1C5FE8] hover:bg-[#0a3fab] inline-block font-medium text-base text-white tracking-[-0.04em] rounded-lg lg:rounded-xl px-5 py-3  ">
            <span className="mr-1">+</span> New Shipments
           </Link>
         </div>

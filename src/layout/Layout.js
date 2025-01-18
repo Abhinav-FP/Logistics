@@ -9,7 +9,6 @@ import { useRouter } from "next/router";
 export default function Layout({ children, page }) {
   const { user, setUser } = useRole();
   const router = useRouter(); // Corrected variable name
-  console.log("user", user);
 
   const fetchData = async (signal) => {
     const main = new Details();
