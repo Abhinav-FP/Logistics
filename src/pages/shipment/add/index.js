@@ -3,6 +3,8 @@ import Layout from "@/layout/Layout";
 import Details from "@/pages/api/Listing/Details";
 import React, { useEffect, useState } from "react";
 import { IoBookmark } from "react-icons/io5";
+import { RxCross1 } from "react-icons/rx";
+
 
 export default function index() {
   const [formData, setFormData] = useState({
@@ -18,7 +20,8 @@ export default function index() {
     typeOfGoods: "",
     quantity: "",
     weight: "",
-    dimensions: "",
+    dimensions1: "",
+    dimensions2: "",
     customerName: "",
   });
 
@@ -55,10 +58,9 @@ export default function index() {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    setFormData(formData);
+    console.log("formData", formData);
   };
 
-  console.log("formData", formData);
 
   return (
     <Layout page={"Shipment"}>
@@ -208,7 +210,11 @@ export default function index() {
                     className="w-full h-11 lg:h-[48px]  block bg-white text-[#000] text-base border border-black border-opacity-10 rounded-md lg:rounded-xl py-2 px-4 leading-tight focus:outline-none"
                     placeholder=""
                   >
-                    <option></option>
+                    <option value="">Select Goods Type</option>
+                    <option value="food">Food and Beverages</option>
+                    <option value="raw">Raw Materials</option>
+                    <option value="automotive">Automotive Parts</option>
+                    <option value="pharmaceuticals">Pharmaceuticals</option>
                   </select>
                 </div>
                 <div className="w-full md:w-6/12 px-2 lg:px-3 mb-4 lg:mb-6">
@@ -216,7 +222,7 @@ export default function index() {
                     Quantity
                   </label>
                   <input
-                    type="text"
+                    type="number"
                     name="quantity"
                     value={formData.quantity}
                     onChange={handleChange}
@@ -229,7 +235,7 @@ export default function index() {
                     Weight
                   </label>
                   <input
-                    type="text"
+                    type="number"
                     name="weight"
                     value={formData.weight}
                     onChange={handleChange}
@@ -241,14 +247,25 @@ export default function index() {
                   <label className="text-[#70708D] text-sm tracking-[-0.04em] uppercase mb-2 block">
                     Dimensions
                   </label>
+                  <div className="flex gap-2 items-center">
                   <input
-                    type="text"
-                    name="dimensions"
-                    value={formData.dimensions}
+                    type="number"
+                    name="dimensions1"
+                    value={formData.dimensions1}
                     onChange={handleChange}
-                    className="w-full h-11 lg:h-[48px] appearance-none block bg-white text-[#000] text-base border border-black border-opacity-10 rounded-md lg:rounded-xl py-2 px-4 leading-tight focus:outline-none"
+                    className="w-1/2 h-11 lg:h-[48px] appearance-none block bg-white text-[#000] text-base border border-black border-opacity-10 rounded-md lg:rounded-xl py-2 px-4 leading-tight focus:outline-none"
                     placeholder=""
-                  />
+                    />
+                    <RxCross1 size={20} color={"#70708D"}/>
+                  <input
+                    type="number"
+                    name="dimensions2"
+                    value={formData.dimensions2}
+                    onChange={handleChange}
+                    className="w-1/2 h-11 lg:h-[48px] appearance-none block bg-white text-[#000] text-base border border-black border-opacity-10 rounded-md lg:rounded-xl py-2 px-4 leading-tight focus:outline-none"
+                    placeholder=""
+                    />
+                    </div>
                 </div>
               </div>
             </div>
@@ -346,7 +363,7 @@ export default function index() {
                     className="w-full h-11 lg:h-[48px]  block bg-white text-[#000] text-base border border-black border-opacity-10 rounded-md lg:rounded-xl py-2 px-4 leading-tight focus:outline-none"
                     placeholder=""
                   >
-                    <option value="">Select Broker</option>
+                    <option value="">Select Customer</option>
                     {customers &&
                       customers?.map((item) => (
                         <option value={item._id}>{item?.email}</option>
