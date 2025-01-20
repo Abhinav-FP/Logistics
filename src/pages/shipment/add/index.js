@@ -5,44 +5,46 @@ import React, { useEffect, useState } from "react";
 import { IoBookmark } from "react-icons/io5";
 
 export default function index() {
-    const [formData, setFormData] = useState({
-        title: "",
-        description: "",
-        pickup: "",
-        delivery: "",
-        shippingDate: "",
-        deliveryDate: "",
-        estimatedCost: "",
-        paymentStatus: "",
-        brokerName: "",
-        typeOfGoods: "",
-        quantity: "",
-        weight: "",
-        dimensions: "",
-        customerName: "",
-      });
-    
-    const[brokers,setBrokers]=useState([]);
-    const[customers,setCustomers]=useState([]);
+  const [formData, setFormData] = useState({
+    title: "",
+    description: "",
+    pickup: "",
+    delivery: "",
+    shippingDate: "",
+    deliveryDate: "",
+    estimatedCost: "",
+    paymentStatus: "",
+    brokerName: "",
+    typeOfGoods: "",
+    quantity: "",
+    weight: "",
+    dimensions: "",
+    customerName: "",
+  });
 
-    const getBrokerandCustomer = () => {
-      const main = new Details();
-      main
-        .Usersget("")
-        .then((response) => {
-          const users = response?.data?.data || [];     
-          const brokers = users && users?.filter((user) => user?.role === "broker");
-          const customers = users && users?.filter((user) => user?.role === "customer");
-          setBrokers(brokers);
-          setCustomers(customers);
-          })
-          .catch((err) => {
-            console.log("Error fetching users:", err);
-          });
-    };
-    useEffect(()=>{
-        getBrokerandCustomer();
-    },[])
+  const [brokers, setBrokers] = useState([]);
+  const [customers, setCustomers] = useState([]);
+
+  const getBrokerandCustomer = () => {
+    const main = new Details();
+    main
+      .Usersget("")
+      .then((response) => {
+        const users = response?.data?.data || [];
+        const brokers =
+          users && users?.filter((user) => user?.role === "broker");
+        const customers =
+          users && users?.filter((user) => user?.role === "customer");
+        setBrokers(brokers);
+        setCustomers(customers);
+      })
+      .catch((err) => {
+        console.log("Error fetching users:", err);
+      });
+  };
+  useEffect(() => {
+    getBrokerandCustomer();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -55,9 +57,9 @@ export default function index() {
     e.preventDefault();
     setFormData(formData);
   };
-  
+
   console.log("formData", formData);
-  
+
   return (
     <Layout page={"Shipment"}>
       <form onSubmit={handleSubmit}>
@@ -69,7 +71,7 @@ export default function index() {
             type="submit"
             className="bg-[#1C5FE8] flex gap-2 items-center hover:bg-[#0a3fab] font-medium text-base text-white tracking-[-0.04em] rounded-lg lg:rounded-xl px-5 py-3  "
           >
-            <IoBookmark size={18} color={"#ffff"}/>
+            <IoBookmark size={18} color={"#ffff"} />
             Save Shipment
           </button>
         </div>
@@ -146,10 +148,10 @@ export default function index() {
                         />
                       </svg>
                     </div> */}
-                     <LocationSearch
-                        name="pickup"
-                        formData={formData}
-                        setFormData={setFormData}
+                    <LocationSearch
+                      name="pickup"
+                      formData={formData}
+                      setFormData={setFormData}
                     />
                   </div>
                 </div>
@@ -190,10 +192,10 @@ export default function index() {
                         />
                       </svg>
                     </div> */}
-                   <LocationSearch
-                     name="delivery"
-                     formData={formData}
-                     setFormData={setFormData}
+                    <LocationSearch
+                      name="delivery"
+                      formData={formData}
+                      setFormData={setFormData}
                     />
                   </div>
                 </div>
@@ -338,20 +340,22 @@ export default function index() {
                   />
                 </div>
                 <div className="w-full md:w-6/12 px-2 lg:px-3 mb-4 lg:mb-6">
-                    <label className="text-[#70708D] text-sm tracking-[-0.04em] uppercase mb-2 block">
-                        Payment Status
-                    </label>
-                    <select
-                        value={formData.paymentStatus}
-                        name="paymentStatus"
-                        onChange={handleChange}
-                        className="w-full h-11 lg:h-[48px] block bg-white text-[#000] text-base border border-black border-opacity-10 rounded-md lg:rounded-xl py-2 px-4 leading-tight focus:outline-none"
-                    >
-                        <option value="" disabled>Select Payment Status</option>
-                        <option value="Pending">Pending</option>
-                        <option value="Done">Done</option>
-                        <option value="PayOnDelivery">Pay on Delivery</option>
-                    </select>
+                  <label className="text-[#70708D] text-sm tracking-[-0.04em] uppercase mb-2 block">
+                    Payment Status
+                  </label>
+                  <select
+                    value={formData.paymentStatus}
+                    name="paymentStatus"
+                    onChange={handleChange}
+                    className="w-full h-11 lg:h-[48px] block bg-white text-[#000] text-base border border-black border-opacity-10 rounded-md lg:rounded-xl py-2 px-4 leading-tight focus:outline-none"
+                  >
+                    <option value="" disabled>
+                      Select Payment Status
+                    </option>
+                    <option value="Pending">Pending</option>
+                    <option value="Done">Done</option>
+                    <option value="PayOnDelivery">Pay on Delivery</option>
+                  </select>
                 </div>
               </div>
             </div>
@@ -377,9 +381,10 @@ export default function index() {
                     placeholder=""
                   >
                     <option value="">Select Broker</option>
-                    {brokers && brokers?.map((item)=>(
-                      <option value={item._id}>{item?.email}</option>
-                    ))}
+                    {brokers &&
+                      brokers?.map((item) => (
+                        <option value={item._id}>{item?.email}</option>
+                      ))}
                   </select>
                 </div>
               </div>
@@ -406,9 +411,10 @@ export default function index() {
                     placeholder=""
                   >
                     <option value="">Select Broker</option>
-                    {customers && customers?.map((item)=>(
-                      <option value={item._id}>{item?.email}</option>
-                    ))}
+                    {customers &&
+                      customers?.map((item) => (
+                        <option value={item._id}>{item?.email}</option>
+                      ))}
                   </select>
                 </div>
               </div>
