@@ -2,21 +2,21 @@ import React from 'react';
 import LocatinTracker from '../tracklocation/index';
 
 export default function Index() {
-    const restaurantCoordinates = { lat: 26.9298469, lng: 75.7853946 };
-    const orderCoordinates = { lat: 26.850262, lng: 75.761726 };
-    const checkoutCoordinates = { lat: 26.8669, lng: 75.79735 };
+    const Start_coordinates = { lat: 26.9178958, lng: 75.8500819 };
+    const Current_coordinates = { lat: 26.9229, lng: 75.8269 };
+    const End_coordinates = { lat: 26.9278715, lng: 75.7879766 };
 
     return (
         <div>
             <h1>Coordinates</h1>
-            <p>Restaurant Coordinates: {`${restaurantCoordinates.lat}, ${restaurantCoordinates.lng}`}</p>
-            <p>Order Coordinates: {`${orderCoordinates.lat}, ${orderCoordinates.lng}`}</p>
-            <p>Checkout Coordinates: {`${checkoutCoordinates.lat}, ${checkoutCoordinates.lng}`}</p>
+            <p>Start Location Coordinates: {`${Start_coordinates.lat}, ${Start_coordinates.lng}`}</p>
+            <p>Current Location Coordinates: {`${Current_coordinates.lat}, ${Current_coordinates.lng}`}</p>
+            <p>Destination Coordinates: {`${End_coordinates.lat}, ${End_coordinates.lng}`}</p>
 
-            <LocatinTracker 
-                restaurent_coordinates={restaurantCoordinates} 
-                order_coordinates={orderCoordinates} 
-                checkout_coordinates={checkoutCoordinates} 
+            <LocatinTracker
+                Start_coordinates={Start_coordinates}
+                Current_coordinates={Current_coordinates}
+                End_coordinates={End_coordinates}
             />
         </div>
     );
