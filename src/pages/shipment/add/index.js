@@ -98,6 +98,7 @@ export default function index() {
                     onChange={handleChange}
                     className="w-full h-11 lg:h-[48px] appearance-none block bg-white text-[#000] text-base border border-black border-opacity-10 rounded-md lg:rounded-xl py-2 px-4 leading-tight focus:outline-none"
                     placeholder=""
+                    required
                   />
                 </div>
                 <div className="w-full md:w-6/12 px-2 lg:px-3 mb-4 lg:mb-6">
@@ -111,6 +112,7 @@ export default function index() {
                     onChange={handleChange}
                     className="w-full h-11 lg:h-[48px] appearance-none block bg-white text-[#000] text-base border border-black border-opacity-10 rounded-md lg:rounded-xl py-2 px-4 leading-tight focus:outline-none"
                     placeholder=""
+                    required
                   />
                 </div>
                 <div className="w-full md:w-6/12 px-2 lg:px-3 mb-4 lg:mb-6">
@@ -149,6 +151,7 @@ export default function index() {
                       onChange={handleChange}
                       className="w-full h-11 lg:h-[48px] appearance-none block bg-white text-[#000] text-base border border-black border-opacity-10 rounded-md lg:rounded-xl py-2 px-4 leading-tight focus:outline-none"
                       placeholder=""
+                      required
                     />
                     {/* <div className="absolute top-[13px] right-4">
                       <svg
@@ -184,6 +187,7 @@ export default function index() {
                       onChange={handleChange}
                       className="w-full h-11 lg:h-[48px] appearance-none block bg-white text-[#000] text-base border border-black border-opacity-10 rounded-md lg:rounded-xl py-2 px-4 leading-tight focus:outline-none"
                       placeholder=""
+                      required
                     />
                   </div>
                 </div>
@@ -228,6 +232,7 @@ export default function index() {
                     onChange={handleChange}
                     className="w-full h-11 lg:h-[48px] appearance-none block bg-white text-[#000] text-base border border-black border-opacity-10 rounded-md lg:rounded-xl py-2 px-4 leading-tight focus:outline-none"
                     placeholder=""
+                    required
                   />
                 </div>
                 <div className="w-full md:w-6/12 px-2 lg:px-3 mb-4 lg:mb-6">
@@ -241,6 +246,7 @@ export default function index() {
                     onChange={handleChange}
                     className="w-full h-11 lg:h-[48px] appearance-none block bg-white text-[#000] text-base border border-black border-opacity-10 rounded-md lg:rounded-xl py-2 px-4 leading-tight focus:outline-none"
                     placeholder=""
+                    required
                   />
                 </div>
                 <div className="w-full md:w-6/12 px-2 lg:px-3 mb-4 lg:mb-6">
@@ -255,6 +261,7 @@ export default function index() {
                     onChange={handleChange}
                     className="w-1/2 h-11 lg:h-[48px] appearance-none block bg-white text-[#000] text-base border border-black border-opacity-10 rounded-md lg:rounded-xl py-2 px-4 leading-tight focus:outline-none"
                     placeholder=""
+                    required
                     />
                     <RxCross1 size={20} color={"#70708D"}/>
                   <input
@@ -264,6 +271,7 @@ export default function index() {
                     onChange={handleChange}
                     className="w-1/2 h-11 lg:h-[48px] appearance-none block bg-white text-[#000] text-base border border-black border-opacity-10 rounded-md lg:rounded-xl py-2 px-4 leading-tight focus:outline-none"
                     placeholder=""
+                    required
                     />
                     </div>
                 </div>
@@ -290,6 +298,7 @@ export default function index() {
                     onChange={handleChange}
                     className="w-full h-11 lg:h-[48px] appearance-none block bg-white text-[#000] text-base border border-black border-opacity-10 rounded-md lg:rounded-xl py-2 px-4 leading-tight focus:outline-none"
                     placeholder=""
+                    required
                   />
                 </div>
                 <div className="w-full md:w-6/12 px-2 lg:px-3 mb-4 lg:mb-6">
