@@ -116,38 +116,6 @@ export default function index() {
                     Pickup Location
                   </label>
                   <div className="relative">
-                    {/* <input
-                      type="text"
-                      name="pickup"
-                      value={formData.pickup}
-                      onChange={handleChange}
-                      className="w-full h-11 lg:h-[48px] appearance-none block bg-white text-[#000] text-base border border-black border-opacity-10 rounded-md lg:rounded-xl py-2 px-4 leading-tight focus:outline-none"
-                      placeholder=""
-                    />
-                    <div className="absolute top-[13px] right-4">
-                      <svg
-                        width="22"
-                        height="22"
-                        viewBox="0 0 22 22"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M20.5 11H18.389M18.389 11C18.389 12.9598 17.611 14.8389 16.2252 16.2247C14.8394 17.6105 12.9598 18.389 11 18.389M18.389 11C18.389 9.04018 17.611 7.16013 16.2252 5.77433C14.8394 4.38853 12.9598 3.611 11 3.611M11 1.5V3.611M11 3.611C9.04032 3.611 7.16089 4.38848 5.77519 5.77419C4.38948 7.15989 3.611 9.03931 3.611 10.999C3.611 12.9587 4.38948 14.8381 5.77519 16.2238C7.16089 17.6095 9.04032 18.389 11 18.389M1.5 11H3.611M11 20.5V18.389"
-                          stroke="#646567"
-                          stroke-width="1.5"
-                          stroke-miterlimit="10"
-                          stroke-linecap="round"
-                        />
-                        <path
-                          d="M11.0001 15.2218C12.1198 15.2218 13.1937 14.777 13.9855 13.9852C14.7773 13.1935 15.2221 12.1196 15.2221 10.9998C15.2221 9.88009 14.7773 8.80621 13.9855 8.01443C13.1937 7.22265 12.1198 6.77783 11.0001 6.77783C9.88033 6.77783 8.80645 7.22265 8.01467 8.01443C7.22289 8.80621 6.77808 9.88009 6.77808 10.9998C6.77808 12.1196 7.22289 13.1935 8.01467 13.9852C8.80645 14.777 9.88033 15.2218 11.0001 15.2218Z"
-                          stroke="#646567"
-                          stroke-width="1.5"
-                          stroke-miterlimit="10"
-                          stroke-linecap="round"
-                        />
-                      </svg>
-                    </div> */}
                     <LocationSearch
                       name="pickup"
                       formData={formData}
@@ -160,38 +128,6 @@ export default function index() {
                     Delivery Location
                   </label>
                   <div className="relative">
-                    {/* <input
-                      type="text"
-                      name="delivery"
-                      value={formData.delivery}
-                      onChange={handleChange}
-                      className="w-full h-11 lg:h-[48px] appearance-none block bg-white text-[#000] text-base border border-black border-opacity-10 rounded-md lg:rounded-xl py-2 px-4 leading-tight focus:outline-none"
-                      placeholder=""
-                    />
-                    <div className="absolute top-[13px] right-4">
-                      <svg
-                        width="22"
-                        height="22"
-                        viewBox="0 0 22 22"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M20.5 11H18.389M18.389 11C18.389 12.9598 17.611 14.8389 16.2252 16.2247C14.8394 17.6105 12.9598 18.389 11 18.389M18.389 11C18.389 9.04018 17.611 7.16013 16.2252 5.77433C14.8394 4.38853 12.9598 3.611 11 3.611M11 1.5V3.611M11 3.611C9.04032 3.611 7.16089 4.38848 5.77519 5.77419C4.38948 7.15989 3.611 9.03931 3.611 10.999C3.611 12.9587 4.38948 14.8381 5.77519 16.2238C7.16089 17.6095 9.04032 18.389 11 18.389M1.5 11H3.611M11 20.5V18.389"
-                          stroke="#646567"
-                          stroke-width="1.5"
-                          stroke-miterlimit="10"
-                          stroke-linecap="round"
-                        />
-                        <path
-                          d="M11.0001 15.2218C12.1198 15.2218 13.1937 14.777 13.9855 13.9852C14.7773 13.1935 15.2221 12.1196 15.2221 10.9998C15.2221 9.88009 14.7773 8.80621 13.9855 8.01443C13.1937 7.22265 12.1198 6.77783 11.0001 6.77783C9.88033 6.77783 8.80645 7.22265 8.01467 8.01443C7.22289 8.80621 6.77808 9.88009 6.77808 10.9998C6.77808 12.1196 7.22289 13.1935 8.01467 13.9852C8.80645 14.777 9.88033 15.2218 11.0001 15.2218Z"
-                          stroke="#646567"
-                          stroke-width="1.5"
-                          stroke-miterlimit="10"
-                          stroke-linecap="round"
-                        />
-                      </svg>
-                    </div> */}
                     <LocationSearch
                       name="delivery"
                       formData={formData}
@@ -331,7 +267,7 @@ export default function index() {
                     Estimated Cost
                   </label>
                   <input
-                    type="text"
+                    type="number"
                     name="estimatedCost"
                     value={formData.estimatedCost}
                     onChange={handleChange}

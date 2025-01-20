@@ -9,22 +9,21 @@ function LocationSearch({ name, formData, setFormData }) {
     let autocompleteInstance;
 
     const loadScript = () => {
-      if (!window.google) {
+      if (!document.querySelector("#google-maps-script")) {
         const script = document.createElement("script");
+        script.id = "google-maps-script";
         script.src = `https://maps.googleapis.com/maps/api/js?key=${googlemap}&libraries=places`;
         script.async = true;
         script.onload = initializeAutocomplete;
         document.body.appendChild(script);
-      } else {
+      } else if (window.google) {
         initializeAutocomplete();
       }
     };
 
     const initializeAutocomplete = () => {
-      if (inputRef.current) {
-        autocompleteInstance = new window.google.maps.places.Autocomplete(
-          inputRef.current
-        );
+      if (inputRef.current && window.google) {
+        autocompleteInstance = new window.google.maps.places.Autocomplete(inputRef.current);
 
         // Add listener for place selection
         autocompleteInstance.addListener("place_changed", handlePlaceSelect);
@@ -32,12 +31,14 @@ function LocationSearch({ name, formData, setFormData }) {
     };
 
     const handlePlaceSelect = () => {
-      const place = autocompleteInstance.getPlace();
-      if (place?.formatted_address) {
-        setFormData((prevData) => ({
-          ...prevData,
-          [name]: place.formatted_address,
-        }));
+      if (autocompleteInstance) {
+        const place = autocompleteInstance.getPlace();
+        if (place?.formatted_address) {
+          setFormData((prevData) => ({
+            ...prevData,
+            [name]: place.formatted_address,
+          }));
+        }
       }
     };
 
@@ -101,14 +102,14 @@ function LocationSearch({ name, formData, setFormData }) {
         className="w-full h-11 lg:h-[48px] appearance-none block bg-white text-[#000] text-base border border-black border-opacity-10 rounded-md lg:rounded-xl py-2 px-4 leading-tight focus:outline-none"
         placeholder={`Enter ${name} location`}
       />
-        <button
-          type="button"
-          onClick={detectCurrentLocation}
-          className="absolute top-[13px] right-4 rounded-full hover:bg-gray-600"
-          title="Detect Current Location"
-        >
-          <MdOutlineMyLocation size={22} color={"#646567"} />
-        </button>
+      <button
+        type="button"
+        onClick={detectCurrentLocation}
+        className="absolute top-[13px] right-4 rounded-full hover:bg-gray-600"
+        title="Detect Current Location"
+      >
+        <MdOutlineMyLocation size={22} color={"#646567"} />
+      </button>
     </div>
   );
 }
