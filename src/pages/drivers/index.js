@@ -37,7 +37,7 @@ export default function index() {
                 <div className="flex items-center justify-between items-center space-y-4 md:space-y-0">
                     <h2 className="text-[#151547] text-lg tracking-[-0.04em] font-medium m-0">Carrier  Listing </h2>
                     <Link href="/carriers/add" className="bg-[#1C5FE8] hover:bg-[#0a3fab] inline-block font-medium text-base text-white tracking-[-0.04em] rounded-lg lg:rounded-xl px-5 py-3  ">
-                        <span className="mr-1">+</span> Add New Carrier
+                        <span className="mr-1">+</span> Add New Driver
                     </Link>
                 </div>
                 <div className="bg-white mt-6 lg:mt-[30px] px-6 py-[30px] rounded-md lg:rounded-xl border border-black border-opacity-10">

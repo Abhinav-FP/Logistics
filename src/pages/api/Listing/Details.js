@@ -22,6 +22,10 @@ class Details extends Component {
     return Api.get("/shipment/get");
   }
 
+  async deleteShipment(data) {
+    return Api.get(`/shipment/delete/${data}`);
+  }
+
   render() {
     return (
       <div>

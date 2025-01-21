@@ -1,8 +1,33 @@
 import Layout from '@/layout/Layout'
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
+import Details from '../api/Listing/Details';
 
 export default function index() {
+
+    const [listing, setLisitng] = useState("");
+    const [Loading, setLoading] = useState(false);
+    const getdrivers = () => {
+      setLoading(true);
+      const main = new Details();
+      main
+        .Usersget("driver")
+        .then((r) => {
+          setLoading(false);
+          setLisitng(r?.data?.data);
+        })
+        .catch((err) => {
+          setLoading(false);
+          setLisitng([]);
+          console.log("error", err);
+        });
+    };
+  
+    useEffect(() => {
+      getdrivers();
+    }, []);
+    console.log("listing", listing);
+
     const carriersData = [
         {
             id: "SHP-001",
