@@ -3,7 +3,9 @@ import LocatinTracker from '../tracklocation/index';
 
 export default function Index() {
     const Start_coordinates = { lat: 26.9178958, lng: 75.8500819 };
-    const Current_coordinates = { lat: 26.9229, lng: 75.8269 };
+    const Current_coordinates = { lat: 26.922116, lng: 75.8107634 };
+    // const Current_coordinates = { lat: 26.9229, lng: 75.8269 };
+
     const End_coordinates = { lat: 26.9278715, lng: 75.7879766 };
 
     return (

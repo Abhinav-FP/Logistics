@@ -55,6 +55,29 @@ const MapComponent = ({ StartLocation, CurrentLocation, EndLocation }) => {
                 center={CurrentLocation || StartLocation}
                 options={{ cursor: 'crosshair' }}
             >
+
+                {/* Start Location  */}
+                {StartLocation && (
+                    <CustomMarker
+                        position={StartLocation}
+                        iconUrl="https://th.bing.com/th/id/OIP.ZCHVQMolgocE66TQdftn3wHaGA?rs=1&pid=ImgDetMain"
+                      
+                        size={{ width: 50, height: 50 }}
+                    />
+                )}
+                {/* End  Location  */}
+                
+                {EndLocation && (
+                    <CustomMarker
+                        position={EndLocation}
+                          iconUrl="https://th.bing.com/th/id/OIP.hIhIc_XIUMQXr6J4BHdMzwHaF6?w=224&h=180&c=7&r=0&o=5&pid=1.7"
+                        size={{ width: 40, height: 40 }}
+                    />
+                )}
+              
+
+              {/* Current Loction  */}
+
                 {CurrentLocation && (
                     <CustomMarker
                         position={CurrentLocation}
@@ -64,21 +87,10 @@ const MapComponent = ({ StartLocation, CurrentLocation, EndLocation }) => {
                     />
                 )}
 
-                {EndLocation && (
-                    <CustomMarker
-                        position={StartLocation}
-                        iconUrl="https://th.bing.com/th/id/OIP.ZCHVQMolgocE66TQdftn3wHaGA?rs=1&pid=ImgDetMain"
-                        size={{ width: 40, height: 40 }}
-                    />
-                )}
 
-                {StartLocation && (
-                    <CustomMarker
-                        position={StartLocation}
-                        iconUrl="https://www.pngall.com/wp-content/uploads/8/Restaurant-Logo-PNG-Free-Image.png"
-                        size={{ width: 50, height: 50 }}
-                    />
-                )}
+
+
+             
 
                 {directions && <DirectionsRenderer directions={directions} />}
             </GoogleMap>
