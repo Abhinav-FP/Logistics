@@ -1,12 +1,15 @@
 import LocationSearch from "@/components/LocationSearch";
 import Layout from "@/layout/Layout";
 import Details from "@/pages/api/Listing/Details";
+import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { IoBookmark } from "react-icons/io5";
 import { RxCross1 } from "react-icons/rx";
 
 
 export default function index() {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -24,10 +27,11 @@ export default function index() {
     dimensions2: "",
     customerName: "",
   });
-
   const [brokers, setBrokers] = useState([]);
   const [customers, setCustomers] = useState([]);
+  const [loading, setLoading] = useState([]);
 
+  // Get Brokers and Customers list
   const getBrokerandCustomer = () => {
     const main = new Details();
     main
@@ -56,11 +60,61 @@ export default function index() {
       [name]: value,
     });
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("formData", formData);
+    setLoading(true);
+    const main = new Details();
+    const response = main.createShipment({
+      name: formData.title,
+      description: formData.description,
+      pickup_location: formData.pickup,
+      drop_location: formData.delivery,
+      customer_id: formData.customerName, 
+      broker_id: formData.brokerName, 
+      shippingDate: formData.shippingDate,
+      deliveryDateExpect: formData.deliveryDate,
+      cost: formData.estimatedCost,
+      paymentStatus: formData.paymentStatus,
+      quantity: formData.quantity,
+      weight: formData.weight,
+      dimensions: `${formData.dimensions1} x ${formData.dimensions2}`, 
+      typeOfGoods: formData.typeOfGoods,
+      });
+    response
+      .then((res) => {
+        if (res && res?.data && res?.data?.status) {
+          toast.success(res.data.message);
+          setLoading(false);
+          setFormData({
+            title: "",
+            description: "",
+            pickup: "",
+            delivery: "",
+            shippingDate: "",
+            deliveryDate: "",
+            estimatedCost: "",
+            paymentStatus: "",
+            brokerName: "",
+            typeOfGoods: "",
+            quantity: "",
+            weight: "",
+            dimensions1: "",
+            dimensions2: "",
+            customerName: "",
+          })
+          router.push("/shipment")
+        } else {
+          toast.error(res.data.message);
+          setLoading(false);
+        }
+      })
+      .catch((error) => {
+        toast.error(error?.response?.data?.message);
+        console.log("error", error);
+        setLoading(false);
+      });
   };
-
 
   return (
     <Layout page={"Shipment"}>

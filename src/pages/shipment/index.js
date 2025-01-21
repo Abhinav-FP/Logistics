@@ -1,9 +1,35 @@
 import Layout from '@/layout/Layout'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import ShipmentTable from '../Home/ShipmentTable';
 import Link from 'next/link';
+import Details from '../api/Listing/Details';
 
 export default function index() {
+
+  const [listing, setLisitng] = useState("");
+  const [Loading, setLoading] = useState(false);
+  const getshipment = () => {
+    setLoading(true);
+    const main = new Details();
+    main
+      .getShipment("")
+      .then((r) => {
+        setLoading(false);
+        setLisitng(r?.data?.data);
+      })
+      .catch((err) => {
+        setLoading(false);
+        setLisitng([]);
+        console.log("error", err);
+      });
+  };
+
+  useEffect(() => {
+    getshipment();
+  }, []);
+  console.log("listing", listing);
+
+
   const data = [
     { id: 'SHP-001', title: 'Electronics Delivery', pickup: 'New York, NY', delivery: 'Los Angeles, CA', status: 'In Transit', shipmentDate: '2024-12-01', expectedDelivery: '2024-12-08' },
     { id: 'SHP-002', title: 'Furniture Delivery', pickup: 'Chicago, IL', delivery: 'Houston, TX', status: 'Delivered', shipmentDate: '2024-11-15', expectedDelivery: '2024-11-20' },
@@ -27,7 +53,7 @@ export default function index() {
           </Link>
         </div>
         <div className="bg-white mt-6 lg:mt-[30px] px-6 py-[30px] rounded-md lg:rounded-xl border border-black border-opacity-10">
-          <ShipmentTable shipments={data} />
+          <ShipmentTable shipments={listing} />
         </div>
       </div>
     </Layout>
