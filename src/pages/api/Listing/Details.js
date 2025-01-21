@@ -14,6 +14,14 @@ class Details extends Component {
     return Api.get("/user/get-role");
   }
 
+  async createShipment(data) {
+    return Api.post("/shipment/create",data);
+  }
+
+  async getShipment() {
+    return Api.get("/shipment/get");
+  }
+
   render() {
     return (
       <div>

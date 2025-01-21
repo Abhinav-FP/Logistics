@@ -12,7 +12,7 @@ import Link from "next/link";
 import { IoIosMenu } from "react-icons/io";
 import { IoMdArrowRoundBack } from "react-icons/io";
 
-function SideBar() {
+function SideBar({role}) {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -43,7 +43,7 @@ function SideBar() {
               <img src="/Logo.png" alt="FriegtFlow Logo" className="h-[41px] w-[98px] mr-2" />
               <div className="flex flex-col">
                 <span className="text-lg font-medium text-[#151547] tracking-[-0.04em] mb-1 leading-tight">FriegtFlow</span>
-                <span className="text-xs font-medium text-[#727272] tracking-[-0.06em] ">User</span>
+                <span className="text-xs font-medium text-[#727272] tracking-[-0.06em] capitalize">{role}</span>
               </div>
           </div>
         </div>
@@ -132,7 +132,7 @@ function SideBar() {
             </ul>
           </div>
 
-          <div>
+          {/* <div>
             <div className="uppercase text-[#808080] text-sm font-medium mb-4 lg:mb-5">PAYMENT</div>
             <ul className="mt-2 space-y-1">
               <Link
@@ -156,7 +156,7 @@ function SideBar() {
                 Payments
               </Link>
             </ul>
-          </div>
+          </div> */}
         </div>
       </div>
     </>

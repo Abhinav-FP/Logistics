@@ -10,7 +10,7 @@ export default function index() {
       setLoading(true);
       const main = new Details();
       main
-        .Usersget("")
+        .Usersget("customer")
         .then((r) => {
           setLoading(false);
           setLisitng(r?.data?.data);
