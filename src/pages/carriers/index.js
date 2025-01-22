@@ -1,46 +1,75 @@
-import Layout from '@/layout/Layout'
-import React from 'react';
-import Link from 'next/link';
+import Layout from "@/layout/Layout";
+import React, { useEffect, useState } from "react";
+import Link from "next/link";
+import Details from "../api/Listing/Details";
+import UsersTable from "@/components/UsersTable";
+import Popup from "@/components/Popup";
 
 export default function index() {
-    const carriersData = [
-        {
-            id: "SHP-001",
-            CarrierName: "John Carter",
-            companyName: "John Carter",
-            information: "2024-12-01 | 04:30 PM",
-            size: "40",
-            vehicleTypes: ['Truck', 'Van']
-        },
-        {
-            id: "SHP-001",
-            CarrierName: "John Carter",
-            companyName: "John Carter",
-            information: "2024-12-01 | 04:30 PM",
-            size: "40",
-            vehicleTypes: ['Truck', 'Van']
-        },
-        {
-            id: "SHP-001",
-            CarrierName: "John Carter",
-            companyName: "John Carter",
-            information: "2024-12-01 | 04:30 PM",
-            size: "40",
-            vehicleTypes: ['Truck', 'Van']
-        }
-    ];
-    return (
-        <>
-            <Layout page={"carriersData"}>
-                <div>
-                    <div className="flex items-center justify-between items-center space-y-4 md:space-y-0">
-                        <h2 className="text-[#151547] text-lg tracking-[-0.04em] font-medium m-0">Carrier  Listing </h2>
-                        <Link href="/carriers/add" className="bg-[#1C5FE8] hover:bg-[#0a3fab] inline-block font-medium text-base text-white tracking-[-0.04em] rounded-lg lg:rounded-xl px-5 py-3  ">
-                            <span className="mr-1">+</span> Add New Carrier
-                        </Link>
-                    </div>
-                    <div className="bg-white mt-6 lg:mt-[30px] px-6 py-[30px] rounded-md lg:rounded-xl border border-black border-opacity-10">
-                        <div className="overflow-x-auto">
+  const [listing, setLisitng] = useState("");
+  const [Loading, setLoading] = useState(false);
+
+  const getcarriers = () => {
+    setLoading(true);
+    const main = new Details();
+    main
+      .Usersget("carrier")
+      .then((r) => {
+        setLoading(false);
+        setLisitng(r?.data?.data);
+      })
+      .catch((err) => {
+        setLoading(false);
+        setLisitng([]);
+        console.log("error", err);
+      });
+  };
+
+  useEffect(() => {
+    getcarriers();
+  }, []);
+  console.log("listing", listing);
+
+  const carriersData = [
+      {
+          id: "SHP-001",
+          CarrierName: "John Carter",
+          companyName: "John Carter",
+          information: "2024-12-01 | 04:30 PM",
+          size: "40",
+          vehicleTypes: ['Truck', 'Van']
+      },
+      {
+          id: "SHP-001",
+          CarrierName: "John Carter",
+          companyName: "John Carter",
+          information: "2024-12-01 | 04:30 PM",
+          size: "40",
+          vehicleTypes: ['Truck', 'Van']
+      },
+      {
+          id: "SHP-001",
+          CarrierName: "John Carter",
+          companyName: "John Carter",
+          information: "2024-12-01 | 04:30 PM",
+          size: "40",
+          vehicleTypes: ['Truck', 'Van']
+      }
+  ];
+  return (
+    <>
+      <Layout page={"Carriers"}>
+        <div>
+          <div className="flex items-center justify-between items-center space-y-4 md:space-y-0">
+            <h2 className="text-[#151547] text-lg tracking-[-0.04em] font-medium m-0">
+              Carrier Listing{" "}
+            </h2>
+            <Link href="/carriers/add" className="bg-[#1C5FE8] hover:bg-[#0a3fab] inline-block font-medium text-base text-white tracking-[-0.04em] rounded-lg lg:rounded-xl px-5 py-3">
+              <span className="mr-1">+</span> Add New Carrier
+            </Link>
+          </div>
+          <div className="bg-white mt-6 lg:mt-[30px] px-6 py-[30px] rounded-md lg:rounded-xl border border-black border-opacity-10">
+            <div className="overflow-x-auto">
                             <table className="w-full border-none">
                                 <thead>
                                     <tr className="text-[#9090AD] bg-[#F4F6F8] border border-black border-opacity-10 uppercase ">
@@ -73,9 +102,10 @@ export default function index() {
                                 </tbody>
                             </table>
                         </div>
-                    </div>
-                </div>
-            </Layout>
-        </>
-    )
-};
+            {/* <UsersTable listing={listing} /> */}
+          </div>
+        </div>
+      </Layout>
+    </>
+  );
+}
