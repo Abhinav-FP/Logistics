@@ -4,7 +4,7 @@ import { IoBookmark } from "react-icons/io5";
 
 export default function index() {
   const [formData, setFormData] = useState({
-    title: "",
+    name: "",
     id: "",
     type: "",
     companyname: "",
@@ -67,8 +67,8 @@ export default function index() {
                     </label>
                     <input
                       type="text"
-                      name="title"
-                      value={formData.title}
+                      name="name"
+                      value={formData.name}
                       onChange={handleChange}
                       className="w-full h-11 lg:h-[48px] appearance-none block bg-white text-[#000] text-base border border-black border-opacity-10 rounded-md lg:rounded-xl py-2 px-4 leading-tight focus:outline-none"
                       placeholder=""

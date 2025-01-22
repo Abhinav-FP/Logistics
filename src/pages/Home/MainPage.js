@@ -2,6 +2,7 @@ import Layout from "@/layout/Layout";
 import React from "react";
 import Dashboard from "./Dashboard";
 import ShipmentTable from "./ShipmentTable";
+import BrokerDashboard from "./BrokerDashboard";
 
 export default function MainPage() {
 
@@ -20,6 +21,7 @@ export default function MainPage() {
           <h2 className="text-[#151547] text-lg tracking-[-0.04em] font-medium mb-4 lg:mb-5">Shipment Listing </h2>
           <ShipmentTable shipments={data}/>
         </div>
+        <BrokerDashboard/>
         </div>
       </Layout>
   );
