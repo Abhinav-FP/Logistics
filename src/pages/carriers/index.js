@@ -4,6 +4,7 @@ import Link from "next/link";
 import Details from "../api/Listing/Details";
 import UsersTable from "@/components/UsersTable";
 import Popup from "@/components/Popup";
+import Loader from "@/components/Loader";
 
 export default function index() {
   const [listing, setLisitng] = useState("");
@@ -59,6 +60,7 @@ export default function index() {
   return (
     <>
       <Layout page={"Carriers"}>
+        {Loading ? <Loader /> :
         <div>
           <div className="flex items-center justify-between items-center space-y-4 md:space-y-0">
             <h2 className="text-[#151547] text-lg tracking-[-0.04em] font-medium m-0">
@@ -101,6 +103,7 @@ export default function index() {
             {/* <UsersTable listing={listing} /> */}
           </div>
         </div>
+         }
       </Layout>
     </>
   );

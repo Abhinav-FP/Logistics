@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import Details from '../api/Listing/Details';
 import Link from 'next/link';
 import UsersTable from '@/components/UsersTable';
+import Loader from '@/components/Loader';
 
 export default function index() {
 
@@ -32,6 +33,8 @@ export default function index() {
  
   return (
     <Layout page={"Customers"}>
+      {Loading ? <Loader/> : 
+      <>
       <div className="flex items-center justify-between items-center space-y-4 md:space-y-0">
         <h2 className="text-[#151547] text-lg tracking-[-0.04em] font-medium m-0">Customers  Listing </h2>
         <Link href="/users/add" className="bg-[#1C5FE8] hover:bg-[#0a3fab] inline-block font-medium text-base text-white tracking-[-0.04em] rounded-lg lg:rounded-xl px-5 py-3">
@@ -65,6 +68,8 @@ export default function index() {
           </table>
         </div> */}
       </div>
+      </>
+      }
     </Layout>
   )
 }
