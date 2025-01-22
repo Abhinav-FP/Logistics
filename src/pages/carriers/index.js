@@ -13,7 +13,7 @@ export default function index() {
     setLoading(true);
     const main = new Details();
     main
-      .Usersget("carrier")
+      .Carrierget()
       .then((r) => {
         setLoading(false);
         setLisitng(r?.data?.data);
@@ -82,18 +82,14 @@ export default function index() {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {carriersData && carriersData?.map((carrier) => (
+                                    {listing && listing?.map((carrier) => (
                                         <tr key={carrier.id} className="border-b  border-black border-opacity-10 font-medium">
-                                            <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">{carrier?.id}</td>
-                                            <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">{carrier?.carrierName}</td>
-                                            <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">{carrier?.companyName}</td>
-                                            <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">{carrier?.information}</td>
+                                            <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">{carrier?.carrier_id_given}</td>
+                                            <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">{carrier?.career_id_ref?.name}</td>
+                                            <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">{carrier?.companyname}</td>
+                                            <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">{carrier?.career_id_ref?.contact}</td>
                                             <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">{carrier?.size}</td>
-                                            <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">
-                                                {carrier.vehicleTypes?.map((vehicleType, index) => (
-                                                    <span key={index}>{vehicleType},</span>
-                                                ))}
-                                            </td>
+                                            <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">{carrier?.type}</td>
                                         </tr>
                                     ))}
 

@@ -3,16 +3,12 @@ import React, { useEffect, useState } from 'react'
 import Details from '../api/Listing/Details';
 import Link from 'next/link';
 import UsersTable from '@/components/UsersTable';
-import Popup from '@/components/Popup';
 
 export default function index() {
 
   const [listing, setLisitng] = useState("");
   const [Loading, setLoading] = useState(false);
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
-  const openPopup = () => setIsPopupOpen(true);
-  const closePopup = () => setIsPopupOpen(false);
   const getusers = () => {
     setLoading(true);
     const main = new Details();
@@ -35,15 +31,12 @@ export default function index() {
   console.log("listing", listing);
  
   return (
-    <Layout page={"Users"}>
+    <Layout page={"Customers"}>
       <div className="flex items-center justify-between items-center space-y-4 md:space-y-0">
-        <h2 className="text-[#151547] text-lg tracking-[-0.04em] font-medium m-0">Carrier  Listing </h2>
-        <button href="/carriers/add" className="bg-[#1C5FE8] hover:bg-[#0a3fab] inline-block font-medium text-base text-white tracking-[-0.04em] rounded-lg lg:rounded-xl px-5 py-3"
-        onClick={() => {
-          openPopup();
-        }}>
-          <span className="mr-1">+</span> Add New User
-        </button>
+        <h2 className="text-[#151547] text-lg tracking-[-0.04em] font-medium m-0">Customers  Listing </h2>
+        <Link href="/users/add" className="bg-[#1C5FE8] hover:bg-[#0a3fab] inline-block font-medium text-base text-white tracking-[-0.04em] rounded-lg lg:rounded-xl px-5 py-3">
+          <span className="mr-1">+</span> Add New Customer
+        </Link>
       </div>
       <div className="bg-white mt-6 lg:mt-[30px] px-6 py-[30px] rounded-md lg:rounded-xl border border-black border-opacity-10">
         <UsersTable listing={listing} />
@@ -72,61 +65,6 @@ export default function index() {
           </table>
         </div> */}
       </div>
-      <Popup isOpen={isPopupOpen} onClose={closePopup}>
-            <form className="space-y-4">
-              <div>
-                <label
-                  htmlFor="name"
-                  className="text-[#70708D] text-sm tracking-[-0.04em] uppercase mb-2 block"
-                >
-                  Name
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  className="w-full h-11 appearance-none block bg-white text-[#000] text-base border border-black border-opacity-10 rounded-md py-2 px-4 leading-tight focus:outline-none"
-                  placeholder="Enter your name"
-                  required
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="email"
-                  className="text-[#70708D] text-sm tracking-[-0.04em] uppercase mb-2 block"
-                >
-                  Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  className="w-full h-11 appearance-none block bg-white text-[#000] text-base border border-black border-opacity-10 rounded-md py-2 px-4 leading-tight focus:outline-none"
-                  placeholder="Enter your email"
-                  required
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="contact"
-                  className="text-[#70708D] text-sm tracking-[-0.04em] uppercase mb-2 block"
-                >
-                  Contact
-                </label>
-                <input
-                  type="text"
-                  id="contact"
-                  className="w-full h-11 appearance-none block bg-white text-[#000] text-base border border-black border-opacity-10 rounded-md py-2 px-4 leading-tight focus:outline-none"
-                  placeholder="Enter your contact number"
-                  required
-                />
-              </div>
-              <button
-                type="submit"
-                className="w-full bg-[#1C5FE8] hover:bg-[#0a3fab] font-medium text-base text-white tracking-[-0.04em] rounded-lg py-3"
-              >
-                Submit
-              </button>
-            </form>
-          </Popup>
     </Layout>
   )
 }
