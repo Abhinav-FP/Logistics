@@ -57,6 +57,8 @@ export default function index() {
           vehicleTypes: ['Truck', 'Van']
       }
   ];
+
+  console.log("listing" ,listing)
   return (
     <>
       <Layout page={"Carriers"}>
