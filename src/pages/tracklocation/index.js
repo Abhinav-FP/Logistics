@@ -5,10 +5,7 @@ const MapContainer = ({ Current_coordinates, Start_coordinates, End_coordinates 
     const [CurrentLocation, setCurrentLocation] = useState(null);
     const [StartLocation, setStartLocation] = useState(null);
     const [EndLocation, setEndLocation] = useState(null);
-
     useEffect(() => {
-        console.log('Setting locations:', Current_coordinates, Start_coordinates, End_coordinates);
-        
         if (Start_coordinates?.lat && Start_coordinates?.lng) {
             setStartLocation(Start_coordinates);
         }
