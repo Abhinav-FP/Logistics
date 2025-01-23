@@ -18,41 +18,6 @@ const MapComponent = ({ StartLocation, CurrentLocation, EndLocation }) => {
     const [directions, setDirections] = useState(null);
     const [routeDetails, setRouteDetails] = useState({});
     console.log("routeDetails", routeDetails)
-    // useEffect(() => {
-    //     if (typeof window !== 'undefined' && window.google) {
-    //         const { google } = window;
-
-    //         if (google && google.maps) {
-    //             const directionsService = new google.maps.DirectionsService();
-
-    //             directionsService.route(
-    //                 {
-    //                     origin: StartLocation,
-    //                     destination: EndLocation,
-    //                     travelMode: google.maps.TravelMode.DRIVING,
-    //                 },
-    //                 (result, status) => {
-    //                     if (status === google.maps.DirectionsStatus.OK) {
-    //                         setDirections(result);
-    //                         console.log("result", result);
-    //                         const leg = result.routes[0].legs[0];
-    //                         const startToEndDistance = leg.distance.text;
-    //                         const startToEndDuration = leg.duration.text
-    //                         setRouteDetails({
-    //                             startToEndDistance,
-    //                             startToEndDuration
-    //                         });
-    //                     } else {
-    //                         console.error(`Error fetching directions: ${status}`);
-    //                     }
-    //                 }
-    //             );
-    //         } else {
-    //             console.error('Google Maps API is not properly loaded.');
-    //         }
-    //     }
-    // }, [StartLocation, EndLocation]);
-
     useEffect(() => {
         if (typeof window !== 'undefined' && window.google) {
             const { google } = window;
