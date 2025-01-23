@@ -109,8 +109,6 @@ const MapComponent = ({ StartLocation, CurrentLocation, EndLocation }) => {
         }
     }, [StartLocation, EndLocation, CurrentLocation]);
 
-
-
     const NEXT_PUBLIC_GOOGLE_MAPS_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
 
     return (
