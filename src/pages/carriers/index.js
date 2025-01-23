@@ -10,6 +10,8 @@ import { useRole } from "@/context/RoleContext";
 export default function Index() {
   const [listing, setLisitng] = useState("");
   const [Loading, setLoading] = useState(false);
+    const { user, setUser } = useRole();
+  
 
   const getcarriers = () => {
     setLoading(true);
