@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import dynamic from 'next/dynamic';
 import { GoogleMap, Marker, DirectionsRenderer, LoadScript } from '@react-google-maps/api';
 
@@ -17,62 +17,64 @@ const MapComponent = ({ StartLocation, CurrentLocation, EndLocation }) => {
     const [directions, setDirections] = useState(null);
     const [routeDetails, setRouteDetails] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         if (typeof window !== 'undefined' && window.google) {
             const { google } = window;
-
+    
             if (google && google.maps) {
                 const directionsService = new google.maps.DirectionsService();
-
-                directionsService.route(
-                    {
-                        origin: StartLocation,
-                        destination: EndLocation,
-                        travelMode: google.maps.TravelMode.DRIVING,
-                    },
-                    (result, status) => {
-                        if (status === google.maps.DirectionsStatus.OK) {
-                            setDirections(result);
-                            const legStartToEnd = result.routes[0].legs[0];
-                            const startToEndDistance = legStartToEnd.distance.text;
-                            const startToEndDuration = legStartToEnd.duration.text;
-
-                            directionsService.route(
-                                {
-                                    origin: CurrentLocation,
-                                    destination: StartLocation,
-                                    travelMode: google.maps.TravelMode.DRIVING,
-                                },
-                                (result, status) => {
-                                    if (status === google.maps.DirectionsStatus.OK) {
-                                        const legEndToCurrent = result.routes[0].legs[0];
-                                        const endToCurrentDistance = legEndToCurrent.distance.text;
-                                        const endToCurrentDuration = legEndToCurrent.duration.text;
-                                        setRouteDetails({
-                                            startToEndDistance,
-                                            endToCurrentDistance,
-                                            startToEndDuration,
-                                            endToCurrentDuration,
-                                        });
-                                    } else {
-                                        console.error(`Error fetching directions: ${status}`);
+    
+                if (StartLocation && EndLocation && CurrentLocation) {
+                    // Only fetch directions when locations are updated
+                    directionsService.route(
+                        {
+                            origin: StartLocation,
+                            destination: EndLocation,
+                            travelMode: google.maps.TravelMode.DRIVING,
+                        },
+                        (result, status) => {
+                            if (status === google.maps.DirectionsStatus.OK) {
+                                setDirections(result);
+                                const legStartToEnd = result.routes[0].legs[0];
+                                const startToEndDistance = legStartToEnd.distance.text;
+                                const startToEndDuration = legStartToEnd.duration.text;
+    
+                                directionsService.route(
+                                    {
+                                        origin: CurrentLocation,
+                                        destination: StartLocation,
+                                        travelMode: google.maps.TravelMode.DRIVING,
+                                    },
+                                    (result, status) => {
+                                        if (status === google.maps.DirectionsStatus.OK) {
+                                            const legEndToCurrent = result.routes[0].legs[0];
+                                            const endToCurrentDistance = legEndToCurrent.distance.text;
+                                            const endToCurrentDuration = legEndToCurrent.duration.text;
+                                            setRouteDetails({
+                                                startToEndDistance,
+                                                endToCurrentDistance,
+                                                startToEndDuration,
+                                                endToCurrentDuration,
+                                            });
+                                        } else {
+                                            console.error(`Error fetching directions: ${status}`);
+                                        }
+                                        setLoading(false);
                                     }
-                                    setLoading(false);
-                                }
-                            );
-                        } else {
-                            console.error(`Error fetching directions: ${status}`);
-                            setLoading(false);
+                                );
+                            } else {
+                                console.error(`Error fetching directions: ${status}`);
+                                setLoading(false);
+                            }
                         }
-                    }
-                );
-            } else {
-                console.error('Google Maps API is not properly loaded.');
-                setLoading(false);
+                    );
+                }
             }
         }
     }, [StartLocation, EndLocation, CurrentLocation]);
+    
 
     const NEXT_PUBLIC_GOOGLE_MAPS_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
 
@@ -118,6 +120,11 @@ const MapComponent = ({ StartLocation, CurrentLocation, EndLocation }) => {
             {loading ? (
                 <div className="p-4 m-4 bg-gray-100 rounded-lg shadow-lg">
                     <p className="text-lg mb-2">Loading route details...</p>
+                   
+                </div>
+            ) : error ? (
+                <div className="p-4 m-4 bg-gray-100 rounded-lg shadow-lg">
+                    <p className="text-lg text-red-500 mb-2">Error: {error}</p>
                 </div>
             ) : (
                 routeDetails && (
@@ -134,4 +141,3 @@ const MapComponent = ({ StartLocation, CurrentLocation, EndLocation }) => {
 };
 
 export default dynamic(() => Promise.resolve(MapComponent), { ssr: false });
-

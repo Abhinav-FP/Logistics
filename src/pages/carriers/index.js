@@ -6,7 +6,7 @@ import UsersTable from "@/components/UsersTable";
 import Popup from "@/components/Popup";
 import Loader from "@/components/Loader";
 
-export default function index() {
+export default function Index() {
   const [listing, setLisitng] = useState("");
   const [Loading, setLoading] = useState(false);
 
