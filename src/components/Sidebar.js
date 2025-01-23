@@ -20,7 +20,7 @@ function SideBar({role}) {
     <>
       {isOpen && 
       <button
-        className="lg:hidden p-2 absolute left-[250px] top-3 text-red-700 border border-red-700 z-[99] rounded"
+        className="lg:hidden p-2 absolute left-[209px] top-6 text-red-700 border border-red-700 z-[99] rounded"
         onClick={() => setIsOpen(false)}
       >
      <IoMdArrowRoundBack size={24}/>
