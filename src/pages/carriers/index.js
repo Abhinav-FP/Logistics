@@ -7,8 +7,7 @@ import Popup from "@/components/Popup";
 import Loader from "@/components/Loader";
 import { useRole } from "@/context/RoleContext";
 
-export default function index() {
-    const { user } = useRole();
+export default function Index() {
   const [listing, setLisitng] = useState("");
   const [Loading, setLoading] = useState(false);
 
@@ -59,6 +58,8 @@ export default function index() {
           vehicleTypes: ['Truck', 'Van']
       }
   ];
+
+  console.log("listing" ,listing)
   return (
     <>
       <Layout page={"Carriers"}>
