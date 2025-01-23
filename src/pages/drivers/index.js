@@ -1,12 +1,38 @@
 import Layout from "@/layout/Layout";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { BsDownload } from "react-icons/bs";
 import { MdDone } from "react-icons/md";
 import { CiNoWaitingSign } from "react-icons/ci";
 import { IoMdShare } from "react-icons/io";
+import Details from "../api/Listing/Details";
 
 export default function index() {
+
+    const [listing, setLisitng] = useState("");
+    const [Loading, setLoading] = useState(false);
+  
+    const getusers = () => {
+      setLoading(true);
+      const main = new Details();
+      main
+        .Usersget("driver")
+        .then((r) => {
+          setLoading(false);
+          setLisitng(r?.data?.data);
+        })
+        .catch((err) => {
+          setLoading(false);
+          setLisitng([]);
+          console.log("error", err);
+        });
+    };
+  
+    useEffect(() => {
+      getusers();
+    }, []);
+    console.log("listing", listing);
+
     const drivers = [
         {
             id: "SHP-001",
@@ -35,8 +61,8 @@ export default function index() {
         <Layout page={"Driver"}>
             <div>
                 <div className="flex items-center justify-between items-center space-y-4 md:space-y-0">
-                    <h2 className="text-[#151547] text-lg tracking-[-0.04em] font-medium m-0">Carrier  Listing </h2>
-                    <Link href="/carriers/add" className="bg-[#1C5FE8] hover:bg-[#0a3fab] inline-block font-medium text-base text-white tracking-[-0.04em] rounded-lg lg:rounded-xl px-5 py-3  ">
+                    <h2 className="text-[#151547] text-lg tracking-[-0.04em] font-medium m-0">Driver Listing </h2>
+                    <Link href="/carriers/add" className="bg-[#1C5FE8] hover:bg-[#0a3fab] inline-block font-medium text-base text-white tracking-[-0.04em] rounded-lg lg:rounded-xl px-5 py-3 ">
                         <span className="mr-1">+</span> Add New Driver
                     </Link>
                 </div>
