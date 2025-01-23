@@ -2,13 +2,31 @@ import Popup from "@/components/Popup";
 import React, { useState } from "react";
 import { FaEye } from "react-icons/fa";
 import { FaRegTrashCan } from "react-icons/fa6";
+import Details from "../api/Listing/Details";
+import toast from "react-hot-toast";
 
-export default function ShipmentTable({ shipments }) {
+export default function ShipmentTable({ shipments, getshipment }) {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const[data,setData] = useState({});
 
   const openPopup = () => setIsPopupOpen(true);
   const closePopup = () => setIsPopupOpen(false);
+
+  const deleteshipment = (id) => {
+    const main = new Details();
+    main
+      .deleteShipment(id)
+      .then((r) => {
+        toast.success(r?.data?.message);
+        getshipment();
+      })
+      .catch((err) => {
+        toast.error(err?.response?.data?.message);
+        console.log("error", err);
+      });
+  };
+
+
   console.log("shipments",shipments);
   return (
     <div className="overflow-x-auto">
@@ -26,7 +44,7 @@ export default function ShipmentTable({ shipments }) {
           </tr>
         </thead>
         <tbody>
-          {shipments && shipments.map((shipment, index) => (
+          {shipments && shipments?.map((shipment, index) => (
             <tr key={index} className="border-b border-black border-opacity-10 font-medium">
               <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">
                 {index < 10 ? `SHP-00${index + 1}` : `SHP-0${index + 1}`}
@@ -52,7 +70,9 @@ export default function ShipmentTable({ shipments }) {
                     setData(shipment);
                     openPopup();
                     }}/> 
-                  <FaRegTrashCan size={20} color={"#Ff0000"} className="cursor-pointer"/>
+                  <FaRegTrashCan size={20} color={"#Ff0000"} className="cursor-pointer"
+                  onClick={() => deleteshipment(shipment?._id)}
+                  />
                 </div>
               </td>
             </tr>

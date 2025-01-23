@@ -10,6 +10,10 @@ class Details extends Component {
     return Api.get(`/user/get/${data}`);
   }
 
+  async Carrierget() {
+    return Api.get("/user/get-carrier");
+  }
+
   async profileVerify() {
     return Api.get("/user/get-role");
   }
@@ -20,6 +24,19 @@ class Details extends Component {
 
   async getShipment() {
     return Api.get("/shipment/get");
+  }
+
+
+  async deleteShipment(data) {
+    return Api.get(`/shipment/delete/${data}`);
+  }
+
+  async createCarrier(data) {
+    return Api.post("/user/create-carrier",data);
+  }
+
+  async createCustomer(data) {
+    return Api.post("/user/create-customer",data);
   }
 
   render() {

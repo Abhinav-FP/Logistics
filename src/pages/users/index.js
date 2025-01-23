@@ -1,66 +1,75 @@
 import Layout from '@/layout/Layout';
 import React, { useEffect, useState } from 'react'
 import Details from '../api/Listing/Details';
+import Link from 'next/link';
+import UsersTable from '@/components/UsersTable';
+import Loader from '@/components/Loader';
 
 export default function index() {
 
-    const [listing, setLisitng] = useState("");
-    const [Loading, setLoading] = useState(false);
-    const getusers = () => {
-      setLoading(true);
-      const main = new Details();
-      main
-        .Usersget("customer")
-        .then((r) => {
-          setLoading(false);
-          setLisitng(r?.data?.data);
-        })
-        .catch((err) => {
-          setLoading(false);
-          setLisitng([]);
-          console.log("error", err);
-        });
-    };
-  
-    useEffect(() => {
-      getusers();
-    }, []);
-    console.log("listing", listing);
+  const [listing, setLisitng] = useState("");
+  const [Loading, setLoading] = useState(false);
 
-    const shipments = [
-        { id: 'SHP-001', title: 'Electronics Delivery', pickup: 'New York, NY', delivery: 'Los Angeles, CA', status: 'In Transit', shipmentDate: '2024-12-01', expectedDelivery: '2024-12-08' },
-        { id: 'SHP-002', title: 'Furniture Delivery', pickup: 'Chicago, IL', delivery: 'Houston, TX', status: 'Delivered', shipmentDate: '2024-11-15', expectedDelivery: '2024-11-20' },
-        { id: 'SHP-003', title: 'Books Shipment', pickup: 'San Francisco, CA', delivery: 'Seattle, WA', status: 'In Transit', shipmentDate: '2024-12-05', expectedDelivery: '2024-12-10' },
-        { id: 'SHP-004', title: 'Clothing Shipment', pickup: 'Miami, FL', delivery: 'Boston, MA', status: 'Pending', shipmentDate: '2024-12-03', expectedDelivery: '2024-12-09' },
-        { id: 'SHP-005', title: 'Medical Supplies', pickup: 'Denver, CO', delivery: 'Phoenix, AZ', status: 'In Transit', shipmentDate: '2024-12-06', expectedDelivery: '2024-12-11' },
-        { id: 'SHP-006', title: 'Food Delivery', pickup: 'Las Vegas, NV', delivery: 'San Diego, CA', status: 'Cancelled', shipmentDate: '2024-11-25', expectedDelivery: '2024-11-28' },
-        { id: 'SHP-007', title: 'Automobile Parts', pickup: 'Detroit, MI', delivery: 'Dallas, TX', status: 'In Transit', shipmentDate: '2024-12-07', expectedDelivery: '2024-12-12' },
-        { id: 'SHP-008', title: 'Toy Shipment', pickup: 'Atlanta, GA', delivery: 'Orlando, FL', status: 'Delivered', shipmentDate: '2024-11-20', expectedDelivery: '2024-11-24' },
-        { id: 'SHP-009', title: 'Sporting Goods', pickup: 'Philadelphia, PA', delivery: 'Washington, DC', status: 'In Transit', shipmentDate: '2024-12-08', expectedDelivery: '2024-12-14' },
-        { id: 'SHP-010', title: 'Office Supplies', pickup: 'Boston, MA', delivery: 'Newark, NJ', status: 'Pending', shipmentDate: '2024-12-02', expectedDelivery: '2024-12-05' }
-      ]; 
+  const getusers = () => {
+    setLoading(true);
+    const main = new Details();
+    main
+      .Usersget("customer")
+      .then((r) => {
+        setLoading(false);
+        setLisitng(r?.data?.data);
+      })
+      .catch((err) => {
+        setLoading(false);
+        setLisitng([]);
+        console.log("error", err);
+      });
+  };
+
+  useEffect(() => {
+    getusers();
+  }, []);
+  console.log("listing", listing);
+ 
   return (
-    <Layout page={"Users"}>
-    <div className="overflow-x-auto mt-6">
-    <table className="table-auto border-gray-200">
-      <thead>
-        <tr className="text-[#9090AD] bg-[#F4F6F8] border border-gray-200 uppercase">
-          <th className="px-4 py-2 ">Name</th>
-          <th className="px-4 py-2 ">Role</th>
-          <th className="px-4 py-2 ">Tasks assigned</th>
-        </tr>
-      </thead>
-      <tbody>
-        {listing && listing?.map((data) => (
-          <tr key={data?._id} className="border border-gray-200 font-medium">
-            <td className="px-4 py-2">{data?.email}</td>
-            <td className="px-4 py-2">{data?.role}</td>
-            <td className="px-4 py-2">{data?.tasks || "0"}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  </div>
-  </Layout>
+    <Layout page={"Customers"}>
+      {Loading ? <Loader/> : 
+      <>
+      <div className="flex items-center justify-between items-center space-y-4 md:space-y-0">
+        <h2 className="text-[#151547] text-lg tracking-[-0.04em] font-medium m-0">Customers  Listing </h2>
+        <Link href="/users/add" className="bg-[#1C5FE8] hover:bg-[#0a3fab] inline-block font-medium text-base text-white tracking-[-0.04em] rounded-lg lg:rounded-xl px-5 py-3">
+          <span className="mr-1">+</span> Add New Customer
+        </Link>
+      </div>
+      <div className="bg-white mt-6 lg:mt-[30px] px-6 py-[30px] rounded-md lg:rounded-xl border border-black border-opacity-10">
+        <UsersTable listing={listing} />
+        {/* <div className="overflow-x-auto">
+          <table className="w-full border-none">
+            <thead>
+              <tr className="text-[#9090AD] bg-[#F4F6F8] border border-black border-opacity-10 uppercase ">
+                <th className="px-4 py-3  tracking-[-0.04em] text-sm font-medium text-left">Sr No</th>
+                <th className="px-4 py-3  tracking-[-0.04em] text-sm font-medium text-left">Name</th>
+                <th className="px-4 py-3  tracking-[-0.04em] text-sm font-medium text-left">Role</th>
+                <th className="px-4 py-3  tracking-[-0.04em] text-sm font-medium text-left">Email</th>
+                <th className="px-4 py-3  tracking-[-0.04em] text-sm font-medium text-left">Contact</th>
+              </tr>
+            </thead>
+            <tbody>
+              {listing && listing?.map((data, index) => (
+                <tr key={index} className="border-b border-black border-opacity-10 font-medium">
+                  <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">{data?.id}</td>
+                  <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">{data?.name}</td>
+                  <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">{data?.role}</td>
+                  <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">{data?.email}</td>
+                  <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">{data?.contact}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div> */}
+      </div>
+      </>
+      }
+    </Layout>
   )
 }
