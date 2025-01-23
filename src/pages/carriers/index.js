@@ -30,7 +30,6 @@ export default function Index() {
   useEffect(() => {
     getcarriers();
   }, []);
-  console.log("user", user);
 
   const carriersData = [
     {
