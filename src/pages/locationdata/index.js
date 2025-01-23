@@ -5,13 +5,13 @@ export default function Index() {
     const Start_coordinates = { lat: 26.9178958, lng: 75.8500819 };
     const End_coordinates = { lat: 26.9278715, lng: 75.7879766 };
     // const Current_coordinates = { lat: 26.9246, lng: 75.8181 };
-       const Current_coordinates = { lat: 26.9229, lng: 75.8269 };
+    //    const Current_coordinates = { lat: 26.9229, lng: 75.8269 };
 
     // malviya nagar
 
     // const Start_coordinates = { lat: 26.852533, lng: 75.8213041 };
 
-    // const Current_coordinates = { lat: 26.8859042, lng: 75.8150196 };
+    const Current_coordinates = { lat: 26.8859042, lng: 75.8150196 };
     // const End_coordinates = { lat: 26.9299574, lng: 75.7830367 };
 
     return (

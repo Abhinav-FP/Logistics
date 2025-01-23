@@ -115,7 +115,7 @@ const MapComponent = ({ StartLocation, CurrentLocation, EndLocation }) => {
 
     return (
         <LoadScript googleMapsApiKey={NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}>
-            <div className='flex  justify-center '>
+            <div className='flex  justify-center'>
                 <GoogleMap
                     mapContainerStyle={{ width: '80%', height: '500px' }}
                     zoom={14}
@@ -147,8 +147,6 @@ const MapComponent = ({ StartLocation, CurrentLocation, EndLocation }) => {
                             size={{ width: 50, height: 50 }}
                         />
                     )}
-
-                    {/* Directions */}
                     {directions && <DirectionsRenderer directions={directions} />}
                 </GoogleMap>
             </div>
@@ -156,7 +154,6 @@ const MapComponent = ({ StartLocation, CurrentLocation, EndLocation }) => {
             {/* Display route details */}
             {routeDetails.startToEndDuration && (
                 <div className="p-4 m-4 bg-gray-100 rounded-lg shadow-lg">
-                    <h1 className="text-2xl font-bold mb-4">Duration & Distance</h1>
                     <p className="text-lg mb-2">Duration from Start to End: {routeDetails.startToEndDuration}</p>
                     <p className="text-lg mb-2">Distance from Start to End: {routeDetails.startToEndDistance}</p>
                     <p className="text-lg mb-2">Duration from End to Current Location: {routeDetails.endToCurrentDuration}</p>
