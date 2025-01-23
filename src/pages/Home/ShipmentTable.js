@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 
 
-export default function ShipmentTable({ shipments, getshipment, DeleteOption=false }) {
+export default function ShipmentTable({ shipments, getShipments, DeleteOption=false, role }) {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const[data,setData] = useState({});
 
@@ -20,7 +20,7 @@ export default function ShipmentTable({ shipments, getshipment, DeleteOption=fal
       .deleteShipment(id)
       .then((r) => {
         toast.success(r?.data?.message);
-        getshipment();
+        getShipments(role === "broker");
       })
       .catch((err) => {
         toast.error(err?.response?.data?.message);

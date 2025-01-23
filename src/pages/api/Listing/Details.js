@@ -26,6 +26,9 @@ class Details extends Component {
     return Api.get("/shipment/get");
   }
 
+  async getBrokerShipment() {
+    return Api.get("/shipment/get-shipment-broker");
+  }
 
   async deleteShipment(data) {
     return Api.get(`/shipment/delete/${data}`);
