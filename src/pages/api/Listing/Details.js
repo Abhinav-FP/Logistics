@@ -14,6 +14,10 @@ class Details extends Component {
     return Api.get("/user/get-carrier");
   }
 
+  async Driverget() {
+    return Api.get("/user/get-driver");
+  }
+
   async profileVerify() {
     return Api.get("/user/get-role");
   }
@@ -40,6 +44,10 @@ class Details extends Component {
 
   async createCustomer(data) {
     return Api.post("/user/create-customer",data);
+  }
+
+  async createDriver(data) {
+    return Api.post("/user/create-driver",data);
   }
 
   async direction(data) {
