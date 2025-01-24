@@ -42,6 +42,10 @@ class Details extends Component {
     return Api.post("/user/create-customer",data);
   }
 
+  async direction(data) {
+    return Api.post(`/place/directions` , data);
+  }
+
   render() {
     return (
       <div>
