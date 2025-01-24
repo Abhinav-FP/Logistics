@@ -58,7 +58,7 @@ const MapComponent = ({ StartLocation, CurrentLocation, EndLocation }) => {
     const NEXT_PUBLIC_GOOGLE_MAPS_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
 
     if (!NEXT_PUBLIC_GOOGLE_MAPS_API_KEY) {
-        return <div>Google Maps API key is missing!</div>;
+        return <div>Google Maps API key is missing!</div>; 
     }
 
     return (
