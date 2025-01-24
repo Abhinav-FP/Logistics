@@ -22,5 +22,4 @@ const Popup = ({ isOpen, onClose, children, size }) => {
     </div>
   );
 };
-
 export default Popup;
