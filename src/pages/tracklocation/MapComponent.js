@@ -4,7 +4,7 @@ import Details from '../api/Listing/Details';
 
 const MapComponent = ({ StartLocation, CurrentLocation, EndLocation }) => {
     const [routeDetails, setRouteDetails] = useState(null);
-    console.log("v",routeDetails)
+    console.log("v", routeDetails)
     const [status, setStatus] = useState(true);
 
     const markerIcons = {
@@ -34,7 +34,7 @@ const MapComponent = ({ StartLocation, CurrentLocation, EndLocation }) => {
                 CurrentLocation: `${CurrentLocation.lat},${CurrentLocation.lng}`
             });
             console.log("response", response)
-            console.log("response?.data?.data",response?.data?.data)
+            console.log("response?.data?.data", response?.data?.data)
             if (response?.data?.data) {
                 setStatus(false);
                 setRouteDetails(response.data.data);
@@ -96,14 +96,33 @@ const MapComponent = ({ StartLocation, CurrentLocation, EndLocation }) => {
                     )}
 
                     {routeDetails && routeDetails.startToEndPolyline && (
-                        <Polyline
-                            path={google.maps.geometry.encoding.decodePath(routeDetails.startToEndPolyline)}
-                            options={{
-                                strokeColor: '#0000FF',
-                                strokeOpacity: 0.6,
-                                strokeWeight: 5,
-                            }}
-                        />
+                        <>
+
+                            <Polyline
+                                path={google.maps.geometry.encoding.decodePath(routeDetails.startToEndPolyline)}
+                                options={{
+                                    strokeColor: '#0000FF',
+                                    strokeOpacity: 0.6,
+                                    strokeWeight: 5,
+                                }}
+                            />
+                            <Polyline
+                                path={google.maps.geometry.encoding.decodePath(routeDetails.StartToCurrentPolyline)}
+                                options={{
+                                    strokeColor: '#000fff',
+                                    strokeOpacity: 0.2,
+                                    strokeWeight: 4,
+                                }}
+                            />
+                            <Polyline
+                                path={google.maps.geometry.encoding.decodePath(routeDetails.currentToEndPolyline)}
+                                options={{
+                                    strokeColor: '#fff000',
+                                    strokeOpacity: 0.6,
+                                    strokeWeight: 5,
+                                }}
+                            />
+                        </>
                     )}
                 </GoogleMap>
             </div>
@@ -115,11 +134,13 @@ const MapComponent = ({ StartLocation, CurrentLocation, EndLocation }) => {
             ) : (
                 routeDetails && (
                     <div className="p-4 m-4 bg-gray-100 rounded-lg shadow-lg">
-                           <h1 className="text-2xl font-bold mb-4">Duration & Distance</h1>
+                        <h1 className="text-2xl font-bold mb-4">Duration & Distance</h1>
                         <p className="text-lg mb-2">Duration from Start to End: {routeDetails.startToEndDuration}</p>
                         <p className="text-lg mb-2">Distance from Start to End: {routeDetails.startToEndDistance}</p>
-                        <p className="text-lg mb-2">Duration from End to Current Location: {routeDetails.endToCurrentDuration}</p>
-                        <p className="text-lg">Distance from End to Current Location: {routeDetails.endToCurrentDistance}</p>
+                        <p className="text-lg mb-2">Duration from  Current to End Location: {routeDetails.currentToEndDuration}</p>
+                        <p className="text-lg">Distance from Current to End Location: {routeDetails.currentToEndDistance}</p>
+                        <p className="text-lg mb-2">Duration from Start to Current  Location: {routeDetails.StartToCurrentDuration}</p>
+                        <p className="text-lg">Distance from Start to Current  Location: {routeDetails.StartToCurrentDistance}</p>
                     </div>
                 )
             )}
