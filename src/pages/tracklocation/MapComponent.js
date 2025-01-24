@@ -33,10 +33,10 @@ const MapComponent = ({ StartLocation, CurrentLocation, EndLocation }) => {
                 CurrentLocation: `${CurrentLocation.lat},${CurrentLocation.lng}`
             });
             console.log("response", response)
-            if (response?.data?.routeDetails) {
+            if (response?.data?.data) {
                 setStatus(false);
 
-                setRouteDetails(response.data.routeDetails);
+                setRouteDetails(response.data.data);
             } else {
                 setStatus(false);
 
@@ -99,8 +99,8 @@ const MapComponent = ({ StartLocation, CurrentLocation, EndLocation }) => {
                             path={google.maps.geometry.encoding.decodePath(routeDetails.startToEndPolyline)}
                             options={{
                                 strokeColor: '#0000FF',
-                                strokeOpacity: 0.8,
-                                strokeWeight: 2,
+                                strokeOpacity: 0.6,
+                                strokeWeight: 5,
                             }}
                         />
                     )}
@@ -111,13 +111,10 @@ const MapComponent = ({ StartLocation, CurrentLocation, EndLocation }) => {
                 <div className="p-4 m-4 bg-gray-100 rounded-lg shadow-lg">
                     <p className="text-lg mb-2">Loading route details...</p>
                 </div>
-            ) : status.error ? (
-                <div className="p-4 m-4 bg-gray-100 rounded-lg shadow-lg">
-                    <p className="text-lg text-red-500 mb-2">Error: {status.error}</p>
-                </div>
             ) : (
                 routeDetails && (
                     <div className="p-4 m-4 bg-gray-100 rounded-lg shadow-lg">
+                           <h1 className="text-2xl font-bold mb-4">Duration & Distance</h1>
                         <p className="text-lg mb-2">Duration from Start to End: {routeDetails.startToEndDuration}</p>
                         <p className="text-lg mb-2">Distance from Start to End: {routeDetails.startToEndDistance}</p>
                         <p className="text-lg mb-2">Duration from End to Current Location: {routeDetails.endToCurrentDuration}</p>
