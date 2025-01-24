@@ -4,44 +4,38 @@ import ShipmentTable from '../Home/ShipmentTable';
 import Link from 'next/link';
 import Details from '../api/Listing/Details';
 import Loader from '@/components/Loader';
+import { useRole } from '@/context/RoleContext';
+import { useRouter } from 'next/router';
 
 export default function index() {
-
+  const { user } = useRole();
   const [listing, setLisitng] = useState("");
   const [Loading, setLoading] = useState(false);
-  const getshipment = () => {
+  const router = useRouter(); // Corrected variable name
+  
+
+  const getShipments = async (isBroker) => {
     setLoading(true);
     const main = new Details();
-    main
-      .getShipment("")
-      .then((r) => {
-        setLoading(false);
-        setLisitng(r?.data?.data);
-      })
-      .catch((err) => {
-        setLoading(false);
-        setLisitng([]);
-        console.log("error", err);
-      });
+    try {
+      const response = isBroker ? await main.getBrokerShipment() : await main.getShipment("");
+      setLisitng(response?.data?.data);
+    } catch (err) {
+      setLisitng([]);
+      if (err.response?.status === 401) {
+        router.push('/login'); 
+      } else {
+        console.error("Error fetching shipments", err);
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
-    getshipment();
-  }, []);
+    getShipments(user?.role === "broker");
+  }, [user?.role]);
   console.log("listing", listing);
-
-  const data = [
-    { id: 'SHP-001', title: 'Electronics Delivery', pickup: 'New York, NY', delivery: 'Los Angeles, CA', status: 'In Transit', shipmentDate: '2024-12-01', expectedDelivery: '2024-12-08' },
-    { id: 'SHP-002', title: 'Furniture Delivery', pickup: 'Chicago, IL', delivery: 'Houston, TX', status: 'Delivered', shipmentDate: '2024-11-15', expectedDelivery: '2024-11-20' },
-    { id: 'SHP-003', title: 'Books Shipment', pickup: 'San Francisco, CA', delivery: 'Seattle, WA', status: 'In Transit', shipmentDate: '2024-12-05', expectedDelivery: '2024-12-10' },
-    { id: 'SHP-004', title: 'Clothing Shipment', pickup: 'Miami, FL', delivery: 'Boston, MA', status: 'Pending', shipmentDate: '2024-12-03', expectedDelivery: '2024-12-09' },
-    { id: 'SHP-005', title: 'Medical Supplies', pickup: 'Denver, CO', delivery: 'Phoenix, AZ', status: 'In Transit', shipmentDate: '2024-12-06', expectedDelivery: '2024-12-11' },
-    { id: 'SHP-006', title: 'Food Delivery', pickup: 'Las Vegas, NV', delivery: 'San Diego, CA', status: 'Cancelled', shipmentDate: '2024-11-25', expectedDelivery: '2024-11-28' },
-    { id: 'SHP-007', title: 'Automobile Parts', pickup: 'Detroit, MI', delivery: 'Dallas, TX', status: 'In Transit', shipmentDate: '2024-12-07', expectedDelivery: '2024-12-12' },
-    { id: 'SHP-008', title: 'Toy Shipment', pickup: 'Atlanta, GA', delivery: 'Orlando, FL', status: 'Delivered', shipmentDate: '2024-11-20', expectedDelivery: '2024-11-24' },
-    { id: 'SHP-009', title: 'Sporting Goods', pickup: 'Philadelphia, PA', delivery: 'Washington, DC', status: 'In Transit', shipmentDate: '2024-12-08', expectedDelivery: '2024-12-14' },
-    { id: 'SHP-010', title: 'Office Supplies', pickup: 'Boston, MA', delivery: 'Newark, NJ', status: 'Pending', shipmentDate: '2024-12-02', expectedDelivery: '2024-12-05' }
-  ];
 
   return (
     <Layout page={"Shipment"}>
@@ -54,7 +48,7 @@ export default function index() {
         </div>
         <div className="bg-white mt-6 lg:mt-[30px] px-6 py-[30px] rounded-md lg:rounded-xl border border-black border-opacity-10">
           {Loading ? <Loader/> :
-          <ShipmentTable shipments={listing} getshipment={getshipment}/>}
+          <ShipmentTable shipments={listing} getshipments={getShipments} DeleteOption={true} role={user?.role}/>}
         </div>
       </div>
     </Layout>

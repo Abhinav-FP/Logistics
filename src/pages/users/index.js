@@ -4,11 +4,13 @@ import Details from '../api/Listing/Details';
 import Link from 'next/link';
 import UsersTable from '@/components/UsersTable';
 import Loader from '@/components/Loader';
+import { useRouter } from 'next/router';
 
 export default function index() {
 
   const [listing, setLisitng] = useState("");
   const [Loading, setLoading] = useState(false);
+  const router = useRouter(); 
 
   const getusers = () => {
     setLoading(true);
@@ -22,7 +24,10 @@ export default function index() {
       .catch((err) => {
         setLoading(false);
         setLisitng([]);
-        console.log("error", err);
+        if (err.response?.status === 401) {
+          router.push('/login'); 
+        } else {
+        console.log("error", err);}
       });
   };
 

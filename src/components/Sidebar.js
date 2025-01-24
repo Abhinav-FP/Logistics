@@ -20,7 +20,7 @@ function SideBar({role}) {
     <>
       {isOpen && 
       <button
-        className="lg:hidden p-2 absolute left-[250px] top-3 text-red-700 border border-red-700 z-[99] rounded"
+        className="lg:hidden p-2 absolute left-[209px] top-6 text-red-700 border border-red-700 z-[99] rounded"
         onClick={() => setIsOpen(false)}
       >
      <IoMdArrowRoundBack size={24}/>
@@ -80,7 +80,7 @@ function SideBar({role}) {
                 <FiTruck size={20} />
                 Shipment
               </Link>
-              <Link
+              {/* <Link
                 href="/drivers"
                 className={`flex items-center py-2.5 px-2.5 gap-2 text-[#727272] text-base font-medium tracking-[-0.06em] ${
                    pathname.startsWith("/drivers") ? "text-blue-500 bg-blue-100" : "hover:bg-gray-100"
@@ -88,6 +88,15 @@ function SideBar({role}) {
               >
                 <PiTrolleySuitcaseLight size={20} />
                 Drivers
+              </Link> */}
+              <Link
+                href="/brokers"
+                className={`flex items-center py-2.5 px-2.5 gap-2 text-[#727272] text-base font-medium tracking-[-0.06em] ${
+                   pathname.startsWith("/brokers") ? "text-blue-500 bg-blue-100" : "hover:bg-gray-100"
+                } rounded-md`}
+              >
+                <PiTrolleySuitcaseLight size={20} />
+                Brokers
               </Link>
               <Link
                 href="/users"

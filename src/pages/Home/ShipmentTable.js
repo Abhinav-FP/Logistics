@@ -4,8 +4,10 @@ import { FaEye } from "react-icons/fa";
 import { FaRegTrashCan } from "react-icons/fa6";
 import Details from "../api/Listing/Details";
 import toast from "react-hot-toast";
+import { HiOutlineDotsHorizontal } from "react-icons/hi";
 
-export default function ShipmentTable({ shipments, getshipment }) {
+
+export default function ShipmentTable({ shipments, getShipments, DeleteOption=false, role }) {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const[data,setData] = useState({});
 
@@ -18,7 +20,7 @@ export default function ShipmentTable({ shipments, getshipment }) {
       .deleteShipment(id)
       .then((r) => {
         toast.success(r?.data?.message);
-        getshipment();
+        getShipments(role === "broker");
       })
       .catch((err) => {
         toast.error(err?.response?.data?.message);
@@ -65,6 +67,7 @@ export default function ShipmentTable({ shipments, getshipment }) {
               <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">{shipment?.shippingDate}</td>
               <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">{shipment?.deliveryDateExpect}</td>
               <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">
+                {DeleteOption ? 
                 <div className="flex gap-2 items-center">
                   <FaEye size={20} className="cursor-pointer" onClick={()=>{
                     setData(shipment);
@@ -74,6 +77,9 @@ export default function ShipmentTable({ shipments, getshipment }) {
                   onClick={() => deleteshipment(shipment?._id)}
                   />
                 </div>
+                : 
+                  <HiOutlineDotsHorizontal size={20} color={"#9090AD"} className="cursor-pointer"/>
+                }
               </td>
             </tr>
           ))}

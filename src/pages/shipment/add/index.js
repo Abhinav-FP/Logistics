@@ -277,7 +277,7 @@ export default function index() {
                 </div>
                 <div className="w-full md:w-6/12 px-2 lg:px-3 mb-4 lg:mb-6">
                   <label className="text-[#70708D] text-sm tracking-[-0.04em] uppercase mb-2 block">
-                    Quantity
+                    Quantity (No. of Items)
                   </label>
                   <input
                     type="number"

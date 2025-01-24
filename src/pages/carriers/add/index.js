@@ -118,6 +118,7 @@ export default function index() {
                       onChange={handleChange}
                       className="w-full h-11 lg:h-[48px] appearance-none block bg-white text-[#000] text-base border border-black border-opacity-10 rounded-md lg:rounded-xl py-2 px-4 leading-tight focus:outline-none"
                       placeholder=""
+                      required
                     />
                   </div>
                   <div className="w-full md:w-6/12 px-2 lg:px-3 mb-4 lg:mb-6">
@@ -131,6 +132,7 @@ export default function index() {
                       onChange={handleChange}
                       className="w-full h-11 lg:h-[48px] appearance-none block bg-white text-[#000] text-base border border-black border-opacity-10 rounded-md lg:rounded-xl py-2 px-4 leading-tight focus:outline-none"
                       placeholder=""
+                      required
                     />
                   </div>
                   <div className="w-full md:w-6/12 px-2 lg:px-3 mb-4 lg:mb-6">
@@ -144,6 +146,7 @@ export default function index() {
                       onChange={handleChange}
                       className="w-full h-11 lg:h-[48px] appearance-none block bg-white text-[#000] text-base border border-black border-opacity-10 rounded-md lg:rounded-xl py-2 px-4 leading-tight focus:outline-none"
                       placeholder=""
+                      required
                     />
                   </div>
                   <div className="w-full md:w-6/12 px-2 lg:px-3 mb-4 lg:mb-6">
@@ -157,6 +160,7 @@ export default function index() {
                       onChange={handleChange}
                       className="w-full h-11 lg:h-[48px] appearance-none block bg-white text-[#000] text-base border border-black border-opacity-10 rounded-md lg:rounded-xl py-2 px-4 leading-tight focus:outline-none"
                       placeholder=""
+                      required
                     />
                   </div>
                   <div className="w-full md:w-6/12 px-2 lg:px-3 mb-4 lg:mb-6">
@@ -170,6 +174,7 @@ export default function index() {
                       onChange={handleChange}
                       className="w-full h-11 lg:h-[48px] appearance-none block bg-white text-[#000] text-base border border-black border-opacity-10 rounded-md lg:rounded-xl py-2 px-4 leading-tight focus:outline-none"
                       placeholder=""
+                      required
                     />
                   </div>
                   <div className="w-full md:w-6/12 px-2 lg:px-3 mb-4 lg:mb-6">
@@ -183,6 +188,7 @@ export default function index() {
                       onChange={handleChange}
                       className="w-full h-11 lg:h-[48px] appearance-none block bg-white text-[#000] text-base border border-black border-opacity-10 rounded-md lg:rounded-xl py-2 px-4 leading-tight focus:outline-none"
                       placeholder=""
+                      required
                     />
                   </div>
                   <div className="w-full md:w-6/12 px-2 lg:px-3 mb-4 lg:mb-6">
@@ -190,12 +196,21 @@ export default function index() {
                       Contact information
                     </label>
                     <input
-                      type="number"
+                      type="text"
                       name="contact"
                       value={formData.contact}
-                      onChange={handleChange}
+                      onChange={(e) => {
+                        if (
+                          e.target.value.length <= 10 &&
+                          /^[0-9]*$/.test(e.target.value)
+                           ) {
+                            handleChange(e);
+                             }
+                        }}
+                       maxLength="10"
                       className="w-full h-11 lg:h-[48px] appearance-none block bg-white text-[#000] text-base border border-black border-opacity-10 rounded-md lg:rounded-xl py-2 px-4 leading-tight focus:outline-none"
                       placeholder=""
+                      required
                     />
                   </div>
                   <div className="w-full md:w-6/12 px-2 lg:px-3 mb-4 lg:mb-6">

@@ -4,6 +4,7 @@ import Details from '../api/Listing/Details';
 
 const MapComponent = ({ StartLocation, CurrentLocation, EndLocation }) => {
     const [routeDetails, setRouteDetails] = useState(null);
+    console.log("v",routeDetails)
     const [status, setStatus] = useState(true);
 
     const markerIcons = {
@@ -33,9 +34,9 @@ const MapComponent = ({ StartLocation, CurrentLocation, EndLocation }) => {
                 CurrentLocation: `${CurrentLocation.lat},${CurrentLocation.lng}`
             });
             console.log("response", response)
+            console.log("response?.data?.data",response?.data?.data)
             if (response?.data?.data) {
                 setStatus(false);
-
                 setRouteDetails(response.data.data);
             } else {
                 setStatus(false);
@@ -94,7 +95,7 @@ const MapComponent = ({ StartLocation, CurrentLocation, EndLocation }) => {
                         />
                     )}
 
-                    {routeDetails && routeDetails.combinedPolyline && (
+                    {routeDetails && routeDetails.startToEndPolyline && (
                         <Polyline
                             path={google.maps.geometry.encoding.decodePath(routeDetails.startToEndPolyline)}
                             options={{
@@ -107,7 +108,7 @@ const MapComponent = ({ StartLocation, CurrentLocation, EndLocation }) => {
                 </GoogleMap>
             </div>
 
-            {status.loading ? (
+            {status ? (
                 <div className="p-4 m-4 bg-gray-100 rounded-lg shadow-lg">
                     <p className="text-lg mb-2">Loading route details...</p>
                 </div>
