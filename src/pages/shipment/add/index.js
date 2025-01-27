@@ -8,8 +8,36 @@ import { IoBookmark } from "react-icons/io5";
 import { RxCross1 } from "react-icons/rx";
 
 
-export default function index() {
+export default function Index() {
+  
   const router = useRouter();
+const{Id} = router.query;
+console.log("Id",Id)
+
+
+  const getShipments = async (isBroker) => {
+    setLoading(true);
+    const main = new Details();
+    try {
+      const response = isBroker ? await main.getBrokerShipment() : await main.getShipment("");
+      setLisitng(response?.data?.data);
+    } catch (err) {
+      setLisitng([]);
+      if (err.response?.status === 401) {
+        router.push('/login'); 
+      } else {
+        console.error("Error fetching shipments", err);
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getShipments(user?.role === "broker");
+  }, [user?.role]);
+
+
   const [formData, setFormData] = useState({
     title: "",
     description: "",

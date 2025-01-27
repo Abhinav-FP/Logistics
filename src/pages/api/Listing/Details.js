@@ -26,6 +26,11 @@ class Details extends Component {
     return Api.post("/shipment/create",data);
   }
 
+  
+  async UpdateShipment(data) {
+    return Api.post("/shipment/create",data);
+  }
+
   async getShipment() {
     return Api.get("/shipment/get");
   }
@@ -50,6 +55,8 @@ class Details extends Component {
     return Api.post("/user/create-driver",data);
   }
 
+
+  // ?direction
   async direction(data) {
     return Api.post(`/place/directions` , data);
   }
