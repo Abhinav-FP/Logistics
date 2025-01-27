@@ -54,6 +54,13 @@ class Details extends Component {
     return Api.post(`/place/directions` , data);
   }
 
+  async GetDirection(id) {
+    return Api.get(`/place/get_direction/${id}` );
+  }
+
+  async UpdateDirection(data) {
+    return Api.post(`/place/update_direction` , data);
+  }
   render() {
     return (
       <div>

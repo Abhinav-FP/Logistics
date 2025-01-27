@@ -3,16 +3,15 @@ import { useState, useEffect } from 'react';
 import Details from '../api/Listing/Details';
 
 const MapComponent = ({ StartLocation, CurrentLocation, EndLocation }) => {
+    const Id = "678f8a5225ab3bc62aea25ca";
     const [routeDetails, setRouteDetails] = useState(null);
-    console.log("v", routeDetails)
+    console.log("routeDetails" ,routeDetails)
     const [status, setStatus] = useState(true);
-
     const markerIcons = {
         start: "https://th.bing.com/th/id/OIP.ZCHVQMolgocE66TQdftn3wHaGA?rs=1&pid=ImgDetMain",
         end: "https://th.bing.com/th/id/OIP.hIhIc_XIUMQXr6J4BHdMzwHaF6?w=224&h=180&c=7&r=0&o=5&pid=1.7",
         current: "https://i.ibb.co/9TTs8Jk/material-symbols-local-shipping-outline.png"
     };
-
     const CustomMarker = ({ position, iconUrl, size = { width: 40, height: 40 } }) => {
         const icon = window.google
             ? {
@@ -28,20 +27,35 @@ const MapComponent = ({ StartLocation, CurrentLocation, EndLocation }) => {
         const main = new Details();
         setStatus(true);
         try {
-            const response = await main.direction({
-                StartLocation: `${StartLocation.lat},${StartLocation.lng}`,
-                EndLocation: `${EndLocation.lat},${EndLocation.lng}`,
-                CurrentLocation: `${CurrentLocation.lat},${CurrentLocation.lng}`
-            });
-            console.log("response", response)
-            console.log("response?.data?.data", response?.data?.data)
-            if (response?.data?.data) {
-                setStatus(false);
-                setRouteDetails(response.data.data);
-            } else {
-                setStatus(false);
+            let response = null;
+            if (Id) {
+                response = await main.UpdateDirection({
+                    CurrentLocation: `${CurrentLocation.lat},${CurrentLocation.lng}`,
+                    Shipment_id: Id
+                });
+                console.log("response", response)
+                if (response?.data?.data) {
+                    setStatus(false);
+                    setRouteDetails(response.data.data.routeDetails);
+                } else {
+                    setStatus(false);
 
+                }
+            } else {
+                response = await main.direction({
+                    StartLocation: `${StartLocation.lat},${StartLocation.lng}`,
+                    EndLocation: `${EndLocation.lat},${EndLocation.lng}`,
+                    CurrentLocation: `${CurrentLocation.lat},${CurrentLocation.lng}`
+                });
+                if (response?.data?.data) {
+                    setStatus(false);
+                    setRouteDetails(response.data.data.routeDetails);
+                } else {
+                    setStatus(false);
+
+                }
             }
+
         } catch (error) {
             console.log("error", error)
             setStatus(false);
@@ -58,7 +72,7 @@ const MapComponent = ({ StartLocation, CurrentLocation, EndLocation }) => {
     const NEXT_PUBLIC_GOOGLE_MAPS_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
 
     if (!NEXT_PUBLIC_GOOGLE_MAPS_API_KEY) {
-        return <div>Google Maps API key is missing!</div>; 
+        return <div>Google Maps API key is missing!</div>;
     }
 
     return (
@@ -95,11 +109,11 @@ const MapComponent = ({ StartLocation, CurrentLocation, EndLocation }) => {
                         />
                     )}
 
-                    {routeDetails && routeDetails.startToEndPolyline && (
+                    {routeDetails && routeDetails.StartToEndPolyline && (
                         <>
 
                             <Polyline
-                                path={google.maps.geometry.encoding.decodePath(routeDetails.startToEndPolyline)}
+                                path={google.maps.geometry.encoding.decodePath(routeDetails.StartToEndPolyline)}
                                 options={{
                                     strokeColor: '#0000FF',
                                     strokeOpacity: 0.6,
@@ -135,8 +149,8 @@ const MapComponent = ({ StartLocation, CurrentLocation, EndLocation }) => {
                 routeDetails && (
                     <div className="p-4 m-4 bg-gray-100 rounded-lg shadow-lg">
                         <h1 className="text-2xl font-bold mb-4">Duration & Distance</h1>
-                        <p className="text-lg mb-2">Duration from Start to End: {routeDetails.startToEndDuration}</p>
-                        <p className="text-lg mb-2">Distance from Start to End: {routeDetails.startToEndDistance}</p>
+                        <p className="text-lg mb-2">Duration from Start to End: {routeDetails.StartToEndDuration}</p>
+                        <p className="text-lg mb-2">Distance from Start to End: {routeDetails.StartToEndDistance}</p>
                         <p className="text-lg mb-2">Duration from  Current to End Location: {routeDetails.currentToEndDuration}</p>
                         <p className="text-lg">Distance from Current to End Location: {routeDetails.currentToEndDistance}</p>
                         <p className="text-lg mb-2">Duration from Start to Current  Location: {routeDetails.StartToCurrentDuration}</p>
