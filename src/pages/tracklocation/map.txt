@@ -119,3 +119,60 @@
 // };
 
 // export default dynamic(() => Promise.resolve(MapComponent), { ssr: false });
+
+
+// useEffect(() => {
+    //     if (typeof window !== 'undefined' && window.google) {
+    //         const { google } = window;
+
+    //         if (google && google.maps) {
+    //             const directionsService = new google.maps.DirectionsService();
+
+    //             if (StartLocation && EndLocation && CurrentLocation) {
+    //                 // Only fetch directions when locations are updated
+    //                 directionsService.route(
+    //                     {
+    //                         origin: StartLocation,
+    //                         destination: EndLocation,
+    //                         travelMode: google.maps.TravelMode.DRIVING,
+    //                     },
+    //                     (result, status) => {
+    //                         if (status === google.maps.DirectionsStatus.OK) {
+    //                             setDirections(result);
+    //                             const legStartToEnd = result.routes[0].legs[0];
+    //                             const startToEndDistance = legStartToEnd.distance.text;
+    //                             const startToEndDuration = legStartToEnd.duration.text;
+
+    //                             directionsService.route(
+    //                                 {
+    //                                     origin: CurrentLocation,
+    //                                     destination: StartLocation,
+    //                                     travelMode: google.maps.TravelMode.DRIVING,
+    //                                 },
+    //                                 (result, status) => {
+    //                                     if (status === google.maps.DirectionsStatus.OK) {
+    //                                         const legEndToCurrent = result.routes[0].legs[0];
+    //                                         const endToCurrentDistance = legEndToCurrent.distance.text;
+    //                                         const endToCurrentDuration = legEndToCurrent.duration.text;
+    //                                         setRouteDetails({
+    //                                             startToEndDistance,
+    //                                             endToCurrentDistance,
+    //                                             startToEndDuration,
+    //                                             endToCurrentDuration,
+    //                                         });
+    //                                     } else {
+    //                                         console.error(`Error fetching directions: ${status}`);
+    //                                     }
+    //                                     setLoading(false);
+    //                                 }
+    //                             );
+    //                         } else {
+    //                             console.error(`Error fetching directions: ${status}`);
+    //                             setLoading(false);
+    //                         }
+    //                     }
+    //                 );
+    //             }
+    //         }
+    //     }
+    // }, [StartLocation, EndLocation, CurrentLocation]);
