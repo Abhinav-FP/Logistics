@@ -1,15 +1,16 @@
 import Popup from "@/components/Popup";
 import React, { useState } from "react";
-import { FaEye } from "react-icons/fa";
+import { FaEdit, FaEye } from "react-icons/fa";
 import { FaRegTrashCan } from "react-icons/fa6";
 import Details from "../api/Listing/Details";
 import toast from "react-hot-toast";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
+import Link from "next/link";
 
 
-export default function ShipmentTable({ shipments, getShipments, DeleteOption=false, role }) {
+export default function ShipmentTable({ shipments, getShipments, DeleteOption = false, role  }) {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const[data,setData] = useState({});
+  const [data, setData] = useState({});
 
   const openPopup = () => setIsPopupOpen(true);
   const closePopup = () => setIsPopupOpen(false);
@@ -29,7 +30,7 @@ export default function ShipmentTable({ shipments, getShipments, DeleteOption=fa
   };
 
 
-  console.log("shipments",shipments);
+  console.log("shipments", shipments);
   return (
     <div className="overflow-x-auto">
       <table className="w-full border-none">
@@ -55,30 +56,33 @@ export default function ShipmentTable({ shipments, getShipments, DeleteOption=fa
               <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left capitalize">{shipment?.pickup_location}</td>
               <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left capitalize">{shipment?.drop_location}</td>
               <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left capitalize">
-                <div className={`px-2 py-1 ${
-                  shipment?.status?.toLowerCase() === "in transit" ? "bg-[#C2970A1A] text-[#C2970A]" :
-                  shipment?.status?.toLowerCase() === "delivered" ? "bg-green-300 text-green-700" :
-                  shipment?.status?.toLowerCase() === "cancelled" ? "bg-red-400 text-red-700" :
-                  shipment?.status?.toLowerCase() === "pending" ? "bg-orange-300 text-orange-500" : ""
-                } flex justify-center items-center rounded-md`}>
+                <div className={`px-2 py-1 ${shipment?.status?.toLowerCase() === "in transit" ? "bg-[#C2970A1A] text-[#C2970A]" :
+                    shipment?.status?.toLowerCase() === "delivered" ? "bg-green-300 text-green-700" :
+                      shipment?.status?.toLowerCase() === "cancelled" ? "bg-red-400 text-red-700" :
+                        shipment?.status?.toLowerCase() === "pending" ? "bg-orange-300 text-orange-500" : ""
+                  } flex justify-center items-center rounded-md`}>
                   {shipment?.status}
                 </div>
               </td>
               <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">{shipment?.shippingDate}</td>
               <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">{shipment?.deliveryDateExpect}</td>
               <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">
-                {DeleteOption ? 
-                <div className="flex gap-2 items-center">
-                  <FaEye size={20} className="cursor-pointer" onClick={()=>{
-                    setData(shipment);
-                    openPopup();
-                    }}/> 
-                  <FaRegTrashCan size={20} color={"#Ff0000"} className="cursor-pointer"
-                  onClick={() => deleteshipment(shipment?._id)}
-                  />
-                </div>
-                : 
-                  <HiOutlineDotsHorizontal size={20} color={"#9090AD"} className="cursor-pointer"/>
+                {DeleteOption ?
+                  <div className="flex gap-2 items-center">
+                    <FaEye size={20} className="cursor-pointer" onClick={() => {
+                      setData(shipment);
+                      openPopup();
+                    }} />
+                    <Link href={`/shipment/add/${shipment?._id}`}  className="bg-success-600">
+
+                      <FaEdit size={20} className="cursor-pointer"  color={"#ffff"}/>
+                    </Link>
+                    <FaRegTrashCan size={20} color={"#Ff0000"} className="cursor-pointer"
+                      onClick={() => deleteshipment(shipment?._id)}
+                    />
+                  </div>
+                  :
+                  <HiOutlineDotsHorizontal size={20} color={"#9090AD"} className="cursor-pointer" />
                 }
               </td>
             </tr>
@@ -150,15 +154,14 @@ export default function ShipmentTable({ shipments, getShipments, DeleteOption=fa
             <div>
               <p className="font-medium text-gray-600">Status:</p>
               <p
-                className={`px-2 py-1 rounded-md capitalize max-w-fit ${
-                  data?.status?.toLowerCase() === "pending"
+                className={`px-2 py-1 rounded-md capitalize max-w-fit ${data?.status?.toLowerCase() === "pending"
                     ? "bg-orange-300 text-orange-800"
                     : data?.status?.toLowerCase() === "delivered"
-                    ? "bg-green-300 text-green-800"
-                    : data?.status?.toLowerCase() === "cancelled"
-                    ? "bg-red-300 text-red-800"
-                    : "bg-gray-300 text-gray-800"
-                }`}
+                      ? "bg-green-300 text-green-800"
+                      : data?.status?.toLowerCase() === "cancelled"
+                        ? "bg-red-300 text-red-800"
+                        : "bg-gray-300 text-gray-800"
+                  }`}
               >
                 {data?.status}
               </p>

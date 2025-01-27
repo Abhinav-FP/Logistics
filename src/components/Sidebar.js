@@ -72,7 +72,7 @@ function SideBar({role}) {
               <Link
                 href="/shipment"
                 className={`flex items-center py-2.5 px-2.5 gap-2 text-[#727272] text-base font-medium tracking-[-0.06em] ${
-                  pathname.startsWith("/shipment")
+                  pathname?.startsWith("/shipment")
                     ? "text-blue-500 bg-blue-100"
                     : "hover:bg-gray-100"
                 } rounded-md`}
@@ -84,7 +84,7 @@ function SideBar({role}) {
               <Link
                 href="/drivers"
                 className={`flex items-center py-2.5 px-2.5 gap-2 text-[#727272] text-base font-medium tracking-[-0.06em] ${
-                   pathname.startsWith("/drivers") ? "text-blue-500 bg-blue-100" : "hover:bg-gray-100"
+                   pathname?.startsWith("/drivers") ? "text-blue-500 bg-blue-100" : "hover:bg-gray-100"
                 } rounded-md`}
               >
                 <PiTrolleySuitcaseLight size={20} />
@@ -93,7 +93,7 @@ function SideBar({role}) {
               <Link
                 href="/brokers"
                 className={`flex items-center py-2.5 px-2.5 gap-2 text-[#727272] text-base font-medium tracking-[-0.06em] ${
-                   pathname.startsWith("/brokers") ? "text-blue-500 bg-blue-100" : "hover:bg-gray-100"
+                   pathname?.startsWith("/brokers") ? "text-blue-500 bg-blue-100" : "hover:bg-gray-100"
                 } rounded-md`}
               >
                 <PiTrolleySuitcaseLight size={20} />
@@ -102,7 +102,7 @@ function SideBar({role}) {
               <Link
                 href="/users"
                 className={`flex items-center py-2.5 px-2.5 gap-2 text-[#727272] text-base font-medium tracking-[-0.06em] ${
-                   pathname.startsWith("/users") ? "text-blue-500 bg-blue-100" : "hover:bg-gray-100"
+                   pathname?.startsWith("/users") ? "text-blue-500 bg-blue-100" : "hover:bg-gray-100"
                 } rounded-md`}
               >
                 <FaRegUser size={20} />
@@ -111,7 +111,7 @@ function SideBar({role}) {
               <Link
                 href="/carriers"
                 className={`flex items-center py-2.5 px-2.5 gap-2 text-[#727272] text-base font-medium tracking-[-0.06em] ${
-                  pathname.startsWith("/carriers") ? "text-blue-500 bg-blue-100" : "hover:bg-gray-100"
+                  pathname?.startsWith("/carriers") ? "text-blue-500 bg-blue-100" : "hover:bg-gray-100"
                 } rounded-md`}
               >
                 <FaRegUser size={20} />
@@ -120,7 +120,7 @@ function SideBar({role}) {
               <Link
                 href="/analytics"
                 className={`flex items-center py-2.5 px-2.5 gap-2 text-[#727272] text-base font-medium tracking-[-0.06em] ${
-                  pathname.startsWith("/analytics")
+                  pathname?.startsWith("/analytics")
                     ? "text-blue-500 bg-blue-100"
                     : "hover:bg-gray-100"
                 } rounded-md`}

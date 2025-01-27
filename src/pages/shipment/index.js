@@ -7,7 +7,7 @@ import Loader from '@/components/Loader';
 import { useRole } from '@/context/RoleContext';
 import { useRouter } from 'next/router';
 
-export default function index() {
+export default function Index() {
   const { user } = useRole();
   const [listing, setLisitng] = useState("");
   const [Loading, setLoading] = useState(false);
@@ -48,7 +48,7 @@ export default function index() {
         </div>
         <div className="bg-white mt-6 lg:mt-[30px] px-6 py-[30px] rounded-md lg:rounded-xl border border-black border-opacity-10">
           {Loading ? <Loader/> :
-          <ShipmentTable shipments={listing} getshipments={getShipments} DeleteOption={true} role={user?.role}/>}
+          <ShipmentTable shipments={listing} getshipments={getShipments} DeleteOption={true} role={user?.role}  />}
         </div>
       </div>
     </Layout>

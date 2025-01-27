@@ -27,13 +27,17 @@ class Details extends Component {
   }
 
   
-  async UpdateShipment(data) {
-    return Api.post("/shipment/create",data);
+  async UpdateShipment(Id, data) {
+    return Api.post(`/shipment/update/${Id}`,data);
   }
 
   async getShipment() {
     return Api.get("/shipment/get");
   }
+  async getShipmentById(Id) {
+    return Api.get(`/shipment/get/${Id}`);
+  }
+
 
   async getBrokerShipment() {
     return Api.get("/shipment/get-shipment-broker");
