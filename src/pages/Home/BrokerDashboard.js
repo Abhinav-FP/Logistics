@@ -184,26 +184,26 @@ export default function BrokerDashboard() {
                 width="100%" height="224" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
               </iframe>
             </div>
-            <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 lg:gap-6 '>
-              <div className='[&:not(:last-child)]:border-r border-black border-opacity-10'>
-                <h3 className='text-base text-[#7A7A7A] tracking-[-0.04em] font-medium mb-0'>Category</h3>
-                <p className='text-xl text-[#262626] tracking-[-0.04em] font-medium mb-0'>Electronic</p>
+            <div className='grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-1.5 lg:gap-2 xl:gap-3'>
+              <div className='md:[&:not(:last-child)]:border-r border-black border-opacity-10'>
+                <h3 className='text-sm xl:text-base text-[#7A7A7A] tracking-[-0.04em] font-medium mb-0'>Category</h3>
+                <p className='text-base text-[#262626] tracking-[-0.04em] font-medium mb-0'>Electronic</p>
               </div>
-              <div className='[&:not(:last-child)]:border-r border-black border-opacity-10'>
-                <h3 className='text-base text-[#7A7A7A] tracking-[-0.04em] font-medium mb-0'>Distance</h3>
-                <p className='text-xl text-[#262626] tracking-[-0.04em] font-medium mb-0'>60 km</p>
+              <div className='md:[&:not(:last-child)]:border-r border-black border-opacity-10'>
+                <h3 className='text-sm xl:text-base text-[#7A7A7A] tracking-[-0.04em] font-medium mb-0'>Distance</h3>
+                <p className='text-base text-[#262626] tracking-[-0.04em] font-medium mb-0'>60 km</p>
               </div>
-              <div className='[&:not(:last-child)]:border-r border-black border-opacity-10'>
-                <h3 className='text-base text-[#7A7A7A] tracking-[-0.04em] font-medium mb-0'>Estimation</h3>
-                <p className='text-xl text-[#262626] tracking-[-0.04em] font-medium mb-0'>1d 6h</p>
+              <div className='md:[&:not(:last-child)]:border-r border-black border-opacity-10'>
+                <h3 className='text-sm xl:text-base text-[#7A7A7A] tracking-[-0.04em] font-medium mb-0'>Estimation</h3>
+                <p className='text-base text-[#262626] tracking-[-0.04em] font-medium mb-0'>1d 6h</p>
               </div>
-              <div className='[&:not(:last-child)]:border-r border-black border-opacity-10'>
-                <h3 className='text-base text-[#7A7A7A] tracking-[-0.04em] font-medium mb-0'>Weight</h3>
-                <p className='text-xl text-[#262626] tracking-[-0.04em] font-medium mb-0'>25kg</p>
+              <div className='md:[&:not(:last-child)]:border-r border-black border-opacity-10'>
+                <h3 className='text-sm xl:text-base text-[#7A7A7A] tracking-[-0.04em] font-medium mb-0'>Weight</h3>
+                <p className='text-base text-[#262626] tracking-[-0.04em] font-medium mb-0'>25kg</p>
               </div>
-              <div className='[&:not(:last-child)]:border-r border-black border-opacity-10'>
-                <h3 className='text-base text-[#7A7A7A] tracking-[-0.04em] font-medium mb-0'>Fee</h3>
-                <p className='text-xl text-[#262626] tracking-[-0.04em] font-medium mb-0'>$ 1050</p>
+              <div className='md:[&:not(:last-child)]:border-r border-black border-opacity-10'>
+                <h3 className='text-sm xl:text-base text-[#7A7A7A] tracking-[-0.04em] font-medium mb-0'>Fee</h3>
+                <p className='text-base text-[#262626] tracking-[-0.04em] font-medium mb-0'>$ 1050</p>
               </div>
             </div>
           </div>
@@ -215,13 +215,13 @@ export default function BrokerDashboard() {
       {/* Recent Shipment */}
       <div className='bg-white mt-6 lg:mt-[30px] px-6 py-[30px] rounded-md lg:rounded-xl border border-black border-opacity-10'>
         <div className='flex flex-wrap items-center -mx-2 mb-[12px]'>
-          <div className='w-full md:w-8/12 px-2 flex flex-wrap items-center'>
+          <div className='w-full md:w-4/12 px-2 flex flex-wrap items-center'>
             <div className="border border-black border-opacity-10 py-2 px-3 rounded-md lg:rounded-xl mr-2">
               <RiTruckLine size={24} color={"#1C5FE8"} />
             </div>
             <h3 className='text-[#151547] text-base tracking-[-0.04em] font-medium mb-0'>Recent Shipment</h3>
           </div>
-          <div className='w-full md:w-4/12 px-2 flex flex-wrap justify-end'>
+          <div className='w-full md:w-8/12 px-2 flex flex-wrap justify-end'>
             <div className='relative mr-4'>
               <svg className='absolute left-4 top-[10px]' width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M15.2825 14.2176L12.5 11.4576C13.5801 10.1109 14.1031 8.40152 13.9616 6.68103C13.8201 4.96053 13.0247 3.35964 11.7391 2.20753C10.4535 1.05543 8.77534 0.439683 7.04968 0.486903C5.32402 0.534124 3.68203 1.24072 2.46135 2.46141C1.24066 3.68209 0.534062 5.32408 0.486842 7.04974C0.439622 8.77541 1.05537 10.4536 2.20747 11.7392C3.35958 13.0248 4.96047 13.8201 6.68096 13.9617C8.40146 14.1032 10.1108 13.5801 11.4575 12.5001L14.2175 15.2601C14.2872 15.3303 14.3702 15.3861 14.4616 15.4242C14.553 15.4623 14.651 15.4819 14.75 15.4819C14.849 15.4819 14.947 15.4623 15.0384 15.4242C15.1298 15.3861 15.2128 15.3303 15.2825 15.2601C15.4177 15.1202 15.4932 14.9333 15.4932 14.7388C15.4932 14.5443 15.4177 14.3574 15.2825 14.2176ZM7.24999 12.5001C6.21164 12.5001 5.1966 12.1921 4.33325 11.6153C3.46989 11.0384 2.79698 10.2185 2.39962 9.25914C2.00226 8.29983 1.89829 7.24423 2.10087 6.22583C2.30344 5.20743 2.80345 4.27197 3.53768 3.53774C4.2719 2.80351 5.20737 2.3035 6.22577 2.10093C7.24417 1.89836 8.29977 2.00232 9.25908 2.39968C10.2184 2.79704 11.0383 3.46995 11.6152 4.33331C12.1921 5.19666 12.5 6.2117 12.5 7.25005C12.5 8.64244 11.9469 9.97779 10.9623 10.9624C9.97773 11.9469 8.64238 12.5001 7.24999 12.5001Z" fill="#151547" />
