@@ -5,8 +5,6 @@ import { useRole } from "@/context/RoleContext";
 import Details from "@/pages/api/Listing/Details";
 import toast from "react-hot-toast";
 import { useRouter } from "next/router";
-import { IoSearch } from "react-icons/io5";
-import { IoPersonOutline } from "react-icons/io5";
 import { MdLogout } from "react-icons/md";
 import { IoSettingsOutline } from "react-icons/io5";
 import NotifcationPopup from "./NotifcationPopup";
