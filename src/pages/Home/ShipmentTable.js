@@ -75,7 +75,7 @@ export default function ShipmentTable({ shipments, getShipments, DeleteOption = 
                     }} />
                     <Link href={`/shipment/add/${shipment?._id}`} className="">
 
-                      <FaEdit size={20} className="cursor-pointer" color={"success"} />
+                      <FaEdit size={20} className="cursor-pointer" color={"#16A34A"} />
                     </Link>
                     <FaRegTrashCan size={20} color={"#Ff0000"} className="cursor-pointer"
                       onClick={() => deleteshipment(shipment?._id)}
