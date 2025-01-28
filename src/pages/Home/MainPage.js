@@ -59,6 +59,7 @@ export default function MainPage() {
               </h2>
               <ShipmentTable shipments={data} />
             </div>
+           
           </>
         ) : user.role === "broker" ? (
           <BrokerDashboard />

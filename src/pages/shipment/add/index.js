@@ -400,7 +400,7 @@ export default function Index() {
                     <option value="">Select Broker</option>
                     {brokers &&
                       brokers?.map((item) => (
-                        <option value={item._id}>{item?.email}</option>
+                        <option value={item?._id}>{item?.email}</option>
                       ))}
                   </select>
                 </div>
@@ -430,7 +430,7 @@ export default function Index() {
                     <option value="">Select Customer</option>
                     {customers &&
                       customers?.map((item) => (
-                        <option value={item._id}>{item?.email}</option>
+                        <option value={item?._id}>{item?.email}</option>
                       ))}
                   </select>
                 </div>
