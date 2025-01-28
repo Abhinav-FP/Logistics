@@ -14,7 +14,7 @@ export default function Sidepopup({ isOpen, onClose, children }) {
           <IoCloseSharp size={24} />
         </button>
 
-        <div className="p-4 text-gray-800 overflow-y-auto h-full relative">
+        <div className="text-gray-800 overflow-y-auto h-full relative">
           {children}
         </div>
       </div>

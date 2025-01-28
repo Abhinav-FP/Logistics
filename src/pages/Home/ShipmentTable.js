@@ -25,12 +25,13 @@ export default function ShipmentTable({
   const [data, setData] = useState({});
   const [isdropdownopen, setIsdropdownopen] = useState(null);
   const [listing, setLisitng] = useState("");
-  const[selectedCarrier,setSelectedCarrier]=useState();
-  const[selectedShipment,setselectedShipment]=useState();
+  const [selectedCarrier, setSelectedCarrier] = useState();
+  const [selectedShipment, setselectedShipment] = useState();
   const toogleButton = (id) => {
     setIsdropdownopen(isdropdownopen === id ? null : id);
   };
 
+  const [activeTab, setActiveTab] = useState("shippingInfo");
 
   const getcarriers = () => {
     const main = new Details();
@@ -72,7 +73,7 @@ export default function ShipmentTable({
         console.log("error", err);
       });
   };
-  console.log("selectedcarrier",selectedCarrier)
+  console.log("selectedcarrier", selectedCarrier)
   console.log("listing", listing);
   return (
     <div className="overflow-x-auto">
@@ -319,9 +320,47 @@ export default function ShipmentTable({
         </div>
       </Popup>
       <Sidepopup isOpen={isSidePopupOpen} onClose={closeSidePopup}>
-        <div>
-          Hello World
+        <div className="px-8 pt-12 pb-8 flex justify-between items-center">
+          <h2 className="text-[#151547] text-medium text-lg md:text-2xl tracking-[-0.04em]">SD-752069247</h2>
+          <Link href="/" className="inline-block text-[#1C5FE8] px-3 py-2 border border-[#1C5FE81A] rounded-md lg:rounded-xl hover:bg-gray-100 focus:outline-none focus:ring focus:ring-offset-.5 focus:ring-[#1C5FE8]"> View Driver’s details
+          </Link>
         </div>
+
+        <div className="border-b border-black border-opacity-10 px-6">
+          <ul className="flex">
+            <li><button onClick={() => setActiveTab("shippingInfo")} className={`px-4 py-2.5 text-[#646567] tracking-[-0.04em] text-base font-medium ${activeTab === "shippingInfo" ? "border-b border-[#1C5FE8]" : "border-b border-[#1C5FE8] border-opacity-0"}`}> Shipping Info</button></li>
+            <li><button onClick={() => setActiveTab("vehicleInfo")} className={`px-4 py-2.5 text-[#646567] tracking-[-0.04em] text-base font-medium ${activeTab === "vehicleInfo" ? "border-b border-[#1C5FE8]" : "border-b border-[#1C5FE8] border-opacity-0"}`}>Shipping Info</button></li>
+            <li><button onClick={() => setActiveTab("document")} className={`px-4 py-2.5 text-[#646567] tracking-[-0.04em] text-base font-medium ${activeTab === "document" ? "border-b border-[#1C5FE8]" : "border-b border-[#1C5FE8] border-opacity-0"}`} >Document</button></li>
+            <li><button onClick={() => setActiveTab("billing")} className={`px-4 py-2.5 text-[#646567] tracking-[-0.04em] text-base font-medium ${activeTab === "billing" ? "border-b border-[#1C5FE8]" : "border-b border-[#1C5FE8] border-opacity-0"}`} >Billing</button></li>
+          </ul>
+        </div>
+        <div className="p-4 lg:p-6">
+          {activeTab === "shippingInfo" &&
+            <div>
+              <div className="border-b border-black border-opacity-10 rounded-md lg:rounded-xl p-2.5 flex flex-wrap">
+                <div className="w-10/12 pl-20 pr-2 relative">
+                  <svg className="absolute left-0 top-2" width="10" height="14" viewBox="0 0 10 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4.66667 6.33333C4.22464 6.33333 3.80072 6.15774 3.48816 5.84518C3.1756 5.53262 3 5.10869 3 4.66667C3 4.22464 3.1756 3.80072 3.48816 3.48816C3.80072 3.17559 4.22464 3 4.66667 3C5.1087 3 5.53262 3.17559 5.84518 3.48816C6.15774 3.80072 6.33334 4.22464 6.33334 4.66667C6.33334 4.88554 6.29023 5.10226 6.20647 5.30447C6.12271 5.50668 5.99994 5.69041 5.84518 5.84518C5.69042 5.99994 5.50668 6.12271 5.30447 6.20647C5.10226 6.29022 4.88554 6.33333 4.66667 6.33333ZM4.66667 0C3.42899 0 2.24201 0.491665 1.36684 1.36683C0.491665 2.242 0 3.42899 0 4.66667C0 8.16667 4.66667 13.3333 4.66667 13.3333C4.66667 13.3333 9.33334 8.16667 9.33334 4.66667C9.33334 3.42899 8.84167 2.242 7.9665 1.36683C7.09133 0.491665 5.90435 0 4.66667 0Z" fill="#1C5FE8" />
+                  </svg>
+                  <h3>Mountain View, IL 65757</h3>
+                  <p>#21 maple Lane</p>
+                </div>
+                <div className="w-2/12">
+                  <button>
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M10.545 6.765L11.235 7.455L4.44 14.25H3.75V13.56L10.545 6.765ZM13.245 2.25C13.0575 2.25 12.8625 2.325 12.72 2.4675L11.3475 3.84L14.16 6.6525L15.5325 5.28C15.602 5.21061 15.6572 5.1282 15.6948 5.03747C15.7325 4.94674 15.7518 4.84948 15.7518 4.75125C15.7518 4.65302 15.7325 4.55576 15.6948 4.46503C15.6572 4.3743 15.602 4.29189 15.5325 4.2225L13.7775 2.4675C13.6275 2.3175 13.44 2.25 13.245 2.25ZM10.545 4.6425L2.25 12.9375V15.75H5.0625L13.3575 7.455L10.545 4.6425Z" fill="#1C5FE8" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          }
+          {activeTab === "vehicleInfo" && <div>Vehicle Information Content</div>}
+          {activeTab === "document" && <div>document Information Content</div>}
+          {activeTab === "billing" && <div>document Information Content</div>}
+        </div>
+
+
       </Sidepopup>
       <ViewShipment isOpen={isPopupOpen} onClose={closePopup} data={data} />
     </div>
