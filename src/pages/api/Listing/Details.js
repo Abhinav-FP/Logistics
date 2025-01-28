@@ -76,10 +76,10 @@ class Details extends Component {
   async GetNotification(){
     return Api.get(`/user/get-notification`);
   }
-  MarkNotificationAsRead
+  
 
   async MarkNotificationAsRead(data){
-    return Api.post(`/user/Read-notification` ,data);
+    return Api.post(`/user/read-notification` ,data);
   }
   render() {
     return (

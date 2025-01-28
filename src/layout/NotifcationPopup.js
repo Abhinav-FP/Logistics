@@ -31,8 +31,7 @@ export default function NotificationPopup() {
 
     function markAsRead(notificationId) {
         const main = new Details();
-        main
-            .MarkNotificationAsRead(notificationId)
+        main.MarkNotificationAsRead({shipmentId : notificationId})
             .then(() => {
                 console.log('Notification marked as read');
                 GetNotifications();
@@ -105,8 +104,8 @@ export default function NotificationPopup() {
                                                 </p>
                                                 <button
                                                     className="text-blue-500 text-sm mt-1"
-                                                    onClick={() => markAsRead(notification.id)}
-                                                    aria-label={`Mark notification ${notification.id} as read`} // ARIA label
+                                                    onClick={() => markAsRead(notification.ShipmentId?._id)}
+                                                    aria-label={`Mark notification ${notification.ShipmentId?._id} as read`} // ARIA label
                                                 >
                                                     Mark as Read
                                                 </button>
