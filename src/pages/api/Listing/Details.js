@@ -72,6 +72,15 @@ class Details extends Component {
   async UpdateDirection(data) {
     return Api.post(`/place/update_direction` , data);
   }
+
+  async GetNotification(){
+    return Api.get(`/user/get-notification`);
+  }
+  MarkNotificationAsRead
+
+  async MarkNotificationAsRead(data){
+    return Api.post(`/user/Read-notification` ,data);
+  }
   render() {
     return (
       <div>
