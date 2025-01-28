@@ -8,7 +8,7 @@ import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import Link from "next/link";
 
 
-export default function ShipmentTable({ shipments, getShipments, DeleteOption = false, role  }) {
+export default function ShipmentTable({ shipments, getShipments, DeleteOption = false, role }) {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [data, setData] = useState({});
 
@@ -57,9 +57,9 @@ export default function ShipmentTable({ shipments, getShipments, DeleteOption = 
               <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left capitalize">{shipment?.drop_location}</td>
               <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left capitalize">
                 <div className={`px-2 py-1 ${shipment?.status?.toLowerCase() === "in transit" ? "bg-[#C2970A1A] text-[#C2970A]" :
-                    shipment?.status?.toLowerCase() === "delivered" ? "bg-green-300 text-green-700" :
-                      shipment?.status?.toLowerCase() === "cancelled" ? "bg-red-400 text-red-700" :
-                        shipment?.status?.toLowerCase() === "pending" ? "bg-orange-300 text-orange-500" : ""
+                  shipment?.status?.toLowerCase() === "delivered" ? "bg-green-300 text-green-700" :
+                    shipment?.status?.toLowerCase() === "cancelled" ? "bg-red-400 text-red-700" :
+                      shipment?.status?.toLowerCase() === "pending" ? "bg-orange-300 text-orange-500" : ""
                   } flex justify-center items-center rounded-md`}>
                   {shipment?.status}
                 </div>
@@ -73,9 +73,9 @@ export default function ShipmentTable({ shipments, getShipments, DeleteOption = 
                       setData(shipment);
                       openPopup();
                     }} />
-                    <Link href={`/shipment/add/${shipment?._id}`}  className="bg-success-600">
+                    <Link href={`/shipment/add/${shipment?._id}`} className="">
 
-                      <FaEdit size={20} className="cursor-pointer"  color={"#ffff"}/>
+                      <FaEdit size={20} className="cursor-pointer" color={"success"} />
                     </Link>
                     <FaRegTrashCan size={20} color={"#Ff0000"} className="cursor-pointer"
                       onClick={() => deleteshipment(shipment?._id)}
@@ -155,12 +155,12 @@ export default function ShipmentTable({ shipments, getShipments, DeleteOption = 
               <p className="font-medium text-gray-600">Status:</p>
               <p
                 className={`px-2 py-1 rounded-md capitalize max-w-fit ${data?.status?.toLowerCase() === "pending"
-                    ? "bg-orange-300 text-orange-800"
-                    : data?.status?.toLowerCase() === "delivered"
-                      ? "bg-green-300 text-green-800"
-                      : data?.status?.toLowerCase() === "cancelled"
-                        ? "bg-red-300 text-red-800"
-                        : "bg-gray-300 text-gray-800"
+                  ? "bg-orange-300 text-orange-800"
+                  : data?.status?.toLowerCase() === "delivered"
+                    ? "bg-green-300 text-green-800"
+                    : data?.status?.toLowerCase() === "cancelled"
+                      ? "bg-red-300 text-red-800"
+                      : "bg-gray-300 text-gray-800"
                   }`}
               >
                 {data?.status}
