@@ -1,6 +1,8 @@
 import Details from '@/pages/api/Listing/Details';
+import moment from 'moment';
 import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
+
 
 export default function NotificationPopup() {
     const [Record, setRecord] = useState(0);
@@ -71,7 +73,7 @@ export default function NotificationPopup() {
 
 
                     {isPopupOpen && (
-                        <div className="absolute top-12 right-0 w-[300px] bg-white shadow-lg rounded-xl p-4">
+                        <div className="absolute top-12 right-0 w-[300px] bg-white shadow-lg rounded-xl p-4 z-10">
                             <div className="flex justify-between items-center border-b pb-2 mb-2">
                                 <h3 className="text-lg font-semibold">Notifications</h3>
                                 <button
@@ -88,7 +90,7 @@ export default function NotificationPopup() {
                                 ) : error ? (
                                     <p className="text-red-500 text-sm">{error}</p>
                                 ) : notifications.length > 0 ? (
-                                    <ul className="space-y-2">
+                                    <ul className="space-y-2 max-h-[250px] overflow-y-auto">
                                         {notifications.map((notification, index) => (
                                             <li
                                                 key={index}
@@ -103,13 +105,18 @@ export default function NotificationPopup() {
                                                 <p className="text-xs text-gray-500">
                                                     <strong>Role:</strong> {notification.senderId?.role || "N/A"}
                                                 </p>
-                                                <button
-                                                    className="text-blue-500 text-sm mt-1"
-                                                    onClick={() => markAsRead(notification.ShipmentId?._id)}
-                                                    aria-label={`Mark notification ${notification.ShipmentId?._id} as read`} // ARIA label
-                                                >
-                                                    Mark as Read
-                                                </button>
+    <div className="flex items-center justify-between space-x-4 mt-1">
+      <button
+        className="text-blue-500 text-sm "
+        onClick={() => markAsRead(notification.ShipmentId?._id)}
+        aria-label={`Mark notification ${notification.ShipmentId?._id} as read`} 
+      >
+        Mark as Read
+      </button>
+      <p className='text-sm m-0 text-[#666]'>
+        {moment(notification.createdAt).fromNow()}
+      </p>
+    </div>
                                             </li>
                                         ))}
 
