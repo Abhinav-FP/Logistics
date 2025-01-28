@@ -10,7 +10,6 @@ export default function NotificationPopup() {
     const [isPopupOpen, setIsPopupOpen] = useState(false);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-    console.log("notifications", notifications)
 
     const GetNotifications = () => {
         setLoading(true);
@@ -36,7 +35,6 @@ export default function NotificationPopup() {
         const main = new Details();
         main.MarkNotificationAsRead({ shipmentId: notificationId })
             .then(() => {
-                console.log('Notification marked as read');
                 GetNotifications();
             })
             .catch((err) => {

@@ -32,7 +32,6 @@ export default function Index() {
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("formData", formData);
     setLoading(true);
     const main = new Details();
     const updatedFormData = { ...formData, role: "driver" };

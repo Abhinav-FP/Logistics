@@ -81,7 +81,6 @@ export default function Index() {
         setLoading(false);
       });
   }
-  console.log("data",data);
 
   return (
     <Layout page={"Carriers"}>

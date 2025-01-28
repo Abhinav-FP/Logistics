@@ -72,8 +72,6 @@ export default function ShipmentTable({
         console.log("error", err);
       });
   };
-  console.log("selectedcarrier",selectedCarrier)
-  console.log("listing", listing);
   return (
     <div className="overflow-x-auto">
       <table className="w-full border-none">
