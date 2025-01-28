@@ -90,6 +90,7 @@ function SideBar({role}) {
                 <PiTrolleySuitcaseLight size={20} />
                 Drivers
               </Link> }
+              { role==="shipper" &&
               <Link
                 href="/brokers"
                 className={`flex items-center py-2.5 px-2.5 gap-2 text-[#727272] text-base font-medium tracking-[-0.06em] ${
@@ -98,7 +99,7 @@ function SideBar({role}) {
               >
                 <PiTrolleySuitcaseLight size={20} />
                 Brokers
-              </Link>
+              </Link>}
               <Link
                 href="/users"
                 className={`flex items-center py-2.5 px-2.5 gap-2 text-[#727272] text-base font-medium tracking-[-0.06em] ${
