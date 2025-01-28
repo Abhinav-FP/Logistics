@@ -5,8 +5,6 @@ import { useRole } from "@/context/RoleContext";
 import Details from "@/pages/api/Listing/Details";
 import toast from "react-hot-toast";
 import { useRouter } from "next/router";
-import { IoSearch } from "react-icons/io5";
-import { IoPersonOutline } from "react-icons/io5";
 import { MdLogout } from "react-icons/md";
 import { IoSettingsOutline } from "react-icons/io5";
 import NotifcationPopup from "./NotifcationPopup";
@@ -62,7 +60,7 @@ export default function Layout({ children, page }) {
     <div className="md:flex flex-wrap  bg-[#F5F6FB] items-start">
       <Sidebar role={user?.role || ""} />
       <div className="w-full lg:ml-[304px] lg:w-[calc(100%-304px)]">
-        <div className="fixed px-4 md:px-5 lg:px-[30px] py-3 lg:py-4 top-0  bg-white flex items-center w-full lg:w-[calc(100%-304px)] flex flex-wrap">
+        <div className="fixed z-10 px-4 md:px-5 lg:px-[30px] py-3 lg:py-4 top-0  bg-white flex items-center w-full lg:w-[calc(100%-304px)] flex flex-wrap">
           <div className="w-4/12 pl-4 lg:pl-0">
             <h1 className="text-[#151547] text-lg lg:text-2xl tracking-[-0.04em] font-medium">
               {page || "Dashboard"}
