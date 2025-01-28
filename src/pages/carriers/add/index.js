@@ -7,7 +7,7 @@ import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { IoBookmark } from "react-icons/io5";
 
-export default function index() {
+export default function Index() {
    const router = useRouter(); 
   const[loading,setLoading]=useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
