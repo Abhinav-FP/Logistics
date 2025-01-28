@@ -12,6 +12,12 @@ import { RxCross1 } from "react-icons/rx";
 export default function EditShipment() {
     const { user } = useRole();
     const router = useRouter();
+    const [loading, setLoading] = useState([]);
+    const { slug } = router.query;
+    const [brokers, setBrokers] = useState([]);
+    const [customers, setCustomers] = useState([]);
+    console.log("customers", customers)
+    console.log("brokers", brokers)
     const [formData, setFormData] = useState({
         title: "",
         description: "",
@@ -30,64 +36,6 @@ export default function EditShipment() {
         customerName: "",
     });
 
-    console.log("formData", formData)
-
-    const [brokers, setBrokers] = useState([]);
-    const [customers, setCustomers] = useState([]);
-    const [loading, setLoading] = useState([]);
-    const { slug } = router.query;
-    const getShipments = async (isBroker) => {
-        setLoading(true);
-        const main = new Details();
-        try {
-            const response = isBroker ? await main.getBrokerShipment() : await main.getShipmentById(slug);
-            console.log("response", response)
-            const Response = response?.data?.data[0]
-            console.log("Response", Response)
-            const [dimensions1, dimensions2] = Response?.dimensions
-                ? Response.dimensions?.split("x")?.map((dim) => dim.trim())
-                : ["", ""];
-            setBrokers(Array.isArray(Response?.broker_id) ? Response?.broker_id : [Response?.broker_id]);
-            setCustomers(Array.isArray(Response?.customer_id) ? Response?.customer_id : [Response?.customer_id]);
-            setFormData({
-                title: Response?.name || "",
-                description: Response?.description || "",
-                pickup: Response?.pickup_location || "",
-                delivery: Response?.drop_location || "",
-                shippingDate: Response?.shippingDate || "",
-                deliveryDate: Response?.deliveryDateExpect || "",
-                estimatedCost: Response?.cost || "",
-                paymentStatus: Response?.paymentStatus || "",
-                brokerName: Response?.brokerName || "",
-                typeOfGoods: Response?.typeOfGoods || "",
-                quantity: Response?.quantity || "",
-                weight: Response?.weight || "",
-                dimensions1: dimensions1 || "",
-                dimensions2: dimensions2 || "",
-                customerName: Response?.customerName || "",
-            });
-        } catch (err) {
-            if (err.response?.status === 401) {
-                router.push('/login');
-            } else {
-                console.error("Error fetching shipments", err);
-            }
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    useEffect(() => {
-        if (user?.role === "broker" || slug) {
-            getShipments(user?.role === "broker");
-        }
-    }, [user?.role, slug]);
-
-
-
-
-
-    // Get Brokers and Customers list
     const getBrokerandCustomer = () => {
         const main = new Details();
         main
@@ -108,7 +56,6 @@ export default function EditShipment() {
         getBrokerandCustomer();
     }, []);
 
-
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({
@@ -116,6 +63,55 @@ export default function EditShipment() {
             [name]: value,
         });
     };
+
+
+    const getShipments = async (isBroker) => {
+        setLoading(true);
+        const main = new Details();
+        try {
+            const response = isBroker ? await main.getBrokerShipment() : await main.getShipmentById(slug);
+            const Response = response?.data?.data[0]
+            console.log("Response", Response)
+            const [dimensions1, dimensions2] = Response?.dimensions
+                ? Response.dimensions?.split("x")?.map((dim) => dim.trim())
+                : ["", ""];
+            setFormData({
+                title: Response?.name || "",
+                description: Response?.description || "",
+                pickup: Response?.pickup_location || "",
+                delivery: Response?.drop_location || "",
+                shippingDate: Response?.shippingDate || "",
+                deliveryDate: Response?.deliveryDateExpect || "",
+                estimatedCost: Response?.cost || "",
+                paymentStatus: Response?.paymentStatus || "",
+                brokerName: Response?.broker_id?._id || "",
+                typeOfGoods: Response?.typeOfGoods || "",
+                quantity: Response?.quantity || "",
+                weight: Response?.weight || "",
+                dimensions1: dimensions1 || "",
+                dimensions2: dimensions2 || "",
+                customerName: Response?.customer_id?._id || "",
+            });
+        } catch (err) {
+            if (err.response?.status === 401) {
+                router.push('/login');
+            } else {
+                console.error("Error fetching shipments", err);
+            }
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        if (user?.role === "broker" || slug) {
+            getShipments(user?.role === "broker");
+        }
+    }, [user?.role, slug]);
+
+    console.log("formData", formData)
+
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -449,15 +445,16 @@ export default function EditShipment() {
                                         value={formData.brokerName}
                                         name="brokerName"
                                         onChange={handleChange}
-                                        className="w-full h-11 lg:h-[48px]  block bg-white text-[#000] text-base border border-black border-opacity-10 rounded-md lg:rounded-xl py-2 px-4 leading-tight focus:outline-none"
-                                        placeholder=""
+                                        className="w-full h-11 lg:h-[48px] block bg-white text-[#000] text-base border border-black border-opacity-10 rounded-md lg:rounded-xl py-2 px-4 leading-tight focus:outline-none"
                                     >
-                                        <option value="">Select Broker</option>
                                         {brokers &&
-                                            brokers?.map((item) => (
-                                                <option value={item?._id}>{item?.email}</option>
+                                            brokers.map((item) => (
+                                                <option key={item?._id} value={item?._id}>
+                                                    {item?.email}
+                                                </option>
                                             ))}
                                     </select>
+
                                 </div>
                             </div>
                         </div>
@@ -479,13 +476,14 @@ export default function EditShipment() {
                                         value={formData.customerName}
                                         name="customerName"
                                         onChange={handleChange}
-                                        className="w-full h-11 lg:h-[48px]  block bg-white text-[#000] text-base border border-black border-opacity-10 rounded-md lg:rounded-xl py-2 px-4 leading-tight focus:outline-none"
-                                        placeholder=""
+                                        className="w-full h-11 lg:h-[48px] block bg-white text-[#000] text-base border border-black border-opacity-10 rounded-md lg:rounded-xl py-2 px-4 leading-tight focus:outline-none"
                                     >
-                                        <option value="">Select Customer</option>
+
                                         {customers &&
-                                            customers?.map((item) => (
-                                                <option value={item?._id}>{item?.email}</option>
+                                            customers.map((item) => (
+                                                <option key={item?._id} value={item?._id}>
+                                                    {item?.email}
+                                                </option>
                                             ))}
                                     </select>
                                 </div>

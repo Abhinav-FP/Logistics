@@ -71,17 +71,17 @@ export default function Index() {
       description: formData.description,
       pickup_location: formData.pickup,
       drop_location: formData.delivery,
-      customer_id: formData.customerName, 
-      broker_id: formData.brokerName, 
+      customer_id: formData.customerName,
+      broker_id: formData.brokerName,
       shippingDate: formData.shippingDate,
       deliveryDateExpect: formData.deliveryDate,
       cost: formData.estimatedCost,
       paymentStatus: formData.paymentStatus,
       quantity: formData.quantity,
       weight: formData.weight,
-      dimensions: `${formData.dimensions1} x ${formData.dimensions2}`, 
+      dimensions: `${formData.dimensions1} x ${formData.dimensions2}`,
       typeOfGoods: formData.typeOfGoods,
-      });
+    });
     response
       .then((res) => {
         if (res && res?.data && res?.data?.status) {
@@ -309,26 +309,26 @@ export default function Index() {
                     Dimensions
                   </label>
                   <div className="flex gap-2 items-center">
-                  <input
-                    type="number"
-                    name="dimensions1"
-                    value={formData.dimensions1}
-                    onChange={handleChange}
-                    className="w-1/2 h-11 lg:h-[48px] appearance-none block bg-white text-[#000] text-base border border-black border-opacity-10 rounded-md lg:rounded-xl py-2 px-4 leading-tight focus:outline-none"
-                    placeholder=""
-                    required
+                    <input
+                      type="number"
+                      name="dimensions1"
+                      value={formData.dimensions1}
+                      onChange={handleChange}
+                      className="w-1/2 h-11 lg:h-[48px] appearance-none block bg-white text-[#000] text-base border border-black border-opacity-10 rounded-md lg:rounded-xl py-2 px-4 leading-tight focus:outline-none"
+                      placeholder=""
+                      required
                     />
-                    <RxCross1 size={20} color={"#70708D"}/>
-                  <input
-                    type="number"
-                    name="dimensions2"
-                    value={formData.dimensions2}
-                    onChange={handleChange}
-                    className="w-1/2 h-11 lg:h-[48px] appearance-none block bg-white text-[#000] text-base border border-black border-opacity-10 rounded-md lg:rounded-xl py-2 px-4 leading-tight focus:outline-none"
-                    placeholder=""
-                    required
+                    <RxCross1 size={20} color={"#70708D"} />
+                    <input
+                      type="number"
+                      name="dimensions2"
+                      value={formData.dimensions2}
+                      onChange={handleChange}
+                      className="w-1/2 h-11 lg:h-[48px] appearance-none block bg-white text-[#000] text-base border border-black border-opacity-10 rounded-md lg:rounded-xl py-2 px-4 leading-tight focus:outline-none"
+                      placeholder=""
+                      required
                     />
-                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -399,8 +399,10 @@ export default function Index() {
                   >
                     <option value="">Select Broker</option>
                     {brokers &&
-                      brokers?.map((item) => (
-                        <option value={item?._id}>{item?.email}</option>
+                      brokers.map((item) => (
+                        <option key={item?._id} value={item?._id}>
+                          {item?.email}
+                        </option>
                       ))}
                   </select>
                 </div>
@@ -429,8 +431,10 @@ export default function Index() {
                   >
                     <option value="">Select Customer</option>
                     {customers &&
-                      customers?.map((item) => (
-                        <option value={item?._id}>{item?.email}</option>
+                      customers.map((item) => (
+                        <option key={item?._id} value={item?._id}>
+                          {item?.email}
+                        </option>
                       ))}
                   </select>
                 </div>
