@@ -49,7 +49,7 @@ export default function MainPage() {
 
   return (
     <Layout>
-      <div className="container mx-auto">
+      <div className="">
         {user.role === "shipper" ? (
           <>
             <Dashboard />
