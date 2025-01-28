@@ -1,4 +1,5 @@
 import Details from '@/pages/api/Listing/Details';
+import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
 
 export default function NotificationPopup() {
@@ -31,7 +32,7 @@ export default function NotificationPopup() {
 
     function markAsRead(notificationId) {
         const main = new Details();
-        main.MarkNotificationAsRead({shipmentId : notificationId})
+        main.MarkNotificationAsRead({ shipmentId: notificationId })
             .then(() => {
                 console.log('Notification marked as read');
                 GetNotifications();
@@ -93,9 +94,9 @@ export default function NotificationPopup() {
                                                 key={index}
                                                 className="border-b pb-2 last:border-b-0"
                                             >
-                                                <p className="text-sm text-gray-700">
+                                                <Link href={`/shipment`} className="text-sm text-gray-700">
                                                     <strong>Shipment Name:</strong> {notification.ShipmentId?.name}
-                                                </p>
+                                                </Link>
                                                 <p className="text-xs text-gray-500">
                                                     <strong>Email:</strong> {notification.senderId?.email}
                                                 </p>
