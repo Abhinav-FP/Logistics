@@ -105,18 +105,18 @@ export default function NotificationPopup() {
                                                 <p className="text-xs text-gray-500">
                                                     <strong>Role:</strong> {notification.senderId?.role || "N/A"}
                                                 </p>
-    <div className="flex items-center justify-between space-x-4 mt-1">
-      <button
-        className="text-blue-500 text-sm "
-        onClick={() => markAsRead(notification.ShipmentId?._id)}
-        aria-label={`Mark notification ${notification.ShipmentId?._id} as read`} 
-      >
-        Mark as Read
-      </button>
-      <p className='text-sm m-0 text-[#666]'>
-        {moment(notification.createdAt).fromNow()}
-      </p>
-    </div>
+                                                <div className="flex items-center justify-between space-x-4 mt-1">
+                                                    <button
+                                                        className="text-blue-500 text-sm "
+                                                        onClick={() => markAsRead(notification.ShipmentId?._id)}
+                                                        aria-label={`Mark notification ${notification.ShipmentId?._id} as read`}
+                                                    >
+                                                        Mark as Read
+                                                    </button>
+                                                    <p className='text-sm m-0 text-[#666]'>
+                                                        {moment(notification.createdAt).fromNow()}
+                                                    </p>
+                                                </div>
                                             </li>
                                         ))}
 
