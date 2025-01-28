@@ -11,6 +11,7 @@ import { BsDownload } from "react-icons/bs";
 import { IoInformationCircleOutline } from "react-icons/io5";
 import { FiTruck } from "react-icons/fi";
 import ViewShipment from "@/components/ViewShipment";
+import Sidepopup from "@/components/Sidepopup";
 
 export default function ShipmentTable({
   shipments,
@@ -20,6 +21,7 @@ export default function ShipmentTable({
 }) {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isCarrierPopupOpen, setIsCarrierPopupOpen] = useState(false);
+  const [isSidePopupOpen, setIsSidePopupOpen] = useState(false);
   const [data, setData] = useState({});
   const [isdropdownopen, setIsdropdownopen] = useState(null);
   const [listing, setLisitng] = useState("");
@@ -52,6 +54,9 @@ export default function ShipmentTable({
 
   const openCarrierPopup = () => setIsCarrierPopupOpen(true);
   const closeCarrierPopup = () => setIsCarrierPopupOpen(false);
+
+  const openSidePopup = () => setIsSidePopupOpen(true);
+  const closeSidePopup = () => setIsSidePopupOpen(false);
 
   const deleteshipment = (id) => {
     const main = new Details();
@@ -227,6 +232,17 @@ export default function ShipmentTable({
                               {/* <CiNoWaitingSign size={18} color="#CF0000" /> */}
                             </button>
                           </li>
+                          <li className="py-2 tracking-[-0.04em] [&:not(:last-child)]:border-b border-black border-opacity-10 px-4 lg:px-6">
+                            <button
+                              className="flex gap-2 items-center text-[#1B1B1B] bg-transparent border-none text-sm font-medium"
+                              onClick={() => {
+                                openSidePopup();
+                                setIsdropdownopen(null);
+                              }}
+                            >
+                              Tracking <IoInformationCircleOutline size={18} />
+                            </button>
+                          </li>
                         </ul>
                       </div>
                     </div>
@@ -302,6 +318,11 @@ export default function ShipmentTable({
           </button>
         </div>
       </Popup>
+      <Sidepopup isOpen={isSidePopupOpen} onClose={closeSidePopup}>
+        <div>
+          Hello World
+        </div>
+      </Sidepopup>
       <ViewShipment isOpen={isPopupOpen} onClose={closePopup} data={data} />
     </div>
   );
