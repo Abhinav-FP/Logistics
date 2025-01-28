@@ -23,7 +23,8 @@ export default function ShipmentTable({
   const [data, setData] = useState({});
   const [isdropdownopen, setIsdropdownopen] = useState(null);
   const [listing, setLisitng] = useState("");
-  const [selectedCarrier, setSelectedCarrier] = useState();
+  const[selectedCarrier,setSelectedCarrier]=useState();
+  const[selectedShipment,setselectedShipment]=useState();
   const toogleButton = (id) => {
     setIsdropdownopen(isdropdownopen === id ? null : id);
   };
@@ -66,7 +67,7 @@ export default function ShipmentTable({
         console.log("error", err);
       });
   };
-
+  console.log("selectedcarrier",selectedCarrier)
   console.log("listing", listing);
   return (
     <div className="overflow-x-auto">
@@ -217,6 +218,7 @@ export default function ShipmentTable({
                             <button
                               className="flex gap-2 text-[#1B1B1B] bg-transparent border-none text-sm font-medium"
                               onClick={() => {
+                                setselectedShipment(shipment?._id);
                                 openCarrierPopup();
                                 setIsdropdownopen(null);
                               }}
