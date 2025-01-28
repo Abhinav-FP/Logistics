@@ -23,7 +23,7 @@ export default function ShipmentTable({
   const [data, setData] = useState({});
   const [isdropdownopen, setIsdropdownopen] = useState(null);
   const [listing, setLisitng] = useState("");
-  const[selectedCarrier,setSelectedCarrier]=useState();
+  const [selectedCarrier, setSelectedCarrier] = useState();
   const toogleButton = (id) => {
     setIsdropdownopen(isdropdownopen === id ? null : id);
   };
@@ -191,9 +191,8 @@ export default function ShipmentTable({
                         </svg>
                       </button>
                       <div
-                        className={`after:h-5 after:w-5 after:border-t after:border-l after:bg-white after:absolute after:left-12 after:top-[-10px] after:rotate-45 fixed min-w-[198px] -ml-10 mt-2 border border-black border-opacity-10 rounded-xl z-10 bg-white ${
-                          isdropdownopen === index ? "block" : "hidden"
-                        }`}
+                        className={`after:h-5 after:w-5 after:border-t after:border-l after:bg-white after:absolute after:left-12 after:top-[-10px] after:rotate-45 fixed min-w-[198px] -ml-10 mt-2 border border-black border-opacity-10 rounded-xl z-10 bg-white ${isdropdownopen === index ? "block" : "hidden"
+                          }`}
                       >
                         <ul>
                           <li className="py-2 tracking-[-0.04em] [&:not(:last-child)]:border-b border-black border-opacity-10 px-4 lg:px-6">
@@ -238,66 +237,68 @@ export default function ShipmentTable({
       <Popup
         isOpen={isCarrierPopupOpen}
         onClose={closeCarrierPopup}
-        size={"max-w-[800px]"}
+        size={"max-w-[570px]"}
       >
-        <div className="overflow-x-auto">
-          <table className="w-full border-none">
-            <thead>
-              <tr className="text-[#9090AD] bg-[#F4F6F8] border border-black border-opacity-10 uppercase ">
-                <th className="px-4 py-3  tracking-[-0.04em] text-sm font-medium text-left">
-                  Carrier ID{" "}
-                </th>
-                <th className="px-4 py-3  tracking-[-0.04em] text-sm font-medium text-left">
-                  Carrier Name
-                </th>
-                <th className="px-4 py-3  tracking-[-0.04em] text-sm font-medium text-left">
-                  Company Name
-                </th>
-                <th className="px-4 py-3  tracking-[-0.04em] text-sm font-medium text-left">
-                  Action
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {listing &&
-                listing?.map((carrier, index) => (
-                  <tr
-                    key={index}
-                    className="border-b  border-black border-opacity-10 font-medium"
-                  >
-                    <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">
-                      {carrier?.carrier_id_given}
-                    </td>
-                    <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">
-                      {carrier?.career_id_ref?.name}
-                    </td>
-                    <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">
-                      {carrier?.companyname}
-                    </td>
-                    <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">
-                      <button onClick={()=>{
-                        setSelectedCarrier(carrier?.career_id_ref?._id);
-                      }}>
-                     {selectedCarrier && selectedCarrier === carrier?.career_id_ref?._id ? 
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="24" height="24" rx="12" fill="#0BB635"/>
-                        <path d="M4 12C4 9.87827 4.84285 7.84344 6.34315 6.34315C7.84344 4.84285 9.87827 4 12 4C14.1217 4 16.1566 4.84285 17.6569 6.34315C19.1571 7.84344 20 9.87827 20 12C20 14.1217 19.1571 16.1566 17.6569 17.6569C16.1566 19.1571 14.1217 20 12 20C9.87827 20 7.84344 19.1571 6.34315 17.6569C4.84285 16.1566 4 14.1217 4 12ZM12 2C6.477 2 2 6.477 2 12C2 17.523 6.477 22 12 22C17.523 22 22 17.523 22 12C22 6.477 17.523 2 12 2ZM17.457 9.457L16.043 8.043L11 13.086L8.207 10.293L6.793 11.707L11 15.914L17.457 9.457Z" fill="white"/>
-                      </svg>
-                       :
-                      <svg width="24" height="24" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M2 10C2 7.87827 2.84285 5.84344 4.34315 4.34315C5.84344 2.84285 7.87827 2 10 2C12.1217 2 14.1566 2.84285 15.6569 4.34315C17.1571 5.84344 18 7.87827 18 10C18 12.1217 17.1571 14.1566 15.6569 15.6569C14.1566 17.1571 12.1217 18 10 18C7.87827 18 5.84344 17.1571 4.34315 15.6569C2.84285 14.1566 2 12.1217 2 10ZM10 0C4.477 0 0 4.477 0 10C0 15.523 4.477 20 10 20C15.523 20 20 15.523 20 10C20 4.477 15.523 0 10 0ZM15.457 7.457L14.043 6.043L9 11.086L6.207 8.293L4.793 9.707L9 13.914L15.457 7.457Z" fill="#999999"/>
-                    </svg>
-                    }
-                    </button>
-                    </td>
-                  </tr>
-                ))}
-            </tbody>
-          </table>
+        <div className="lg:px-2.5 lg:pb-2.5">
+          <div className="overflow-x-auto mt-8">
+            <table className="w-full border-none">
+              <thead>
+                <tr className="text-[#9090AD] bg-[#F4F6F8] border border-black border-opacity-10 uppercase ">
+                  <th className="px-4 py-3  tracking-[-0.04em] text-sm font-medium text-left">
+                    Carrier ID{" "}
+                  </th>
+                  <th className="px-4 py-3  tracking-[-0.04em] text-sm font-medium text-left">
+                    Carrier Name
+                  </th>
+                  <th className="px-4 py-3  tracking-[-0.04em] text-sm font-medium text-left">
+                    Company Name
+                  </th>
+                  <th className="px-4 py-3  tracking-[-0.04em] text-sm font-medium text-left">
+                    Action
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {listing &&
+                  listing?.map((carrier, index) => (
+                    <tr
+                      key={index}
+                      className="border-b  border-black border-opacity-10 font-medium"
+                    >
+                      <td className="px-4 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">
+                        {carrier?.carrier_id_given}
+                      </td>
+                      <td className="px-4 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">
+                        {carrier?.career_id_ref?.name}
+                      </td>
+                      <td className="px-4 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">
+                        {carrier?.companyname}
+                      </td>
+                      <td className="px-4 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-center">
+                        <button onClick={() => {
+                          setSelectedCarrier(carrier?.career_id_ref?._id);
+                        }}>
+                          {selectedCarrier && selectedCarrier === carrier?.career_id_ref?._id ?
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <rect width="24" height="24" rx="12" fill="#0BB635" />
+                              <path d="M4 12C4 9.87827 4.84285 7.84344 6.34315 6.34315C7.84344 4.84285 9.87827 4 12 4C14.1217 4 16.1566 4.84285 17.6569 6.34315C19.1571 7.84344 20 9.87827 20 12C20 14.1217 19.1571 16.1566 17.6569 17.6569C16.1566 19.1571 14.1217 20 12 20C9.87827 20 7.84344 19.1571 6.34315 17.6569C4.84285 16.1566 4 14.1217 4 12ZM12 2C6.477 2 2 6.477 2 12C2 17.523 6.477 22 12 22C17.523 22 22 17.523 22 12C22 6.477 17.523 2 12 2ZM17.457 9.457L16.043 8.043L11 13.086L8.207 10.293L6.793 11.707L11 15.914L17.457 9.457Z" fill="white" />
+                            </svg>
+                            :
+                            <svg width="24" height="24" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M2 10C2 7.87827 2.84285 5.84344 4.34315 4.34315C5.84344 2.84285 7.87827 2 10 2C12.1217 2 14.1566 2.84285 15.6569 4.34315C17.1571 5.84344 18 7.87827 18 10C18 12.1217 17.1571 14.1566 15.6569 15.6569C14.1566 17.1571 12.1217 18 10 18C7.87827 18 5.84344 17.1571 4.34315 15.6569C2.84285 14.1566 2 12.1217 2 10ZM10 0C4.477 0 0 4.477 0 10C0 15.523 4.477 20 10 20C15.523 20 20 15.523 20 10C20 4.477 15.523 0 10 0ZM15.457 7.457L14.043 6.043L9 11.086L6.207 8.293L4.793 9.707L9 13.914L15.457 7.457Z" fill="#999999" />
+                            </svg>
+                          }
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+              </tbody>
+            </table>
+          </div>
+          <button className="bg-[#1C5FE8] hover:bg-[#0a3fab] px-10 py-2.5 text-white flex mx-auto mt-6 rounded-lg">
+            Share
+          </button>
         </div>
-        <button className="bg-[#1C5FE8] px-4 py-2 text-white flex mx-auto mt-4 rounded-lg">
-          Share
-        </button>
       </Popup>
       <ViewShipment isOpen={isPopupOpen} onClose={closePopup} data={data} />
     </div>
