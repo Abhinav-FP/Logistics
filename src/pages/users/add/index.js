@@ -1,4 +1,4 @@
-import Popup from "@/components/Popup";
+import AccountPopup from "@/components/AccountPopup";
 import Layout from "@/layout/Layout";
 import Details from "@/pages/api/Listing/Details";
 import { useRouter } from "next/router";
@@ -11,8 +11,18 @@ export default function index() {
   const [loading, setLoading] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(true);
   const openPopup = () => setIsPopupOpen(true);
-  const closePopup = () => setIsPopupOpen(false);
+  const closePopup = () => {
+    setIsPopupOpen(false);
+    router.push("/users");
+  };
   const [data, setData] = useState({});
+  // const [data, setData] = useState({
+  //   name: "Abhinav",
+  //   contact: "7568312283",
+  //   email: "fp@gmail.com",
+  //   address: "fgdfg 345 fdg",
+  //   password:"hjgh8uty68yj",
+  // });
   const [formData, setFormData] = useState({
     name: "",
     contact: "",
@@ -158,8 +168,7 @@ export default function index() {
             </div>
           </div>
         </form>
-        <Popup isOpen={isPopupOpen} onClose={closePopup} size={'max-w-[510px]'}>
-
+        {/* <Popup isOpen={isPopupOpen} onClose={closePopup} size={'max-w-[510px]'}>
           <div className="relative z-[1]">
             <iframe className="absolute w-full z-[1] left-0 -top-6" width="100%" src="https://lottie.host/embed/1033fffa-3d5e-4fea-86a0-31a7203dccb3/ZFfNouJGHe.lottie"></iframe>
             <div className="relative z-[2]">
@@ -175,43 +184,56 @@ export default function index() {
                 <table className="w-full border-0">
                   <tbody>
                     <tr>
-                      <th className="text-left text-[#70708D] border-0 py-2 lg:py-2.5 tracking-[-0.04em] text-[15px] font-medium">Customer Name :</th>
-                      <td className="border-0 py-2 pl-4 lg:py-2.5 text-[#70708D] tracking-[-0.04em] text-[15px] font-bold">Jack</td>
+                      <th className="text-left text-[#70708D] border-0 py-2 lg:py-2.5 tracking-[-0.04em] text-[15px] font-medium">Name :</th>
+                      <td className="border-0 py-2 pl-4 lg:py-2.5 text-[#70708D] tracking-[-0.04em] text-[15px] font-bold capitalize">{data?.name || ""}</td>
                     </tr>
                     <tr>
                       <th className="text-left text-[#70708D] border-0 py-2 lg:py-2.5 tracking-[-0.04em] text-[15px] font-medium">Email :</th>
-                      <td className="border-0 py-2 pl-4 lg:py-2.5 text-[#70708D] tracking-[-0.04em] text-[15px] font-bold">Jack7575@gmail.com</td>
+                      <td className="border-0 py-2 pl-4 lg:py-2.5 text-[#70708D] tracking-[-0.04em] text-[15px] font-bold">{data?.email || ""}</td>
                     </tr>
                     <tr>
                       <th className="text-left text-[#70708D] border-0 py-2 lg:py-2.5 tracking-[-0.04em] text-[15px] font-medium">Phone number :</th>
-                      <td className="border-0 py-2 pl-4 lg:py-2.5 text-[#70708D] tracking-[-0.04em] text-[15px] font-bold">995656xxxx</td>
+                      <td className="border-0 py-2 pl-4 lg:py-2.5 text-[#70708D] tracking-[-0.04em] text-[15px] font-bold">{data?.contact || ""}</td>
                     </tr>
                     <tr>
                       <th className="text-left text-[#70708D] border-0 py-2 lg:py-2.5 tracking-[-0.04em] text-[15px] font-medium">Address :</th>
-                      <td className="border-0 py-2 pl-4 lg:py-2.5 text-[#70708D] tracking-[-0.04em] text-[15px] font-bold">123 Main St, Springfield, IL</td>
+                      <td className="border-0 py-2 pl-4 lg:py-2.5 text-[#70708D] tracking-[-0.04em] text-[15px] font-bold">{data?.address || ""}</td>
                     </tr>
                   </tbody>
                 </table>
               </div>
-              <p className="text-[#70708D] text-medium text-sm tracking-[-0.04em] text-center mb-3 lg:mb-4">Please copy the password as you will not be able to view it again</p>
+              <p className="text-[#70708D] text-medium text-sm tracking-[-0.04em] text-center mb-3 lg:mb-4">Please copy the password as you will not be able to view it again.</p>
               <div className="border border-black border-opacity-10 rounded-md lg:rounded-xl pl-3 lg:pl-5 pr-2 py-2 mb-5 md:mb-4 flex flex-wrap items-center">
                 <div className="w-full md:w-7/12 pr-2">
                   <label className="text-[#70708D] tracking-[-0.04em] text-[15px] font-medium pr-2">Password :</label>
-                  <span className="text-[#70708D] tracking-[-0.04em] text-[15px] font-bold">62h4wqrr</span>
+                  <span className="text-[#70708D] tracking-[-0.04em] text-[15px] font-bold">{data?.password || ""}</span>
                 </div>
                 <div className="w-full md:w-5/12 text-right">
-                  <button className="bg-[#1C5FE8] text-white rounded-md lg:rounded-xl py-2 px-4 text-base font-medium  tracking-[-0.04em]">
-                    <svg className="mr-2 inline" width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M14.9917 3.5H11.4948C9.91071 3.5 8.65529 3.5 7.67377 3.63486C6.6626 3.77336 5.84452 4.06495 5.19974 4.72194C4.55407 5.37892 4.26761 6.21268 4.13201 7.24235C4 8.24287 4 9.5213 4 11.1351V16.4547C4 17.8288 4.82617 19.0061 5.99987 19.5C5.93971 18.6708 5.9397 17.509 5.9397 16.5413V11.9761C5.9397 10.8088 5.9397 9.80195 6.04567 8.99644C6.15972 8.13261 6.41655 7.30523 7.07569 6.63366C7.73483 5.9621 8.54753 5.70058 9.39525 5.58395C10.1855 5.47642 11.1733 5.47642 12.3201 5.47642H15.077C16.2228 5.47642 17.2089 5.47642 18 5.58395C17.763 4.97005 17.3492 4.44287 16.8126 4.07113C16.276 3.6994 15.6414 3.50037 14.9917 3.5Z" fill="white" />
-                      <path d="M7 11.7938C7 9.29843 7 8.05071 7.76194 7.27536C8.52299 6.5 9.74806 6.5 12.2 6.5H14.8C17.251 6.5 18.477 6.5 19.239 7.27536C20.0009 8.05071 20 9.29843 20 11.7938V16.2062C20 18.7016 20 19.9493 19.239 20.7246C18.477 21.5 17.251 21.5 14.8 21.5H12.2C9.74896 21.5 8.52299 21.5 7.76194 20.7246C7 19.9493 7 18.7016 7 16.2062V11.7938Z" fill="white" />
-                    </svg>  Copy
-
+                  <button
+                    className="bg-[#1C5FE8] text-white rounded-md lg:rounded-xl py-2 px-4 text-base font-medium tracking-[-0.04em] flex items-center"
+                    onClick={() => {
+                      if (data?.password) {
+                        navigator.clipboard.writeText(data.password)
+                          .then(() => {
+                            toast.success("Password copied to clipboard!");
+                          })
+                          .catch((err) => {
+                            toast.error("Failed to copy text to clipboard!");
+                          });
+                      } else {
+                        alert("No password to copy!");
+                      }
+                    }}
+                  >
+                    <MdContentCopy size={24} fill={"#ffff"} className="mr-2 inline text-white" />
+                    Copy
                   </button>
                 </div>
               </div>
             </div>
           </div>
-        </Popup>
+        </Popup> */}
+        <AccountPopup isOpen={isPopupOpen} onClose={closePopup} data={data}/>
       </div>
     </Layout>
   );

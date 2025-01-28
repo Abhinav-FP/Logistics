@@ -1,3 +1,4 @@
+import AccountPopup from "@/components/AccountPopup";
 import Popup from "@/components/Popup";
 import Layout from "@/layout/Layout";
 import Details from "@/pages/api/Listing/Details";
@@ -418,7 +419,7 @@ export default function index() {
                         </div> */}
           </div>
         </form>
-        <Popup isOpen={isPopupOpen} onClose={closePopup}>
+        {/* <Popup isOpen={isPopupOpen} onClose={closePopup}>
           <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-sm mx-auto">
             <h2 className="text-2xl font-bold text-center text-green-600 mb-4">Success</h2>
             <p className="text-gray-600 text-center mb-6">Carrier created successfully!</p>
@@ -454,7 +455,8 @@ export default function index() {
               Close
             </button>
           </div>
-        </Popup>
+        </Popup> */}
+        <AccountPopup isOpen={isPopupOpen} onClose={closePopup} data={data}/>
       </div>
     </Layout>
   );
