@@ -1,7 +1,7 @@
 import React from "react";
 
 const Status = ({ status }) => {
-  console.log("status",status)
+  // console.log("status",status)
   const getStatusStyles = (status) => {
     const lowerCaseStatus = status?.toLowerCase();
     switch (lowerCaseStatus) {

@@ -1,3 +1,4 @@
+import AccountPopup from "@/components/AccountPopup";
 import Popup from "@/components/Popup";
 import Layout from "@/layout/Layout";
 import Details from "@/pages/api/Listing/Details";
@@ -172,43 +173,7 @@ export default function Index() {
             </div>
           </div>
         </form>
-        <Popup isOpen={isPopupOpen} onClose={closePopup}>
-           <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-sm mx-auto">
-             <h2 className="text-2xl font-bold text-center text-green-600 mb-4">Success</h2>
-             <p className="text-gray-600 text-center mb-6">Carrier created successfully!</p>
-             <div className="space-y-4">
-               <div>
-                 <label className="block text-sm font-medium text-gray-700">Name:</label>
-                 <p className="text-gray-900 font-semibold">{data?.name || ""}</p>
-               </div>
-               <div>
-                 <label className="block text-sm font-medium text-gray-700">Email:</label>
-                 <p className="text-gray-900 font-semibold">{data?.email || ""}</p>
-               </div>
-               <div>
-                 <label className="block text-sm font-medium text-gray-700">Role:</label>
-                 <p className="text-gray-900 font-semibold">{data?.role || ""}</p>
-               </div>
-               <div>
-                 <label className="block text-sm font-medium text-gray-700">Password:</label>
-                 <p className="text-gray-900 font-semibold">{data?.password || ""}</p>
-               </div>
-               <div>
-                 <label className="block text-sm font-medium text-gray-700">Contact:</label>
-                 <p className="text-gray-900 font-semibold">{data?.contact || ""}</p>
-               </div>
-             </div>
-             <button
-               className="mt-6 w-full bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
-               onClick={()=>{
-                 closePopup();
-                 router.push('/drivers')
-               }}
-             >
-               Close
-             </button>
-           </div>
-         </Popup>
+        <AccountPopup isOpen={isPopupOpen} onClose={closePopup} data={data}/>
       </div>
     </Layout>
   );

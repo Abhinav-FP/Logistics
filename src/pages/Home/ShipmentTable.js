@@ -72,8 +72,29 @@ export default function ShipmentTable({
         console.log("error", err);
       });
   };
-  console.log("selectedcarrier",selectedCarrier)
-  console.log("listing", listing);
+
+  console.log("listing",listing);
+  console.log("selectedCarrier",selectedCarrier);
+  console.log("selectedShipment",selectedShipment);
+  const assigncarrier = () => {
+    const main = new Details();
+    const response = main.UpdateShipment(selectedShipment,{
+      carrier_id : selectedCarrier,
+    });
+    response
+      .then((res) => {
+        if (res && res?.data && res?.data?.status) {
+          toast.success(res.data.message);
+          closeCarrierPopup();
+        } else {
+          toast.error(res.data.message);
+        }
+      })
+      .catch((error) => {
+        toast.error(error?.response?.data?.message);
+        console.log("error", error);
+      });
+  }
   return (
     <div className="overflow-x-auto">
       <table className="w-full border-none">
@@ -313,8 +334,11 @@ export default function ShipmentTable({
               </tbody>
             </table>
           </div>
-          <button className="bg-[#1C5FE8] hover:bg-[#0a3fab] px-10 py-2.5 text-white flex mx-auto mt-6 rounded-lg">
-            Share
+          <button className="bg-[#1C5FE8] hover:bg-[#0a3fab] px-10 py-2.5 text-white flex mx-auto mt-6 rounded-lg"
+          onClick={()=>{
+            assigncarrier();
+          }}>
+            Save
           </button>
         </div>
       </Popup>
