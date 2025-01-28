@@ -23,6 +23,7 @@ export default function ShipmentTable({ shipments, getShipments, DeleteOption = 
       .then((r) => {
         toast.success(r?.data?.message);
         getShipments(role === "broker");
+        getShipments();
       })
       .catch((err) => {
         toast.error(err?.response?.data?.message);
@@ -87,78 +88,86 @@ export default function ShipmentTable({ shipments, getShipments, DeleteOption = 
       <Popup isOpen={isPopupOpen} onClose={closePopup} size={'max-w-[800px]'}>
         <div className="p-4 space-y-4">
           <h2 className="text-xl font-semibold text-gray-800">Shipment Details</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
               <p className="text-left text-[#70708D] border-0 py-.5  lg:py-.5  tracking-[-0.04em] text-[15px] font-medium">Shipment ID:</p>
-              <p className="text-left text-[#70708D] border-0 py-.5  lg:py-.5  tracking-[-0.04em] text-[15px] font-bold">{data?._id}</p>
+              <p className="text-left text-[#70708D] border-0 py-.5  lg:py-.5  tracking-[-0.04em] text-[15px]font-normal">{data?._id}</p>
+            </div>
+            <div>
+              <p className="text-left text-[#70708D] border-0 py-.5  lg:py-.5  tracking-[-0.04em] text-[15px] font-medium">Created At:</p>
+              <p  className="text-left text-[#70708D] border-0 py-.5  lg:py-.5  tracking-[-0.04em] text-[15px] font-normal" >
+              {new Date(data?.created_at).toLocaleString()}
+              </p>
             </div>
             <div>
               <p className="text-left text-[#70708D] border-0 py-.5  lg:py-.5  tracking-[-0.04em] text-[15px] font-medium">Name:</p>
-              <p className="text-left text-[#70708D] border-0 py-.5  lg:py-.5  tracking-[-0.04em] text-[15px] font-bold">{data?.name}</p>
+              <p className="text-left text-[#70708D] border-0 py-.5  lg:py-.5  tracking-[-0.04em] text-[15px] font-normal">{data?.name}</p>
             </div>
+           
             <div>
-              <p className="text-left text-[#70708D] border-0 py-.5  lg:py-.5  tracking-[-0.04em] text-[15px] font-medium">Description:</p>
-              <p className="text-left text-[#70708D] border-0 py-.5  lg:py-.5  tracking-[-0.04em] text-[15px] font-bold">{data?.description}</p>
-            </div>
-            <div>
-              <p className="text-left text-[#70708D] border-0 py-.5  lg:py-.5  tracking-[-0.04em] text-[15px] font-medium">Pickup Location:</p>
-              <p className="text-left text-[#70708D] border-0 py-.5  lg:py-.5  tracking-[-0.04em] text-[15px] font-bold">{data?.pickup_location}</p>
-            </div>
-            <div>
-              <p className="text-left text-[#70708D] border-0 py-.5  lg:py-.5  tracking-[-0.04em] text-[15px] font-medium">Drop Location:</p>
-              <p className="text-left text-[#70708D] border-0 py-.5  lg:py-.5  tracking-[-0.04em] text-[15px] font-bold">{data?.drop_location}</p>
-            </div>
-            <div>
-              <p className="text-left text-[#70708D] border-0 py-.5  lg:py-.5  tracking-[-0.04em] text-[15px] font-medium">Current Location:</p>
-              <p className="text-left text-[#70708D] border-0 py-.5  lg:py-.5  tracking-[-0.04em] text-[15px] font-bold">{data?.current_location || "Not Available"}</p>
+              <p className="text-left text-[#70708D] border-0 py-.5  lg:py-.5  tracking-[-0.04em] text-[15px] font-medium">Type of Goods:</p>
+              <p className="text-left text-[#70708D] border-0 py-.5  lg:py-.5  tracking-[-0.04em] text-[15px] font-normal capitalize">{data?.typeOfGoods}</p>
             </div>
             <div>
               <p className="text-left text-[#70708D] border-0 py-.5  lg:py-.5  tracking-[-0.04em] text-[15px] font-medium">Shipping Date:</p>
-              <p className="text-left text-[#70708D] border-0 py-.5  lg:py-.5  tracking-[-0.04em] text-[15px] font-bold">{data?.shippingDate}</p>
+              <p className="text-left text-[#70708D] border-0 py-.5  lg:py-.5  tracking-[-0.04em] text-[15px] font-normal">{data?.shippingDate}</p>
             </div>
             <div>
               <p className="text-left text-[#70708D] border-0 py-.5  lg:py-.5  tracking-[-0.04em] text-[15px] font-medium">Expected Delivery:</p>
-              <p className="text-left text-[#70708D] border-0 py-.5  lg:py-.5  tracking-[-0.04em] text-[15px] font-bold">{data?.deliveryDateExpect}</p>
+              <p className="text-left text-[#70708D] border-0 py-.5  lg:py-.5  tracking-[-0.04em] text-[15px] font-normal">{data?.deliveryDateExpect}</p>
             </div>
             <div>
               <p className="text-left text-[#70708D] border-0 py-.5  lg:py-.5  tracking-[-0.04em] text-[15px] font-medium">Cost:</p>
-              <p className="text-left text-[#70708D] border-0 py-.5  lg:py-.5  tracking-[-0.04em] text-[15px] font-bold">${data?.cost}</p>
+              <p className="text-left text-[#70708D] border-0 py-.5  lg:py-.5  tracking-[-0.04em] text-[15px] font-normal">${data?.cost}</p>
             </div>
-            <div>
-              <p className="text-left text-[#70708D] border-0 py-.5  lg:py-.5  tracking-[-0.04em] text-[15px] font-medium">Payment Status:</p>
-              <p className={`text-gray-800 capitalize ${data?.paymentStatus === "Done" ? "text-green-600" : "text-red-600"}`}>
-                {data?.paymentStatus}
-              </p>
-            </div>
+           
             <div>
               <p className="text-left text-[#70708D] border-0 py-.5  lg:py-.5  tracking-[-0.04em] text-[15px] font-medium">Quantity:</p>
-              <p className="text-left text-[#70708D] border-0 py-.5  lg:py-.5  tracking-[-0.04em] text-[15px] font-bold">{data?.quantity} units</p>
+              <p className="text-left text-[#70708D] border-0 py-.5  lg:py-.5  tracking-[-0.04em] text-[15px] font-normal">{data?.quantity} units</p>
             </div>
             <div>
               <p className="text-left text-[#70708D] border-0 py-.5  lg:py-.5  tracking-[-0.04em] text-[15px] font-medium">Weight:</p>
-              <p className="text-left text-[#70708D] border-0 py-.5  lg:py-.5  tracking-[-0.04em] text-[15px] font-bold">{data?.weight} kg</p>
+              <p className="text-left text-[#70708D] border-0 py-.5  lg:py-.5  tracking-[-0.04em] text-[15px] font-normal">{data?.weight} kg</p>
             </div>
             <div>
               <p className="text-left text-[#70708D] border-0 py-.5  lg:py-.5  tracking-[-0.04em] text-[15px] font-medium">Dimensions:</p>
-              <p className="text-left text-[#70708D] border-0 py-.5  lg:py-.5  tracking-[-0.04em] text-[15px] font-bold">{data?.dimensions}</p>
+              <p className="text-left text-[#70708D] border-0 py-.5  lg:py-.5  tracking-[-0.04em] text-[15px] font-normal">{data?.dimensions}</p>
             </div>
+          
+            
             <div>
-              <p className="text-left text-[#70708D] border-0 py-.5  lg:py-.5  tracking-[-0.04em] text-[15px] font-medium">Type of Goods:</p>
-              <p className="text-left text-[#70708D] border-0 py-.5  lg:py-.5  tracking-[-0.04em] text-[15px] font-bold">{data?.typeOfGoods}</p>
+              <p className="text-left text-[#70708D] border-0 py-.5  lg:py-.5  tracking-[-0.04em] text-[15px] font-medium">Payment Status:</p>
+              <p className={`text-left text-[#70708D] border-0   tracking-[-0.04em] text-[15px] font-normal max-w-fit py-1`}>
+                <Status status={data?.paymentStatus}/>
+              </p>
             </div>
             <div>
               <p className="text-left text-[#70708D] border-0 py-.5  lg:py-.5  tracking-[-0.04em] text-[15px] font-medium">Status:</p>
-              <p
-                className="px-2 py-1 rounded-md capitalize max-w-fit "
-              >
+              <p  className="text-left text-[#70708D] border-0   tracking-[-0.04em] text-[15px] font-normal max-w-fit py-1" >
                 <Status status={data?.status}/>
-                
               </p>
             </div>
+
+           
           </div>
-          <p className="text-left text-[#70708D] border-0 py-.5  lg:py-.5  tracking-[-0.04em] text-[15px] font-medium">
-            Created At: {new Date(data?.created_at).toLocaleString()}
-          </p>
+
+          <div>
+              <p className="text-left text-[#70708D] border-0 py-.5  lg:py-.5  tracking-[-0.04em] text-[15px] font-medium">Description:</p>
+              <p className="text-left text-[#70708D] border-0 py-.5  lg:py-.5  tracking-[-0.04em] text-[15px] font-normal">{data?.description}</p>
+            </div>
+
+            <div>
+              <p className="text-left text-[#70708D] border-0 py-.5  lg:py-.5  tracking-[-0.04em] text-[15px] font-medium">Pickup Location:</p>
+              <p className="text-left text-[#70708D] border-0 py-.5  lg:py-.5  tracking-[-0.04em] text-[15px] font-normal">{data?.pickup_location}</p>
+            </div>
+            <div>
+              <p className="text-left text-[#70708D] border-0 py-.5  lg:py-.5  tracking-[-0.04em] text-[15px] font-medium">Drop Location:</p>
+              <p className="text-left text-[#70708D] border-0 py-.5  lg:py-.5  tracking-[-0.04em] text-[15px] font-normal">{data?.drop_location}</p>
+            </div>
+            <div>
+              <p className="text-left text-[#70708D] border-0 py-.5  lg:py-.5  tracking-[-0.04em] text-[15px] font-medium">Current Location:</p>
+              <p className="text-left text-[#70708D] border-0 py-.5  lg:py-.5  tracking-[-0.04em] text-[15px] font-normal">{data?.current_location || "Not Available"}</p>
+            </div>
         </div>
       </Popup>
     </div>
