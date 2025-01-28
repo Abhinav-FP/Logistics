@@ -177,7 +177,7 @@ export default function EditShipment() {
             <form onSubmit={handleSubmit}>
                 <div className="flex flex-wrap items-center justify-between mb-3 lg:mb-4">
                     <h3 className="text-[#151547] text-lg tracking-[-0.04em] font-medium m-0">
-                        Create New Shipment{" "}
+                        Edit Shipment{" "}
                     </h3>
                     <button
                         type="submit"
@@ -455,7 +455,7 @@ export default function EditShipment() {
                                         <option value="">Select Broker</option>
                                         {brokers &&
                                             brokers?.map((item) => (
-                                                <option value={item._id}>{item?.email}</option>
+                                                <option value={item?._id}>{item?.email}</option>
                                             ))}
                                     </select>
                                 </div>
@@ -485,7 +485,7 @@ export default function EditShipment() {
                                         <option value="">Select Customer</option>
                                         {customers &&
                                             customers?.map((item) => (
-                                                <option value={item._id}>{item?.email}</option>
+                                                <option value={item?._id}>{item?.email}</option>
                                             ))}
                                     </select>
                                 </div>
