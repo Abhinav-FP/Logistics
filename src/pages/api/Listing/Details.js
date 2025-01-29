@@ -6,6 +6,10 @@ class Details extends Component {
     return Api.post("/user/login", data);
   }
 
+  async resetPassword(data) {
+    return Api.post("/user/reset-password", data);
+  }
+
   async Usersget(data) {
     return Api.get(`/user/get/${data}`);
   }

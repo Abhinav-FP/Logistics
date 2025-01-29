@@ -118,7 +118,7 @@ function SideBar({role}) {
                 <FaRegUser size={20} />
                 Carrier
               </Link>
-              <Link
+              {/* <Link
                 href="/analytics"
                 className={`flex items-center py-2.5 px-2.5 gap-2 text-[#727272] text-base font-medium tracking-[-0.06em] ${
                   pathname?.startsWith("/analytics")
@@ -128,8 +128,8 @@ function SideBar({role}) {
               >
                 <MdOutlineAnalytics size={20} />
                 Analytics
-              </Link>
-              {/* <Link
+              </Link> */}
+              <Link
                 href="/settings"
                 className={`flex items-center py-2.5 px-2.5 gap-2 text-[#727272] text-base font-medium tracking-[-0.06em] ${
                   pathname === "/settings"
@@ -139,7 +139,7 @@ function SideBar({role}) {
               >
                 <IoSettingsOutline size={20} />
                 Settings
-              </Link> */}
+              </Link>
             </ul>
           </div>
 
