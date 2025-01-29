@@ -65,8 +65,7 @@ export default function ShipmentTable({
       .deleteShipment(id)
       .then((r) => {
         toast.success(r?.data?.message);
-        // getShipments(role === "broker");
-        getShipments(role === "shipper");
+        getShipments(role === "broker");
       })
       .catch((err) => {
         toast.error(err?.response?.data?.message);
@@ -88,7 +87,7 @@ export default function ShipmentTable({
         if (res && res?.data && res?.data?.status) {
           toast.success(res.data.message);
           closeCarrierPopup();
-          getShipments();
+          getShipments(role === "broker");
         } else {
           toast.error(res.data.message);
         }
