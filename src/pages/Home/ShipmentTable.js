@@ -64,8 +64,8 @@ export default function ShipmentTable({
       .deleteShipment(id)
       .then((r) => {
         toast.success(r?.data?.message);
-        getShipments(role === "broker");
-        getShipments();
+        // getShipments(role === "broker");
+        getShipments(role === "shipper");
       })
       .catch((err) => {
         toast.error(err?.response?.data?.message);
