@@ -116,9 +116,9 @@ export default function Layout({ children, page }) {
               {dropdownOpen && (
                 <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-300 rounded-md shadow-lg z-50">
                   <ul className="py-1">
-                    <li className="flex gap-2 px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                    <Link href="/settings" className="flex gap-2 px-4 py-2 hover:bg-gray-100 cursor-pointer">
                       <IoSettingsOutline size={20} /> Settings
-                    </li>
+                    </Link>
                     <li className="flex gap-2 px-4 py-2 hover:bg-gray-100 cursor-pointer" onClick={() => handlelogout()}>
                       <MdLogout size={20} /> Logout
                     </li>

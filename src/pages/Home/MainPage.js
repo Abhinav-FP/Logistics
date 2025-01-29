@@ -50,7 +50,7 @@ export default function MainPage() {
   return (
     <Layout>
       <div className="">
-        {user.role === "shipper" ? (
+        {user && user?.role === "shipper" ? (
           <>
             <Dashboard />
             <div className="bg-white mt-6 lg:mt-[30px] px-6 py-[30px] rounded-md lg:rounded-xl border border-black border-opacity-10">
@@ -61,7 +61,7 @@ export default function MainPage() {
             </div>
            
           </>
-        ) : user.role === "broker" ? (
+        ) : user?.role === "broker" ? (
           <BrokerDashboard />
         ) : null}
       </div>
