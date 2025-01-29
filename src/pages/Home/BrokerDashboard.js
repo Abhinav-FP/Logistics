@@ -59,16 +59,10 @@ export default function BrokerDashboard() {
             <option>Week</option>
           </select>
           <Link
-            href="/shipment/add"
+            href="/carriers/add"
             className="bg-[#1C5FE8] hover:bg-[#0a3fab] inline-block font-medium text-base text-white tracking-[-0.04em] rounded-lg lg:rounded-xl px-5 py-3"
           >
-            <span className="mr-1">+</span> New Shipments
-          </Link>
-          <Link
-            href="/shipment/add"
-            className="bg-[#1C5FE8] hover:bg-[#0a3fab] inline-block font-medium text-base text-white tracking-[-0.04em] rounded-lg lg:rounded-xl px-5 py-3"
-          >
-            <span className="mr-1">+</span> Add Driver
+            <span className="mr-1">+</span> Add Carrier
           </Link>
         </div>
       </div>

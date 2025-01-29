@@ -75,6 +75,29 @@ export default function ShipmentTable({
   };
   console.log("selectedcarrier", selectedCarrier)
   console.log("listing", listing);
+
+  console.log("listing", listing);
+  console.log("selectedCarrier", selectedCarrier);
+  console.log("selectedShipment", selectedShipment);
+  const assigncarrier = () => {
+    const main = new Details();
+    const response = main.UpdateShipment(selectedShipment, {
+      carrier_id: selectedCarrier,
+    });
+    response
+      .then((res) => {
+        if (res && res?.data && res?.data?.status) {
+          toast.success(res.data.message);
+          closeCarrierPopup();
+        } else {
+          toast.error(res.data.message);
+        }
+      })
+      .catch((error) => {
+        toast.error(error?.response?.data?.message);
+        console.log("error", error);
+      });
+  }
   return (
     <div className="overflow-x-auto">
       <table className="w-full border-none">
@@ -314,8 +337,11 @@ export default function ShipmentTable({
               </tbody>
             </table>
           </div>
-          <button className="bg-[#1C5FE8] hover:bg-[#0a3fab] px-10 py-2.5 text-white flex mx-auto mt-6 rounded-lg">
-            Share
+          <button className="bg-[#1C5FE8] hover:bg-[#0a3fab] px-10 py-2.5 text-white flex mx-auto mt-6 rounded-lg"
+            onClick={() => {
+              assigncarrier();
+            }}>
+            Save
           </button>
         </div>
       </Popup>
@@ -330,34 +356,119 @@ export default function ShipmentTable({
           <ul className="flex">
             <li><button onClick={() => setActiveTab("shippingInfo")} className={`px-4 py-2.5 text-[#646567] tracking-[-0.04em] text-base font-medium ${activeTab === "shippingInfo" ? "border-b border-[#1C5FE8]" : "border-b border-[#1C5FE8] border-opacity-0"}`}> Shipping Info</button></li>
             <li><button onClick={() => setActiveTab("vehicleInfo")} className={`px-4 py-2.5 text-[#646567] tracking-[-0.04em] text-base font-medium ${activeTab === "vehicleInfo" ? "border-b border-[#1C5FE8]" : "border-b border-[#1C5FE8] border-opacity-0"}`}>Shipping Info</button></li>
-            <li><button onClick={() => setActiveTab("document")} className={`px-4 py-2.5 text-[#646567] tracking-[-0.04em] text-base font-medium ${activeTab === "document" ? "border-b border-[#1C5FE8]" : "border-b border-[#1C5FE8] border-opacity-0"}`} >Document</button></li>
-            <li><button onClick={() => setActiveTab("billing")} className={`px-4 py-2.5 text-[#646567] tracking-[-0.04em] text-base font-medium ${activeTab === "billing" ? "border-b border-[#1C5FE8]" : "border-b border-[#1C5FE8] border-opacity-0"}`} >Billing</button></li>
+            {/* <li><button onClick={() => setActiveTab("document")} className={`px-4 py-2.5 text-[#646567] tracking-[-0.04em] text-base font-medium ${activeTab === "document" ? "border-b border-[#1C5FE8]" : "border-b border-[#1C5FE8] border-opacity-0"}`} >Document</button></li>
+            <li><button onClick={() => setActiveTab("billing")} className={`px-4 py-2.5 text-[#646567] tracking-[-0.04em] text-base font-medium ${activeTab === "billing" ? "border-b border-[#1C5FE8]" : "border-b border-[#1C5FE8] border-opacity-0"}`} >Billing</button></li> */}
           </ul>
         </div>
         <div className="p-4 lg:p-6">
           {activeTab === "shippingInfo" &&
             <div>
-              <div className="border-b border-black border-opacity-10 rounded-md lg:rounded-xl p-2.5 flex flex-wrap">
-                <div className="w-10/12 pl-20 pr-2 relative">
-                  <svg className="absolute left-0 top-2" width="10" height="14" viewBox="0 0 10 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <div className="border border-black border-opacity-10 rounded-md lg:rounded-xl p-2.5 flex flex-wrap items-center mb-3 lg:mb-4">
+                <div className="w-10/12 pl-8 pr-2 relative">
+                  <svg className="absolute left-2 top-4" width="10" height="14" viewBox="0 0 10 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M4.66667 6.33333C4.22464 6.33333 3.80072 6.15774 3.48816 5.84518C3.1756 5.53262 3 5.10869 3 4.66667C3 4.22464 3.1756 3.80072 3.48816 3.48816C3.80072 3.17559 4.22464 3 4.66667 3C5.1087 3 5.53262 3.17559 5.84518 3.48816C6.15774 3.80072 6.33334 4.22464 6.33334 4.66667C6.33334 4.88554 6.29023 5.10226 6.20647 5.30447C6.12271 5.50668 5.99994 5.69041 5.84518 5.84518C5.69042 5.99994 5.50668 6.12271 5.30447 6.20647C5.10226 6.29022 4.88554 6.33333 4.66667 6.33333ZM4.66667 0C3.42899 0 2.24201 0.491665 1.36684 1.36683C0.491665 2.242 0 3.42899 0 4.66667C0 8.16667 4.66667 13.3333 4.66667 13.3333C4.66667 13.3333 9.33334 8.16667 9.33334 4.66667C9.33334 3.42899 8.84167 2.242 7.9665 1.36683C7.09133 0.491665 5.90435 0 4.66667 0Z" fill="#1C5FE8" />
                   </svg>
-                  <h3>Mountain View, IL 65757</h3>
-                  <p>#21 maple Lane</p>
+                  <h3 className="text-black  tracking-[-0.04em] text-sm font-medium m-0">Mountain View, IL 65757</h3>
+                  <p className="text-[#666666] text-[13px] font-medium tracking-[-0.04em] mb-0">#21 maple Lane</p>
                 </div>
-                <div className="w-2/12">
-                  <button>
+                <div className="w-2/12 text-right">
+                  <button className="border-0 bg-transparent p-0">
                     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M10.545 6.765L11.235 7.455L4.44 14.25H3.75V13.56L10.545 6.765ZM13.245 2.25C13.0575 2.25 12.8625 2.325 12.72 2.4675L11.3475 3.84L14.16 6.6525L15.5325 5.28C15.602 5.21061 15.6572 5.1282 15.6948 5.03747C15.7325 4.94674 15.7518 4.84948 15.7518 4.75125C15.7518 4.65302 15.7325 4.55576 15.6948 4.46503C15.6572 4.3743 15.602 4.29189 15.5325 4.2225L13.7775 2.4675C13.6275 2.3175 13.44 2.25 13.245 2.25ZM10.545 4.6425L2.25 12.9375V15.75H5.0625L13.3575 7.455L10.545 4.6425Z" fill="#1C5FE8" />
                     </svg>
                   </button>
                 </div>
               </div>
+              <div class="mb-3 lg:mb-4">
+                <iframe class="rounded-md md:rounded-xl w-full border-0" src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d2510041.546925639!2d-5.405544239113983!3d52.09406503175645!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e0!4m5!1s0x487bc2b6df4b4ebb%3A0x435f66ea8a40e5fa!2s40%20Broomfield%20Ave%2C%20Halifax%2C%20UK!3m2!1d53.7050426!2d-1.8706405!4m5!1s0x486b79ecb050b0bf%3A0xd5cb6cfda4810baf!2sHellandbridge%2C%20Bodmin%20PL30%204QR%2C%20UK!3m2!1d50.510976899999996!2d-4.7311059!5e0!3m2!1sen!2sin!4v1737700026096!5m2!1sen!2sin" width="100%" height="350" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+              </div>
+              <div className="border border-black border-opacity-10 rounded-md lg:rounded-xl mb-3 lg:mb-4">
+                <div className="border-b border-black border-opacity-10  px-4 lg:px-5 py-3 lg:py-4 flex flex-wrap justify-between">
+                  <div className="w-7/12">
+                    <h3 className="text-[#151547] text-medium text-base tracking-[-0.04em] m-0"><span className="text-[#727272]">Cargo ID:</span> #64756757</h3>
+                  </div>
+                  <div className="max-w-[100px]">
+                    <Status status={"Pick-Up"} />
+                  </div>
+                </div>
+                <div className="border-b border-black border-opacity-10 px-4 lg:px-5 py-3 lg:py-4  ">
+                  <div className="flex flex-wrap relative pb-8">
+                    <div className="w-6/12 pl-6 relative">
+                      <div className="h-[68px] w-[1px] border-r-2 border-black border-dashed border-opacity-20 absolute top-[10px] left-[7px]"></div>
+                      <div className="absolute rounded-full left-0 top-1 bg-white border-4 border-[#1C5FE8] h-[15px] w-[15px]" ></div>
+                      <h3 className="text-black  tracking-[-0.04em] text-sm font-medium m-0">06.05.2023</h3>
+                      <p className="text-[#666666] text-[12px] font-medium tracking-[-0.04em] mb-0">8:00 AM</p>
+                    </div>
+                    <div className="w-6/12 ">
+                      <h3 className="text-black  tracking-[-0.04em] text-sm font-medium m-0">Anytown, NY 12335</h3>
+                      <p className="text-[#666666] text-[12px] font-medium tracking-[-0.04em] mb-0">1234 Main St</p>
+                    </div>
+                  </div>
+                  <div className="flex flex-wrap relative">
+                    <div className="w-6/12 pl-6 relative">
+                      <div className="absolute rounded-full left-0 top-1 bg-[#fff] border-4 border-[#1C5FE8]  h-[15px] w-[15px]" ></div>
+                      <h3 className="text-black  tracking-[-0.04em] text-sm font-medium m-0">06.05.2023</h3>
+                      <p className="text-[#666666] text-[12px] font-medium tracking-[-0.04em] mb-0">8:00 AM</p>
+                    </div>
+                    <div className="w-6/12 ">
+                      <h3 className="text-black  tracking-[-0.04em] text-sm font-medium m-0">Anytown, NY 12335</h3>
+                      <p className="text-[#666666] text-[12px] font-medium tracking-[-0.04em] mb-0">1234 Main St</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="px-4 lg:px-5 py-3 lg:py-4 flex flex-wrap justify-between items-center">
+                  <div className="w-10/12 pl-12 pr-2 relative">
+                    <div className="absolute rounded-full left-0 top-1 bg-[#D9D9D9] h-[35px] w-[35px]" ></div>
+                    <h3 className="text-black  tracking-[-0.04em] text-sm font-medium m-0">Ava Thomas</h3>
+                    <p className="text-[#666666] text-[12px] font-medium tracking-[-0.04em] mb-0">User</p>
+                  </div>
+                  <div className="w-2/12 text-right">
+                    <button className="bg-[#1C5FE8] bg-opacity-10 rounded-lg text-[#1C5FE8] px-5 py-2.5">
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4.48578 1.54494L5.59264 1.21123C5.95794 1.10127 6.35076 1.12795 6.69784 1.28629C7.04492 1.44464 7.32254 1.72383 7.47892 2.0718L8.25492 3.79751C8.38961 4.0969 8.42715 4.43095 8.36227 4.75276C8.2974 5.07457 8.13336 5.36798 7.89321 5.5918L6.71206 6.69237C6.55378 6.84266 6.67378 7.42837 7.25206 8.43066C7.83092 9.43351 8.27835 9.83008 8.48464 9.76837L10.0321 9.29523C10.3457 9.19929 10.6816 9.2039 10.9925 9.30842C11.3034 9.41295 11.5738 9.61214 11.7658 9.87808L12.8686 11.4067C13.0914 11.7153 13.1945 12.0944 13.1589 12.4733C13.1233 12.8523 12.9513 13.2055 12.6749 13.4672L11.8223 14.2747C11.5471 14.5353 11.2077 14.7183 10.8387 14.8049C10.4696 14.8915 10.0842 14.8787 9.72178 14.7678C7.93549 14.2209 6.28121 12.5981 4.73664 9.92208C3.18864 7.24208 2.60406 4.98151 3.01149 3.13466C3.09367 2.76252 3.2736 2.41902 3.53275 2.13959C3.79189 1.86015 4.12088 1.65488 4.48578 1.54494Z" fill="#1C5FE8" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
           }
-          {activeTab === "vehicleInfo" && <div>Vehicle Information Content</div>}
-          {activeTab === "document" && <div>document Information Content</div>}
-          {activeTab === "billing" && <div>document Information Content</div>}
+          {activeTab === "vehicleInfo" && <div>
+            <div className="border border-black border-opacity-10 rounded-md lg:rounded-xl mb-3 lg:mb-4 p-4 ">
+              <div className="flex flex-wrap items-center mb-4">
+                <div class="border border-black border-opacity-10 py-2 px-3 rounded-md lg:rounded-xl mr-2">
+                  <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" color="#1C5FE8" height="24" width="24" xmlns="http://www.w3.org/2000/svg"  ><path d="M8.96456 18C8.72194 19.6961 7.26324 21 5.5 21C3.73676 21 2.27806 19.6961 2.03544 18H1V6C1 5.44772 1.44772 5 2 5H16C16.5523 5 17 5.44772 17 6V8H20L23 12.0557V18H20.9646C20.7219 19.6961 19.2632 21 17.5 21C15.7368 21 14.2781 19.6961 14.0354 18H8.96456ZM15 7H3V15.0505C3.63526 14.4022 4.52066 14 5.5 14C6.8962 14 8.10145 14.8175 8.66318 16H14.3368C14.5045 15.647 14.7296 15.3264 15 15.0505V7ZM17 13H21V12.715L18.9917 10H17V13ZM17.5 19C18.1531 19 18.7087 18.5826 18.9146 18C18.9699 17.8436 19 17.6753 19 17.5C19 16.6716 18.3284 16 17.5 16C16.6716 16 16 16.6716 16 17.5C16 17.6753 16.0301 17.8436 16.0854 18C16.2913 18.5826 16.8469 19 17.5 19ZM7 17.5C7 16.6716 6.32843 16 5.5 16C4.67157 16 4 16.6716 4 17.5C4 17.6753 4.03008 17.8436 4.08535 18C4.29127 18.5826 4.84689 19 5.5 19C6.15311 19 6.70873 18.5826 6.91465 18C6.96992 17.8436 7 17.6753 7 17.5Z"></path></svg>
+                </div>
+                <div>
+                  <h3 className="text-[#151547] text-base font-medium tracking-[-0.05em] uppercase">Driver</h3>
+                  <p className="text-[#666666] text-[13px] font-medium tracking-[-0.04em] mb-0">Truck</p>
+                </div>
+              </div>
+              <div className="flex flex-wrap">
+                <div className="w-4/12 pr-1 flex">
+                  <div>
+                    <h3 className="text-black  tracking-[-0.04em] text-sm font-medium m-0">Truck number</h3>
+                    <p className="text-[#666666] text-[12px] font-medium tracking-[-0.04em] mb-0">XL 436464</p>
+                  </div>
+                </div>
+                <div className="w-4/12 pr-1 pl-1 text-center border-r border-l border-black border-opacity-10 flex justify-center ">
+                  <div>
+                    <h3 className="text-black  tracking-[-0.04em] text-sm font-medium m-0">Truck type</h3>
+                    <p className="text-[#666666] text-[12px] font-medium tracking-[-0.04em] mb-0">Flatbed truck</p>
+                  </div>
+                </div>
+                <div className="w-4/12 pr-1 flex justify-end">
+                  <div>
+                    <h3 className="text-black  tracking-[-0.04em] text-sm font-medium m-0 ">Trailer Number</h3>
+                    <p className="text-[#666666] text-[12px] font-medium tracking-[-0.04em] mb-0">TN- 33-34-1</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>}
+          {/* {activeTab === "document" && <div>document Information Content</div>}
+            {activeTab === "billing" && <div>document Information Content</div>} */}
         </div>
 
 
