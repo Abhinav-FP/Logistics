@@ -5,7 +5,6 @@ import Details from '../api/Listing/Details';
 const MapComponent = ({ StartLocation, CurrentLocation, EndLocation }) => {
     const Id = "678f8a5225ab3bc62aea25ca";
     const [routeDetails, setRouteDetails] = useState(null);
-    console.log("routeDetails" ,routeDetails)
     const [status, setStatus] = useState(true);
     const markerIcons = {
         start: "https://th.bing.com/th/id/OIP.ZCHVQMolgocE66TQdftn3wHaGA?rs=1&pid=ImgDetMain",
@@ -33,7 +32,6 @@ const MapComponent = ({ StartLocation, CurrentLocation, EndLocation }) => {
                     CurrentLocation: `${CurrentLocation.lat},${CurrentLocation.lng}`,
                     Shipment_id: Id
                 });
-                console.log("response", response)
                 if (response?.data?.data) {
                     setStatus(false);
                     setRouteDetails(response.data.data.routeDetails);

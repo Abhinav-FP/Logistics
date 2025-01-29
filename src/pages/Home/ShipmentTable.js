@@ -12,6 +12,7 @@ import { IoInformationCircleOutline } from "react-icons/io5";
 import { FiTruck } from "react-icons/fi";
 import ViewShipment from "@/components/ViewShipment";
 import Sidepopup from "@/components/Sidepopup";
+import { TbDotsCircleHorizontal } from "react-icons/tb";
 
 export default function ShipmentTable({
   shipments,
@@ -64,8 +65,8 @@ export default function ShipmentTable({
       .deleteShipment(id)
       .then((r) => {
         toast.success(r?.data?.message);
-        getShipments(role === "broker");
-        getShipments();
+        // getShipments(role === "broker");
+        getShipments(role === "shipper");
       })
       .catch((err) => {
         toast.error(err?.response?.data?.message);
@@ -73,9 +74,10 @@ export default function ShipmentTable({
       });
   };
 
-  console.log("listing",listing);
+  console.log("carriers",listing);
   console.log("selectedCarrier",selectedCarrier);
   console.log("selectedShipment",selectedShipment);
+  console.log("shipments",shipments);
   const assigncarrier = () => {
     const main = new Details();
     const response = main.UpdateShipment(selectedShipment,{
@@ -86,6 +88,7 @@ export default function ShipmentTable({
         if (res && res?.data && res?.data?.status) {
           toast.success(res.data.message);
           closeCarrierPopup();
+          getShipments();
         } else {
           toast.error(res.data.message);
         }
@@ -216,6 +219,7 @@ export default function ShipmentTable({
                             strokeLinejoin="round"
                           />
                         </svg>
+                        {/* <TbDotsCircleHorizontal size={24}/> */}
                       </button>
                       <div
                         className={`after:h-5 after:w-5 after:border-t after:border-l after:bg-white after:absolute after:left-12 after:top-[-10px] after:rotate-45 fixed min-w-[198px] -ml-10 mt-2 border border-black border-opacity-10 rounded-xl z-10 bg-white ${isdropdownopen === index ? "block" : "hidden"
@@ -240,6 +244,7 @@ export default function ShipmentTable({
                               View <IoInformationCircleOutline size={18} />
                             </button>
                           </li>
+                          {!shipment?.carrier_id && 
                           <li className="py-2 tracking-[-0.04em] [&:not(:last-child)]:border-b border-black border-opacity-10 px-4 lg:px-6">
                             <button
                               className="flex gap-2 text-[#1B1B1B] bg-transparent border-none text-sm font-medium"
@@ -252,7 +257,7 @@ export default function ShipmentTable({
                               Assign Carrier <FiTruck size={18} />
                               {/* <CiNoWaitingSign size={18} color="#CF0000" /> */}
                             </button>
-                          </li>
+                          </li>}
                           <li className="py-2 tracking-[-0.04em] [&:not(:last-child)]:border-b border-black border-opacity-10 px-4 lg:px-6">
                             <button
                               className="flex gap-2 items-center text-[#1B1B1B] bg-transparent border-none text-sm font-medium"

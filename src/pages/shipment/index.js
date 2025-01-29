@@ -35,7 +35,6 @@ export default function Index() {
   useEffect(() => {
     getShipments(user?.role === "broker");
   }, [user?.role]);
-  console.log("listing", listing);
 
   return (
     <Layout page={"Shipment"}>

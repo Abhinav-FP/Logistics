@@ -6,10 +6,10 @@ import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { IoBookmark } from "react-icons/io5";
 
-export default function index() {
+export default function Index() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
-  const [isPopupOpen, setIsPopupOpen] = useState(true);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
   const openPopup = () => setIsPopupOpen(true);
   const closePopup = () => {
     setIsPopupOpen(false);
@@ -41,7 +41,6 @@ export default function index() {
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("formData", formData);
     setLoading(true);
     const main = new Details();
     const updatedFormData = { ...formData, role: "customer" };

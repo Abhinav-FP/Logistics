@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import Details from '../api/Listing/Details';
 import Loader from '@/components/Loader';
 
-export default function index() {
+export default function Index() {
 
     const [listing, setLisitng] = useState("");
     const [Loading, setLoading] = useState(false);
@@ -28,7 +28,6 @@ export default function index() {
     useEffect(() => {
       getusers();
     }, []);
-    console.log("listing", listing);
 
 
   return (

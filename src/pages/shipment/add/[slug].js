@@ -16,8 +16,6 @@ export default function EditShipment() {
     const { slug } = router.query;
     const [brokers, setBrokers] = useState([]);
     const [customers, setCustomers] = useState([]);
-    console.log("customers", customers)
-    console.log("brokers", brokers)
     const [formData, setFormData] = useState({
         title: "",
         description: "",
@@ -71,7 +69,6 @@ export default function EditShipment() {
         try {
             const response = isBroker ? await main.getBrokerShipment() : await main.getShipmentById(slug);
             const Response = response?.data?.data[0]
-            console.log("Response", Response)
             const [dimensions1, dimensions2] = Response?.dimensions
                 ? Response.dimensions?.split("x")?.map((dim) => dim.trim())
                 : ["", ""];
@@ -109,7 +106,6 @@ export default function EditShipment() {
         }
     }, [user?.role, slug]);
 
-    console.log("formData", formData)
 
 
 

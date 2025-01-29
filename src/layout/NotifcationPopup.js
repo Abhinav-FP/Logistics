@@ -10,7 +10,6 @@ export default function NotificationPopup() {
     const [isPopupOpen, setIsPopupOpen] = useState(false);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-    console.log("notifications", notifications)
 
     const GetNotifications = () => {
         setLoading(true);
@@ -36,7 +35,6 @@ export default function NotificationPopup() {
         const main = new Details();
         main.MarkNotificationAsRead({ shipmentId: notificationId })
             .then(() => {
-                console.log('Notification marked as read');
                 GetNotifications();
             })
             .catch((err) => {
@@ -105,18 +103,18 @@ export default function NotificationPopup() {
                                                 <p className="text-xs text-gray-500">
                                                     <strong>Role:</strong> {notification.senderId?.role || "N/A"}
                                                 </p>
-    <div className="flex items-center justify-between space-x-4 mt-1">
-      <button
-        className="text-blue-500 text-sm "
-        onClick={() => markAsRead(notification.ShipmentId?._id)}
-        aria-label={`Mark notification ${notification.ShipmentId?._id} as read`} 
-      >
-        Mark as Read
-      </button>
-      <p className='text-sm m-0 text-[#666]'>
-        {moment(notification.createdAt).fromNow()}
-      </p>
-    </div>
+                                                <div className="flex items-center justify-between space-x-4 mt-1">
+                                                    <button
+                                                        className="text-blue-500 text-sm "
+                                                        onClick={() => markAsRead(notification.ShipmentId?._id)}
+                                                        aria-label={`Mark notification ${notification.ShipmentId?._id} as read`}
+                                                    >
+                                                        Mark as Read
+                                                    </button>
+                                                    <p className='text-sm m-0 text-[#666]'>
+                                                        {moment(notification.createdAt).fromNow()}
+                                                    </p>
+                                                </div>
                                             </li>
                                         ))}
 
