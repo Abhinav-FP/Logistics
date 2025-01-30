@@ -344,7 +344,7 @@ export default function Index() {
               <div className="flex flex-wrap -mx-2 lg:-mx-3">
                 <div className="w-full md:w-6/12 px-2 lg:px-3 mb-4 lg:mb-6">
                   <label className="text-[#70708D] text-sm tracking-[-0.04em] uppercase mb-2 block">
-                    Estimated Cost
+                    Estimated Cost (In USD)
                   </label>
                   <input
                     type="number"

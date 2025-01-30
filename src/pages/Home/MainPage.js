@@ -4,6 +4,7 @@ import Dashboard from "./Dashboard";
 import ShipmentTable from "./ShipmentTable";
 import BrokerDashboard from "./BrokerDashboard";
 import { useRole } from "@/context/RoleContext";
+import CarrierDashboard from "./CarrierDashboard";
 
 export default function MainPage() {
   const { user } = useRole();
@@ -59,10 +60,11 @@ export default function MainPage() {
               </h2>
               <ShipmentTable shipments={data} />
             </div>
-           
           </>
         ) : user?.role === "broker" ? (
           <BrokerDashboard />
+        ) : user?.role === "carrier" ? (
+          <CarrierDashboard />
         ) : null}
       </div>
     </Layout>

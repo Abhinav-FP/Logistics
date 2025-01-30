@@ -100,7 +100,7 @@ function SideBar({role}) {
                 <PiTrolleySuitcaseLight size={20} />
                 Brokers
               </Link>}
-              <Link
+              {(role==="shipper" || role==="broker") && <Link
                 href="/users"
                 className={`flex items-center py-2.5 px-2.5 gap-2 text-[#727272] text-base font-medium tracking-[-0.06em] ${
                    pathname?.startsWith("/users") ? "text-blue-500 bg-blue-100" : "hover:bg-gray-100"
@@ -108,8 +108,8 @@ function SideBar({role}) {
               >
                 <FaRegUser size={20} />
                 Customer Management
-              </Link>
-              <Link
+              </Link>}
+              {(role==="shipper" || role==="broker") && <Link
                 href="/carriers"
                 className={`flex items-center py-2.5 px-2.5 gap-2 text-[#727272] text-base font-medium tracking-[-0.06em] ${
                   pathname?.startsWith("/carriers") ? "text-blue-500 bg-blue-100" : "hover:bg-gray-100"
@@ -117,7 +117,7 @@ function SideBar({role}) {
               >
                 <FaRegUser size={20} />
                 Carrier
-              </Link>
+              </Link>}
               {/* <Link
                 href="/analytics"
                 className={`flex items-center py-2.5 px-2.5 gap-2 text-[#727272] text-base font-medium tracking-[-0.06em] ${
