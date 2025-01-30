@@ -1,19 +1,15 @@
 import Status from '@/components/Status';
 import React from 'react';
-import RouteMap from './RouteMap';
+import LocatinTracker from "../tracklocation/index"
 export default function TrackingMap() {
-  const routeDetails = {
-    "StartToEndDistance": "12.6 km",
-    "StartToEndDuration": "30 mins",
-    "StartToEndPolyline": "yr{bDwywmMOZm@OuAWLw@DY?GCGi@KYMC\\uA[SK{Cq@{Ba@h@wC\\cCDw@UW_Lv@qDVmBPiCRoBR_DZqJx@kFb@sE^_@FyFd@s@DgI^kAHwCTs@NkATwBf@yBj@iB^iEr@oNtBaC^q@PqEl@eCX{Dn@cCZuEn@kNjB}@POHMLENeBjNcChRATD@JLNX@^CLIJa@P[DUGSUI_@AG]GeIwAqHcAeB[}Cg@CR}B_@eDg@qCm@WAk@HYv@_ChG{GzQ{@~BSj@OR]hAk@tBuCdI_DnI}CjI{BjGId@LVDZEZGLOJYFMAE?W^a@x@m@tAo@jBy@tBO^cAjCkAdDmCtHeCvGq@hBAHCNKXQLE@CLOnA?^Fj@F\\HTPpB@HJpBiATKHWHoCVmAD}FH_H@yIWwBE[CMDa@A}@C}AAeBE_Ka@_FEiACqJYaDGg@Fc@Hs@VgB~@w@f@{@\\UBIEKUWoASyA_@oC@e@Io@[_BIOOEO?y@FqDd@[?QA?WBkACyAEe@Mu@EM_BRwARoEn@oDf@}HbAe@FWNQp@IFQ\\[b@_@Na@Dc@Aa@IKGiEhHmErGeDhFwCdF{AzB_EhGd@hAN?FCjBJn@?dAClFIm@zFGAMDGJ[@G@ILKv@{@M",
-    "StartToCurrentDistance": "9.6 km",
-    "StartToCurrentDuration": "25 mins",
-    "StartToCurrentPolyline": "yr{bDwywmMOZm@OuAWLw@DY?GCGi@KYMC\\uA[SK{Cq@{Ba@h@wC\\cCDw@UW_Lv@qDVmBPiCRoBR_DZqJx@kFb@sE^_@FyFd@s@DgI^kAHwCTs@NkATwBf@yBj@iB^iEr@oNtBaC^q@PqEl@eCX{Dn@cCZuEn@kNjB}@POHMLENeBjNcChRATD@JLNX@^CLIJa@P[DUGSUI_@AG]GeIwAqHcAeB[}Cg@gN_CuBa@yDm@wGcAoI}AaKaBq@IC@G@OECGiBUiASmIyAuGeAiHmAyQ{CeBYqEw@uCk@AHKVUZ]V]HoACmAO_Di@]Ga@UWYOi@Cc@@g@}E{@c@G[DABIDI@GEGIUUKCcHeA}@DUCb@iDZ{CfA}INqB?c@}@Kc@Ae@EQO_@OwEu@yBm@eB]qEy@kEs@oBc@gDm@sAW_BWIFOFY@KEWSGKCYDOJIF?^@VF",
-    "currentToEndDistance": "5.7 km",
-    "currentToEndDuration": "18 mins",
-    "currentToEndPolyline": "qjicDw}xmMHLBNAXQLc@f@K@_BhMe@EcAlIuArLGf@MbABBFDDHDF?LITOHKh@a@vCeBdNmDzX[fC_@tDG^?R@t@FXJNNJvAjAZLCXk@hBJZJNOJU_@e@s@eA_BeATO|@Or@q@Cm@rBgAbDk@lAW@sAvBKZqAjBeFzH~AfDvBpGd@pArApD@|@DALANBHHHP@NCNGLEBA@L@AfC\\|@t@tBh@zAhCdHZx@VOVGZCXBVJVNPRN\\@HBRAl@Af@Wh@[@k@Nc@@a@E]MiEhHgBjCqCdEsDbGaDjF{A|B{BhDb@hAL@DCDAjBJvAAv@ApCEACANk@jFAAG?EBKFCF]?GBQbA{@M"
-  };
-
+  // const Start_coordinates = { lat: 26.9178958, lng: 75.8500819 };
+  // const End_coordinates = { lat: 26.9278715, lng: 75.7879766 };
+  // const Current_coordinates = { lat: 26.9246, lng: 75.8181 };
+  const Current_coordinates = { lat: 26.9229, lng: 75.8269 };
+  // malviya nagar
+  const Start_coordinates = { lat: 26.852533, lng: 75.8213041 };
+  // const Current_coordinates = { lat: 26.8859042, lng: 75.8150196 };
+  const End_coordinates = { lat: 26.9299574, lng: 75.7830367 };
   return (
     <div>
       <div className="border border-black border-opacity-10 rounded-md lg:rounded-xl p-2.5 flex flex-wrap items-center mb-3 lg:mb-4">
@@ -33,7 +29,11 @@ export default function TrackingMap() {
         </div>
       </div>
       <div class="mb-3 lg:mb-4">
-    <RouteMap routeDetails={routeDetails} />
+        <LocatinTracker
+          Start_coordinates={Start_coordinates}
+          Current_coordinates={Current_coordinates}
+          End_coordinates={End_coordinates}
+        />
       </div>
       <div className="border border-black border-opacity-10 rounded-md lg:rounded-xl mb-3 lg:mb-4">
         <div className="border-b border-black border-opacity-10  px-4 lg:px-5 py-3 lg:py-4 flex flex-wrap justify-between">

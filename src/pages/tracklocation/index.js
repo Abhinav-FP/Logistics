@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Map from "./MapComponent"
 const MapContainer = ({ Current_coordinates, Start_coordinates, End_coordinates }) => {
+
+    
     const [CurrentLocation, setCurrentLocation] = useState(null);
     const [StartLocation, setStartLocation] = useState(null);
     const [EndLocation, setEndLocation] = useState(null);

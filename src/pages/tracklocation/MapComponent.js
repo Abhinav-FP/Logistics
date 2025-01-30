@@ -77,11 +77,11 @@ const MapComponent = ({ StartLocation, CurrentLocation, EndLocation }) => {
         <LoadScript googleMapsApiKey={NEXT_PUBLIC_GOOGLE_MAPS_API_KEY} libraries={['geometry']}>
             <div className='flex justify-center'>
                 <GoogleMap
-                    mapContainerStyle={{ width: '80%', height: '500px' }}
+                    mapContainerStyle={{ width: '100%', height: '300px', borderRadius:"10px" }}
                     zoom={14}
                     center={CurrentLocation || StartLocation || EndLocation}
                     options={{ cursor: 'crosshair' }}
-                    className="p-4 m-4 bg-gray-100 rounded-lg shadow-lg"
+                 
                 >
                     {StartLocation && (
                         <CustomMarker
@@ -113,33 +113,33 @@ const MapComponent = ({ StartLocation, CurrentLocation, EndLocation }) => {
                             <Polyline
                                 path={google.maps.geometry.encoding.decodePath(routeDetails.StartToEndPolyline)}
                                 options={{
-                                    strokeColor: '#0000FF',
-                                    strokeOpacity: 0.6,
+                                    strokeColor: '#000FFF',
+                                    strokeOpacity: 0.3,
                                     strokeWeight: 5,
-                                }}
+                                  }}
                             />
                             <Polyline
                                 path={google.maps.geometry.encoding.decodePath(routeDetails.StartToCurrentPolyline)}
                                 options={{
-                                    strokeColor: '#000fff',
-                                    strokeOpacity: 0.2,
-                                    strokeWeight: 4,
-                                }}
+                                    strokeColor: '#000FFF',
+                                    strokeOpacity: 0.3,
+                                    strokeWeight: 5,
+                                  }}
                             />
                             <Polyline
                                 path={google.maps.geometry.encoding.decodePath(routeDetails.currentToEndPolyline)}
                                 options={{
-                                    strokeColor: '#fff000',
-                                    strokeOpacity: 0.6,
+                                    strokeColor: '#000FFF',
+                                    strokeOpacity: 0.3,
                                     strokeWeight: 5,
-                                }}
+                                  }}
                             />
                         </>
                     )}
                 </GoogleMap>
             </div>
 
-            {status ? (
+            {/* {status ? (
                 <div className="p-4 m-4 bg-gray-100 rounded-lg shadow-lg">
                     <p className="text-lg mb-2">Loading route details...</p>
                 </div>
@@ -155,7 +155,7 @@ const MapComponent = ({ StartLocation, CurrentLocation, EndLocation }) => {
                         <p className="text-lg">Distance from Start to Current  Location: {routeDetails.StartToCurrentDistance}</p>
                     </div>
                 )
-            )}
+            )} */}
         </LoadScript>
     );
 };
