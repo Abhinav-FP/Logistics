@@ -73,7 +73,7 @@ console.log("NEXT_PUBLIC_GOOGLE_MAPS_API_KEY",NEXT_PUBLIC_GOOGLE_MAPS_API_KEY)
           )}
           {routeDetails && routeDetails.StartToEndPolyline && (
             <>
-              <Polyline
+               <Polyline
                 path={window.google?.maps?.geometry?.encoding?.decodePath(routeDetails.StartToEndPolyline)}
                 options={{
                   strokeColor: '#000FFF',
@@ -81,7 +81,27 @@ console.log("NEXT_PUBLIC_GOOGLE_MAPS_API_KEY",NEXT_PUBLIC_GOOGLE_MAPS_API_KEY)
                   strokeWeight: 5,
                 }}
               />
-              <Polyline
+
+<Polyline
+                path={window.google?.maps?.geometry?.encoding?.decodePath(routeDetails.StartToCurrentPolyline)}
+                options={{
+                  strokeColor: '#000FFF',
+                  strokeOpacity: 0.3,
+                  strokeWeight: 5,
+                }}
+              />
+
+<Polyline
+                path={window.google?.maps?.geometry?.encoding?.decodePath(routeDetails.currentToEndPolyline)}
+                options={{
+                  strokeColor: '#000000',
+                  strokeOpacity: 0.3,
+                  strokeWeight: 5,
+                }}
+              />
+
+
+              {/* <Polyline
                 path={window.google?.maps?.geometry?.encoding?.decodePath(routeDetails.StartToCurrentPolyline)}
                 options={{
                   strokeColor: '#000FFF',
@@ -96,7 +116,7 @@ console.log("NEXT_PUBLIC_GOOGLE_MAPS_API_KEY",NEXT_PUBLIC_GOOGLE_MAPS_API_KEY)
                   strokeOpacity: 0.6,
                   strokeWeight: 5,
                 }}
-              />
+              /> */}
             </>
           )}
         </GoogleMap>
