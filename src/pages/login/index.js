@@ -55,11 +55,7 @@ export default function Index() {
   return (
     <div className="flex h-screen">
       <div className="hidden md:flex md:w-1/2 items-center justify-center bg-gray-100">
-        <img
-          src="/Login-img.png"
-          alt="Logistics Illustration"
-          className="w-full h-full object-cover"
-        />
+        <img src="/Login-img.png" alt="Logistics Illustration" className="w-full h-full object-cover" />
       </div>
       <div className="flex flex-col justify-center w-full md:w-1/2 py-8 px-6 md:px-12 lg:px-[76px] bg-white">
         <h2 className="text-xl lg:text-[22px] tracking-[-0.03em] font-semibold text-[#262626] mb-1">SIGN IN</h2>

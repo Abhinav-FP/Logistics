@@ -1,7 +1,6 @@
 import Popup from "@/components/Popup";
 import React, { useEffect, useState } from "react";
 import { FaEdit, FaEye, FaUser } from "react-icons/fa";
-import { FaRegTrashCan } from "react-icons/fa6";
 import Details from "../api/Listing/Details";
 import toast from "react-hot-toast";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";

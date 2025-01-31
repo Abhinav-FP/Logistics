@@ -7,8 +7,6 @@ import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { IoBookmark } from "react-icons/io5";
 import { RxCross1 } from "react-icons/rx";
-
-
 export default function EditShipment() {
     const { user } = useRole();
     const router = useRouter();

@@ -1,8 +1,6 @@
 import Popup from '@/components/Popup';
 import React, { useEffect, useState } from 'react'
 import Details from '../pages/api/Listing/Details';
-import { FiTruck } from 'react-icons/fi';
-import { FaUser } from 'react-icons/fa';
 import toast from 'react-hot-toast';
 import { MdAssignment } from "react-icons/md";
 
