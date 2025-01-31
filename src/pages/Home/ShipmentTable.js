@@ -155,6 +155,8 @@ export default function ShipmentTable({
                             openPopup();
                           }}
                         />
+
+
                         <Link href={`/shipment/add/${shipment?._id}`}>
                           <FaEdit
                             size={20}
@@ -162,12 +164,6 @@ export default function ShipmentTable({
                             color="#16A34A"
                           />
                         </Link>
-                        {/* <FaRegTrashCan
-                          size={20}
-                          className="cursor-pointer"
-                          color="#Ff0000"
-                          onClick={() => deleteshipment(shipment?._id)}
-                        /> */}
                         <Delete step={1} Id={shipment?._id} getShipments={getShipments} role={role} />
                       </div>
                     ) : (
@@ -229,6 +225,7 @@ export default function ShipmentTable({
                             >
                               View <IoInformationCircleOutline size={18} />
                             </button>
+
                           </li>
                           {!shipment?.carrier_id &&
                             <li className="py-2 tracking-[-0.04em] [&:not(:last-child)]:border-b border-black border-opacity-10 px-4 lg:px-6">

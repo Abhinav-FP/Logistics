@@ -4,13 +4,13 @@ import Details from '../pages/api/Listing/Details';
 import { FiTruck } from 'react-icons/fi';
 import { FaUser } from 'react-icons/fa';
 import toast from 'react-hot-toast';
+import { MdAssignment } from "react-icons/md";
 
 export default function DriverAssign({ Id, getShipments, role }) {
-    const [isCarrierPopupOpen, setIsCarrierPopupOpen] = useState(false);
-    const [selectedShipment, setselectedShipment] = useState();
-    const [selectedCarrier, setSelectedCarrier] = useState();
-    const openCarrierPopup = () => setIsCarrierPopupOpen(true);
-    const closeCarrierPopup = () => setIsCarrierPopupOpen(false);
+    const [isdriverPopupOpen, setIsDriverPopupOpen] = useState(false);
+    const [Selecteddriver, setSelecteddriver] = useState();
+    const opendriverPopup = () => setIsDriverPopupOpen(true);
+    const closeDrivePopup = () => setIsDriverPopupOpen(false);
     const [listing, setLisitng] = useState("");
     const getDrivers = () => {
         const main = new Details();
@@ -29,17 +29,17 @@ export default function DriverAssign({ Id, getShipments, role }) {
         getDrivers();
     }, []);
 
-    const assigncarrier = () => {
+    const assigndriver = () => {
         const main = new Details();
-        const response = main.UpdateShipment(selectedShipment, {
-            driver_id: selectedCarrier,
+        const response = main.UpdateShipment(Id, {
+            driver_id: Selecteddriver,
         });
         response
             .then((res) => {
                 if (res && res?.data && res?.data?.status) {
                     toast.success(res.data.message);
-                    closeCarrierPopup();
-                    getShipments(role === "carrier");
+                    closeDrivePopup();
+                    getShipments(role === "driver");
                 } else {
                     toast.error(res.data.message);
                 }
@@ -50,21 +50,21 @@ export default function DriverAssign({ Id, getShipments, role }) {
             });
     }
 
+
     return (
         <>
             <button
                 className="flex gap-2 text-[#1B1B1B] bg-transparent border-none text-sm font-medium"
                 onClick={() => {
-                    setselectedShipment(Id);
-                    openCarrierPopup();
+                    opendriverPopup();
                 }}
             >
-                Assign Driver <FaUser size={18} />
+                Assign Driver <MdAssignment size={24} />
             </button>
             <Popup
-                isOpen={isCarrierPopupOpen}
-                onClose={closeCarrierPopup}
-                size={"max-w-[570px]"}
+                isOpen={isdriverPopupOpen}
+                onClose={closeDrivePopup}
+                size={"max-w-[700px]"}
             >
                 <div className="lg:px-2.5 lg:pb-2.5">
                     <div className="overflow-x-auto mt-8">
@@ -86,25 +86,27 @@ export default function DriverAssign({ Id, getShipments, role }) {
                             </thead>
                             <tbody>
                                 {listing &&
-                                    listing?.map((carrier, index) => (
+                                    listing?.map((driver, index) => (
                                         <tr
                                             key={index}
                                             className="border-b  border-black border-opacity-10 font-medium"
                                         >
                                             <td className="px-4 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">
-                                                {carrier?.driver_id_ref?.name}
+                                                {driver?.driver_id_ref?.name}
                                             </td>
                                             <td className="px-4 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">
-                                                {carrier?.driver_id_ref?.email}
+                                                {driver?.driver_id_ref?.email}
                                             </td>
-                                            <td className="px-4 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">
-                                                {carrier?.address}
+                                            <td width="18%" className="px-4 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left truncate max-w-[200px]" title={driver?.address}>
+                                                {driver?.address}
                                             </td>
+
+
                                             <td className="px-4 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-center">
                                                 <button onClick={() => {
-                                                    setSelectedCarrier(carrier?.driver_id_ref?._id);
+                                                    setSelecteddriver(driver?.driver_id_ref?._id);
                                                 }}>
-                                                    {selectedCarrier && selectedCarrier === carrier?.driver_id_ref?._id ?
+                                                    {Selecteddriver && Selecteddriver === driver?.driver_id_ref?._id ?
                                                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                             <rect width="24" height="24" rx="12" fill="#0BB635" />
                                                             <path d="M4 12C4 9.87827 4.84285 7.84344 6.34315 6.34315C7.84344 4.84285 9.87827 4 12 4C14.1217 4 16.1566 4.84285 17.6569 6.34315C19.1571 7.84344 20 9.87827 20 12C20 14.1217 19.1571 16.1566 17.6569 17.6569C16.1566 19.1571 14.1217 20 12 20C9.87827 20 7.84344 19.1571 6.34315 17.6569C4.84285 16.1566 4 14.1217 4 12ZM12 2C6.477 2 2 6.477 2 12C2 17.523 6.477 22 12 22C17.523 22 22 17.523 22 12C22 6.477 17.523 2 12 2ZM17.457 9.457L16.043 8.043L11 13.086L8.207 10.293L6.793 11.707L11 15.914L17.457 9.457Z" fill="white" />
@@ -123,7 +125,7 @@ export default function DriverAssign({ Id, getShipments, role }) {
                     </div>
                     <button className="bg-[#1C5FE8] hover:bg-[#0a3fab] px-10 py-2.5 text-white flex mx-auto mt-6 rounded-lg"
                         onClick={() => {
-                            assigncarrier();
+                            assigndriver();
                         }}>
                         Save
                     </button>

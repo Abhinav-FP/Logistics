@@ -6,29 +6,33 @@ import Details from '@/pages/api/Listing/Details';
 
 export default function Delete({ step, Id, getShipments, role }) {
     const [isOpen, setIsOpen] = useState(false);
+    
     const [loading, setLoading] = useState(false);
+
     const toggleModal = () => {
         setIsOpen(!isOpen);
     };
     const deleteshipment = (Id) => {
+        setLoading(true);
         const main = new Details();
         main
             .deleteShipment(Id)
             .then((r) => {
                 toast.success(r?.data?.message);
                 getShipments(role === "broker");
+                setLoading(false);
             })
             .catch((err) => {
                 toast.error(err?.response?.data?.message);
                 console.log("error", err);
+                setLoading(false);
             });
     };
-
 
     const handleClick = (e) => {
         e.preventDefault();
         if (step === 1) {
-            deleteshipment(Id); 
+            deleteshipment(Id);
         } else {
             console.warn('Invalid step');
         }
