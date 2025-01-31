@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 import Details from "../api/Listing/Details";
 
 export default function Index() {
-    const[loading,setLoading]=useState(false);
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     password: "",
     newpassword: "",
@@ -39,9 +39,9 @@ export default function Index() {
           setLoading(false);
         }
         setFormData({
-            password: "",
-            newpassword: "",
-            confirmNewpassword: "",
+          password: "",
+          newpassword: "",
+          confirmNewpassword: "",
         });
         setLoading(false);
       })
