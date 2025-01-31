@@ -173,7 +173,7 @@ export default function ShipmentTable({
                       />
                     )}
                   </td>
-                ) : role === "broker" ? (
+                ) : role === "broker"  ? (
                   <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">
                     <div className="relative">
                       <button onClick={() => toogleButton(index)}>
