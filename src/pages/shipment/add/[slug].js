@@ -33,6 +33,7 @@ export default function EditShipment() {
         dimensions2: "",
         customerName: "",
     });
+    console.log("v", formData)
 
     const getBrokerandCustomer = () => {
         const main = new Details();

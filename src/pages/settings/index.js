@@ -22,7 +22,6 @@ export default function Index() {
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("formData", formData);
     if (formData?.newpassword !== formData?.confirmNewpassword) {
       toast.error("Passwords do not match");
       return;

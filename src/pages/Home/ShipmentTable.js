@@ -1,6 +1,6 @@
 import Popup from "@/components/Popup";
 import React, { useEffect, useState } from "react";
-import { FaEdit, FaEye } from "react-icons/fa";
+import { FaEdit, FaEye, FaUser } from "react-icons/fa";
 import { FaRegTrashCan } from "react-icons/fa6";
 import Details from "../api/Listing/Details";
 import toast from "react-hot-toast";
@@ -13,8 +13,9 @@ import { FiTruck } from "react-icons/fi";
 import ViewShipment from "@/components/ViewShipment";
 import Sidepopup from "@/components/Sidepopup";
 import TrackingMap from "./TrackingMap";
-import VehicalInfo from "./VehicleInfo" ;
+import VehicalInfo from "./VehicleInfo";
 import Delete from "@/components/Delete";
+import DriverAssign from "@/components/DriverAssign";
 
 export default function ShipmentTable({
   shipments,
@@ -62,16 +63,6 @@ export default function ShipmentTable({
   const openSidePopup = () => setIsSidePopupOpen(true);
   const closeSidePopup = () => setIsSidePopupOpen(false);
 
-  console.log("selectedcarrier", selectedCarrier)
-  console.log("listing", listing);
-
-  console.log("carriers",listing);
-  console.log("selectedCarrier",selectedCarrier);
-  console.log("selectedShipment",selectedShipment);
-  console.log("shipments",shipments);
-  console.log("listing", listing);
-  console.log("selectedCarrier", selectedCarrier);
-  console.log("selectedShipment", selectedShipment);
   const assigncarrier = () => {
     const main = new Details();
     const response = main.UpdateShipment(selectedShipment, {
@@ -177,7 +168,7 @@ export default function ShipmentTable({
                           color="#Ff0000"
                           onClick={() => deleteshipment(shipment?._id)}
                         /> */}
-                        <Delete step={1} Id={shipment?._id}   getShipments={getShipments} role={role} />
+                        <Delete step={1} Id={shipment?._id} getShipments={getShipments} role={role} />
                       </div>
                     ) : (
                       <HiOutlineDotsHorizontal
@@ -239,20 +230,20 @@ export default function ShipmentTable({
                               View <IoInformationCircleOutline size={18} />
                             </button>
                           </li>
-                          {!shipment?.carrier_id && 
-                          <li className="py-2 tracking-[-0.04em] [&:not(:last-child)]:border-b border-black border-opacity-10 px-4 lg:px-6">
-                            <button
-                              className="flex gap-2 text-[#1B1B1B] bg-transparent border-none text-sm font-medium"
-                              onClick={() => {
-                                setselectedShipment(shipment?._id);
-                                openCarrierPopup();
-                                setIsdropdownopen(null);
-                              }}
-                            >
-                              Assign Carrier <FiTruck size={18} />
-                              {/* <CiNoWaitingSign size={18} color="#CF0000" /> */}
-                            </button>
-                          </li>}
+                          {!shipment?.carrier_id &&
+                            <li className="py-2 tracking-[-0.04em] [&:not(:last-child)]:border-b border-black border-opacity-10 px-4 lg:px-6">
+                              <button
+                                className="flex gap-2 text-[#1B1B1B] bg-transparent border-none text-sm font-medium"
+                                onClick={() => {
+                                  setselectedShipment(shipment?._id);
+                                  openCarrierPopup();
+                                  setIsdropdownopen(null);
+                                }}
+                              >
+                                Assign Carrier <FiTruck size={18} />
+                                {/* <CiNoWaitingSign size={18} color="#CF0000" /> */}
+                              </button>
+                            </li>}
                           <li className="py-2 tracking-[-0.04em] [&:not(:last-child)]:border-b border-black border-opacity-10 px-4 lg:px-6">
                             <button
                               className="flex gap-2 items-center text-[#1B1B1B] bg-transparent border-none text-sm font-medium"
@@ -268,7 +259,23 @@ export default function ShipmentTable({
                       </div>
                     </div>
                   </td>
-                ) : null}
+                ) : (null)}
+
+                {
+                  role === "carrier" && (
+                    <td className="px-4 py-3 tracking-[-0.04em] text-sm font-medium text-left">
+                      {shipment?.driver_id?.name ? (
+                        <div className="flex gap-2 items-center">
+                          <FaUser size={18} />
+                          {shipment?.driver_id?.name}
+                        </div>
+                      ) : (
+                        <DriverAssign Id={shipment?._id} CarrierId={shipment?.carrier_id} getShipments={getShipments} role={role} />
+                      )}
+
+                    </td>
+                  )
+                }
               </tr>
             ))}
         </tbody>
@@ -359,10 +366,10 @@ export default function ShipmentTable({
         </div>
         <div className="p-4 lg:p-6">
           {activeTab === "shippingInfo" &&
-       <TrackingMap />
+            <TrackingMap />
           }
           {activeTab === "vehicleInfo" && <div>
-            <VehicalInfo/>
+            <VehicalInfo />
 
           </div>}
           {/* {activeTab === "document" && <div>document Information Content</div>}

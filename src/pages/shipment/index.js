@@ -9,21 +9,27 @@ import { useRouter } from 'next/router';
 
 export default function Index() {
   const { user } = useRole();
-  const [listing, setLisitng] = useState("");
+  const [listing, setListing] = useState("");
   const [Loading, setLoading] = useState(false);
   const router = useRouter(); 
 
-  const getShipments = async (isBroker) => {
-    console.log("isBroker",isBroker);
+  const getShipments = async () => {
     setLoading(true);
     const main = new Details();
     try {
-      const response = isBroker ? await main.getBrokerShipment() : await main.getShipment("");
-      setLisitng(response?.data?.data);
+      let response;
+      if (user?.role === "broker") {
+        response = await main.getBrokerShipment();
+      } else if (user?.role === "carrier") {
+        response = await main.getcarrierShipment();
+      } else {
+        response = await main.getShipment("");
+      }
+      setListing(response?.data?.data);
     } catch (err) {
-      setLisitng([]);
+      setListing([]);
       if (err.response?.status === 401) {
-        router.push('/login');
+        router.push("/login");
       } else {
         console.error("Error fetching shipments", err);
       }
@@ -31,10 +37,13 @@ export default function Index() {
       setLoading(false);
     }
   };
- 
+  
   useEffect(() => {
-    getShipments(user?.role === "broker");
+    if (user?.role) {
+      getShipments();
+    }
   }, [user?.role]);
+  
 
   return (
     <Layout page={"Shipment"}>

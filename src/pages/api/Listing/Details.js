@@ -29,6 +29,9 @@ class Details extends Component {
   async createShipment(data) {
     return Api.post("/shipment/create",data);
   }
+  async getcarrierShipment() {
+    return Api.get("/shipment/get-shipment-carrier");
+  }
 
   
   async UpdateShipment(Id, data) {

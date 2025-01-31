@@ -5,7 +5,6 @@ import toast from 'react-hot-toast';
 import Details from '@/pages/api/Listing/Details';
 
 export default function Delete({ step, Id, getShipments, role }) {
-    console.log("Id",Id)
     const [isOpen, setIsOpen] = useState(false);
     const [loading, setLoading] = useState(false);
     const toggleModal = () => {
