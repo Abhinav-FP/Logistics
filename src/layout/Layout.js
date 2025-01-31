@@ -75,7 +75,7 @@ export default function Layout({ children, page }) {
   }, [user, router.pathname]);
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
+    localStorage && localStorage.removeItem("token");
     router.push("/login");
     toast.success("Logout Successfully");
   };

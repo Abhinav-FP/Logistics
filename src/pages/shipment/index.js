@@ -13,7 +13,6 @@ export default function Index() {
   const [Loading, setLoading] = useState(false);
   const router = useRouter(); 
 
-
   const getShipments = async (isBroker) => {
     console.log("isBroker",isBroker);
     setLoading(true);
@@ -32,7 +31,7 @@ export default function Index() {
       setLoading(false);
     }
   };
-
+ 
   useEffect(() => {
     getShipments(user?.role === "broker");
   }, [user?.role]);
