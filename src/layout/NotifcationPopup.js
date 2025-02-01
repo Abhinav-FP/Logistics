@@ -17,6 +17,7 @@ export default function NotificationPopup() {
         main
             .GetNotification()
             .then((r) => {
+                console.log("r" ,r)
                 setRecord(r.data.count);
                 setNotifications(r.data.data);
                 setLoading(false);
