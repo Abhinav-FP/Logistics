@@ -2,15 +2,12 @@ import Details from '@/pages/api/Listing/Details';
 import moment from 'moment';
 import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
-
-
 export default function NotificationPopup() {
     const [Record, setRecord] = useState(0);
     const [notifications, setNotifications] = useState([]);
     const [isPopupOpen, setIsPopupOpen] = useState(false);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-
     const GetNotifications = () => {
         setLoading(true);
         const main = new Details();
@@ -64,10 +61,11 @@ export default function NotificationPopup() {
                         />
                     </svg>
                 </div>
-
-                <span className="absolute top-0 right-0 transform translate-x-2 -translate-y-2 bg-red-500 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
-                    {Record}
-                </span>
+                {Record != "0" && (
+                    <span className="absolute top-0 right-0 transform translate-x-2 -translate-y-2 bg-red-500 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
+                        Record
+                    </span>
+                )}
 
 
                 {isPopupOpen && (
