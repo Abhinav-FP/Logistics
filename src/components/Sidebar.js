@@ -17,14 +17,14 @@ function SideBar({ role }) {
     <>
       {isOpen &&
         <button
-          className="lg:hidden p-2 absolute left-[209px] top-6 text-red-700 border border-red-700 z-[99] rounded"
+          className="lg:hidden p-2 absolute left-[213px] top-6 text-red-700 border border-red-700 z-[99] rounded"
           onClick={() => setIsOpen(false)}
         >
-          <IoMdArrowRoundBack size={24} />
+          <IoMdArrowRoundBack size={18} />
         </button>}
       {!isOpen &&
         <button
-          className="lg:hidden p-2 fixed font-bold top-3 text-[#727272] z-[99]"
+          className="lg:hidden p-2 fixed font-bold top-2.5 text-[#727272] z-[99]"
           onClick={() => setIsOpen(true)}
         >
           <IoIosMenu size={24} />

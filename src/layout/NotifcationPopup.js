@@ -48,11 +48,11 @@ export default function NotificationPopup() {
             {Record > 0 && (
                 <div>
                     <div
-                        className="border border-black border-opacity-10 rounded-xl w-[48px] h-[38px] flex items-center justify-center text-[#151547] hover:bg-[#1C5FE8] hover:text-white cursor-pointer"
+                        className="border border-black border-opacity-10 rounded-md lg:rounded-xl w-[44px] lg:w-[48px] h-[34px] lg:h-[38px] flex items-center justify-center text-[#151547] hover:bg-[#1C5FE8] hover:text-white cursor-pointer"
                         onClick={() => setIsPopupOpen(!isPopupOpen)}
                         aria-label="Toggle Notifications"
                     >
-                        <svg
+                        <svg className="w-[16px] lg:w-[18px] h-[18px] lg:h-[21px]"
                             width="18"
                             height="21"
                             viewBox="0 0 18 21"
@@ -72,7 +72,7 @@ export default function NotificationPopup() {
 
 
                     {isPopupOpen && (
-                        <div className="absolute top-12 right-0 w-[300px] bg-white shadow-lg rounded-xl p-4 z-10">
+                        <div className="absolute top-12 -right-24 md:right-0 w-[270px] md:w-[300px] bg-white shadow-lg rounded-xl p-4 z-10">
                             <div className="flex justify-between items-center border-b pb-2 mb-2">
                                 <h3 className="text-lg font-semibold">Notifications</h3>
                                 <button

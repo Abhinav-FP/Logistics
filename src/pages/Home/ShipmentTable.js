@@ -154,8 +154,6 @@ export default function ShipmentTable({
                             openPopup();
                           }}
                         />
-
-
                         <Link href={`/shipment/add/${shipment?._id}`}>
                           <FaEdit
                             size={20}

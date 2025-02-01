@@ -85,16 +85,16 @@ export default function Layout({ children, page }) {
       <Sidebar role={user?.role || ""} />
       <div className="w-full lg:ml-[304px] lg:w-[calc(100%-304px)]">
         <div className="fixed z-10 px-4 md:px-5 lg:px-[30px] py-3 lg:py-4 top-0 bg-white flex items-center w-full lg:w-[calc(100%-304px)] flex-wrap">
-          <div className="w-4/12 pl-4 lg:pl-0">
+          <div className="w-4/12 pl-6 lg:pl-0">
             <h1 className="text-[#151547] text-lg lg:text-2xl tracking-[-0.04em] font-medium">{page || "Dashboard"}</h1>
           </div>
-          <div className="w-8/12 flex justify-end space-x-4">
+          <div className="w-8/12 flex justify-end space-x-2.5 md:space-x-4">
             <NotifcationPopup />
             <Link
-              className="border border-black border-opacity-10 rounded-xl w-[48px] h-[38px] flex items-center justify-center text-[#151547] hover:bg-[#1C5FE8] hover:text-white"
+              className="border border-black border-opacity-10 rounded-md lg:rounded-xl w-[44px] lg:w-[48px] h-[34px] lg:h-[38px] flex items-center justify-center text-[#151547] hover:bg-[#1C5FE8] hover:text-white"
               href=""
             >
-              <svg
+              <svg className="w-[18px] lg:w-[21px] h-[18px] lg:h-[21px]"
                 width="21"
                 height="21"
                 viewBox="0 0 21 21"
@@ -109,8 +109,8 @@ export default function Layout({ children, page }) {
               {/* <IoSearch size={21}/> */}
             </Link>
             <div className="relative">
-              <button className="border border-black border-opacity-10 rounded-xl w-[48px] h-[38px] flex items-center justify-center text-[#151547] hover:bg-[#1C5FE8] hover:text-white" onClick={() => setDropdownOpen(!dropdownOpen)}>
-              <svg
+              <button className="border border-black border-opacity-10 rounded-md lg:rounded-xl w-[44px] lg:w-[48px] h-[34px] lg:h-[38px] flex items-center justify-center text-[#151547] hover:bg-[#1C5FE8] hover:text-white" onClick={() => setDropdownOpen(!dropdownOpen)}>
+              <svg className="w-[16px] lg:w-[18px] h-[20px] lg:h-[22px]"
                   width="18"
                   height="22"
                   viewBox="0 0 18 22"
