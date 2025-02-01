@@ -9,12 +9,14 @@ import Status from "@/components/Status";
 import { BsDownload } from "react-icons/bs";
 import { IoInformationCircleOutline } from "react-icons/io5";
 import { FiTruck } from "react-icons/fi";
+import { BsFileCheck } from "react-icons/bs";
 import ViewShipment from "@/components/ViewShipment";
 import Sidepopup from "@/components/Sidepopup";
 import TrackingMap from "./TrackingMap";
 import VehicalInfo from "./VehicleInfo";
 import Delete from "@/components/Delete";
 import DriverAssign from "@/components/DriverAssign";
+import ConsignmentPopup from "@/components/ConsignmentPopup";
 
 export default function ShipmentTable({
   shipments,
@@ -35,6 +37,7 @@ export default function ShipmentTable({
   };
 
   const [activeTab, setActiveTab] = useState("shippingInfo");
+  const [isConsignmentOpen, setIsConsignmentOpen] = useState(false);
 
   const getcarriers = () => {
     const main = new Details();
@@ -62,6 +65,10 @@ export default function ShipmentTable({
   const openSidePopup = () => setIsSidePopupOpen(true);
   const closeSidePopup = () => setIsSidePopupOpen(false);
 
+  
+  const ConsignmentOpen = () => setIsConsignmentOpen(true);
+  const closeConsignment = () => setIsConsignmentOpen(false);
+
   const assigncarrier = () => {
     const main = new Details();
     const response = main.UpdateShipment(selectedShipment, {
@@ -86,7 +93,7 @@ export default function ShipmentTable({
     <div className="overflow-x-auto">
       <table className="w-full border-none">
         <thead>
-          <tr className="text-[#9090AD] bg-[#F4F6F8] border border-black border-opacity-10 uppercase ">
+          <tr className="text-[#9090AD] bg-[#F4F6F8] border border-black border-opacity-10 uppercase">
             <th className="px-4 py-3 tracking-[-0.04em] text-sm font-medium text-left">
               Shipment ID
             </th>
@@ -201,7 +208,7 @@ export default function ShipmentTable({
                         {/* <TbDotsCircleHorizontal size={24}/> */}
                       </button>
                       <div
-                        className={`after:h-5 after:w-5 after:border-t after:border-l after:bg-white after:absolute after:left-12 after:top-[-10px] after:rotate-45 fixed min-w-[198px] -ml-10 mt-2 border border-black border-opacity-10 rounded-xl z-10 bg-white ${isdropdownopen === index ? "block" : "hidden"
+                        className={`after:h-5 after:w-5 after:border-t after:border-l after:bg-white after:absolute after:right-10 after:top-[-10px] after:rotate-45 absolute min-w-[245px] right-0 mt-2 border border-black border-opacity-10 rounded-xl z-10 bg-white ${isdropdownopen === index ? "block" : "hidden"
                           }`}
                       >
                         <ul>
@@ -247,6 +254,17 @@ export default function ShipmentTable({
                               }}
                             >
                               Tracking <IoInformationCircleOutline size={18} />
+                            </button>
+                          </li>
+
+                          <li className="py-2 tracking-[-0.04em] [&:not(:last-child)]:border-b border-black border-opacity-10 px-4 lg:px-6">
+                            <button
+                              className="flex gap-2 items-center text-[#1B1B1B] bg-transparent border-none text-sm font-medium"
+                              onClick={() => { 
+                                ConsignmentOpen(); 
+                                setIsdropdownopen(null);}}
+                            >
+                              Consignment Confirmation <BsFileCheck  size={18}/>
                             </button>
                           </li>
                         </ul>
@@ -434,6 +452,7 @@ export default function ShipmentTable({
 
       </Sidepopup>
       <ViewShipment isOpen={isPopupOpen} onClose={closePopup} data={data} />
+      <ConsignmentPopup isOpen={isConsignmentOpen} onClose={closeConsignment}   />
     </div>
   );
 }
