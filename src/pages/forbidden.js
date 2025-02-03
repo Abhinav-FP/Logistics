@@ -8,6 +8,7 @@ export default function forbidden() {
       <p class="text-gray-600 text-lg mb-8">
         You tried to access a route you do not have access to. Click the below button to go back to your dashboard.
       </p>
+      
       <Link
             href="/"
             className="py-3.5 px-4 bg-[#1C5FE8] capitalize text-white font-medium rounded-md lg:rounded-xl"

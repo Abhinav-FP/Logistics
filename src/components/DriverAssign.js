@@ -47,7 +47,6 @@ export default function DriverAssign({ Id, getShipments, role }) {
                 console.log("error", error);
             });
     }
-
     return (
         <>
             <button
