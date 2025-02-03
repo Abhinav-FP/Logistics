@@ -330,7 +330,9 @@ export default function ShipmentTable({
                             {shipment?.driver_id?.name ? (
                             <></>
                             ) : (
+                              <li className="py-2 tracking-[-0.04em] [&:not(:last-child)]:border-b border-black border-opacity-10 px-4 lg:px-6">
                               <DriverAssign Id={shipment?._id} CarrierId={shipment?.carrier_id} getShipments={getShipments} role={role} />
+                           </li>
                             )}
                             <li className="py-2 tracking-[-0.04em] [&:not(:last-child)]:border-b border-black border-opacity-10 px-4 lg:px-6">
                               <button
