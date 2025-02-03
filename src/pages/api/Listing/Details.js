@@ -32,6 +32,9 @@ class Details extends Component {
   async getcarrierShipment() {
     return Api.get("/shipment/get-shipment-carrier");
   }
+  async getcustomerShipment() {
+    return Api.get("/shipment/get-shipment-customer");
+  }
 
   
   async UpdateShipment(Id, data) {

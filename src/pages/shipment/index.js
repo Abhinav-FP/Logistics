@@ -22,7 +22,9 @@ export default function Index() {
         response = await main.getBrokerShipment();
       } else if (user?.role === "carrier") {
         response = await main.getcarrierShipment();
-      } else {
+      } else if (user?.role === "customer") {
+        response = await main.getcustomerShipment("");
+      }else {
         response = await main.getShipment("");
       }
       setListing(response?.data?.data);
@@ -30,7 +32,10 @@ export default function Index() {
       setListing([]);
       if (err.response?.status === 401) {
         router.push("/login");
-      } else {
+      } else if(err.response?.status === 403){
+        router.push("/forbidden");
+      }
+      else {
         console.error("Error fetching shipments", err);
       }
     } finally {
