@@ -28,10 +28,7 @@ const MapComponent = ({ StartLocation, CurrentLocation, EndLocation }) => {
         try {
             let response = null;
             if (Id) {
-                response = await main.UpdateDirection({
-                    CurrentLocation: `${CurrentLocation.lat},${CurrentLocation.lng}`,
-                    Shipment_id: Id
-                });
+                response = await main.GetDirection(Id);
                 if (response?.data?.data) {
                     setStatus(false);
                     setRouteDetails(response.data.data.routeDetails);

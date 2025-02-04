@@ -83,14 +83,25 @@ class Details extends Component {
     return Api.post(`/place/update_direction` , data);
   }
 
+  
+  // Get Notification
   async GetNotification(){
     return Api.get(`/user/get-notification`);
   }
-  
 
   async MarkNotificationAsRead(data){
     return Api.post(`/user/read-notification` ,data);
   }
+
+
+  // Dashboard
+  async ShipperDashboard(){
+    return Api.get(`/user/dashboard/shipper`);
+  }
+  async Dashboard(){
+    return Api.get(`/user/dashboard`);
+  }
+
   render() {
     return (
       <div>

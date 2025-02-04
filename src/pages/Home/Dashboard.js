@@ -1,20 +1,43 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { RiTruckLine } from "react-icons/ri";
 import Link from "next/link";
+import Details from "../api/Listing/Details";
 
 export default function Dashboard(){
+  const [listing, setLisitng] = useState("");
+  const [Loading, setLoading] = useState(false);
+  
+  const getData = () => {
+    setLoading(true);
+    const main = new Details();
+    main
+      .ShipperDashboard()
+      .then((r) => {
+        setLoading(false);
+        setLisitng(r?.data?.data);
+      })
+      .catch((err) => {
+        setLoading(false);
+        setLisitng([]);
+        console.log("error", err);
+      });
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+  console.log("listing",listing);
   const metrics = [
-    { title: "IN TRANSIT", value: 621 },
-    { title: "DELIVERED", value: 621 },
-    { title: "DELAYED", value: 621 },
-    { title: "TOTAL SHIPMENT", value: 621 },
-    { title: "ON-TIME DELIVERIES", value: 621 },
-    { title: "PENDING SHIPMENTS", value: 621 },
+    { title: "Pending", value: listing?.statusCounts?.find(user => user._id === "pending")?.count || 0 },
+    { title: "IN TRANSIT", value: listing?.statusCounts?.find(user => user._id === "transit")?.count || 0 },
+    { title: "DELIVERED", value: listing?.statusCounts?.find(user => user._id === "delivered")?.count || 0 },
+    { title: "TOTAL SHIPMENT", value: listing?.Shipment || 0 },
+    { title: "Total Brokers", value: listing?.Users?.find(user => user._id === "broker")?.count || 0 },
+    { title: "Total Customers", value: listing?.Users?.find(user => user._id === "customer")?.count || 0 },
   ];
 
   return (
     <div>
-      
       {/* Header Section */}
       <div className="flex md:items-center justify-between flex-col md:flex-row  mb-4 space-y-4 md:space-y-0">
         <h1 className="text-[#151547] text-lg tracking-[-0.04em] font-medium m-0">Overview</h1>
@@ -36,8 +59,8 @@ export default function Dashboard(){
             className="bg-white p-4 lg:p-5 border border-black border-opacity-10 rounded-md lg:rounded-xl"
           >
             <div className="flex justify-between">
-              <h2 className="text-sm font-normal text-[#7A7A7A] tracking-[-0.04em]">
-                {metric.title}
+              <h2 className="text-sm font-normal text-[#7A7A7A] tracking-[-0.04em] uppercase">
+                {metric?.title}
               </h2>
               <div className="border border-black border-opacity-10 py-2 px-3 rounded-md lg:rounded-xl">
                 <RiTruckLine size={24} color={"#1C5FE8"} />
