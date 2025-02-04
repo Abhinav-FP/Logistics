@@ -63,7 +63,7 @@ export default function NotificationPopup() {
                 </div>
                 {Record != "0" && (
                     <span className="absolute top-0 right-0 transform translate-x-2 -translate-y-2 bg-red-500 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
-                        Record
+                        {Record}
                     </span>
                 )}
 
