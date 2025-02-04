@@ -14,7 +14,6 @@ export default function NotificationPopup() {
         main
             .GetNotification()
             .then((r) => {
-                // console.log("r", r)
                 setRecord(r.data.count);
                 setNotifications(r.data.data);
                 setLoading(false);
@@ -66,8 +65,6 @@ export default function NotificationPopup() {
                         {Record}
                     </span>
                 )}
-
-
                 {isPopupOpen && (
                     <div className="absolute top-12 -right-24 md:right-0 w-[270px] md:w-[300px] bg-white shadow-lg rounded-xl p-4 z-10">
                         <div className="flex justify-between items-center border-b pb-2 mb-2">
