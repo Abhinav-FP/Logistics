@@ -2,6 +2,7 @@ import React from 'react';
 import { RiTruckLine } from "react-icons/ri";
 import Link from 'next/link';
 import RecentShipment from './RecentShipment';
+import Demo from "./Demo"
 
 export default function BrokerDashboard() {
 
@@ -104,7 +105,6 @@ export default function BrokerDashboard() {
           );
         })}
       </div>
-
       <div className='bg-white mt-6 lg:mt-[30px] px-6 py-[30px] rounded-md lg:rounded-xl border border-black border-opacity-10'>
         <div className='flex flex-wrap -mx-[2.5] '>
           {/* Ongoing Delivery */}

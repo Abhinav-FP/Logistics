@@ -1,5 +1,5 @@
 import Popup from "@/components/Popup";
-import React, { useEffect, useState, useRef  } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { FaEdit, FaEye } from "react-icons/fa";
 import Details from "../api/Listing/Details";
 import toast from "react-hot-toast";
@@ -34,11 +34,11 @@ export default function ShipmentTable({
   const [selectedCarrier, setSelectedCarrier] = useState();
   const [selectedShipment, setselectedShipment] = useState();
 
- 
+
 
   const toogleButton = (id) => {
     setIsdropdownopen(isdropdownopen === id ? null : id);
-    
+
   };
 
   const [activeTab, setActiveTab] = useState("shippingInfo");
@@ -58,7 +58,7 @@ export default function ShipmentTable({
   };
 
   useEffect(() => {
-    if(role==="broker"){
+    if (role === "broker") {
       getcarriers();
     }
   }, [role]);
@@ -94,6 +94,39 @@ export default function ShipmentTable({
         toast.error(error?.response?.data?.message);
         console.log("error", error);
       });
+  };
+
+  const [isDropdownOpen, setIsDropdownOpen] = useState(null);
+  const [dropdownPosition, setDropdownPosition] = useState({ top: 0, left: 0 });
+  const dropdownRef = useRef(null);
+
+  
+  const toggleButton = (index, event) => {
+    const button = event.currentTarget;
+    const td = button.closest("td"); // Get the parent <td> element
+    const rect = td.getBoundingClientRect(); // Position of the <td> element
+  
+    // Adjust position if dropdown goes off-screen
+    const dropdownWidth = 240; // Approximate width of the dropdown
+    const dropdownHeight = 160; // Approximate height of the dropdown
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+  
+    let left = rect.left + window.scrollX;
+    let top = rect.bottom + window.scrollY;
+  
+    // If dropdown goes off the right edge, adjust to the left
+    if (left + dropdownWidth > viewportWidth) {
+      left = viewportWidth - dropdownWidth - 10; // Adding a little padding
+    }
+  
+    // If dropdown goes off the bottom edge, adjust to the top
+    if (top + dropdownHeight > viewportHeight) {
+      top = rect.top + window.scrollY - dropdownHeight - 10; // Adjust upwards with some padding
+    }
+  
+    setDropdownPosition({ top, left });
+    setIsDropdownOpen(isDropdownOpen === index ? null : index);
   };
   return (
     <div className="overflow-x-auto">
@@ -156,43 +189,8 @@ export default function ShipmentTable({
                 </td>
                 {role === "shipper" ? (
                   <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">
-                    {DeleteOption ? (
-                      <div className="flex gap-2 items-center">
-                        <FaEye
-                          size={20}
-                          className="cursor-pointer"
-                          color="#3b82f6"
-                          onClick={() => {
-                            setData(shipment);
-                            openPopup();
-                          }}
-                        />
-                        <Link href={`/shipment/add/${shipment?._id}`}>
-                          <FaEdit
-                            size={20}
-                            className="cursor-pointer"
-                            color="#16A34A"
-                          />
-                        </Link>
-                        <Delete
-                          step={1}
-                          Id={shipment?._id}
-                          getShipments={getShipments}
-                          role={role}
-                        />
-                      </div>
-                    ) : (
-                      <HiOutlineDotsHorizontal
-                        size={20}
-                        color="#9090AD"
-                        className="cursor-pointer"
-                      />
-                    )}
-                  </td>
-                ) : role === "broker" ? (
-                  <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">
                     <div className="relative">
-                      <button  onClick={() => toogleButton(index)}>
+                      <button onClick={() => toogleButton(index)}>
                         <svg
                           width="24"
                           height="24"
@@ -216,18 +214,22 @@ export default function ShipmentTable({
                             strokeLinejoin="round"
                           />
                         </svg>
-                        {/* <TbDotsCircleHorizontal size={24}/> */}
                       </button>
+
                       <div
-                        className={`after:h-5 after:w-5 after:border-t after:border-l after:bg-white after:absolute after:right-10 after:top-[-10px] after:rotate-45 absolute min-w-[245px] right-0 mt-2 border border-black border-opacity-10 rounded-xl z-10 bg-white ${
-                          isdropdownopen === index ? "block" : "hidden"
-                        }`}
+                        className={`absolute min-w-[245px] right-0 mt-2 border border-black border-opacity-10 rounded-xl z-10 bg-white shadow-xl transition-all duration-200 ease-in-out ${isdropdownopen === index ? "block opacity-100" : "hidden opacity-0"
+                          }`}
+                        style={{
+                          top: "100%",   // Position it directly below the button
+                          left: "0",     // Align it with the button horizontally
+                          maxHeight: '200px',
+                          overflowY: 'auto'  // Ensure scrollable dropdown content
+                        }}
                       >
                         <ul>
                           <li className="py-2 tracking-[-0.04em] [&:not(:last-child)]:border-b border-black border-opacity-10 px-4 lg:px-6">
                             <button className="flex gap-2 text-[#1B1B1B] bg-transparent border-none text-sm font-medium">
-                              Download PDF{" "}
-                              <BsDownload size={18} color="#1C5FE8" />
+                              Download PDF <BsDownload size={18} color="#1C5FE8" />
                             </button>
                           </li>
                           <li className="py-2 tracking-[-0.04em] [&:not(:last-child)]:border-b border-black border-opacity-10 px-4 lg:px-6">
@@ -253,7 +255,6 @@ export default function ShipmentTable({
                                 }}
                               >
                                 Assign Carrier <FiTruck size={18} />
-                                {/* <CiNoWaitingSign size={18} color="#CF0000" /> */}
                               </button>
                             </li>
                           )}
@@ -268,18 +269,88 @@ export default function ShipmentTable({
                               Tracking <IoInformationCircleOutline size={18} />
                             </button>
                           </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </td>
 
-                          {/* <li className="py-2 tracking-[-0.04em] [&:not(:last-child)]:border-b border-black border-opacity-10 px-4 lg:px-6">
+                ) : role === "broker" ? (
+
+                  <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">
+                    <div className="relative">
+                      <button onClick={() => toogleButton(index)}>
+                        <svg
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <rect
+                            x="0.5"
+                            y="0.5"
+                            width="23"
+                            height="23"
+                            rx="11.5"
+                            stroke="#999999"
+                          />
+                          <path
+                            d="M6 12C6 12.1989 6.07902 12.3897 6.21967 12.5303C6.36032 12.671 6.55109 12.75 6.75 12.75C6.94891 12.75 7.13968 12.671 7.28033 12.5303C7.42098 12.3897 7.5 12.1989 7.5 12C7.5 11.8011 7.42098 11.6103 7.28033 11.4697C7.13968 11.329 6.94891 11.25 6.75 11.25C6.55109 11.25 6.36032 11.329 6.21967 11.4697C6.07902 11.6103 6 11.8011 6 12ZM11.25 12C11.25 12.1989 11.329 12.3897 11.4697 12.5303C11.6103 12.671 11.8011 12.75 12 12.75C12.1989 12.75 12.3897 12.671 12.5303 12.5303C12.671 12.3897 12.75 12.1989 12.75 12C12.75 11.8011 12.671 11.6103 12.5303 11.4697C12.3897 11.329 12.1989 11.25 12 11.25C11.8011 11.25 11.6103 11.329 11.4697 11.4697C11.329 11.6103 11.25 11.8011 11.25 12ZM16.5 12C16.5 12.1989 16.579 12.3897 16.7197 12.5303C16.8603 12.671 17.0511 12.75 17.25 12.75C17.4489 12.75 17.6397 12.671 17.7803 12.5303C17.921 12.3897 18 12.1989 18 12C18 11.8011 17.921 11.6103 17.7803 11.4697C17.6397 11.329 17.4489 11.25 17.25 11.25C17.0511 11.25 16.8603 11.329 16.7197 11.4697C16.579 11.6103 16.5 11.8011 16.5 12Z"
+                            stroke="#999999"
+                            strokeWidth="1.5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                      </button>
+
+                      <div
+                        className={`fixed min-w-[150px] right-0 mt-2 border border-black border-opacity-10 rounded-xl z-10 bg-white shadow-xl transition-all duration-200 ease-in-out ${isdropdownopen === index ? "block opacity-100" : "hidden opacity-0"
+                          }`}
+                      >
+                        <ul>
+                          <li className="py-2 tracking-[-0.04em] [&:not(:last-child)]:border-b border-black border-opacity-10 px-4 lg:px-6">
+                            <button className="flex gap-2 text-[#1B1B1B] bg-transparent border-none text-sm font-medium">
+                              Download PDF <BsDownload size={18} color="#1C5FE8" />
+                            </button>
+                          </li>
+                          <li className="py-2 tracking-[-0.04em] [&:not(:last-child)]:border-b border-black border-opacity-10 px-4 lg:px-6">
                             <button
                               className="flex gap-2 items-center text-[#1B1B1B] bg-transparent border-none text-sm font-medium"
                               onClick={() => {
-                                ConsignmentOpen();
+                                setData(shipment);
+                                openPopup();
                                 setIsdropdownopen(null);
                               }}
                             >
-                              Consignment Confirmation <BsFileCheck size={18} />
+                              View <IoInformationCircleOutline size={18} />
                             </button>
-                          </li> */}
+                          </li>
+                          {!shipment?.carrier_id && (
+                            <li className="py-2 tracking-[-0.04em] [&:not(:last-child)]:border-b border-black border-opacity-10 px-4 lg:px-6">
+                              <button
+                                className="flex gap-2 text-[#1B1B1B] bg-transparent border-none text-sm font-medium"
+                                onClick={() => {
+                                  setselectedShipment(shipment?._id);
+                                  openCarrierPopup();
+                                  setIsdropdownopen(null);
+                                }}
+                              >
+                                Assign Carrier <FiTruck size={18} />
+                              </button>
+                            </li>
+                          )}
+                          <li className="py-2 tracking-[-0.04em] [&:not(:last-child)]:border-b border-black border-opacity-10 px-4 lg:px-6">
+                            <button
+                              className="flex gap-2 items-center text-[#1B1B1B] bg-transparent border-none text-sm font-medium"
+                              onClick={() => {
+                                openSidePopup();
+                                setIsdropdownopen(null);
+                              }}
+                            >
+                              Tracking <IoInformationCircleOutline size={18} />
+                            </button>
+                          </li>
                         </ul>
                       </div>
                     </div>
@@ -314,9 +385,8 @@ export default function ShipmentTable({
                         {/* <TbDotsCircleHorizontal size={24}/> */}
                       </button>
                       <div
-                        className={`after:h-5 after:w-5 after:border-t after:border-l after:bg-white after:absolute after:left-12 after:top-[-10px] after:rotate-45 fixed min-w-[198px] -ml-10 mt-2 border border-black border-opacity-10 rounded-xl z-10 bg-white ${
-                          isdropdownopen === index ? "block" : "hidden"
-                        }`}
+                        className={`after:h-5 after:w-5 after:border-t after:border-l after:bg-white after:absolute after:left-12 after:top-[-10px] after:rotate-45 fixed min-w-[198px] -ml-10 mt-2 border border-black border-opacity-10 rounded-xl z-10 bg-white ${isdropdownopen === index ? "block" : "hidden"
+                          }`}
                       >
                         <ul>
                           <li className="py-2 tracking-[-0.04em] [&:not(:last-child)]:border-b border-black border-opacity-10 px-4 lg:px-6">
@@ -392,9 +462,8 @@ export default function ShipmentTable({
                         {/* <TbDotsCircleHorizontal size={24}/> */}
                       </button>
                       <div
-                        className={`after:h-5 after:w-5 after:border-t after:border-l after:bg-white after:absolute after:left-12 after:top-[-10px] after:rotate-45 fixed min-w-[198px] -ml-10 mt-2 border border-black border-opacity-10 rounded-xl z-10 bg-white ${
-                          isdropdownopen === index ? "block" : "hidden"
-                        }`}
+                        className={`after:h-5 after:w-5 after:border-t after:border-l after:bg-white after:absolute after:left-12 after:top-[-10px] after:rotate-45 fixed min-w-[198px] -ml-10 mt-2 border border-black border-opacity-10 rounded-xl z-10 bg-white ${isdropdownopen === index ? "block" : "hidden"
+                          }`}
                       >
                         <ul>
                           <li className="py-2 tracking-[-0.04em] [&:not(:last-child)]:border-b border-black border-opacity-10 px-4 lg:px-6">
@@ -426,7 +495,7 @@ export default function ShipmentTable({
                               Tracking <IoInformationCircleOutline size={18} />
                             </button>
                           </li>
-                           {/* {true && ( */}
+                          {/* {true && ( */}
                           {shipment?.status === "delivered" && (
                             <li className="py-2 tracking-[-0.04em] [&:not(:last-child)]:border-b border-black border-opacity-10 px-4 lg:px-6">
                               <button
@@ -437,7 +506,7 @@ export default function ShipmentTable({
                                 }}
                               >
                                 Provide Rating
-                                <MdStarRate size={18}  />
+                                <MdStarRate size={18} />
                                 {/* <IoInformationCircleOutline size={18} /> */}
                               </button>
                             </li>
@@ -451,6 +520,7 @@ export default function ShipmentTable({
             ))}
         </tbody>
       </table>
+      
       <Popup
         isOpen={isCarrierPopupOpen}
         onClose={closeCarrierPopup}
@@ -498,7 +568,7 @@ export default function ShipmentTable({
                           }}
                         >
                           {selectedCarrier &&
-                          selectedCarrier === carrier?.career_id_ref?._id ? (
+                            selectedCarrier === carrier?.career_id_ref?._id ? (
                             <svg
                               width="24"
                               height="24"
@@ -567,11 +637,10 @@ export default function ShipmentTable({
             <li>
               <button
                 onClick={() => setActiveTab("shippingInfo")}
-                className={`px-4 py-2.5 text-[#646567] tracking-[-0.04em] text-base font-medium ${
-                  activeTab === "shippingInfo"
-                    ? "border-b border-[#1C5FE8]"
-                    : "border-b border-[#1C5FE8] border-opacity-0"
-                }`}
+                className={`px-4 py-2.5 text-[#646567] tracking-[-0.04em] text-base font-medium ${activeTab === "shippingInfo"
+                  ? "border-b border-[#1C5FE8]"
+                  : "border-b border-[#1C5FE8] border-opacity-0"
+                  }`}
               >
                 {" "}
                 Shipping Info
@@ -580,11 +649,10 @@ export default function ShipmentTable({
             <li>
               <button
                 onClick={() => setActiveTab("vehicleInfo")}
-                className={`px-4 py-2.5 text-[#646567] tracking-[-0.04em] text-base font-medium ${
-                  activeTab === "vehicleInfo"
-                    ? "border-b border-[#1C5FE8]"
-                    : "border-b border-[#1C5FE8] border-opacity-0"
-                }`}
+                className={`px-4 py-2.5 text-[#646567] tracking-[-0.04em] text-base font-medium ${activeTab === "vehicleInfo"
+                  ? "border-b border-[#1C5FE8]"
+                  : "border-b border-[#1C5FE8] border-opacity-0"
+                  }`}
               >
                 Shipping Info
               </button>
