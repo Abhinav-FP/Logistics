@@ -1,5 +1,5 @@
 import Popup from "@/components/Popup";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef  } from "react";
 import { FaEdit, FaEye } from "react-icons/fa";
 import Details from "../api/Listing/Details";
 import toast from "react-hot-toast";
@@ -33,8 +33,12 @@ export default function ShipmentTable({
   const [listing, setLisitng] = useState("");
   const [selectedCarrier, setSelectedCarrier] = useState();
   const [selectedShipment, setselectedShipment] = useState();
+
+ 
+
   const toogleButton = (id) => {
     setIsdropdownopen(isdropdownopen === id ? null : id);
+    
   };
 
   const [activeTab, setActiveTab] = useState("shippingInfo");
@@ -188,7 +192,7 @@ export default function ShipmentTable({
                 ) : role === "broker" ? (
                   <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">
                     <div className="relative">
-                      <button onClick={() => toogleButton(index)}>
+                      <button  onClick={() => toogleButton(index)}>
                         <svg
                           width="24"
                           height="24"
