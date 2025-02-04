@@ -1,5 +1,5 @@
 import Popup from "@/components/Popup";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef  } from "react";
 import { FaEdit, FaEye } from "react-icons/fa";
 import Details from "../api/Listing/Details";
 import toast from "react-hot-toast";
@@ -32,8 +32,12 @@ export default function ShipmentTable({
   const [listing, setLisitng] = useState("");
   const [selectedCarrier, setSelectedCarrier] = useState();
   const [selectedShipment, setselectedShipment] = useState();
+
+ 
+
   const toogleButton = (id) => {
     setIsdropdownopen(isdropdownopen === id ? null : id);
+    
   };
 
   const [activeTab, setActiveTab] = useState("shippingInfo");
@@ -181,7 +185,7 @@ export default function ShipmentTable({
                 ) : role === "broker" ? (
                   <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">
                     <div className="relative">
-                      <button onClick={() => toogleButton(index)}>
+                      <button  onClick={() => toogleButton(index)}>
                         <svg
                           width="24"
                           height="24"
@@ -207,7 +211,7 @@ export default function ShipmentTable({
                         </svg>
                         {/* <TbDotsCircleHorizontal size={24}/> */}
                       </button>
-                      <div
+                      <div   
                         className={`after:h-5 after:w-5 after:border-t after:border-l after:bg-white after:absolute after:right-10 after:top-[-10px] after:rotate-45 absolute min-w-[245px] right-0 mt-2 border border-black border-opacity-10 rounded-xl z-10 bg-white ${isdropdownopen === index ? "block" : "hidden"
                           }`}
                       >
@@ -277,7 +281,7 @@ export default function ShipmentTable({
                   role === "carrier" && (
                     <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">
                       <div className="relative">
-                        <button onClick={() => toogleButton(index)}>
+                        <button  onClick={() => toogleButton(index)}>
                           <svg
                             width="24"
                             height="24"
@@ -304,7 +308,7 @@ export default function ShipmentTable({
                           {/* <TbDotsCircleHorizontal size={24}/> */}
                         </button>
                         <div
-                          className={`after:h-5 after:w-5 after:border-t after:border-l after:bg-white after:absolute after:left-12 after:top-[-10px] after:rotate-45 fixed min-w-[198px] -ml-10 mt-2 border border-black border-opacity-10 rounded-xl z-10 bg-white ${isdropdownopen === index ? "block" : "hidden"
+                         className={`after:h-5 after:w-5 after:border-t after:border-l after:bg-white after:absolute after:left-12 after:top-[-10px] after:rotate-45 fixed min-w-[198px] -ml-10 mt-2 border border-black border-opacity-10 rounded-xl z-10 bg-white ${isdropdownopen === index ? "block" : "hidden"
                             }`}
                         >
                           <ul>
