@@ -1,11 +1,10 @@
 import Layout from "@/layout/Layout";
 import React from "react";
-import Dashboard from "./Dashboard";
-import ShipmentTable from "./ShipmentTable";
 import BrokerDashboard from "./BrokerDashboard";
 import { useRole } from "@/context/RoleContext";
 import CarrierDashboard from "./CarrierDashboard";
 import CustomerDashboard from "./CustomerDashboard";
+import ShipperDashboard from "./ShipperDashboard";
 
 export default function MainPage() {
   const { user } = useRole();
@@ -54,13 +53,7 @@ export default function MainPage() {
       <div className="">
         {user && user?.role === "shipper" ? (
           <>
-            <Dashboard />
-            <div className="bg-white mt-6 lg:mt-[30px] px-6 py-[30px] rounded-md lg:rounded-xl border border-black border-opacity-10">
-              <h2 className="text-[#151547] text-lg tracking-[-0.04em] font-medium mb-4 lg:mb-5">
-                Shipment Listing
-              </h2>
-              <ShipmentTable shipments={data} />
-            </div>
+            <ShipperDashboard/>
           </>
         ) : user && user?.role === "broker" ? (
           <BrokerDashboard />
