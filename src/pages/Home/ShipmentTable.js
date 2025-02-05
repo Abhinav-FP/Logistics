@@ -97,37 +97,6 @@ export default function ShipmentTable({
   };
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(null);
-  const [dropdownPosition, setDropdownPosition] = useState({ top: 0, left: 0 });
-  const dropdownRef = useRef(null);
-
-
-  const toggleButton = (index, event) => {
-    const button = event.currentTarget;
-    const td = button.closest("td"); // Get the parent <td> element
-    const rect = td.getBoundingClientRect(); // Position of the <td> element
-
-    // Adjust position if dropdown goes off-screen
-    const dropdownWidth = 240; // Approximate width of the dropdown
-    const dropdownHeight = 160; // Approximate height of the dropdown
-    const viewportWidth = window.innerWidth;
-    const viewportHeight = window.innerHeight;
-
-    let left = rect.left + window.scrollX;
-    let top = rect.bottom + window.scrollY;
-
-    // If dropdown goes off the right edge, adjust to the left
-    if (left + dropdownWidth > viewportWidth) {
-      left = viewportWidth - dropdownWidth - 10; // Adding a little padding
-    }
-
-    // If dropdown goes off the bottom edge, adjust to the top
-    if (top + dropdownHeight > viewportHeight) {
-      top = rect.top + window.scrollY - dropdownHeight - 10; // Adjust upwards with some padding
-    }
-
-    setDropdownPosition({ top, left });
-    setIsDropdownOpen(isDropdownOpen === index ? null : index);
-  };
   return (
     <div className="overflow-x-auto">
       <table className="w-full border-none">
@@ -571,13 +540,13 @@ export default function ShipmentTable({
           <h2 className="text-[#151547] text-medium text-lg md:text-2xl tracking-[-0.04em]">
             SD-752069247
           </h2>
-          <Link
+          {/* <Link
             href="/"
             className="inline-block text-[#1C5FE8] px-3 py-2 border border-[#1C5FE81A] rounded-md lg:rounded-xl hover:bg-gray-100 focus:outline-none focus:ring focus:ring-offset-.5 focus:ring-[#1C5FE8]"
           >
             {" "}
             View Driver’s details
-          </Link>
+          </Link> */}
         </div>
 
         <div className="border-b border-black border-opacity-10 px-6">

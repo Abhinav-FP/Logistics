@@ -2,7 +2,7 @@ import { Component } from "react";
 import Api from "./Api";
 
 class Details extends Component {
- async login(data) {
+  async login(data) {
     return Api.post("/user/login", data);
   }
 
@@ -12,6 +12,10 @@ class Details extends Component {
 
   async Usersget(data) {
     return Api.get(`/user/get/${data}`);
+  }
+
+  async Coustmerget() {
+    return Api.get(`/user/cous`);
   }
 
   async Carrierget() {
@@ -27,7 +31,7 @@ class Details extends Component {
   }
 
   async createShipment(data) {
-    return Api.post("/shipment/create",data);
+    return Api.post("/shipment/create", data);
   }
   async getcarrierShipment() {
     return Api.get("/shipment/get-shipment-carrier");
@@ -36,9 +40,9 @@ class Details extends Component {
     return Api.get("/shipment/get-shipment-customer");
   }
 
-  
+
   async UpdateShipment(Id, data) {
-    return Api.post(`/shipment/update/${Id}`,data);
+    return Api.post(`/shipment/update/${Id}`, data);
   }
 
   async getShipment() {
@@ -58,48 +62,52 @@ class Details extends Component {
   }
 
   async createCarrier(data) {
-    return Api.post("/user/create-carrier",data);
+    return Api.post("/user/create-carrier", data);
   }
 
   async createCustomer(data) {
-    return Api.post("/user/create-customer",data);
+    return Api.post("/user/create-customer", data);
   }
 
   async createDriver(data) {
-    return Api.post("/user/create-driver",data);
+    return Api.post("/user/create-driver", data);
   }
 
 
   // ?direction
   async direction(data) {
-    return Api.post(`/place/directions` , data);
+    return Api.post(`/place/directions`, data);
   }
 
   async GetDirection(id) {
-    return Api.get(`/place/get_direction/${id}` );
+    return Api.get(`/place/get_direction/${id}`);
   }
 
   async UpdateDirection(data) {
-    return Api.post(`/place/update_direction` , data);
+    return Api.post(`/place/update_direction`, data);
   }
 
-  
+
   // Get Notification
-  async GetNotification(){
+  async GetNotification() {
     return Api.get(`/user/get-notification`);
   }
 
-  async MarkNotificationAsRead(data){
-    return Api.post(`/user/read-notification` ,data);
+  async MarkNotificationAsRead(data) {
+    return Api.post(`/user/read-notification`, data);
   }
 
 
   // Dashboard
-  async ShipperDashboard(){
+  async ShipperDashboard() {
     return Api.get(`/user/dashboard/shipper`);
   }
-  async Dashboard(){
+  async Dashboard() {
     return Api.get(`/user/dashboard`);
+  }
+
+  async ForgotEmail() {
+    return Api.post(`/app/forget_email`);
   }
 
   render() {

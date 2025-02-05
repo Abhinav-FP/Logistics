@@ -3,7 +3,8 @@ import Popup from './Popup';
 import { MdContentCopy } from "react-icons/md";
 import toast from "react-hot-toast";
 
-export default function AccountPopup({isOpen, onClose, data}) {
+export default function AccountPopup({isOpen, onClose, data ,carrier }) {
+  console.log("data" ,data ,carrier)
   return (
     <Popup isOpen={isOpen} onClose={onClose} size={'max-w-[510px]'}>
           <div className="relative z-[1]">
@@ -31,10 +32,6 @@ export default function AccountPopup({isOpen, onClose, data}) {
                     <tr>
                       <th className="text-left text-[#70708D] border-0 py-2 lg:py-2.5 tracking-[-0.04em] text-[15px] font-medium">Phone number :</th>
                       <td className="border-0 py-2 pl-4 lg:py-2.5 text-[#70708D] tracking-[-0.04em] text-[15px] font-bold">{data?.contact || ""}</td>
-                    </tr>
-                    <tr>
-                      <th className="text-left text-[#70708D] border-0 py-2 lg:py-2.5 tracking-[-0.04em] text-[15px] font-medium">Address :</th>
-                      <td className="border-0 py-2 pl-4 lg:py-2.5 text-[#70708D] tracking-[-0.04em] text-[15px] font-bold">{data?.address || ""}</td>
                     </tr>
                   </tbody>
                 </table>
