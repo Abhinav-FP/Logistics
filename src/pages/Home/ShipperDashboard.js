@@ -7,44 +7,6 @@ import ShipmentTable from "./ShipmentTable";
 export default function ShipperDashboard() {
   const [listing, setLisitng] = useState("");
   const [Loading, setLoading] = useState(false);
-  const data = [
-    {
-      id: "SHP-001",
-      name: "Electronics Delivery",
-      pickup_location: "New York, NY",
-      drop_location: "Los Angeles, CA",
-      status: "In Transit",
-      shippingDate: "2024-12-01",
-      deliveryDateExpect: "2024-12-08",
-    },
-    {
-      id: "SHP-002",
-      name: "Furniture Delivery",
-      pickup_location: "Chicago, IL",
-      drop_location: "Houston, TX",
-      status: "Delivered",
-      shippingDate: "2024-11-15",
-      deliveryDateExpect: "2024-11-20",
-    },
-    {
-      id: "SHP-003",
-      name: "Clothing Shipment",
-      pickup_location: "Miami, FL",
-      drop_location: "Boston, MA",
-      status: "Pending",
-      shippingDate: "2024-12-03",
-      deliveryDateExpect: "2024-12-09",
-    },
-    {
-      id: "SHP-004",
-      name: "Food Delivery",
-      pickup_location: "Las Vegas, NV",
-      drop_location: "San Diego, CA",
-      status: "Cancelled",
-      shippingDate: "2024-11-25",
-      deliveryDateExpect: "2024-11-28",
-    },
-  ];
 
   const getData = () => {
     setLoading(true);
@@ -70,22 +32,22 @@ export default function ShipperDashboard() {
     {
       title: "Pending",
       value:
-        listing?.statusCounts?.find((user) => user._id === "pending")?.count ||
-        0,
+        listing?.statusCounts?.find((user) => user._id === "pending")?.count || 0,
     },
     {
       title: "IN TRANSIT",
       value:
-        listing?.statusCounts?.find((user) => user._id === "transit")?.count ||
-        0,
+        listing?.statusCounts?.find((user) => user._id === "transit")?.count || 0,
     },
     {
       title: "DELIVERED",
       value:
-        listing?.statusCounts?.find((user) => user._id === "delivered")
-          ?.count || 0,
+        listing?.statusCounts?.find((user) => user._id === "delivered")?.count || 0,
     },
-    { title: "TOTAL SHIPMENT", value: listing?.Shipment || 0 },
+    { 
+      title: "TOTAL SHIPMENT", 
+      value: listing?.Shipment || 0 
+    },
     {
       title: "Total Brokers",
       value: listing?.Users?.find((user) => user._id === "broker")?.count || 0,

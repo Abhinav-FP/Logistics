@@ -98,6 +98,9 @@ class Details extends Component {
   async ShipperDashboard(){
     return Api.get(`/user/dashboard/shipper`);
   }
+  async UserDashboard(){
+    return Api.get(`/user/dashboard/customer`);
+  }
   async Dashboard(){
     return Api.get(`/user/dashboard`);
   }
