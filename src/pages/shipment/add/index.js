@@ -404,7 +404,7 @@ export default function Index() {
                     {brokers &&
                       brokers.map((item) => (
                         <option key={item?._id} value={item?._id}>
-                          {item?.email}
+                          {item?.name} ({item?.email})
                         </option>
                       ))}
                   </select>
@@ -437,7 +437,7 @@ export default function Index() {
                     {customers &&
                       customers.map((item) => (
                         <option key={item?._id} value={item?._id}>
-                          {item?.email}
+                          {item?.name} ({item?.email})
                         </option>
                       ))}
                   </select>
