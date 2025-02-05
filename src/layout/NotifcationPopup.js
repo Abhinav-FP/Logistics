@@ -14,7 +14,6 @@ export default function NotificationPopup() {
         main
             .GetNotification()
             .then((r) => {
-                console.log("r", r)
                 setRecord(r.data.count);
                 setNotifications(r.data.data);
                 setLoading(false);
@@ -63,11 +62,9 @@ export default function NotificationPopup() {
                 </div>
                 {Record != "0" && (
                     <span className="absolute top-0 right-0 transform translate-x-2 -translate-y-2 bg-red-500 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
-                        Record
+                        {Record}
                     </span>
                 )}
-
-
                 {isPopupOpen && (
                     <div className="absolute top-12 -right-24 md:right-0 w-[270px] md:w-[300px] bg-white shadow-lg rounded-xl p-4 z-10">
                         <div className="flex justify-between items-center border-b pb-2 mb-2">

@@ -268,6 +268,7 @@ export default function Index() {
                     onChange={handleChange}
                     className="w-full h-11 lg:h-[48px]  block bg-white text-[#000] text-base border border-black border-opacity-10 rounded-md lg:rounded-xl py-2 px-4 leading-tight focus:outline-none"
                     placeholder=""
+                    required
                   >
                     <option value="">Select Goods Type</option>
                     <option value="food">Food and Beverages</option>
@@ -365,6 +366,7 @@ export default function Index() {
                     name="paymentStatus"
                     onChange={handleChange}
                     className="w-full h-11 lg:h-[48px] block bg-white text-[#000] text-base border border-black border-opacity-10 rounded-md lg:rounded-xl py-2 px-4 leading-tight focus:outline-none"
+                    required
                   >
                     <option value="" disabled>
                       Select Payment Status
@@ -396,6 +398,7 @@ export default function Index() {
                     onChange={handleChange}
                     className="w-full h-11 lg:h-[48px]  block bg-white text-[#000] text-base border border-black border-opacity-10 rounded-md lg:rounded-xl py-2 px-4 leading-tight focus:outline-none"
                     placeholder=""
+                    required
                   >
                     <option value="">Select Broker</option>
                     {brokers &&
@@ -428,6 +431,7 @@ export default function Index() {
                     onChange={handleChange}
                     className="w-full h-11 lg:h-[48px]  block bg-white text-[#000] text-base border border-black border-opacity-10 rounded-md lg:rounded-xl py-2 px-4 leading-tight focus:outline-none"
                     placeholder=""
+                    required
                   >
                     <option value="">Select Customer</option>
                     {customers &&
