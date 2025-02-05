@@ -10,8 +10,8 @@ import { RxCross1 } from "react-icons/rx";
 export default function EditShipment() {
     const { user } = useRole();
     const router = useRouter();
-    const [loading, setLoading] = useState([]);
     const { slug } = router.query;
+    const [loading, setLoading] = useState([]);
     const [brokers, setBrokers] = useState([]);
     const [customers, setCustomers] = useState([]);
     const [formData, setFormData] = useState({

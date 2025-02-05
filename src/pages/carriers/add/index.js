@@ -38,6 +38,7 @@ export default function Index() {
       [name]: value,
     }));
   }
+  const[carrier ,setCarrier] = useState([])
 
   // Handle form submission
   const handleSubmit=(e) => {
@@ -51,6 +52,7 @@ export default function Index() {
         if (res && res?.data && res?.data?.status) {
           toast.success(res.data.message);
           setData(res.data.data?.user);
+          setCarrier(res.data.data.carrierResult)
           setIsPopupOpen(true);
           setLoading(false);
         } else {
@@ -117,7 +119,7 @@ export default function Index() {
                       value={formData.name}
                       onChange={handleChange}
                       className="w-full h-11 lg:h-[48px] appearance-none block bg-white text-[#000] text-base border border-black border-opacity-10 rounded-md lg:rounded-xl py-2 px-4 leading-tight focus:outline-none"
-                      placeholder=""
+                      placeholder="Enter Carrier Name"
                       required
                     />
                   </div>
@@ -131,7 +133,7 @@ export default function Index() {
                       value={formData.id}
                       onChange={handleChange}
                       className="w-full h-11 lg:h-[48px] appearance-none block bg-white text-[#000] text-base border border-black border-opacity-10 rounded-md lg:rounded-xl py-2 px-4 leading-tight focus:outline-none"
-                      placeholder=""
+                       placeholder="Enter Carrier ID"
                       required
                     />
                   </div>
@@ -170,7 +172,7 @@ export default function Index() {
                     <input
                       type="number"
                       name="license"
-                      value={formData.licenseno}
+                      value={formData.license}
                       onChange={handleChange}
                       className="w-full h-11 lg:h-[48px] appearance-none block bg-white text-[#000] text-base border border-black border-opacity-10 rounded-md lg:rounded-xl py-2 px-4 leading-tight focus:outline-none"
                       placeholder=""
@@ -188,6 +190,7 @@ export default function Index() {
                       onChange={handleChange}
                       className="w-full h-11 lg:h-[48px] appearance-none block bg-white text-[#000] text-base border border-black border-opacity-10 rounded-md lg:rounded-xl py-2 px-4 leading-tight focus:outline-none"
                       placeholder=""
+                      min={0}
                       required
                     />
                   </div>
@@ -307,155 +310,9 @@ export default function Index() {
                 </div>
               </div>
             </div>
-            {/* <div className='bg-white rounded-xl border border-black border-opacity-10 '>
-                            <div className='py-6 px-[30px] border-b border-black border-opacity-10'>
-                                <h4 className='text-[#151547] text-lg tracking-[-0.04em] font-medium m-0'>Fleet and Equipment Details</h4>
-                            </div>
-                            <div className='py-6 px-[30px]'>
-                                <div className='flex flex-wrap -mx-2 lg:-mx-3'>
-                                    <div className='w-full md:w-6/12 px-2 lg:px-3 mb-4 lg:mb-6'>
-                                        <label className='text-[#70708D] text-sm tracking-[-0.04em] uppercase mb-2 block'>Vehicle Type</label>
-                                        <input type='text'
-                                            value={formData.title}
-                                            onChange={handleChange}
-                                            className='w-full h-11 lg:h-[48px] appearance-none block bg-white text-[#000] text-base border border-black border-opacity-10 rounded-md lg:rounded-xl py-2 px-4 leading-tight focus:outline-none' placeholder='' />
-                                    </div>
-                                    <div className='w-full md:w-6/12 px-2 lg:px-3 mb-4 lg:mb-6'>
-                                        <label className='text-[#70708D] text-sm tracking-[-0.04em] uppercase mb-2 block'>Vehicle Capacity (kg/ton)</label>
-                                        <input type='text'
-                                            value={formData.title}
-                                            onChange={handleChange}
-                                            className='w-full h-11 lg:h-[48px] appearance-none block bg-white text-[#000] text-base border border-black border-opacity-10 rounded-md lg:rounded-xl py-2 px-4 leading-tight focus:outline-none' placeholder='' />
-                                    </div> 
-                                    <div className='w-full md:w-6/12 px-2 lg:px-3 mb-4 lg:mb-6'>
-                                        <label className='text-[#70708D] text-sm tracking-[-0.04em] uppercase mb-2 block'>Vehicle Registration Numbers</label>
-                                        <input type='text'
-                                            value={formData.title}
-                                            onChange={handleChange}
-                                            className='w-full h-11 lg:h-[48px] appearance-none block bg-white text-[#000] text-base border border-black border-opacity-10 rounded-md lg:rounded-xl py-2 px-4 leading-tight focus:outline-none' placeholder='' />
-                                    </div>
-                                    <div className='w-full md:w-6/12 px-2 lg:px-3 mb-4 lg:mb-6'>
-                                        <label className='text-[#70708D] text-sm tracking-[-0.04em] uppercase mb-2 block'>Insurance Information</label>
-                                        <input type='text'
-                                            value={formData.title}
-                                            onChange={handleChange}
-                                            className='w-full h-11 lg:h-[48px] appearance-none block bg-white text-[#000] text-base border border-black border-opacity-10 rounded-md lg:rounded-xl py-2 px-4 leading-tight focus:outline-none' placeholder='' />
-                                    </div>
-                                    <div className='w-full md:w-6/12 px-2 lg:px-3 mb-4 lg:mb-6'>
-                                        <label className='text-[#70708D] text-sm tracking-[-0.04em] uppercase mb-2 block'>Insurance Provider Name</label>
-                                        <input type='text'
-                                            value={formData.title}
-                                            onChange={handleChange}
-                                            className='w-full h-11 lg:h-[48px] appearance-none block bg-white text-[#000] text-base border border-black border-opacity-10 rounded-md lg:rounded-xl py-2 px-4 leading-tight focus:outline-none' placeholder='' />
-                                    </div>
-                                    <div className='w-full md:w-6/12 px-2 lg:px-3 mb-4 lg:mb-6'>
-                                        <label className='text-[#70708D] text-sm tracking-[-0.04em] uppercase mb-2 block'>Policy Number</label>
-                                        <input type='text'
-                                            value={formData.title}
-                                            onChange={handleChange}
-                                            className='w-full h-11 lg:h-[48px] appearance-none block bg-white text-[#000] text-base border border-black border-opacity-10 rounded-md lg:rounded-xl py-2 px-4 leading-tight focus:outline-none' placeholder='' />
-                                    </div>
-                                    <div className='w-full md:w-6/12 px-2 lg:px-3 mb-4 lg:mb-6'>
-                                        <label className='text-[#70708D] text-sm tracking-[-0.04em] uppercase mb-2 block'>Expiry Date</label>
-                                        <input type='text'
-                                            value={formData.title}
-                                            onChange={handleChange}
-                                            className='w-full h-11 lg:h-[48px] appearance-none block bg-white text-[#000] text-base border border-black border-opacity-10 rounded-md lg:rounded-xl py-2 px-4 leading-tight focus:outline-none' placeholder='' />
-                                    </div> 
-                                </div>
-                            </div>
-                        </div>
-                        <div className='bg-white rounded-xl border border-black border-opacity-10 '>
-                            <div className='py-6 px-[30px] border-b border-black border-opacity-10'>
-                                <h4 className='text-[#151547] text-lg tracking-[-0.04em] font-medium m-0'>Bank and Payment Details</h4>
-                            </div>
-                            <div className='py-6 px-[30px]'>
-                                <div className='flex flex-wrap -mx-2 lg:-mx-3'>
-                                    <div className='w-full md:w-6/12 px-2 lg:px-3 mb-4 lg:mb-6'>
-                                        <label className='text-[#70708D] text-sm tracking-[-0.04em] uppercase mb-2 block'>Bank Name</label>
-                                        <input type='text'
-                                            value={formData.title}
-                                            onChange={handleChange}
-                                            className='w-full h-11 lg:h-[48px] appearance-none block bg-white text-[#000] text-base border border-black border-opacity-10 rounded-md lg:rounded-xl py-2 px-4 leading-tight focus:outline-none' placeholder='' />
-                                    </div>
-                                    <div className='w-full md:w-6/12 px-2 lg:px-3 mb-4 lg:mb-6'>
-                                        <label className='text-[#70708D] text-sm tracking-[-0.04em] uppercase mb-2 block'>Account Number</label>
-                                        <input type='text'
-                                            value={formData.title}
-                                            onChange={handleChange}
-                                            className='w-full h-11 lg:h-[48px] appearance-none block bg-white text-[#000] text-base border border-black border-opacity-10 rounded-md lg:rounded-xl py-2 px-4 leading-tight focus:outline-none' placeholder='' />
-                                    </div> 
-                                    <div className='w-full md:w-6/12 px-2 lg:px-3 mb-4 lg:mb-6'>
-                                        <label className='text-[#70708D] text-sm tracking-[-0.04em] uppercase mb-2 block'>IBAN (optional)</label>
-                                        <input type='text'
-                                            value={formData.title}
-                                            onChange={handleChange}
-                                            className='w-full h-11 lg:h-[48px] appearance-none block bg-white text-[#000] text-base border border-black border-opacity-10 rounded-md lg:rounded-xl py-2 px-4 leading-tight focus:outline-none' placeholder='' />
-                                    </div>
-                                    <div className='w-full md:w-6/12 px-2 lg:px-3 mb-4 lg:mb-6'>
-                                        <label className='text-[#70708D] text-sm tracking-[-0.04em] uppercase mb-2 block'>Payment Terms</label>
-                                        <input type='text'
-                                            value={formData.title}
-                                            onChange={handleChange}
-                                            className='w-full h-11 lg:h-[48px] appearance-none block bg-white text-[#000] text-base border border-black border-opacity-10 rounded-md lg:rounded-xl py-2 px-4 leading-tight focus:outline-none' placeholder='' />
-                                    </div>
-                                    <div className='w-full md:w-6/12 px-2 lg:px-3 mb-4 lg:mb-6'>
-                                        <label className='text-[#70708D] text-sm tracking-[-0.04em] uppercase mb-2 block'>Preferred Payment Method</label>
-                                        <input type='text'
-                                            value={formData.title}
-                                            onChange={handleChange}
-                                            className='w-full h-11 lg:h-[48px] appearance-none block bg-white text-[#000] text-base border border-black border-opacity-10 rounded-md lg:rounded-xl py-2 px-4 leading-tight focus:outline-none' placeholder='' />
-                                    </div>
-                                    <div className='w-full md:w-6/12 px-2 lg:px-3 mb-4 lg:mb-6'>
-                                        <label className='text-[#70708D] text-sm tracking-[-0.04em] uppercase mb-2 block'>Policy Number</label>
-                                        <input type='text'
-                                            value={formData.title}
-                                            onChange={handleChange}
-                                            className='w-full h-11 lg:h-[48px] appearance-none block bg-white text-[#000] text-base border border-black border-opacity-10 rounded-md lg:rounded-xl py-2 px-4 leading-tight focus:outline-none' placeholder='' />
-                                    </div> 
-                                </div>
-                            </div>
-                        </div> */}
           </div>
         </form>
-        {/* <Popup isOpen={isPopupOpen} onClose={closePopup}>
-          <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-sm mx-auto">
-            <h2 className="text-2xl font-bold text-center text-green-600 mb-4">Success</h2>
-            <p className="text-gray-600 text-center mb-6">Carrier created successfully!</p>
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700">Name:</label>
-                <p className="text-gray-900 font-semibold">{data?.name || ""}</p>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700">Email:</label>
-                <p className="text-gray-900 font-semibold">{data?.email || ""}</p>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700">Role:</label>
-                <p className="text-gray-900 font-semibold">{data?.role || ""}</p>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700">Password:</label>
-                <p className="text-gray-900 font-semibold">{data?.password || ""}</p>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700">Contact:</label>
-                <p className="text-gray-900 font-semibold">{data?.contact || ""}</p>
-              </div>
-            </div>
-            <button
-              className="mt-6 w-full bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
-              onClick={()=>{
-                closePopup();
-                router.push('/carriers')
-              }}
-            >
-              Close
-            </button>
-          </div>
-        </Popup> */}
-        <AccountPopup isOpen={isPopupOpen} onClose={closePopup} data={data}/>
+        <AccountPopup isOpen={isPopupOpen} onClose={closePopup} data={data} carrier={carrier}/>
       </div>
     </Layout>
   );
