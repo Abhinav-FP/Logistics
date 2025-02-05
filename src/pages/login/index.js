@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Details from "../api/Listing/Details";
 import toast from "react-hot-toast";
 import { useRouter } from "next/router";
+import ForgetPassword from "../forget/forgetlink";
 
 export default function Index() {
   const [formData, setFormData] = useState({
@@ -98,14 +99,9 @@ export default function Index() {
               required
             />
           </div>
-          {/* <div className="mb-4 text-right">
-            <Link
-              href=""
-              className="text-sm sm:text-lg text-[#1C5FE8] font-medium"
-            >
-              Forget Password?
-            </Link>
-          </div> */}
+          <div className="mb-4 text-right">
+         <ForgetPassword />
+          </div>
           <button
             type="submit"
             className="w-full py-3.5 px-4 bg-[#1C5FE8] text-white font-medium rounded-md lg:rounded-xl"
