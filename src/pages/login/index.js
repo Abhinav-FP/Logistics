@@ -4,13 +4,14 @@ import Details from "../api/Listing/Details";
 import toast from "react-hot-toast";
 import { useRouter } from "next/router";
 import ForgetPassword from "../forget/forgetlink";
-
+import { IoEye, IoEyeOff } from "react-icons/io5";
 export default function Index() {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
-  const[loading,setLoading]=useState(false);
+  const [loading, setLoading] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
   const router = useRouter();
 
   const handleChange = (e) => {
@@ -26,8 +27,8 @@ export default function Index() {
     setLoading(true);
     const main = new Details();
     const response = main.login({
-      email:formData?.email,
-      password:formData.password,
+      email: formData?.email,
+      password: formData.password,
     });
     response
       .then((res) => {
@@ -89,18 +90,33 @@ export default function Index() {
             >
               Password
             </label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              className="block w-full h-12 lg:h-[65px] px-3 py-3 bg-gray-100 text-[#727272] border border-transparent rounded-lg lg:rounded-[15px] sm:text-sm"
-              required
-            />
+            <div className="relative">
+              <input
+                type={showNewPassword ? "text" : "password"}
+                id="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                className="block w-full h-12 lg:h-[65px] px-3 py-3 bg-gray-100 text-[#727272] border border-transparent rounded-lg lg:rounded-[15px] sm:text-sm"
+                required
+              />
+
+              <button
+                type="button"
+                onClick={() => setShowNewPassword(!showNewPassword)}
+                className="absolute top-6 right-5"
+              >
+                {showNewPassword ? (
+                  <IoEyeOff size={24} className="text-gray-600" />
+                ) : (
+                  <IoEye size={24} className="text-gray-600" />
+                )}
+              </button>
+            </div>
+
           </div>
           <div className="mb-4 text-right">
-         <ForgetPassword />
+            <ForgetPassword />
           </div>
           <button
             type="submit"

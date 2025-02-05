@@ -131,9 +131,9 @@ export default function ForgetPassword() {
                 className="absolute top-[20px] right-5"
               >
                 {showNewPassword ? (
-                  <IoEyeOff size={24} className="text-white" />
+                  <IoEyeOff size={24} className="text-black" />
                 ) : (
-                  <IoEye size={24} className="text-white" />
+                  <IoEye size={24} className="text-black" />
                 )}
               </button>
               <p

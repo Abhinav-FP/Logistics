@@ -14,6 +14,10 @@ class Details extends Component {
     return Api.get(`/user/get/${data}`);
   }
 
+  async Coustmerget() {
+    return Api.get(`/user/cous`);
+  }
+
   async Carrierget() {
     return Api.get("/user/get-carrier");
   }
