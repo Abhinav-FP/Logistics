@@ -540,13 +540,13 @@ export default function ShipmentTable({
           <h2 className="text-[#151547] text-medium text-lg md:text-2xl tracking-[-0.04em]">
             SD-752069247
           </h2>
-          <Link
+          {/* <Link
             href="/"
             className="inline-block text-[#1C5FE8] px-3 py-2 border border-[#1C5FE81A] rounded-md lg:rounded-xl hover:bg-gray-100 focus:outline-none focus:ring focus:ring-offset-.5 focus:ring-[#1C5FE8]"
           >
             {" "}
             View Driver’s details
-          </Link>
+          </Link> */}
         </div>
 
         <div className="border-b border-black border-opacity-10 px-6">
