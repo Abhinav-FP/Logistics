@@ -106,8 +106,12 @@ class Details extends Component {
     return Api.get(`/user/dashboard`);
   }
 
-  async ForgotEmail() {
-    return Api.post(`/app/forget_email`);
+  async ForgotEmail(data) {
+    return Api.post(`/app/forget_email` , data);
+  }
+
+  async ForgotPassword(data) {
+    return Api.post(`/app/forget_password`, data);
   }
 
   render() {

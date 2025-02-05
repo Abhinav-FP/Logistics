@@ -2,18 +2,19 @@ import React, { useState } from "react";
 import { IoCloseSharp } from "react-icons/io5";
 import toast from "react-hot-toast";
 import Details from "../api/Listing/Details";
+import { useRouter } from "next/router";
 
 export default function FogetLinks() {
   const [isOpen, setIsOpen] = useState(false);
-
+  const Router = useRouter();
   const toggleModal = () => {
     setIsOpen(!isOpen);
   };
   const [Regs, setRegs] = useState({
     email: "",
   });
-console.log("Regs",Regs)
-console.log("Regs",)
+  console.log("Regs", Regs)
+  console.log("Regs",)
   const handleInputs = (e) => {
     const value = e.target.value;
     const name = e.target.name;
@@ -31,9 +32,13 @@ console.log("Regs",)
     const main = new Details();
     try {
       const response = await main.ForgotEmail({ email: Regs.email });
-      if (response?.data?.status === "success") {
+      console.log("response", response)
+      if (response?.data?.status === true) {
         toast.success(response.data.message);
         toggleModal();
+        Router.push("/forget/password")
+      } else {
+        toast.error(response.data.message);
       }
       setLoading(false);
     } catch (error) {
@@ -47,7 +52,7 @@ console.log("Regs",)
       <div className="flex items-center justify-end ">
         <div
           onClick={toggleModal}
-          className="text-sm sm:text-lg text-[#1C5FE8] font-medium"
+          className="text-sm sm:text-lg text-[#1C5FE8] font-medium cursor-pointer"
         >
           Forgot Password ?
         </div>
@@ -75,9 +80,6 @@ console.log("Regs",)
             </div>
             <form>
               <div className="mb-4">
-                <label className="block text-sm font-[18px] text-black text-left color-[#2D3344] mb-[10px]">
-                  Email
-                </label>
                 <input
                   type="email"
                   name="email"
