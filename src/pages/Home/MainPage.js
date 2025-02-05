@@ -52,9 +52,7 @@ export default function MainPage() {
     <Layout>
       <div className="">
         {user && user?.role === "shipper" ? (
-          <>
             <ShipperDashboard/>
-          </>
         ) : user && user?.role === "broker" ? (
           <BrokerDashboard />
         ) : user && user?.role === "carrier" ? (

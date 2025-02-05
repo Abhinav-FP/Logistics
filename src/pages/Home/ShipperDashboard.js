@@ -147,7 +147,10 @@ export default function ShipperDashboard() {
         <h2 className="text-[#151547] text-lg tracking-[-0.04em] font-medium mb-4 lg:mb-5">
           Shipment Listing
         </h2>
-        <ShipmentTable shipments={data} />
+        <ShipmentTable shipments={listing?.ShipmentData} 
+        getShipments={getData}
+        DeleteOption={true}
+        role={"shipper"}/>
       </div>
     </>
   );
