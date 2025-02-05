@@ -106,6 +106,10 @@ class Details extends Component {
     return Api.get(`/user/dashboard`);
   }
 
+  async ForgotEmail() {
+    return Api.post(`/app/forget_email`);
+  }
+
   render() {
     return (
       <div>

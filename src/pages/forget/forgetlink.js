@@ -12,7 +12,8 @@ export default function FogetLinks() {
   const [Regs, setRegs] = useState({
     email: "",
   });
-
+console.log("Regs",Regs)
+console.log("Regs",)
   const handleInputs = (e) => {
     const value = e.target.value;
     const name = e.target.name;
@@ -29,11 +30,10 @@ export default function FogetLinks() {
     setLoading(true);
     const main = new Details();
     try {
-      const response = await main.ForgetPasswordLink(Regs);
+      const response = await main.ForgotEmail({ email: Regs.email });
       if (response?.data?.status === "success") {
         toast.success(response.data.message);
         toggleModal();
-      } else {
       }
       setLoading(false);
     } catch (error) {
@@ -47,7 +47,7 @@ export default function FogetLinks() {
       <div className="flex items-center justify-end ">
         <div
           onClick={toggleModal}
-           className="text-sm sm:text-lg text-[#1C5FE8] font-medium"
+          className="text-sm sm:text-lg text-[#1C5FE8] font-medium"
         >
           Forgot Password ?
         </div>
@@ -84,7 +84,7 @@ export default function FogetLinks() {
                   autocomplete="off"
                   onChange={handleInputs}
                   value={Regs.email}
-                       className="block w-full h-12 lg:h-[65px] px-3 py-3 bg-gray-100 text-[#727272] border border-transparent rounded-lg lg:rounded-[15px] sm:text-sm"
+                  className="block w-full h-12 lg:h-[65px] px-3 py-3 bg-gray-100 text-[#727272] border border-transparent rounded-lg lg:rounded-[15px] sm:text-sm"
                   placeholder="Enter the Email.."
                   required
                 />
@@ -92,7 +92,7 @@ export default function FogetLinks() {
               <div className="flex justify-end">
                 <button
                   onClick={handleForms}
-                 className="w-full py-3.5 px-4 bg-[#1C5FE8] text-white font-medium rounded-md lg:rounded-xl"
+                  className="w-full py-3.5 px-4 bg-[#1C5FE8] text-white font-medium rounded-md lg:rounded-xl"
                 >
                   {loading ? "Loading..." : "Send Link"}
                 </button>
