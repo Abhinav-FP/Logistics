@@ -1,108 +1,91 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
+import { createPortal } from "react-dom";
 
-const TableWithDropdown = () => {
-  const [isDropdownOpen, setIsDropdownOpen] = useState(null);
-  const [dropdownPosition, setDropdownPosition] = useState({ top: 0, left: 0 });
-  const buttonRefs = useRef([]);
-  const dropdownRefs = useRef([]);
+const ResponsiveTable = () => {
+  const [isdropdownopen, setIsdropdownopen] = useState(null);
+  const [dropdownPosition, setIsdropdownopendownPosition] = useState({ top: 0, left: 0 });
+  const dropdownRefs = useRef({});
+
+  const toogleButton = (id, event) => {
+    event.stopPropagation();
+    if (isdropdownopen === id) {
+      setIsdropdownopen(null);
+    } else {
+      const button = event.currentTarget;
+      const rect = button.getBoundingClientRect();
+      setIsdropdownopendownPosition({
+        top: rect.top + window.scrollY + button.offsetHeight,
+        left: rect.left + window.scrollX,
+      });
+      setIsdropdownopen(id);
+    }
+  };
 
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
-        !dropdownRefs.current.some(
-          (ref) => ref && ref.contains(event.target)
-        ) &&
-        !buttonRefs.current.some(
-          (ref) => ref && ref.contains(event.target)
-        )
+        isdropdownopen &&
+        dropdownRefs.current[isdropdownopen] &&
+        !dropdownRefs.current[isdropdownopen].contains(event.target)
       ) {
-        setIsDropdownOpen(null);
+        setIsdropdownopen(null);
       }
     };
-
     document.addEventListener("click", handleClickOutside);
-
     return () => {
       document.removeEventListener("click", handleClickOutside);
     };
-  }, []);
+  }, [isdropdownopen]);
 
-  const handleButtonClick = (index) => {
-    setIsDropdownOpen((prevState) => (prevState === index ? null : index));
-    if (isDropdownOpen !== index) {
-      positionDropdown(index);
-    }
-  };
-
-  const positionDropdown = (index) => {
-    const button = buttonRefs.current[index];
-    const dropdown = dropdownRefs.current[index];
-
-    if (button && dropdown) {
-      document.body.appendChild(dropdown);
-
-      const buttonRect = button.getBoundingClientRect();
-      setDropdownPosition({
-        top: buttonRect.bottom + window.scrollY,
-        left: buttonRect.left + window.scrollX,
-      });
-
-      dropdown.style.top = `${buttonRect.bottom + window.scrollY}px`;
-      dropdown.style.left = `${buttonRect.left + window.scrollX}px`;
-      dropdown.style.position = "absolute";
-    }
-  };
-
-  const rows = [
-    { id: 1, name: "John Doe", age: 28 },
-    { id: 2, name: "Jane Smith", age: 34 },
-    { id: 3, name: "Michael Johnson", age: 45 },
-  ];
+  const tableData = [1, 2, 3];
 
   return (
-    <div className="overflow-x-auto">
-      <table className="min-w-full table-auto border-collapse">
+    <div className="overflow-auto border rounded-md">
+      <table className="min-w-full border-collapse border border-gray-300">
         <thead>
-          <tr>
-            <th className="px-4 py-2 border-b">ID</th>
-            <th className="px-4 py-2 border-b">Name</th>
-            <th className="px-4 py-2 border-b">Age</th>
-            <th className="px-4 py-2 border-b">Actions</th>
+          <tr className="bg-gray-200">
+            <th className="p-2 border">#</th>
+            <th className="p-2 border">Actions</th>
+            {Array.from({ length: 11 }).map((_, index) => (
+              <th key={index} className="p-2 border">Table Heading</th>
+            ))}
           </tr>
         </thead>
         <tbody>
-          {rows.map((row, index) => (
-            <tr key={row.id} className="hover:bg-gray-100">
-              <td className="px-4 py-2 border-b">{row.id}</td>
-              <td className="px-4 py-2 border-b">{row.name}</td>
-              <td className="px-4 py-2 border-b">{row.age}</td>
-              <td className="px-4 py-2 border-b">
-                <div className="relative inline-block text-left">
-                  <button
-                    ref={(el) => (buttonRefs.current[index] = el)}
-                    onClick={() => handleButtonClick(index)}
-                    className="inline-flex justify-center w-full rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none"
-                  >
-                    Options
+          {tableData.map((item) => (
+            <tr key={item} className="bg-white">
+              <td className="p-2 border">{item}</td>
+              <td className="p-2 border relative">
+                <div className="inline-block">
+                  <button className="bg-red-500 text-white px-3 py-1 rounded-l-md">
+                    Action
                   </button>
-                  {isDropdownOpen === index && (
-                    <div
-                      ref={(el) => (dropdownRefs.current[index] = el)}
-                      className="bg-white text-gray-700 shadow-lg rounded-md mt-2 w-48 py-1 z-10"
-                    >
-                      <a href="#" className="block px-4 py-2 text-sm">
-                        Action 1
-                      </a>
-                      <a href="#" className="block px-4 py-2 text-sm">
-                        Action 2
-                      </a>
-                      <a href="#" className="block px-4 py-2 text-sm">
-                        Action 3
-                      </a>
-                    </div>
-                  )}
+                  <button
+                    className="bg-red-600 text-white px-3 py-1 rounded-r-md"
+                    onClick={(e) => toogleButton(item, e)}
+                  >
+                    ▼
+                  </button>
+                  {isdropdownopen === item &&
+                    createPortal(
+                      <ul
+                        ref={(el) => (dropdownRefs.current[item] = el)}
+                        className="absolute w-40 bg-white border rounded-md shadow-md z-10"
+                        style={{ top: `${dropdownPosition.top}px`, left: `${dropdownPosition.left}px`, position: "absolute" }}
+                      >
+                        <li className="p-2 hover:bg-gray-100 cursor-pointer">Action</li>
+                        <li className="p-2 hover:bg-gray-100 cursor-pointer">Another Action</li>
+                        <li className="p-2 hover:bg-gray-100 cursor-pointer">Something Else</li>
+                        <li className="border-t"></li>
+                        <li className="p-2 hover:bg-gray-100 cursor-pointer">Separated Link</li>
+                      </ul>,
+                      document.body
+                    )}
                 </div>
               </td>
+              {Array.from({ length: 11 }).map((_, index) => (
+                <td key={index} className="p-2 border">Table Cell</td>
+              ))}
             </tr>
           ))}
         </tbody>
@@ -111,4 +94,4 @@ const TableWithDropdown = () => {
   );
 };
 
-export default TableWithDropdown;
+export default ResponsiveTable;
