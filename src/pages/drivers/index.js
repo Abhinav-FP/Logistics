@@ -43,18 +43,18 @@ export default function Index() {
                     </Link>
                 </div>
 
-                <div className="bg-white mt-6 lg:mt-[30px] px-6 py-[30px] rounded-md lg:rounded-xl border border-black border-opacity-10">
+                <div className="bg-white mt-6 lg:mt-[30px] px-5 lg:px-6 py-5 lg:py-[30px] rounded-md lg:rounded-xl border border-black border-opacity-10">
                     <div className="overflow-x-auto">
                         {Loading ? (
                             <Loader />
                         ) : (<table className="w-full border-none">
                             <thead>
                                 <tr className="text-[#9090AD] bg-[#F4F6F8] border border-black border-opacity-10 uppercase ">
-                                    <th className="px-4 py-3  tracking-[-0.04em] text-sm font-medium text-left">Sr No</th>
-                                    <th className="px-4 py-3  tracking-[-0.04em] text-sm font-medium text-left">name</th>
-                                    <th className="px-4 py-3  tracking-[-0.04em] text-sm font-medium text-left">Email</th>
-                                    <th className="px-4 py-3  tracking-[-0.04em] text-sm font-medium text-left">Contact</th>
-                                    <th className="px-4 py-3  tracking-[-0.04em] text-sm font-medium text-left">VIN Number</th>
+                                    <th className="px-4 py-3  tracking-[-0.04em] text-sm font-medium text-left whitespace-nowrap">Sr No</th>
+                                    <th className="px-4 py-3  tracking-[-0.04em] text-sm font-medium text-left whitespace-nowrap">name</th>
+                                    <th className="px-4 py-3  tracking-[-0.04em] text-sm font-medium text-left whitespace-nowrap">Email</th>
+                                    <th className="px-4 py-3  tracking-[-0.04em] text-sm font-medium text-left whitespace-nowrap">Contact</th>
+                                    <th className="px-4 py-3  tracking-[-0.04em] text-sm font-medium text-left whitespace-nowrap">VIN Number</th>
                                 </tr>
                             </thead>
                             <tbody>
