@@ -20,6 +20,7 @@ import ConsignmentPopup from "@/components/ConsignmentPopup";
 import { createPortal } from "react-dom";
 import { MdStarRate } from "react-icons/md";
 import { MdOutlineNotListedLocation } from "react-icons/md";
+import NoData from "@/components/NoData";
 
 export default function ShipmentTable({
   shipments,
@@ -132,6 +133,7 @@ export default function ShipmentTable({
 
   return (
     <div className="overflow-x-auto">
+      {shipments && shipments?.length>0 ? 
       <table className="w-full border-none">
         <thead>
           <tr className="text-[#9090AD] bg-[#F4F6F8] border border-black border-opacity-10 uppercase">
@@ -495,7 +497,8 @@ export default function ShipmentTable({
               </tr>
             ))}
         </tbody>
-      </table>
+      </table> :
+       <NoData Heading={"No Data available"} content={"You don't have any data to view at the moment. Please come later"}/>}
       <Popup
         isOpen={isCarrierPopupOpen}
         onClose={closeCarrierPopup}

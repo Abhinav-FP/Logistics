@@ -3,6 +3,7 @@ import Layout from '@/layout/Layout'
 import React, { useEffect, useState } from 'react'
 import Details from '../api/Listing/Details';
 import Loader from '@/components/Loader';
+import NoData from '@/components/NoData';
 
 export default function Index() {
 
@@ -39,6 +40,7 @@ export default function Index() {
       </div>
       <div className="bg-white mt-6 lg:mt-[30px] px-6 py-[30px] rounded-md lg:rounded-xl border border-black border-opacity-10">
       <div className="overflow-x-auto">
+        {listing && listing?.length>0 ? 
       <table className="w-full border-none">
         <thead>
           <tr className="text-[#9090AD] bg-[#F4F6F8] border border-black border-opacity-10 uppercase ">
@@ -61,6 +63,8 @@ export default function Index() {
           ))}
         </tbody>
       </table>
+      :
+      <NoData Heading={"No Data available"} content={"You don't have any brokers listing to view at the moment"}/>}
     </div>
       </div>
       </>

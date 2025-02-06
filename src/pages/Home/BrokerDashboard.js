@@ -5,6 +5,7 @@ import RecentShipment from './RecentShipment';
 import Demo from "./Demo"
 import Details from '../api/Listing/Details';
 import ShipmentTable from './ShipmentTable';
+import Loader from '@/components/Loader';
 
 export default function BrokerDashboard() {
 
@@ -77,6 +78,10 @@ export default function BrokerDashboard() {
     return str.slice(0, charLimit) + "...";
   }
   return (
+    <>
+    {Loading ? (
+            <Loader />
+          ) : (
     <>
       {/* Header Section */}
       <br />
@@ -256,6 +261,7 @@ export default function BrokerDashboard() {
         role={"broker"}
         />
       </div>
+    </>)}
     </>
   );
 }

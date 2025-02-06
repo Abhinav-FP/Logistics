@@ -53,6 +53,9 @@ class Details extends Component {
   }
 
 
+  async getShipperShipment() {
+    return Api.get("/shipment/get-shipment-shipper");
+  }
   async getBrokerShipment() {
     return Api.get("/shipment/get-shipment-broker");
   }
