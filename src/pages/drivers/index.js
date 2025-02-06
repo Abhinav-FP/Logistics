@@ -29,10 +29,6 @@ export default function Index() {
     getusers();
   }, []);
 
-  const [isopen, sentIsopen] = useState(null);
-  const toogleButton = (id) => {
-    sentIsopen(isopen === id ? null : id);
-  };
   return (
     <Layout page={"Driver"}>
       <div>
