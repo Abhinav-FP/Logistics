@@ -24,6 +24,8 @@ export default function Index() {
         response = await main.getcarrierShipment();
       } else if (user?.role === "customer") {
         response = await main.getcustomerShipment("");
+      } else if (user?.role === "shipper") {
+        response = await main.getShipperShipment("");
       }else {
         response = await main.getShipment("");
       }

@@ -6,6 +6,7 @@ import UsersTable from "@/components/UsersTable";
 import Popup from "@/components/Popup";
 import Loader from "@/components/Loader";
 import { useRole } from "@/context/RoleContext";
+import NoData from "@/components/NoData";
 
 export default function Index() {
   const [listing, setLisitng] = useState("");
@@ -82,6 +83,7 @@ export default function Index() {
             </div>
             <div className="bg-white mt-6 lg:mt-[30px] px-6 py-[30px] rounded-md lg:rounded-xl border border-black border-opacity-10">
               <div className="overflow-x-auto">
+              {listing && listing?.length>0 ? 
                 <table className="w-full border-none">
                   <thead>
                     <tr className="text-[#9090AD] bg-[#F4F6F8] border border-black border-opacity-10 uppercase ">
@@ -134,6 +136,8 @@ export default function Index() {
                       ))}
                   </tbody>
                 </table>
+                :
+                <NoData Heading={"No Data available"} content={"You don't have any carrier listing to view at the moment"}/>}
               </div>
               {/* <UsersTable listing={listing} /> */}
             </div>
