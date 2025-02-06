@@ -42,7 +42,7 @@ export default function Delete({ step, Id, getShipments, role }) {
         <div className="flex flex-col">
             <button
                 onClick={toggleModal}
-                className=' gap-[10px] m-auto font-[manrope] font-[600] text-black text-[18px]'
+                className='m-auto font-[manrope] font-[600] text-black text-[18px]'
             >
                 <MdDelete size={24} className='text-red-600 hover:text-red-700' />
             </button>
