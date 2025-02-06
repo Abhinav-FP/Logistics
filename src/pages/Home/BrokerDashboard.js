@@ -196,7 +196,19 @@ export default function BrokerDashboard() {
             <div className='mb-4 lg:mb-6'>
               <iframe
                 className='rounded-md md:rounded-xl w-full border-0'
-                src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d2510041.546925639!2d-5.405544239113983!3d52.09406503175645!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e0!4m5!1s0x487bc2b6df4b4ebb%3A0x435f66ea8a40e5fa!2s40%20Broomfield%20Ave%2C%20Halifax%2C%20UK!3m2!1d53.7050426!2d-1.8706405!4m5!1s0x486b79ecb050b0bf%3A0xd5cb6cfda4810baf!2sHellandbridge%2C%20Bodmin%20PL30%204QR%2C%20UK!3m2!1d50.510976899999996!2d-4.7311059!5e0!3m2!1sen!2sin!4v1737700026096!5m2!1sen!2sin"
+                src={`https://www.google.com/maps/embed/v1/directions?key=${
+                  process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY
+                }&origin=${
+                  (listing &&
+                    listing?.ShipmentData &&
+                    listing?.ShipmentData[0]?.pickup_location) ||
+                  ""
+                }&destination=${
+                  (listing &&
+                    listing?.ShipmentData &&
+                    listing?.ShipmentData[0]?.drop_location) ||
+                  ""
+                }&mode=driving`}
                 width="100%" height="224" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
               </iframe>
             </div>
