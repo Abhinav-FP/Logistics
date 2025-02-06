@@ -94,7 +94,7 @@ export default function Index() {
             </h3>
             <button
               type="submit"
-              className="flex gap-2 items-center bg-[#1C5FE8] hover:bg-[#0a3fab] font-medium text-base text-white tracking-[-0.04em] rounded-lg lg:rounded-xl px-5 py-3"
+              className="flex gap-2 items-center bg-[#1C5FE8] hover:bg-[#0a3fab] font-medium text-base text-white tracking-[-0.04em] rounded-lg lg:rounded-xl px-4 md:px-5 py-2.5 md:py-3"
             >
               <IoBookmark size={18} color={"#ffff"} /> Save
             </button>
@@ -102,12 +102,12 @@ export default function Index() {
           <div className="space-y-4 lg:space-y-5">
             {/* Carrier Information */}
             <div className="bg-white rounded-xl border border-black border-opacity-10 ">
-              <div className="py-6 px-[30px] border-b border-black border-opacity-10">
+              <div className="py-5 lg:py-6 px-5 lg:px-[30px] border-b border-black border-opacity-10">
                 <h4 className="text-[#151547] text-lg tracking-[-0.04em] font-medium m-0">
                   Carrier Information
                 </h4>
               </div>
-              <div className="py-6 px-[30px]">
+              <div className="py-5 lg:py-6 px-5 lg:px-[30px]">
                 <div className="flex flex-wrap -mx-2 lg:-mx-3">
                   <div className="w-full md:w-6/12 px-2 lg:px-3 mb-4 lg:mb-6">
                     <label className="text-[#70708D] text-sm tracking-[-0.04em] uppercase mb-2 block">

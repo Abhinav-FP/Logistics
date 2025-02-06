@@ -19,6 +19,7 @@ export default function Index() {
     shippingDate: "",
     deliveryDate: "",
     estimatedCost: "",
+    
     paymentStatus: "",
     brokerName: "",
     typeOfGoods: "",
@@ -85,6 +86,7 @@ export default function Index() {
       weight: formData.weight,
       dimensions: `${formData.dimensions1} x ${formData.dimensions2}`,
       typeOfGoods: formData.typeOfGoods,
+      current_location:formData.pickup
     });
     response
       .then((res) => {

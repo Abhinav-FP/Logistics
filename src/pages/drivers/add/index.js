@@ -82,12 +82,12 @@ export default function Index() {
           <div className="space-y-4 lg:space-y-5">
             {/* Carrier Information */}
             <div className="bg-white rounded-xl border border-black border-opacity-10 ">
-              <div className="py-6 px-[30px] border-b border-black border-opacity-10">
+              <div className="px-5 lg:px-6 py-5 lg:py-[30px] border-b border-black border-opacity-10">
                 <h4 className="text-[#151547] text-lg tracking-[-0.04em] font-medium m-0">
                   Driver Details
                 </h4>
               </div>
-              <div className="py-6 px-[30px]">
+              <div className="px-5 lg:px-6 py-5 lg:py-[30px]">
                 <div className="flex flex-wrap -mx-2 lg:-mx-3">
                   <div className="w-full md:w-6/12 px-2 lg:px-3 mb-4 lg:mb-6">
                     <label className="text-[#70708D] text-sm tracking-[-0.04em] uppercase mb-2 block">
