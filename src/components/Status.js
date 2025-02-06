@@ -13,7 +13,6 @@ const Status = ({ status }) => {
 
   const getStatusStyles = (status) => statusStyles[status?.toLowerCase()] || "";
 
-
   return (
     <div
       className={`px-2 py-1 ${getStatusStyles(status)} flex justify-center items-center rounded-md  capitalize`}
