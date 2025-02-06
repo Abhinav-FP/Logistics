@@ -18,7 +18,9 @@ import Delete from "@/components/Delete";
 import DriverAssign from "@/components/DriverAssign";
 import ConsignmentPopup from "@/components/ConsignmentPopup";
 import { createPortal } from "react-dom";
-import { MdStarRate } from "react-icons/md";    
+import { MdStarRate } from "react-icons/md";
+import { MdOutlineNotListedLocation } from "react-icons/md";
+
 export default function ShipmentTable({
   shipments,
   getShipments,
@@ -125,6 +127,9 @@ export default function ShipmentTable({
         console.log("error", error);
       });
   }
+
+  console.log("data",data);
+
   return (
     <div className="overflow-x-auto">
       <table className="w-full border-none">
@@ -187,7 +192,6 @@ export default function ShipmentTable({
 
                 {role === "shipper" ? (
                   <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">
-                    {DeleteOption ? (
                       <div className="flex gap-2 items-center">
                         <FaEye
                           size={20}
@@ -205,15 +209,16 @@ export default function ShipmentTable({
                             color="#16A34A"
                           />
                         </Link>
+                        <MdOutlineNotListedLocation size={24}
+                          className="cursor-pointer"
+                          color="#3b82f6"
+                          onClick={() => {
+                            setData(shipment);
+                            openSidePopup();
+                          }}
+                          />
                         <Delete step={1} Id={shipment?._id} getShipments={getShipments} role={role} />
                       </div>
-                    ) : (
-                      <HiOutlineDotsHorizontal
-                        size={20}
-                        color="#9090AD"
-                        className="cursor-pointer"
-                      />
-                    )}
                   </td>
                 ) : role === "broker" ? (
                   <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">
@@ -294,18 +299,6 @@ export default function ShipmentTable({
                                   }}
                                 >
                                   Tracking <IoInformationCircleOutline size={18} />
-                                </button>
-                              </li>
-
-                              <li className="py-2 tracking-[-0.04em] [&:not(:last-child)]:border-b border-black border-opacity-10 px-4 lg:px-6">
-                                <button
-                                  className="flex gap-2 items-center text-[#1B1B1B] bg-transparent border-none text-sm font-medium"
-                                  onClick={() => {
-                                    ConsignmentOpen();
-                                    setIsdropdownopen(null);
-                                  }}
-                                >
-                                  Consignment Confirmation <BsFileCheck size={18} />
                                 </button>
                               </li>
                             </ul>
@@ -570,29 +563,27 @@ export default function ShipmentTable({
       </Popup>
       <Sidepopup isOpen={isSidePopupOpen} onClose={closeSidePopup}>
         <div className="px-8 pt-12 pb-8 flex justify-between items-center">
-          <h2 className="text-[#151547] text-medium text-lg md:text-2xl tracking-[-0.04em]">SD-752069247</h2>
-          <Link href="/" className="inline-block text-[#1C5FE8] px-3 py-2 border border-[#1C5FE81A] rounded-md lg:rounded-xl hover:bg-gray-100 focus:outline-none focus:ring focus:ring-offset-.5 focus:ring-[#1C5FE8]"> View Driver’s details
-          </Link>
+          <h2 className="text-[#151547] text-medium text-lg md:text-2xl tracking-[-0.04em]">{data?.name}</h2>
+          <button onClick={()=>{setActiveTab("vehicleInfo")}} className="inline-block text-[#1C5FE8] px-3 py-2 border border-[#1C5FE81A] rounded-md lg:rounded-xl hover:bg-gray-100 focus:outline-none focus:ring focus:ring-offset-.5 focus:ring-[#1C5FE8]"> View Driver’s details
+          </button>
         </div>
 
         <div className="border-b border-black border-opacity-10 px-6">
           <ul className="flex">
             <li><button onClick={() => setActiveTab("shippingInfo")} className={`px-4 py-2.5 text-[#646567] tracking-[-0.04em] text-base font-medium ${activeTab === "shippingInfo" ? "border-b border-[#1C5FE8]" : "border-b border-[#1C5FE8] border-opacity-0"}`}> Shipping Info</button></li>
-            <li><button onClick={() => setActiveTab("vehicleInfo")} className={`px-4 py-2.5 text-[#646567] tracking-[-0.04em] text-base font-medium ${activeTab === "vehicleInfo" ? "border-b border-[#1C5FE8]" : "border-b border-[#1C5FE8] border-opacity-0"}`}>Shipping Info</button></li>
+            <li><button onClick={() => setActiveTab("vehicleInfo")} className={`px-4 py-2.5 text-[#646567] tracking-[-0.04em] text-base font-medium ${activeTab === "vehicleInfo" ? "border-b border-[#1C5FE8]" : "border-b border-[#1C5FE8] border-opacity-0"}`}>Driver Info</button></li>
             {/* <li><button onClick={() => setActiveTab("document")} className={`px-4 py-2.5 text-[#646567] tracking-[-0.04em] text-base font-medium ${activeTab === "document" ? "border-b border-[#1C5FE8]" : "border-b border-[#1C5FE8] border-opacity-0"}`} >Document</button></li>
             <li><button onClick={() => setActiveTab("billing")} className={`px-4 py-2.5 text-[#646567] tracking-[-0.04em] text-base font-medium ${activeTab === "billing" ? "border-b border-[#1C5FE8]" : "border-b border-[#1C5FE8] border-opacity-0"}`} >Billing</button></li> */}
           </ul>
         </div>
         <div className="p-4 lg:p-6">
           {activeTab === "shippingInfo" &&
-            <TrackingMap />
+            <TrackingMap data={data}/>
           }
           {activeTab === "vehicleInfo" && <div>
-            <VehicalInfo />
+            <VehicalInfo data={data}/>
 
           </div>}
-          {/* {activeTab === "document" && <div>document Information Content</div>}
-            {activeTab === "billing" && <div>document Information Content</div>} */}
         </div>
 
 

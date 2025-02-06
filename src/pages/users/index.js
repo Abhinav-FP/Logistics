@@ -48,7 +48,6 @@ console.log("listing",listing)
       </div>
       <div className="bg-white mt-6 lg:mt-[30px] px-6 py-[30px] rounded-md lg:rounded-xl border border-black border-opacity-10">
         <UsersTable listing={listing} />
-     
       </div>
       </>
       }

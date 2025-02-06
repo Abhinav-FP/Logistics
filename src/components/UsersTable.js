@@ -19,12 +19,12 @@ export default function UsersTable({ listing }) {
           {listing && listing?.map((data, index) => (
             <tr key={index} className="border-b border-black border-opacity-10 font-medium">
               <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">{index + 1}</td>
-              <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left capitalize">{data?.user_id_ref.name}</td>
-              <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left capitalize">{data?.user_id_ref.role}</td>
-              <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">{data?.user_id_ref.email}</td>
-              <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">{data.address}</td>
+              <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left capitalize">{data?.user_id_ref?.name}</td>
+              <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left capitalize">{data?.user_id_ref?.role}</td>
+              <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">{data?.user_id_ref?.email}</td>
+              <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">{data?.address}</td>
 
-              <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">{data?.user_id_ref.contact}</td>
+              <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">{data?.user_id_ref?.contact}</td>
             </tr>
           ))}
         </tbody>
