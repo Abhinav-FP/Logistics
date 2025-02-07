@@ -43,7 +43,6 @@ const MapComponent = ({ EndLocation, StartLocation, CurrentLocation, routeDetail
         if (CurrentLocation.length > 0) return { lat: CurrentLocation[0].lat, lng: CurrentLocation[0].lng };
         if (StartLocation) return { lat: StartLocation.lat, lng: StartLocation.lng };
         if (EndLocation) return { lat: EndLocation.lat, lng: EndLocation.lng };
-        return { lat: 26.9353531, lng: 75.7973631 };
     };
 
     return (
@@ -62,6 +61,7 @@ const MapComponent = ({ EndLocation, StartLocation, CurrentLocation, routeDetail
                             icon={markerIcons.start}
                         />
                     )}
+
 
                     {EndLocation && (
                         <CustomMarker
