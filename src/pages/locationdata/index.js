@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import LocatinTracker from '../tracklocation/index';
 
 export default function Index() {
     // const Start_coordinates = { lat: 26.9178958, lng: 75.8500819 };
@@ -20,13 +19,13 @@ export default function Index() {
                 <p className="text-lg">Destination Coordinates: {`${End_coordinates.lat}, ${End_coordinates.lng}`}</p>
             </div>
 
-            <div>
+            {/* <div>
                 <LocatinTracker
                     Start_coordinates={Start_coordinates}
                     Current_coordinates={Current_coordinates}
                     End_coordinates={End_coordinates}
                 />
-            </div>
+            </div> */}
 
         </div>
     );

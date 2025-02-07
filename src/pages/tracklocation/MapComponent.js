@@ -40,9 +40,9 @@ const MapComponent = ({ EndLocation, StartLocation, CurrentLocation, routeDetail
     };
 
     const centerMap = () => {
-        if (CurrentLocation.length > 0) return { lat: CurrentLocation[0].lat, lng: CurrentLocation[0].lng };
-        if (StartLocation) return { lat: StartLocation.lat, lng: StartLocation.lng };
-        if (EndLocation) return { lat: EndLocation.lat, lng: EndLocation.lng };
+        if (CurrentLocation?.length > 0) return { lat: CurrentLocation[0]?.lat, lng: CurrentLocation[0]?.lng };
+        if (StartLocation) return { lat: StartLocation?.lat, lng: StartLocation?.lng };
+        if (EndLocation) return { lat: EndLocation?.lat, lng: EndLocation?.lng };
     };
 
     return (
@@ -70,12 +70,12 @@ const MapComponent = ({ EndLocation, StartLocation, CurrentLocation, routeDetail
                         />
                     )}
 
-                    {CurrentLocation.length > 0 && (
+                    {CurrentLocation && CurrentLocation?.length > 0 && (
                         <CustomMarker
-                            key={CurrentLocation.length - 1}
+                            key={CurrentLocation?.length - 1}
                             position={{
-                                lat: CurrentLocation[CurrentLocation.length - 1].lat,
-                                lng: CurrentLocation[CurrentLocation.length - 1].lng
+                                lat: CurrentLocation[CurrentLocation?.length - 1].lat,
+                                lng: CurrentLocation[CurrentLocation?.length - 1].lng
                             }}
                             icon={markerIcons.current}
                         />
@@ -84,7 +84,7 @@ const MapComponent = ({ EndLocation, StartLocation, CurrentLocation, routeDetail
                     <>
                         {routeDetails?.StartToEndPolyline && (
                             <Polyline
-                                path={decodePolyline(routeDetails.StartToEndPolyline)}
+                                path={decodePolyline(routeDetails?.StartToEndPolyline)}
                                 options={{
                                     strokeColor: '#000000',
                                     strokeOpacity: 0.7,
@@ -95,7 +95,7 @@ const MapComponent = ({ EndLocation, StartLocation, CurrentLocation, routeDetail
 
                         {routeDetails?.EndToCurrentPolyline && (
                             <Polyline
-                                path={decodePolyline(routeDetails.EndToCurrentPolyline)}
+                                path={decodePolyline(routeDetails?.EndToCurrentPolyline)}
                                 options={{
                                     strokeColor: '#FF0000',
                                     strokeOpacity: 0.5,
@@ -106,7 +106,7 @@ const MapComponent = ({ EndLocation, StartLocation, CurrentLocation, routeDetail
 
                         {routeDetails?.CurrentToEndPolyline && (
                             <Polyline
-                                path={decodePolyline(routeDetails.CurrentToEndPolyline)}
+                                path={decodePolyline(routeDetails?.CurrentToEndPolyline)}
                                 options={{
                                     strokeColor: '#00FF00',
                                     strokeOpacity: 0.5,

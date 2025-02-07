@@ -127,6 +127,8 @@ export default function ShipmentTable({
       });
   }
 
+  console.log("data",data);
+
 
   return (
     <div className="overflow-x-auto">
