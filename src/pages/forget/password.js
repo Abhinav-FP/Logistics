@@ -65,7 +65,6 @@ export default function ForgetPassword() {
     }
 
     setLoading(true);
-    console.log("ggeeg  ")
     const main = new Details();
     try {
       const response = await main.ForgotPassword({

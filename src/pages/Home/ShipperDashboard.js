@@ -28,7 +28,6 @@ export default function ShipperDashboard() {
   useEffect(() => {
     getData();
   }, []);
-  console.log("listing", listing);
   const metrics = [
     {
       title: "Pending",

@@ -31,7 +31,6 @@ export default function BrokerDashboard() {
   useEffect(() => {
     getData();
   }, []);
-  console.log("listing",listing);
 
   const metrics = [
     {

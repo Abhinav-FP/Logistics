@@ -2,7 +2,7 @@ import React from "react";
 
 const Status = ({ status }) => {
   const statusStyles = {
-    "in transit": "bg-[#C2970A1A] text-[#C2970A]",
+    "transit": "bg-[#C2970A1A] text-[#C2970A]",
     "payondelivery": "bg-[#C2970A1A] text-[#C2970A]",
     "delivered": "bg-[#0BB6351A] text-[#0BB635]",
     "done": "bg-[#0BB6351A] text-[#0BB635]",

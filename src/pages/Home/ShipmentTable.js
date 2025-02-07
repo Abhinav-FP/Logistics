@@ -28,7 +28,6 @@ export default function ShipmentTable({
   DeleteOption = false,
   role,
 }) {
-  console.log("role", role);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isCarrierPopupOpen, setIsCarrierPopupOpen] = useState(false);
   const [isSidePopupOpen, setIsSidePopupOpen] = useState(false);
@@ -37,7 +36,6 @@ export default function ShipmentTable({
   const [listing, setLisitng] = useState("");
   const [selectedCarrier, setSelectedCarrier] = useState();
   const [selectedShipment, setselectedShipment] = useState();
-
   const [dropdownPosition, setIsdropdownopendownPosition] = useState({ top: 0, left: 0 });
   const dropdownRefs = useRef({});
   const toogleButton = (id, e) => {
@@ -129,7 +127,6 @@ export default function ShipmentTable({
       });
   }
 
-  console.log("data",data);
 
   return (
     <div className="overflow-x-auto">
@@ -211,7 +208,7 @@ export default function ShipmentTable({
                             color="#16A34A"
                           />
                         </Link>
-                        {!shipment?.status === "transit" &&
+                        {/* {shipment?.status === "transit" && */}
                         <MdOutlineNotListedLocation size={24}
                           className="cursor-pointer"
                           color="#3b82f6"
@@ -219,7 +216,8 @@ export default function ShipmentTable({
                             setData(shipment);
                             openSidePopup();
                           }}
-                          />}
+                          />
+                          {/* // } */}
                         <Delete step={1} Id={shipment?._id} getShipments={getShipments} role={role} />
                       </div>
                   </td>
@@ -279,7 +277,7 @@ export default function ShipmentTable({
                                 </button>
 
                               </li>
-                              {!shipment?.carrier_id &&
+                              {shipment?.carrier_id &&
                                 <li className="py-2 tracking-[-0.04em] [&:not(:last-child)]:border-b border-black border-opacity-10 px-4 lg:px-6">
                                   <button
                                     className="flex gap-2 text-[#1B1B1B] bg-transparent border-none text-sm font-medium"
@@ -298,6 +296,7 @@ export default function ShipmentTable({
                                 <button
                                   className="flex gap-2 items-center text-[#1B1B1B] bg-transparent border-none text-sm font-medium"
                                   onClick={() => {
+                                    setData(shipment);
                                     openSidePopup();
                                     setIsdropdownopen(null);
                                   }}
@@ -377,11 +376,12 @@ export default function ShipmentTable({
                                 <DriverAssign Id={shipment?._id} CarrierId={shipment?.carrier_id} getShipments={getShipments} role={role} />
                               </li>
                             )}
-                             {!shipment?.status === "transit" &&
+                             {shipment?.status === "transit" &&
                             <li className="py-2 tracking-[-0.04em] [&:not(:last-child)]:border-b border-black border-opacity-10 px-4 lg:px-6">
                               <button
                                 className="flex gap-2 items-center text-[#1B1B1B] bg-transparent border-none text-sm font-medium"
                                 onClick={() => {
+                                  setData(shipment);
                                   openSidePopup();
                                   setIsdropdownopen(null);
                                 }}
@@ -456,11 +456,12 @@ export default function ShipmentTable({
                               View <IoInformationCircleOutline size={18} />
                             </button>
                           </li>
-                          {!shipment?.status === "transit" &&
+                          {shipment?.status == "transit" &&
                           <li className="py-2 tracking-[-0.04em] [&:not(:last-child)]:border-b border-black border-opacity-10 px-4 lg:px-6">
                             <button
                               className="flex gap-2 items-center text-[#1B1B1B] bg-transparent border-none text-sm font-medium"
                               onClick={() => {
+                                setData(shipment);
                                 openSidePopup();
                                 setIsdropdownopen(null);
                               }}

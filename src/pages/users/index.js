@@ -12,7 +12,6 @@ export default function Index() {
   const [listing, setLisitng] = useState("");
   const [Loading, setLoading] = useState(false);
   const router = useRouter(); 
-console.log("listing",listing)
   const getusers = () => {
     setLoading(true);
     const main = new Details();
