@@ -215,9 +215,9 @@ export default function ShipmentTable({
                   {shipment?.deliveryDateExpect}
                 </td>
 
-                <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">
+                {/* <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">
                   {shipment?.driverAccept}
-                </td>
+                </td> */}
 
                 {role === "shipper" ? (
                   <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">
