@@ -1,6 +1,7 @@
 import Popup from "@/components/Popup";
 import React, { useEffect, useState, useRef } from "react";
-import { FaEdit, FaEye } from "react-icons/fa";
+import { FaEye } from "react-icons/fa";
+import { GrEdit } from "react-icons/gr";
 import Details from "../api/Listing/Details";
 import toast from "react-hot-toast";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
@@ -136,28 +137,28 @@ export default function ShipmentTable({
       <table className="w-full border-none">
         <thead>
           <tr className="text-[#9090AD] bg-[#F4F6F8] border border-black border-opacity-10 uppercase">
-            <th className="px-4 py-3 tracking-[-0.04em] text-sm font-medium text-left">
+            <th className="px-4 py-3 tracking-[-0.04em] text-sm font-medium text-left whitespace-nowrap">
               Shipment ID
             </th>
-            <th className="px-4 py-3 tracking-[-0.04em] text-sm font-medium text-left">
+            <th className="px-4 py-3 tracking-[-0.04em] text-sm font-medium text-left whitespace-nowrap">
               Title
             </th>
-            <th className="px-4 py-3 tracking-[-0.04em] text-sm font-medium text-left">
+            <th className="px-4 py-3 tracking-[-0.04em] text-sm font-medium text-left whitespace-nowrap">
               Pickup Location
             </th>
-            <th className="px-4 py-3 tracking-[-0.04em] text-sm font-medium text-left">
+            <th className="px-4 py-3 tracking-[-0.04em] text-sm font-medium text-left whitespace-nowrap">
               Delivery Location
             </th>
-            <th className="px-4 py-3 tracking-[-0.04em] text-sm font-medium text-left">
+            <th className="px-4 py-3 tracking-[-0.04em] text-sm font-medium text-left whitespace-nowrap">
               Status
             </th>
-            <th className="px-4 py-3 tracking-[-0.04em] text-sm font-medium text-left">
+            <th className="px-4 py-3 tracking-[-0.04em] text-sm font-medium text-left whitespace-nowrap">
               Shipment Date
             </th>
-            <th className="px-4 py-3 tracking-[-0.04em] text-sm font-medium text-left">
+            <th className="px-4 py-3 tracking-[-0.04em] text-sm font-medium text-left whitespace-nowrap">
               Expected Delivery
             </th>
-            <th className="px-4 py-3 tracking-[-0.04em] text-sm font-medium text-left">
+            <th className="px-4 py-3 tracking-[-0.04em] text-sm font-medium text-left whitespace-nowrap">
               Action
             </th>
           </tr>
@@ -195,17 +196,17 @@ export default function ShipmentTable({
                   <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">
                       <div className="flex gap-2 items-center">
                         <FaEye
-                          size={20}
+                          size={18}
                           className="cursor-pointer"
-                          color="#3b82f6"
+                          color="#000"
                           onClick={() => {
                             setData(shipment);
                             openPopup();
                           }}
                         />
                         <Link href={`/shipment/add/${shipment?._id}`}>
-                          <FaEdit
-                            size={20}
+                          <GrEdit 
+                            size={18}
                             className="cursor-pointer"
                             color="#16A34A"
                           />

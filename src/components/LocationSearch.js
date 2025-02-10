@@ -103,7 +103,7 @@ function LocationSearch({ name, formData, setFormData }) {
         name={name}
         value={formData[name] || ""}
         onChange={handleInput}
-        className="w-full h-11 lg:h-[48px] appearance-none block bg-white text-[#000] text-base border border-black border-opacity-10 rounded-md lg:rounded-xl py-2 px-4 leading-tight focus:outline-none"
+        className="w-full h-11 lg:h-[48px] appearance-none block bg-white text-[#000] text-base border border-black border-opacity-10 rounded-md lg:rounded-xl py-2 px-4 pr-12 leading-tight focus:outline-none bg-no-repeat "
         placeholder={`Enter ${name} location`}
       />
       <button
