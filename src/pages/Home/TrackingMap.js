@@ -6,7 +6,7 @@ import MapComponent from '../tracklocation/MapComponent';
 import Details from '../api/Listing/Details';
 
 export default function TrackingMap({ data }) {
-
+console.log("tracing ,map " ,data)
   const [routeDetails, setRouteDetails] = useState(null);
   const [status, setStatus] = useState(true);
   const [CurrentLocation, setCurrentLocation] = useState([]);
@@ -48,6 +48,7 @@ export default function TrackingMap({ data }) {
       </div>
       <div class="mb-3 lg:mb-4">
         <MapComponent
+        driverAccept={data?.driverAccept}
           EndLocation={EndLocation}
           routeDetails={routeDetails}
           StartLocation={StartLocation}
