@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { IoCloseSharp } from "react-icons/io5";
-import { MdDelete } from "react-icons/md";
+import { RiDeleteBin6Line } from "react-icons/ri";
 import toast from 'react-hot-toast';
 import Details from '@/pages/api/Listing/Details';
 
@@ -44,7 +44,7 @@ export default function Delete({ step, Id, getShipments, role }) {
                 onClick={toggleModal}
                 className='m-auto font-[manrope] font-[600] text-black text-[18px]'
             >
-                <MdDelete size={24} className='text-red-600 hover:text-red-700' />
+                <RiDeleteBin6Line size={18} className='text-red-600 hover:text-red-700' />
             </button>
             {/* Modal */}
             {isOpen && (

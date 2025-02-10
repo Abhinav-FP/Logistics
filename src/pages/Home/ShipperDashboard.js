@@ -113,7 +113,7 @@ export default function ShipperDashboard() {
               ))}
             </div>
           </div>
-          <div className="bg-white mt-6 lg:mt-[30px] px-6 py-[30px] rounded-md lg:rounded-xl border border-black border-opacity-10">
+          <div className="bg-white mt-6 lg:mt-[30px] px-5 lg:px-6 py-5 lg:py-[30px] rounded-md lg:rounded-xl border border-black border-opacity-10">
             <h2 className="text-[#151547] text-lg tracking-[-0.04em] font-medium mb-4 lg:mb-5">
               Shipment Listing
             </h2>
