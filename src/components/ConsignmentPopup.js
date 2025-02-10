@@ -1,8 +1,40 @@
 import React, { useState } from 'react'
 import Popup from './Popup';
+import Details from '@/pages/api/Listing/Details';
+import toast from 'react-hot-toast';
 
-export default function ConsignmentPopup({ isOpen, onClose }) {
+export default function ConsignmentPopup({ isOpen, onClose, data, getShipments }) {
     const[condition,setCondition]=useState("expected");
+    const[loading,setLoading]=useState(false);
+    console.log("data",data);
+    console.log("condition",condition);
+
+    const submitRating = () => {
+        if(loading){return;}
+        setLoading(true);
+        const main = new Details();
+        const response = main.UpdateShipment(data?._id, {
+            review: condition,
+        });
+        response
+          .then((res) => {
+            if (res && res?.data && res?.data?.status) {
+              toast.success("Rating submitting successfully");
+              onClose();
+              getShipments();
+              setLoading(false);
+            } else {
+              toast.error(res.data.message);
+              setLoading(false);
+            }
+          })
+          .catch((error) => {
+            toast.error(error?.response?.data?.message);
+            console.log("error", error);
+            setLoading(false);
+          });
+      }
+
     return (
         <Popup isOpen={isOpen} onClose={onClose} size={"max-w-[856px]"}>
             <div className='py-6 p-6 md:px-8 lg:px-16'>
@@ -58,8 +90,14 @@ export default function ConsignmentPopup({ isOpen, onClose }) {
                     <img className='max-w-full mx-auto block' src='images/PDF-modal.png' alt='img' />
                 </div>
                 <div className='flex flex-wrap justify-center items-center gap-3 lg:gap-5 mt-6'>
-                    <button className='bg-[#1C5FE8] hover:bg-[#0a3fab] border boder-[#1C5FE8] hover:boder-[#0a3fab]  inline-block font-medium text-base text-white tracking-[-0.04em] rounded-lg lg:rounded-xl px-16 py-3 uppercase'>Confirm</button>
-                    <button className='bg-white hover:bg-[#0a3fab] border boder-black border-opacity-10 inline-block font-medium text-base text-[#1B1B1B] hover:text-white tracking-[-0.04em] rounded-lg lg:rounded-xl px-16 py-3 uppercase'>cancel</button>
+                    <button className='bg-[#1C5FE8] hover:bg-[#0a3fab] border boder-[#1C5FE8] hover:boder-[#0a3fab]  inline-block font-medium text-base text-white tracking-[-0.04em] rounded-lg lg:rounded-xl px-16 py-3 uppercase'
+                    onClick={()=>{submitRating()}}
+                    >
+                       {loading ? "Submitting..." : "Confirm" }
+                        </button>
+                    <button className='bg-white hover:bg-[#0a3fab] border boder-black border-opacity-10 inline-block font-medium text-base text-[#1B1B1B] hover:text-white tracking-[-0.04em] rounded-lg lg:rounded-xl px-16 py-3 uppercase'
+                    onClick={()=>{onClose()}}
+                    >cancel</button>
                 </div> 
             </div>
         </Popup>

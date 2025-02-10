@@ -472,11 +472,12 @@ export default function ShipmentTable({
                             </button>
                           </li>}
                           {/* {true && ( */}
-                          {shipment?.status === "delivered" && (
+                          {/* {shipment?.status === "delivered" && ( */}
                             <li className="py-2 tracking-[-0.04em] [&:not(:last-child)]:border-b border-black border-opacity-10 px-4 lg:px-6">
                               <button
                                 className="flex gap-2 items-center text-[#1B1B1B] bg-transparent border-none text-sm font-medium"
                                 onClick={() => {
+                                  setData(shipment);
                                   ConsignmentOpen();
                                   setIsdropdownopen(null);
                                 }}
@@ -486,7 +487,7 @@ export default function ShipmentTable({
                                 {/* <IoInformationCircleOutline size={18} /> */}
                               </button>
                             </li>
-                          )}
+                          {/* )} */}
                         </ul>
                         </div>
                         ,
@@ -599,7 +600,7 @@ export default function ShipmentTable({
 
       </Sidepopup>
       <ViewShipment isOpen={isPopupOpen} onClose={closePopup} data={data} />
-      <ConsignmentPopup isOpen={isConsignmentOpen} onClose={closeConsignment} />
+      <ConsignmentPopup isOpen={isConsignmentOpen} onClose={closeConsignment} data={data} getShipments={getShipments}/>
     </div>
   );
 }
