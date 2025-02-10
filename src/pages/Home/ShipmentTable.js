@@ -151,7 +151,7 @@ export default function ShipmentTable({
     }
   };
 
-  console.log("data",data);
+  console.log("shipments",shipments);
 
 
   return (
@@ -213,6 +213,10 @@ export default function ShipmentTable({
                 </td>
                 <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">
                   {shipment?.deliveryDateExpect}
+                </td>
+
+                <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">
+                  {shipment?.driverAccept}
                 </td>
 
                 {role === "shipper" ? (
