@@ -128,6 +128,29 @@ export default function ShipmentTable({
       });
   }
 
+  const handleDownloadBOL = async (shipmentId) => {
+    const detailsService = new Details();
+  
+    try {
+      const response = await detailsService.getBOL(shipmentId);
+      
+      // Create a blob from the response data
+      const blob = new Blob([response.data], { type: "application/pdf" });
+      
+      // Create a temporary link element
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "BOL.pdf"; // Set file name
+  
+      // Append to document, trigger download, and remove element
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (error) {
+      console.error("Error downloading BOL:", error);
+    }
+  };
+
   console.log("data",data);
 
 
@@ -262,7 +285,10 @@ export default function ShipmentTable({
                           >
                             <ul>
                               <li className="py-2 tracking-[-0.04em] [&:not(:last-child)]:border-b border-black border-opacity-10 px-4 lg:px-6">
-                                <button className="flex gap-2 text-[#1B1B1B] bg-transparent border-none text-sm font-medium">
+                                <button className="flex gap-2 text-[#1B1B1B] bg-transparent border-none text-sm font-medium"
+                                onClick={()=>{
+                                  handleDownloadBOL(shipment?._id);
+                                }}>
                                   Download PDF{" "}
                                   <BsDownload size={18} color="#1C5FE8" />
                                 </button>
@@ -354,7 +380,10 @@ export default function ShipmentTable({
                           >
                           <ul>
                             <li className="py-2 tracking-[-0.04em] [&:not(:last-child)]:border-b border-black border-opacity-10 px-4 lg:px-6">
-                              <button className="flex gap-2 text-[#1B1B1B] bg-transparent border-none text-sm font-medium">
+                              <button className="flex gap-2 text-[#1B1B1B] bg-transparent border-none text-sm font-medium"
+                              onClick={()=>{
+                                handleDownloadBOL(shipment?._id);
+                              }}>
                                 Download PDF{" "}
                                 <BsDownload size={18} color="#1C5FE8" />
                               </button>
@@ -442,7 +471,10 @@ export default function ShipmentTable({
                           >
                           <ul>
                           <li className="py-2 tracking-[-0.04em] [&:not(:last-child)]:border-b border-black border-opacity-10 px-4 lg:px-6">
-                            <button className="flex gap-2 text-[#1B1B1B] bg-transparent border-none text-sm font-medium">
+                            <button className="flex gap-2 text-[#1B1B1B] bg-transparent border-none text-sm font-medium"
+                            onClick={()=>{
+                              handleDownloadBOL(shipment?._id);
+                            }}>
                               Download PDF{" "}
                               <BsDownload size={18} color="#1C5FE8" />
                             </button>

@@ -76,6 +76,12 @@ class Details extends Component {
     return Api.post("/user/create-driver", data);
   }
 
+  async getBOL(shipmentId) {
+    return Api.get(`/shipment/get-bol/${shipmentId}`, {
+      responseType: 'blob', 
+    });
+  }
+
 
   // ?direction
   async direction(data) {
