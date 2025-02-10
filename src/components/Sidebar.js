@@ -8,6 +8,7 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { IoIosMenu } from "react-icons/io";
 import { IoMdArrowRoundBack } from "react-icons/io";
+import { LuShipWheel } from "react-icons/lu";
 
 function SideBar({ role }) {
   const pathname = usePathname();
@@ -71,10 +72,19 @@ function SideBar({ role }) {
                     : "hover:bg-gray-100"
                   } rounded-md`}
               >
-                <FiTruck size={20} />
+                <PiTrolleySuitcaseLight size={20} />
                 Shipment
               </Link>
-              {role === "carrier" &&
+              {role === "admin" &&
+                <Link
+                  href="/shippers"
+                  className={`flex items-center py-2.5 px-2.5 gap-2 text-[#727272] text-base font-medium tracking-[-0.06em] ${pathname?.startsWith("/shippers") ? "text-blue-500 bg-blue-100" : "hover:bg-gray-100"
+                    } rounded-md`}
+                >
+                <LuShipWheel size={20}/>
+                  Shippers
+                </Link>}
+              {(role === "carrier" || role === "admin") &&
                 <Link
                   href="/drivers"
                   className={`flex items-center py-2.5 px-2.5 gap-2 text-[#727272] text-base font-medium tracking-[-0.06em] ${pathname?.startsWith("/drivers") ? "text-blue-500 bg-blue-100" : "hover:bg-gray-100"
@@ -83,7 +93,7 @@ function SideBar({ role }) {
                   <PiTrolleySuitcaseLight size={20} />
                   Drivers
                 </Link>}
-              {role === "shipper" &&
+              {role === "shipper" || role === "admin" &&
                 <Link
                   href="/brokers"
                   className={`flex items-center py-2.5 px-2.5 gap-2 text-[#727272] text-base font-medium tracking-[-0.06em] ${pathname?.startsWith("/brokers") ? "text-blue-500 bg-blue-100" : "hover:bg-gray-100"
@@ -92,7 +102,7 @@ function SideBar({ role }) {
                   <PiTrolleySuitcaseLight size={20} />
                   Brokers
                 </Link>}
-              {(role === "shipper" || role === "broker") && <Link
+              {(role === "shipper" || role === "broker" || role === "admin") && <Link
                 href="/users"
                 className={`flex items-center py-2.5 px-2.5 gap-2 text-[#727272] text-base font-medium tracking-[-0.06em] ${pathname?.startsWith("/users") ? "text-blue-500 bg-blue-100" : "hover:bg-gray-100"
                   } rounded-md`}
@@ -100,7 +110,7 @@ function SideBar({ role }) {
                 <FaRegUser size={20} />
                 Customer Management
               </Link>}
-              {(role === "shipper" || role === "broker") && <Link
+              {(role === "shipper" || role === "broker" || role === "admin") && <Link
                 href="/carriers"
                 className={`flex items-center py-2.5 px-2.5 gap-2 text-[#727272] text-base font-medium tracking-[-0.06em] ${pathname?.startsWith("/carriers") ? "text-blue-500 bg-blue-100" : "hover:bg-gray-100"
                   } rounded-md`}

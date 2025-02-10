@@ -4,10 +4,12 @@ import Link from "next/link";
 import Details from "../api/Listing/Details";
 import Loader from "@/components/Loader";
 import NoData from "@/components/NoData";
+import { useRole } from "@/context/RoleContext";
 
 export default function Index() {
   const [listing, setLisitng] = useState("");
   const [Loading, setLoading] = useState(false);
+   const { user } = useRole();
 
   const getusers = () => {
     setLoading(true);
@@ -36,12 +38,13 @@ export default function Index() {
           <h2 className="text-[#151547] text-lg tracking-[-0.04em] font-medium m-0">
             Driver Listing{" "}
           </h2>
+          {user?.role === "carrier" && 
           <Link
             href="/drivers/add"
             className="bg-[#1C5FE8] hover:bg-[#0a3fab] inline-block font-medium text-base text-white tracking-[-0.04em] rounded-lg lg:rounded-xl px-5 py-3 "
           >
             <span className="mr-1">+</span> Add New Driver
-          </Link>
+          </Link>}
         </div>
 
         {Loading ? (
