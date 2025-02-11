@@ -93,7 +93,7 @@ function SideBar({ role }) {
                   <PiTrolleySuitcaseLight size={20} />
                   Drivers
                 </Link>}
-              {role === "shipper" || role === "admin" &&
+              {(role === "shipper" || role === "admin") &&
                 <Link
                   href="/brokers"
                   className={`flex items-center py-2.5 px-2.5 gap-2 text-[#727272] text-base font-medium tracking-[-0.06em] ${pathname?.startsWith("/brokers") ? "text-blue-500 bg-blue-100" : "hover:bg-gray-100"
