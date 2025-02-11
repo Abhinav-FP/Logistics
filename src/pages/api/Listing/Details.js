@@ -76,6 +76,10 @@ class Details extends Component {
     return Api.post("/user/create-driver", data);
   }
 
+  async createShipperBroker(data) {
+    return Api.post("/user/create-account", data);
+  }
+
   async getBOL(shipmentId) {
     return Api.get(`/shipment/get-bol/${shipmentId}`, {
       responseType: 'blob', 
@@ -108,6 +112,9 @@ class Details extends Component {
 
 
   // Dashboard
+  async AdminDashboard() {
+    return Api.get(`/user/dashboard/admin`);
+  }
   async ShipperDashboard() {
     return Api.get(`/user/dashboard/shipper`);
   }

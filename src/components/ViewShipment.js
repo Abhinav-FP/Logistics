@@ -30,7 +30,7 @@ export default function ViewShipment({ isOpen, onClose, data }) {
             <p className="text-left text-[#70708D] border-0 py-.5  lg:py-.5  tracking-[-0.04em] text-[15px] font-medium">
               Name:
             </p>
-            <p className="text-left text-[#70708D] border-0 py-.5  lg:py-.5  tracking-[-0.04em] text-[15px] font-normal">
+            <p className="capitalize text-left text-[#70708D] border-0 py-.5  lg:py-.5  tracking-[-0.04em] text-[15px] font-normal">
               {data?.name}
             </p>
           </div>
@@ -116,7 +116,7 @@ export default function ViewShipment({ isOpen, onClose, data }) {
               <p className="text-left text-[#70708D] border-0 py-.5  lg:py-.5  tracking-[-0.04em] text-[15px] font-medium">
                 Broker Name :
               </p>
-              <p className="text-left text-[#70708D] border-0 capitalize  tracking-[-0.04em] text-[15px] font-normal max-w-fit py-1">
+              <p className="text-left text-[#70708D] border-0 capitalize tracking-[-0.04em] text-[15px] font-normal max-w-fit py-1">
                 {data?.broker_id?.name}
               </p>
             </div>
@@ -127,7 +127,7 @@ export default function ViewShipment({ isOpen, onClose, data }) {
               <p className="text-left text-[#70708D] border-0 py-.5  lg:py-.5  tracking-[-0.04em] text-[15px] font-medium">
                 Carrier Name :
               </p>
-              <p className="text-left text-[#70708D] border-0 capitalize  tracking-[-0.04em] text-[15px] font-normal max-w-fit py-1">
+              <p className="text-left text-[#70708D] border-0 capitalize tracking-[-0.04em] text-[15px] font-normal max-w-fit py-1">
                 {data?.carrier_id?.name}
               </p>
             </div>
@@ -139,7 +139,7 @@ export default function ViewShipment({ isOpen, onClose, data }) {
               <p className="text-left text-[#70708D] border-0 py-.5  lg:py-.5  tracking-[-0.04em] text-[15px] font-medium">
                 Customer Name :
               </p>
-              <p className="text-left text-[#70708D] border-0   capitalize tracking-[-0.04em] text-[15px] font-normal max-w-fit py-1">
+              <p className="text-left text-[#70708D] border-0  capitalize tracking-[-0.04em] text-[15px] font-normal max-w-fit py-1">
                 {data?.customer_id?.name}
               </p>
             </div>
@@ -149,7 +149,7 @@ export default function ViewShipment({ isOpen, onClose, data }) {
               <p className="text-left text-[#70708D] border-0 py-.5  lg:py-.5  tracking-[-0.04em] text-[15px] font-medium">
                 Driver Name :
               </p>
-              <p className="text-left text-[#70708D] border-0  capitalize  tracking-[-0.04em] text-[15px] font-normal max-w-fit py-1">
+              <p className="text-left text-[#70708D] border-0  capitalize tracking-[-0.04em] text-[15px] font-normal max-w-fit py-1">
                 {data?.driver_id?.name}
               </p>
             </div>
@@ -161,7 +161,7 @@ export default function ViewShipment({ isOpen, onClose, data }) {
           <p className="text-left text-[#70708D] border-0 py-.5  lg:py-.5  tracking-[-0.04em] text-[15px] font-medium">
             Description:
           </p>
-          <p className="text-left text-[#70708D] border-0 py-.5  lg:py-.5  tracking-[-0.04em] text-[15px] font-normal">
+          <p className="text-left text-[#70708D] border-0 py-.5 lg:py-.5 tracking-[-0.04em] text-[15px] font-normal capitalize">
             {data?.description}
           </p>
         </div>
@@ -170,7 +170,7 @@ export default function ViewShipment({ isOpen, onClose, data }) {
           <p className="text-left text-[#70708D] border-0 py-.5  lg:py-.5  tracking-[-0.04em] text-[15px] font-medium">
             Pickup Location:
           </p>
-          <p className="text-left text-[#70708D] border-0 py-.5  lg:py-.5  tracking-[-0.04em] text-[15px] font-normal">
+          <p className="text-left text-[#70708D] border-0 py-.5 lg:py-.5 tracking-[-0.04em] text-[15px] font-normal capitalize">
             {data?.pickup_location}
           </p>
         </div>
@@ -178,18 +178,18 @@ export default function ViewShipment({ isOpen, onClose, data }) {
           <p className="text-left text-[#70708D] border-0 py-.5  lg:py-.5  tracking-[-0.04em] text-[15px] font-medium">
             Drop Location:
           </p>
-          <p className="text-left text-[#70708D] border-0 py-.5  lg:py-.5  tracking-[-0.04em] text-[15px] font-normal">
+          <p className="text-left text-[#70708D] border-0 py-.5  lg:py-.5  tracking-[-0.04em] text-[15px] font-normal capitalize">
             {data?.drop_location}
           </p>
         </div>
-        <div>
+        {/* <div>
           <p className="text-left text-[#70708D] border-0 py-.5  lg:py-.5  tracking-[-0.04em] text-[15px] font-medium">
             Current Location:
           </p>
           <p className="text-left text-[#70708D] border-0 py-.5  lg:py-.5  tracking-[-0.04em] text-[15px] font-normal">
             {data?.current_location || "Not Available"}
           </p>
-        </div>
+        </div> */}
       </div>
     </Popup>
   )
