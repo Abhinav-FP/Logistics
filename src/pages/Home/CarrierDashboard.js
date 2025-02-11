@@ -97,10 +97,10 @@ export default function CarrierDashboard() {
                 <option>Week</option>
               </select>
               <Link
-                href="/carriers/add"
+                href="/drivers/add"
                 className="bg-[#1C5FE8] hover:bg-[#0a3fab] inline-block font-medium text-base text-white tracking-[-0.04em] rounded-lg lg:rounded-xl px-5 py-3"
               >
-                <span className="mr-1">+</span> Add Carrier
+                <span className="mr-1">+</span> Add Driver
               </Link>
             </div>
           </div>
