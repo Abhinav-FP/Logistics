@@ -311,7 +311,7 @@ export default function ShipmentTable({
                                 </button>
 
                               </li>
-                              {shipment?.carrier_id &&
+                              {!shipment?.carrier_id &&
                                 <li className="py-2 tracking-[-0.04em] [&:not(:last-child)]:border-b border-black border-opacity-10 px-4 lg:px-6">
                                   <button
                                     className="flex gap-2 text-[#1B1B1B] bg-transparent border-none text-sm font-medium"
