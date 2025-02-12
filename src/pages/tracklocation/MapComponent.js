@@ -1,5 +1,4 @@
 import { GoogleMap, Marker, Polyline, LoadScript, TrafficLayer } from '@react-google-maps/api';
-import DataMap from './DataMap';
 import React from 'react';
 
 const MapComponent = ({ EndLocation, StartLocation, CurrentLocation, routeDetails, driverAccept }) => {
