@@ -50,7 +50,7 @@ export default function BrokerDashboard() {
     },
     {
       id: 3,
-      title: "Delievered",
+      title: "Delivered",
       value: listing?.statusCounts?.find((user) => user._id === "delivered")?.count || 0,
     },
   ];
