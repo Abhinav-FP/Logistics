@@ -15,8 +15,8 @@ export default function Index() {
 
   const getShipments = async () => {
     setLoading(true);
-    const main = new Details();
     try {
+      const main = new Details();
       let response;
       if (user?.role === "broker") {
         response = await main.getBrokerShipment();
@@ -26,19 +26,22 @@ export default function Index() {
         response = await main.getcustomerShipment("");
       } else if (user?.role === "shipper") {
         response = await main.getShipperShipment("");
-      }else {
+      } else {
         response = await main.getShipment("");
       }
       setListing(response?.data?.data);
     } catch (err) {
       setListing([]);
-      if (err.response?.status === 401) {
-        router.push("/login");
-      } else if(err.response?.status === 403){
-        router.push("/forbidden");
-      }
-      else {
-        console.error("Error fetching shipments", err);
+      console.log("Error fetching shipments:", err);
+      
+      if (err.response) {
+        if (err.response.status === 401) {
+          router.push("/login");
+        } else if (err.response.status === 403) {
+          router.push("/forbidden");
+        }
+      } else {
+        console.log("An unexpected error occurred.");
       }
     } finally {
       setLoading(false);

@@ -16,7 +16,7 @@ export default function Index() {
     setLoading(true);
     const main = new Details();
     main
-      .Coustmerget()
+      .Customerget()
       .then((r) => {
         setLoading(false);
         setLisitng(r?.data?.data);
@@ -34,6 +34,7 @@ export default function Index() {
   useEffect(() => {
     getusers();
   }, []);
+  console.log("listing",listing)
  
   return (
     <Layout page={"Customers"}>

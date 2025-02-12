@@ -14,7 +14,7 @@ class Details extends Component {
     return Api.get(`/user/get/${data}`);
   }
 
-  async Coustmerget() {
+  async Customerget() {
     return Api.get(`/user/cous`);
   }
 
