@@ -33,6 +33,7 @@ export default function FogetLinks() {
       if (response?.data?.status === true) {
         toast.success(response.data.message);
         toggleModal();
+        localStorage && localStorage.setItem("email",Regs.email);
         Router.push("/forget/password")
       } else {
         toast.error(response.data.message);
