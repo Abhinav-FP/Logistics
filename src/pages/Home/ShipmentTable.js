@@ -239,13 +239,14 @@ export default function ShipmentTable({
                             openPopup();
                           }}
                         />
+                        {shipment?.status !== "delivered" && (
                         <Link href={`/shipment/add/${shipment?._id}`}>
                           <GrEdit
                             size={18}
                             className="cursor-pointer"
                             color="#16A34A"
                           />
-                        </Link>
+                        </Link>)}
                         {shipment?.status === "transit" && (
                           <MdOutlineNotListedLocation
                             size={24}
@@ -257,12 +258,13 @@ export default function ShipmentTable({
                             }}
                           />
                         )}
+                        {shipment?.status !== "delivered" && (
                         <Delete
                           step={1}
                           Id={shipment?._id}
                           getShipments={getShipments}
                           role={role}
-                        />
+                        />)}
                       </div>
                     </td>
                   ) : role === "broker" ? (

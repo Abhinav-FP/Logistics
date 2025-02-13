@@ -17,7 +17,8 @@ let Api = axios.create({
   baseURL: API_URL,
   headers: {
     'Accept': 'application/json',
-    'Access-Control-Allow-Origin': '*'
+    'Access-Control-Allow-Origin': '*',
+    "Content-Type": "multipart/form-data",
   }
 });
 

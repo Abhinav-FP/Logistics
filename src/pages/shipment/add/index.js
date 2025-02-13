@@ -19,7 +19,6 @@ export default function Index() {
     shippingDate: "",
     deliveryDate: "",
     estimatedCost: "",
-    
     paymentStatus: "",
     brokerName: "",
     typeOfGoods: "",
@@ -28,6 +27,7 @@ export default function Index() {
     dimensions1: "",
     dimensions2: "",
     customerName: "",
+    file:null,
   });
   const [brokers, setBrokers] = useState([]);
   const [customers, setCustomers] = useState([]);
@@ -67,6 +67,16 @@ export default function Index() {
     });
   };
 
+  const handleUpload = (event) => {
+    const file = event.target.files[0]; // Get the first uploaded file
+    if (file) {
+      setFormData((prevData) => ({
+        ...prevData,
+        file: file,
+      }));
+    }
+  };  
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
@@ -86,7 +96,8 @@ export default function Index() {
       weight: formData.weight,
       dimensions: `${formData.dimensions1} x ${formData.dimensions2}`,
       typeOfGoods: formData.typeOfGoods,
-      current_location:formData.pickup
+      current_location:formData.pickup,
+      file:formData?.file
     });
     response
       .then((res) => {
@@ -109,6 +120,7 @@ export default function Index() {
             dimensions1: "",
             dimensions2: "",
             customerName: "",
+            file:"",
           })
           router.push("/shipment")
         } else {
@@ -122,6 +134,8 @@ export default function Index() {
         setLoading(false);
       });
   };
+
+  // console.log("formData",formData);
 
   return (
     <Layout page={"Shipment"}>
@@ -432,6 +446,35 @@ export default function Index() {
                         </option>
                       ))}
                   </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          {/* Attach BOL */}
+          <div className="bg-white rounded-xl border border-black border-opacity-10 ">
+            <div className="py-6 px-[30px] border-b border-black border-opacity-10">
+              <h4 className="text-[#151547] text-lg tracking-[-0.04em] font-medium m-0">
+                Upload BOL (optional)
+              </h4>
+            </div>
+            <div className="py-6 px-[30px]">
+              <div className="flex flex-wrap -mx-2 lg:-mx-3">
+                <div className="w-full md:w-12/12 px-2 lg:px-3 mb-4 lg:mb-6">
+                  <label className="text-[#70708D] text-sm tracking-[-0.04em] uppercase mb-2 block">
+                    Upload BOL
+                  </label>
+                  <input
+                    name="file"
+                    type="file"
+                    onChange={handleUpload} // Correctly handles file input
+                    className="w-full h-11 lg:h-[48px] block bg-white text-[#000] text-base border border-black border-opacity-10 rounded-md lg:rounded-xl py-2 px-4 leading-tight focus:outline-none"
+                    required
+                  />
+                  {/* {formData.file && (
+                    <p className="text-sm text-green-600 mt-2">
+                      File Selected: {formData?.file?.name}
+                    </p>
+                  )} */}
                 </div>
               </div>
             </div>
