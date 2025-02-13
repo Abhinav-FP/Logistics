@@ -6,8 +6,6 @@ import toast from 'react-hot-toast';
 export default function ConsignmentPopup({ isOpen, onClose, data, getShipments }) {
     const[condition,setCondition]=useState("expected");
     const[loading,setLoading]=useState(false);
-    console.log("data",data);
-    console.log("condition",condition);
 
     const submitRating = () => {
         if(loading){return;}

@@ -135,7 +135,6 @@ export default function Index() {
       });
   };
 
-  // console.log("formData",formData);
 
   return (
     <Layout page={"Shipment"}>

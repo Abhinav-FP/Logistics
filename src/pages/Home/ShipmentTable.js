@@ -160,7 +160,6 @@ export default function ShipmentTable({
     }
   };
 
-  console.log("shipments", shipments);
 
   return (
     <div className="overflow-x-auto">

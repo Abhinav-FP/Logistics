@@ -30,7 +30,6 @@ export default function CarrierDashboard() {
   useEffect(() => {
     getData();
   }, []);
-  console.log("listing", listing);
 
   const metrics = [
     {
