@@ -1,5 +1,5 @@
 import { Component } from "react";
-import Api from "./Api";
+import { Api, ApiallowFile } from "./Api"; 
 
 class Details extends Component {
   async login(data) {
@@ -31,8 +31,10 @@ class Details extends Component {
   }
 
   async createShipment(data) {
-    return Api.post("/shipment/create", data);
+    return ApiallowFile.post("/shipment/create", data);
   }
+  
+
   async getcarrierShipment() {
     return Api.get("/shipment/get-shipment-carrier");
   }

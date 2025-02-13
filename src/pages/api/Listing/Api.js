@@ -18,7 +18,7 @@ let Api = axios.create({
   headers: {
     'Accept': 'application/json',
     'Access-Control-Allow-Origin': '*',
-    "Content-Type": "multipart/form-data",
+    // "Content-Type": "multipart/form-data",
   }
 });
 
@@ -35,4 +35,26 @@ Api.interceptors.request.use(
   }
 );
 
-export default Api;
+let ApiallowFile = axios.create({
+  baseURL: API_URL,
+  headers: {
+    'Accept': 'application/json',
+    'Access-Control-Allow-Origin': '*',
+    "Content-Type": "multipart/form-data",
+  }
+});
+
+ApiallowFile.interceptors.request.use(
+  async (config) => {
+    const token = getToken();
+    if (token !== null) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
+export {Api, ApiallowFile};

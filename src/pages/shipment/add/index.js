@@ -139,7 +139,7 @@ export default function Index() {
 
   return (
     <Layout page={"Shipment"}>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} enctype="multipart/form-data">
         <div className="flex flex-wrap items-center justify-between mb-3 lg:mb-4">
           <h3 className="text-[#151547] text-lg tracking-[-0.04em] font-medium m-0">
             Create New Shipment{" "}
