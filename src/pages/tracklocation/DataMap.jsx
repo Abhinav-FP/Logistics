@@ -1,90 +1,104 @@
-import { GoogleMap, Marker, Polyline, LoadScript, TrafficLayer } from '@react-google-maps/api';
-import React from 'react'
+import React, { useState, useEffect } from "react";
+import { GoogleMap, LoadScript, DirectionsService, DirectionsRenderer } from "@react-google-maps/api";
 
-const DataMap = ({ routesData }) => {
-    const markerIcons = {
-        flight: {
-            url: "https://img.icons8.com/color/48/000000/airport.png", // Airplane icon
-            scaledSize: { width: 40, height: 40 },
-        },
-        train: {
-            url: "https://img.icons8.com/color/48/000000/train.png", // Train icon
-            scaledSize: { width: 40, height: 40 },
-        },
-        bus: {
-            url: "https://img.icons8.com/color/48/000000/bus.png", // Bus icon
-            scaledSize: { width: 40, height: 40 },
-        },
-        waterway: {
-            url: "https://img.icons8.com/color/48/000000/ship.png", // Ship icon
-            scaledSize: { width: 40, height: 40 },
-        },
-        roadway: {
-            url: "https://img.icons8.com/color/48/000000/car.png", // Car icon
-            scaledSize: { width: 40, height: 40 },
-        },
-    };
-
-    const decodePolyline = (encodedPath) => {
-        if (window.google && google.maps.geometry && encodedPath) {
-            return google.maps.geometry.encoding.decodePath(encodedPath);
-        }
-        return [];
-    };
-
-    const centerMap = () => {
-        return routesData[0]?.startLocation; // Default center based on the first route's start location
-    };
-
-    return (
-        <LoadScript googleMapsApiKey="AIzaSyAZdS5ILSddnuGPqz1TbLNd24wApLunFGU" libraries={['geometry']}>
-            <div className='flex justify-center'>
-                <GoogleMap
-                    mapContainerStyle={{ width: '100%', height: '300px', borderRadius: "10px" }}
-                    zoom={14}
-                    center={centerMap()}
-                    options={{ cursor: 'crosshair' }}
-                >
-                    <TrafficLayer />
-                    {routesData.map((route, index) => {
-                        const { startLocation, endLocation, mode, polyline } = route;
-
-                        const icon = markerIcons[mode.toLowerCase()] || markerIcons.roadway;
-
-                        return (
-                            <React.Fragment key={index}>
-                                {/* Start Marker */}
-                                <Marker
-                                    position={startLocation}
-                                    icon={icon}
-                                />
-
-                                {/* End Marker */}
-                                <Marker
-                                    position={endLocation}
-                                    icon={icon}
-                                />
-
-                                {/* Polyline (Route) */}
-                                <Polyline
-                                    path={decodePolyline(polyline)}
-                                    options={{
-                                        strokeColor: mode === 'flight' ? '#1E90FF' :
-                                                     mode === 'train' ? '#FFD700' :
-                                                     mode === 'bus' ? '#FF6347' :
-                                                     mode === 'waterway' ? '#20B2AA' :
-                                                     '#32CD32',
-                                        strokeOpacity: 0.6,
-                                        strokeWeight: 5,
-                                    }}
-                                />
-                            </React.Fragment>
-                        );
-                    })}
-                </GoogleMap>
-            </div>
-        </LoadScript>
-    );
+const containerStyle = {
+  width: "100%",
+  height: "600px",
 };
 
-export default DataMap;
+const center = { lat: 26.9124, lng: 75.7873 }; // Jaipur center
+
+const origin = "Jaipur, Rajasthan, India";
+const destination = "Noida, Uttar Pradesh, India";
+
+const TravelMap = () => {
+  const [roadResponse, setRoadResponse] = useState(null);
+  const [transitResponse, setTransitResponse] = useState(null);
+  const [flightDetails, setFlightDetails] = useState("Fetching..."); // Placeholder
+
+  // Directions API Callback (Road)
+  const roadDirectionsCallback = (result, status) => {
+    if (status === "OK") {
+      setRoadResponse(result);
+    } else {
+      console.error("Error fetching road directions:", status);
+    }
+  };
+
+  // Directions API Callback (Transit)
+  const transitDirectionsCallback = (result, status) => {
+    if (status === "OK") {
+      setTransitResponse(result);
+    } else {
+      console.error("Error fetching transit directions:", status);
+    }
+  };
+
+
+  useEffect(() => {
+    // Fetch Road Data
+    const roadUrl = `https://maps.googleapis.com/maps/api/directions/json?origin=${origin}&destination=${destination}&mode=driving&key=AIzaSyAZdS5ILSddnuGPqz1TbLNd24wApLunFGU`;
+    fetch(roadUrl)
+      .then(res => res.json())
+      .then(data => {
+        if (data.routes.length > 0) {
+          setRoadResponse(data);
+        }
+      })
+      .catch(error => console.error("Error fetching road data:", error));
+
+
+    // Fetch Transit (Train) Data
+    const transitUrl = `https://maps.googleapis.com/maps/api/directions/json?origin=${origin}&destination=${destination}&mode=transit&key=AIzaSyAZdS5ILSddnuGPqz1TbLNd24wApLunFGU`;
+    fetch(transitUrl)
+      .then(res => res.json())
+      .then(data => {
+        if (data.routes.length > 0) {
+          setTransitResponse(data);
+        }
+      })
+      .catch(error => console.error("Error fetching transit data:", error));
+
+
+    // Flight Data (Placeholder - Requires Google Places/Airports API)
+    //  This is complex and would require a separate API call to get flight details
+    //  and potentially multiple calls to handle different airlines/routes.
+    //  A simplified placeholder is used here.
+    setTimeout(() => {  // Simulate API call delay
+      setFlightDetails("Approx. 1 hour (Non-stop)"); // Replace with actual API data
+    }, 1500); // Simulate 1.5-second delay
+  }, []);
+
+
+  return (
+    <div>
+      <h2>Jaipur to Noida Travel Options</h2>
+      <ul>
+        <li>🚗 By Road: {roadResponse ? roadResponse.routes[0].legs[0].distance.text + " (~" + roadResponse.routes[0].legs[0].duration.text + ")" : "Fetching..."}</li>
+        <li>🚆 By Train: {transitResponse && transitResponse.routes.length > 0 ? transitResponse.routes[0].legs[0].distance.text + " (~" + transitResponse.routes[0].legs[0].duration.text + ")" : "Fetching..."}</li>
+        <li>✈️ By Flight: {flightDetails}</li>
+      </ul>
+
+      <LoadScript googleMapsApiKey="AIzaSyAZdS5ILSddnuGPqz1TbLNd24wApLunFGU">
+        <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={6}>
+          {roadResponse && (
+            <DirectionsRenderer directions={roadResponse} options={{
+              polylineOptions: {
+                color: "blue" // Road route color
+              }
+            }} />
+          )}
+          {transitResponse && (
+            <DirectionsRenderer directions={transitResponse} options={{
+              polylineOptions: {
+                color: "green" // Transit route color
+              }
+            }} />
+          )}
+        </GoogleMap>
+      </LoadScript>
+    </div>
+  );
+};
+
+export default TravelMap;

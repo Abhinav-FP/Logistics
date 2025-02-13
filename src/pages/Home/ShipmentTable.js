@@ -239,7 +239,7 @@ export default function ShipmentTable({
                             color="#16A34A"
                           />
                         </Link>
-                        {shipment?.status === "transit" &&
+                        {/* {shipment?.status === "transit" && */}
                         <MdOutlineNotListedLocation size={24}
                           className="cursor-pointer"
                           color="#3b82f6"
@@ -248,7 +248,7 @@ export default function ShipmentTable({
                             openSidePopup();
                           }}
                           />
-                           } 
+                           {/* }  */}
                         <Delete step={1} Id={shipment?._id} getShipments={getShipments} role={role} />
                       </div>
                   </td>
