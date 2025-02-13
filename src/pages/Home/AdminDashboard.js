@@ -72,9 +72,9 @@ export default function AdminDashboard() {
                 Overview
               </h1>
               <div className="flex flex-wrap items-center justify-between space-x-2 lg:space-x-4">
-                <select className="border border-black rounded-md lg:rounded-xl bg-white border-opacity-10 w-[105px] h-11 lg:h-12 px-2.5 lg:px-3.5 text-[#151547] font-medium text-base tracking-[-0.04em]">
+                {/* <select className="border border-black rounded-md lg:rounded-xl bg-white border-opacity-10 w-[105px] h-11 lg:h-12 px-2.5 lg:px-3.5 text-[#151547] font-medium text-base tracking-[-0.04em]">
                   <option>Week</option>
-                </select>
+                </select> */}
                 <Link
                   href="/shippers/add"
                   className="bg-[#1C5FE8] hover:bg-[#0a3fab] inline-block font-medium text-base text-white tracking-[-0.04em] rounded-lg lg:rounded-xl px-5 py-3  "

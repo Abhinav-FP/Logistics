@@ -800,7 +800,7 @@ export default function ShipmentTable({
           <h2 className="text-[#151547] text-medium text-lg md:text-2xl tracking-[-0.04em]">
             {data?.name}
           </h2>
-          <button
+          {/* <button
             onClick={() => {
               setActiveTab("vehicleInfo");
             }}
@@ -808,7 +808,7 @@ export default function ShipmentTable({
           >
             {" "}
             View Driver’s details
-          </button>
+          </button> */}
         </div>
 
         <div className="border-b border-black border-opacity-10 px-6">
