@@ -38,9 +38,9 @@ console.log("tracing ,map " ,data)
   }, [data]);
   return (
     <div>
-      <div className="border border-black border-opacity-10 rounded-md lg:rounded-xl p-2.5 flex flex-wrap items-center mb-3 lg:mb-4">
+      <div className="border border-black border-opacity-10 rounded-md lg:rounded-xl p-3 flex flex-wrap items-center mb-3 lg:mb-4">
         <div className="w-12/12 pl-8 pr-2 relative">
-          <svg className="absolute left-2 top-4" width="10" height="14" viewBox="0 0 10 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg className="absolute left-2 top-1" width="10" height="14" viewBox="0 0 10 14" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M4.66667 6.33333C4.22464 6.33333 3.80072 6.15774 3.48816 5.84518C3.1756 5.53262 3 5.10869 3 4.66667C3 4.22464 3.1756 3.80072 3.48816 3.48816C3.80072 3.17559 4.22464 3 4.66667 3C5.1087 3 5.53262 3.17559 5.84518 3.48816C6.15774 3.80072 6.33334 4.22464 6.33334 4.66667C6.33334 4.88554 6.29023 5.10226 6.20647 5.30447C6.12271 5.50668 5.99994 5.69041 5.84518 5.84518C5.69042 5.99994 5.50668 6.12271 5.30447 6.20647C5.10226 6.29022 4.88554 6.33333 4.66667 6.33333ZM4.66667 0C3.42899 0 2.24201 0.491665 1.36684 1.36683C0.491665 2.242 0 3.42899 0 4.66667C0 8.16667 4.66667 13.3333 4.66667 13.3333C4.66667 13.3333 9.33334 8.16667 9.33334 4.66667C9.33334 3.42899 8.84167 2.242 7.9665 1.36683C7.09133 0.491665 5.90435 0 4.66667 0Z" fill="#1C5FE8" />
           </svg>
           <h3 className="text-black  tracking-[-0.04em] text-sm font-medium m-0">{data?.drop_location}</h3>
@@ -56,7 +56,7 @@ console.log("tracing ,map " ,data)
         />
       </div>
       <div className="border border-black border-opacity-10 rounded-md lg:rounded-xl mb-3 lg:mb-4">
-        <div className="border-b border-black border-opacity-10  px-4 lg:px-5 py-3 lg:py-4 flex flex-wrap justify-between">
+        <div className="border-b border-black border-opacity-10  px-3 md:px-4 lg:px-5 py-3 lg:py-4 flex flex-wrap justify-between">
           <div className="w-7/12">
             <h3 className="text-[#151547] text-medium text-base tracking-[-0.04em] m-0"><span className="text-[#727272]">Cargo ID:</span> #64756757</h3>
           </div>
@@ -64,7 +64,7 @@ console.log("tracing ,map " ,data)
             <Status status={"Pick-Up"} />
           </div>
         </div>
-        <div className="border-b border-black border-opacity-10 px-4 lg:px-5 py-3 lg:py-4  ">
+        <div className="border-b border-black border-opacity-10 px-3 md:px-4 lg:px-5 py-3 lg:py-4  ">
           {CurrentLocation?.map((item, index) => (
             <div className="flex flex-wrap relative pb-8" key={index}>
               <div className="w-6/12 pl-6 relative">

@@ -13,39 +13,44 @@ export default function VehicleInfo({data}) {
       </div>
     </div>
     <div className="flex flex-wrap ">
-      <div className="w-4/12 pr-1 flex">
+      <div className="w-full md:w-6/12 pr-2 flex">
         <div>
           <h3 className="text-black  tracking-[-0.04em] text-sm font-medium m-0 capitalize">company name</h3>
           <p className="text-[#666666] text-[12px] font-medium tracking-[-0.04em] mb-0 capitalize">{data?.driver_id?.company_name || "N/A"}</p>
         </div>
       </div>
-      <div className="w-4/12 pr-1 pl-1 text-center border-r border-l border-black border-opacity-10 flex justify-center ">
+      <div className="w-full md:w-6/12  pl-2   ">
         <div>
           <h3 className="text-black  tracking-[-0.04em] text-sm font-medium m-0">Email</h3>
           <p className="text-[#666666] text-[12px] font-medium tracking-[-0.04em] mb-0">{data?.driver_id?.email || "N/A"}</p>
         </div>
       </div>
-      <div className="w-4/12 pr-1 flex justify-end">
+      
+    </div>
+    <div className="flex flex-wrap mt-4 pt-4 border-t border-black border-opacity-10">
+    <div className="w-full md:w-6/12 pr-2 flex ">
         <div>
           <h3 className="text-black  tracking-[-0.04em] text-sm font-medium m-0 ">Contact</h3>
           <p className="text-[#666666] text-[12px] font-medium tracking-[-0.04em] mb-0">{data?.driver_id?.contact || "N/A"}</p>
         </div>
       </div>
-    </div>
-    <div className="flex flex-wrap mt-4 pt-4 border-t border-l border-black border-opacity-10">
-      <div className="w-4/12 pr-1 flex">
+      <div className="w-full md:w-6/12 pl-2  ">
         <div>
           <h3 className="text-black  tracking-[-0.04em] text-sm font-medium m-0 capitalize">MC number</h3>
           <p className="text-[#666666] text-[12px] font-medium tracking-[-0.04em] mb-0">{data?.driver_id?.mc_number}</p>
         </div>
       </div>
-      <div className="w-4/12 pr-1 pl-1 text-center border-r border-l border-black border-opacity-10 flex justify-center ">
+
+    </div>
+    <div className="flex flex-wrap mt-4 pt-4 border-t   border-black border-opacity-10">
+      
+      <div className="w-full md:w-6/12 pr-2 flex ">
         <div>
           <h3 className="text-black  tracking-[-0.04em] text-sm font-medium m-0">Truck type</h3>
           <p className="text-[#666666] text-[12px] font-medium tracking-[-0.04em] mb-0">{data?.driver_id?.trucktype}</p>
         </div>
       </div>
-      <div className="w-4/12 pr-1 flex justify-end">
+      <div className="w-full md:w-6/12   pl-2  ">
         <div>
           <h3 className="text-black  tracking-[-0.04em] text-sm font-medium m-0 ">VIN Number</h3>
           <p className="text-[#666666] text-[12px] font-medium tracking-[-0.04em] mb-0">{data?.driver_id?.vin}</p>
