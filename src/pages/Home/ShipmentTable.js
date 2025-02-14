@@ -796,7 +796,7 @@ export default function ShipmentTable({
         </div>
       </Popup>
       <Sidepopup isOpen={isSidePopupOpen} onClose={closeSidePopup}>
-        <div className="px-8 pt-12 pb-8 flex justify-between items-center">
+        <div className="px-4 lg:px-8 pt-6 lg:pt-12 pb-4 lg:pb-8 flex justify-between items-center">
           <h2 className="text-[#151547] text-medium text-lg md:text-2xl tracking-[-0.04em]">
             {data?.name}
           </h2>
