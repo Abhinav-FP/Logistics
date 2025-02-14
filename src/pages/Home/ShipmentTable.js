@@ -120,7 +120,7 @@ export default function ShipmentTable({
         if (res && res?.data && res?.data?.status) {
           toast.success(res.data.message);
           closeCarrierPopup();
-          getShipments(role === "broker");
+          getShipments();
         } else {
           toast.error(res.data.message);
         }

@@ -19,7 +19,7 @@ export default function Delete({ step, Id, getShipments, role }) {
             .deleteShipment(Id)
             .then((r) => {
                 toast.success(r?.data?.message);
-                getShipments(role === "broker");
+                getShipments();
                 setLoading(false);
             })
             .catch((err) => {

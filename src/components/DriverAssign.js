@@ -39,7 +39,7 @@ export default function DriverAssign({ Id, getShipments, role }) {
                 if (res && res?.data && res?.data?.status) {
                     toast.success(res.data.message);
                     closeDrivePopup();
-                    getShipments(role === "driver");
+                    getShipments();
                 } else {
                     toast.error(res.data.message);
                 }

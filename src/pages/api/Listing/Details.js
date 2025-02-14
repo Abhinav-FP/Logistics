@@ -35,11 +35,11 @@ class Details extends Component {
   }
   
 
-  async getcarrierShipment() {
-    return Api.get("/shipment/get-shipment-carrier");
+  async getcarrierShipment(data) {
+    return Api.get(`/shipment/get-shipment-carrier/${data}`);
   }
-  async getcustomerShipment() {
-    return Api.get("/shipment/get-shipment-customer");
+  async getcustomerShipment(data) {
+    return Api.get(`/shipment/get-shipment-customer/${data}`);
   }
 
 
@@ -55,11 +55,11 @@ class Details extends Component {
   }
 
 
-  async getShipperShipment() {
-    return Api.get("/shipment/get-shipment-shipper");
+  async getShipperShipment(data) {
+    return Api.get(`/shipment/get-shipment-shipper/${data}`);
   }
-  async getBrokerShipment() {
-    return Api.get("/shipment/get-shipment-broker");
+  async getBrokerShipment(data) {
+    return Api.get(`/shipment/get-shipment-broker/${data}`);
   }
 
   async deleteShipment(data) {
