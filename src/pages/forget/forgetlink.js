@@ -13,8 +13,6 @@ export default function FogetLinks() {
   const [Regs, setRegs] = useState({
     email: "",
   });
-  console.log("Regs", Regs)
-  console.log("Regs",)
   const handleInputs = (e) => {
     const value = e.target.value;
     const name = e.target.name;
@@ -32,10 +30,10 @@ export default function FogetLinks() {
     const main = new Details();
     try {
       const response = await main.ForgotEmail({ email: Regs.email });
-      console.log("response", response)
       if (response?.data?.status === true) {
         toast.success(response.data.message);
         toggleModal();
+        localStorage && localStorage.setItem("email",Regs.email);
         Router.push("/forget/password")
       } else {
         toast.error(response.data.message);

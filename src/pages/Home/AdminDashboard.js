@@ -5,7 +5,7 @@ import Details from "../api/Listing/Details";
 import ShipmentTable from "./ShipmentTable";
 import Loader from "@/components/Loader";
 
-export default function ShipperDashboard() {
+export default function AdminDashboard() {
   const [listing, setLisitng] = useState("");
   const [Loading, setLoading] = useState(false);
 
@@ -13,7 +13,7 @@ export default function ShipperDashboard() {
     setLoading(true);
     const main = new Details();
     main
-      .ShipperDashboard()
+      .AdminDashboard()
       .then((r) => {
         setLoading(false);
         setLisitng(r?.data?.data);
@@ -30,35 +30,32 @@ export default function ShipperDashboard() {
   }, []);
   const metrics = [
     {
-      title: "Pending",
-      value:
-        listing?.statusCounts?.find((user) => user._id === "pending")?.count ||
-        0,
+      title: "Total Shippers",
+      value: listing?.Users?.find((user) => user._id === "shipper")?.count || 0,
     },
     {
-      title: "IN TRANSIT",
+      title: "Total Brokers",
       value:
-        listing?.statusCounts?.find((user) => user._id === "transit")?.count ||
-        0,
+        listing?.Users?.find((user) => user._id === "broker")?.count || 0,
     },
     {
-      title: "DELIVERED",
-      value:
-        listing?.statusCounts?.find((user) => user._id === "delivered")
-          ?.count || 0,
+        title: "Total Carriers",
+        value: listing?.Users?.find((user) => user._id === "carrier")?.count || 0,
+    },
+    {
+        title: "Total Customers",
+        value:
+        listing?.Users?.find((user) => user._id === "customer")?.count || 0,
     },
     {
       title: "TOTAL SHIPMENT",
       value: listing?.Shipment || 0,
     },
     {
-      title: "Total Brokers",
-      value: listing?.Users?.find((user) => user._id === "broker")?.count || 0,
-    },
-    {
-      title: "Total Customers",
+      title: "Pending Shipments",
       value:
-        listing?.Users?.find((user) => user._id === "customer")?.count || 0,
+        listing?.statusCounts?.find((user) => user._id === "pending")?.count ||
+        0,
     },
   ];
 
@@ -79,10 +76,10 @@ export default function ShipperDashboard() {
                   <option>Week</option>
                 </select> */}
                 <Link
-                  href="/shipment/add"
+                  href="/shippers/add"
                   className="bg-[#1C5FE8] hover:bg-[#0a3fab] inline-block font-medium text-base text-white tracking-[-0.04em] rounded-lg lg:rounded-xl px-5 py-3  "
                 >
-                  <span className="mr-1">+</span> New Shipments
+                  <span className="mr-1">+</span> Add shipper
                 </Link>
               </div>
             </div>
@@ -120,7 +117,7 @@ export default function ShipperDashboard() {
               shipments={listing?.ShipmentData}
               getShipments={getData}
               DeleteOption={true}
-              role={"shipper"}
+              role={"admin"}
             />
           </div>
         </>

@@ -4,7 +4,6 @@ import { MdContentCopy } from "react-icons/md";
 import toast from "react-hot-toast";
 
 export default function AccountPopup({isOpen, onClose, data ,carrier }) {
-  console.log("data" ,data ,carrier)
   return (
     <Popup isOpen={isOpen} onClose={onClose} size={'max-w-[510px]'}>
           <div className="relative z-[1]">

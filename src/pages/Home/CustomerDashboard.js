@@ -29,7 +29,6 @@ export default function CustomerDashboard() {
   useEffect(() => {
     getData();
   }, []);
-  console.log("listing", listing);
 
   function truncateString(str, charLimit) {
     if (str.length <= charLimit) return str;

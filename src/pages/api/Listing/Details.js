@@ -1,5 +1,5 @@
 import { Component } from "react";
-import Api from "./Api";
+import { Api, ApiallowFile } from "./Api"; 
 
 class Details extends Component {
   async login(data) {
@@ -14,7 +14,7 @@ class Details extends Component {
     return Api.get(`/user/get/${data}`);
   }
 
-  async Coustmerget() {
+  async Customerget() {
     return Api.get(`/user/cous`);
   }
 
@@ -31,8 +31,10 @@ class Details extends Component {
   }
 
   async createShipment(data) {
-    return Api.post("/shipment/create", data);
+    return ApiallowFile.post("/shipment/create", data);
   }
+  
+
   async getcarrierShipment() {
     return Api.get("/shipment/get-shipment-carrier");
   }
@@ -76,6 +78,16 @@ class Details extends Component {
     return Api.post("/user/create-driver", data);
   }
 
+  async createShipperBroker(data) {
+    return Api.post("/user/create-account", data);
+  }
+
+  async getBOL(shipmentId) {
+    return Api.get(`/shipment/get-bol/${shipmentId}`, {
+      responseType: 'blob', 
+    });
+  }
+
 
   // ?direction
   async direction(data) {
@@ -102,6 +114,9 @@ class Details extends Component {
 
 
   // Dashboard
+  async AdminDashboard() {
+    return Api.get(`/user/dashboard/admin`);
+  }
   async ShipperDashboard() {
     return Api.get(`/user/dashboard/shipper`);
   }

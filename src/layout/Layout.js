@@ -31,6 +31,10 @@ export default function Layout({ children, page }) {
       name: "customer",
       route_permissions: ["/","/shipment","/settings"],
     },
+    {
+      name: "admin",
+      route_permissions: ["/","/shipment","/shippers","/shippers/add","/drivers","/brokers","/brokers/add","/users","/carriers","/settings"],
+    },
   ];
 
   const fetchData = async (signal) => {

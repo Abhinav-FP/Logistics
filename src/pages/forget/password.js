@@ -65,18 +65,21 @@ export default function ForgetPassword() {
     }
 
     setLoading(true);
-    console.log("ggeeg  ")
     const main = new Details();
     try {
+      const email= localStorage && localStorage.getItem('email') || ""
       const response = await main.ForgotPassword({
+        email: email,
         Otp: Regs.otp,
         newPassword: Regs.newPassword,
       });
       if (response?.data) {
         toast.success(response.data.message);
+        localStorage && localStorage?.removeItem("email");
         router.push("/login"); // navigate to the success page after resetting
       }
     } catch (error) {
+      console.log("error",error);
       console.log("error", error?.response);
       toast.error(error?.response?.data?.message);
     } finally {

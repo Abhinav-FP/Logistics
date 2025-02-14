@@ -5,6 +5,7 @@ import { useRole } from "@/context/RoleContext";
 import CarrierDashboard from "./CarrierDashboard";
 import CustomerDashboard from "./CustomerDashboard";
 import ShipperDashboard from "./ShipperDashboard";
+import AdminDashboard from "./AdminDashboard";
 
 export default function MainPage() {
   const { user } = useRole();
@@ -18,6 +19,8 @@ export default function MainPage() {
           <BrokerDashboard />
         ) : user && user?.role === "carrier" ? (
           <CarrierDashboard />
+        ) : user && user?.role === "admin" ? (
+          <AdminDashboard/>
         ) : <CustomerDashboard/>}
       </div>
     </Layout>

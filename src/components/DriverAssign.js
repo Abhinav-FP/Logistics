@@ -31,7 +31,8 @@ export default function DriverAssign({ Id, getShipments, role }) {
         const main = new Details();
         const response = main.UpdateShipment(Id, {
             driver_id: Selecteddriver,
-            driverAccept: "true"
+            driverAccept: "true",
+            status : "transit"
         });
         response
             .then((res) => {

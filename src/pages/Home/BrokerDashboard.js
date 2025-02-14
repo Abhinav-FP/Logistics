@@ -31,7 +31,6 @@ export default function BrokerDashboard() {
   useEffect(() => {
     getData();
   }, []);
-  console.log("listing",listing);
 
   const metrics = [
     {
@@ -51,7 +50,7 @@ export default function BrokerDashboard() {
     },
     {
       id: 3,
-      title: "Delievered",
+      title: "Delivered",
       value: listing?.statusCounts?.find((user) => user._id === "delivered")?.count || 0,
     },
   ];
@@ -88,9 +87,9 @@ export default function BrokerDashboard() {
       <div className="flex md:items-center justify-between flex-col md:flex-row mb-4 space-y-4 md:space-y-0">
         <h1 className="text-[#151547] text-lg tracking-[-0.04em] font-medium m-0">Overview</h1>
         <div className="flex flex-wrap items-center justify-between space-x-2 lg:space-x-4">
-          <select className="border border-black rounded-md lg:rounded-xl bg-white border-opacity-10 w-[105px] h-11 lg:h-12 px-2.5 lg:px-3.5 text-[#151547] font-medium text-base tracking-[-0.04em]">
+          {/* <select className="border border-black rounded-md lg:rounded-xl bg-white border-opacity-10 w-[105px] h-11 lg:h-12 px-2.5 lg:px-3.5 text-[#151547] font-medium text-base tracking-[-0.04em]">
             <option>Week</option>
-          </select>
+          </select> */}
           <Link
             href="/carriers/add"
             className="bg-[#1C5FE8] hover:bg-[#0a3fab] inline-block font-medium text-base text-white tracking-[-0.04em] rounded-lg lg:rounded-xl px-5 py-3"

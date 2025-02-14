@@ -12,12 +12,11 @@ export default function Index() {
   const [listing, setLisitng] = useState("");
   const [Loading, setLoading] = useState(false);
   const router = useRouter(); 
-console.log("listing",listing)
   const getusers = () => {
     setLoading(true);
     const main = new Details();
     main
-      .Coustmerget()
+      .Customerget()
       .then((r) => {
         setLoading(false);
         setLisitng(r?.data?.data);
@@ -35,6 +34,7 @@ console.log("listing",listing)
   useEffect(() => {
     getusers();
   }, []);
+  console.log("listing",listing)
  
   return (
     <Layout page={"Customers"}>
