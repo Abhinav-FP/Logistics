@@ -20,6 +20,8 @@ import { createPortal } from "react-dom";
 import { MdStarRate } from "react-icons/md";
 import NoData from "@/components/NoData";
 import { MdLocationOn } from "react-icons/md";
+import moment from "moment";
+
 
 export default function ShipmentTable({
   shipments,
@@ -214,10 +216,10 @@ export default function ShipmentTable({
                     <Status status={shipment?.status} />
                   </td>
                   <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">
-                    {shipment?.shippingDate}
+                    {shipment?.shippingDate ? moment(shipment.shippingDate).format("DD/MM/YYYY") : "N/A"}
                   </td>
                   <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">
-                    {shipment?.deliveryDateExpect}
+                    {shipment?.deliveryDateExpect ? moment(shipment.deliveryDateExpect).format("DD/MM/YYYY") : "N/A"}
                   </td>
 
                   {/* <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">
@@ -814,8 +816,8 @@ export default function ShipmentTable({
               <button
                 onClick={() => setActiveTab("shippingInfo")}
                 className={`px-4 py-2.5 text-[#646567] tracking-[-0.04em] text-base font-medium ${activeTab === "shippingInfo"
-                    ? "border-b border-[#1C5FE8]"
-                    : "border-b border-[#1C5FE8] border-opacity-0"
+                  ? "border-b border-[#1C5FE8]"
+                  : "border-b border-[#1C5FE8] border-opacity-0"
                   }`}
               >
                 {" "}
@@ -826,8 +828,8 @@ export default function ShipmentTable({
               <button
                 onClick={() => setActiveTab("vehicleInfo")}
                 className={`px-4 py-2.5 text-[#646567] tracking-[-0.04em] text-base font-medium ${activeTab === "vehicleInfo"
-                    ? "border-b border-[#1C5FE8]"
-                    : "border-b border-[#1C5FE8] border-opacity-0"
+                  ? "border-b border-[#1C5FE8]"
+                  : "border-b border-[#1C5FE8] border-opacity-0"
                   }`}
               >
                 Driver Info
