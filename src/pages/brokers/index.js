@@ -40,7 +40,7 @@ export default function Index() {
       <>
       <div className="flex items-center justify-between items-center space-y-4 md:space-y-0">
         <h2 className="text-[#151547] text-lg tracking-[-0.04em] font-medium m-0">Brokers  Listing </h2>
-        {user?.role === "shipper" || user.role === "admin" && 
+        {user?.role === "shipper"  && 
           <Link
             href="/brokers/add"
             className="bg-[#1C5FE8] hover:bg-[#0a3fab] inline-block font-medium text-base text-white tracking-[-0.04em] rounded-lg lg:rounded-xl px-5 py-3 "
