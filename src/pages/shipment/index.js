@@ -95,7 +95,7 @@ export default function Index() {
             <div className="flex justify-between flex-wrap gap-4 items-baseline">
               <div className="flex overflow-x-auto align-items-center py-2 sm:space-x-4 space-x-1">
                 <select
-                  className="font-inter font-medium lg:text-[16px] text-[14px] leading-tight text-center xxl:w-52 px-4 border-2 p-3 mb-2 rounded-full focus:outline-none "
+                  className="font-inter font-medium lg:text-[16px] text-[14px] leading-tight text-center xxl:w-52 px-4 border-2 p-3 mb-2 rounded-lg lg:rounded-xl focus:outline-none "
                   value={filter}
                   onChange={(e) => handleFilterChange(e.target.value)}
                 >

@@ -12,8 +12,8 @@ export default function UsersTable({ listing }) {
             <th width="15%" className="px-4 py-3  tracking-[-0.04em] text-sm font-medium text-left">Name</th>
             <th width="10%" className="px-4 py-3  tracking-[-0.04em] text-sm font-medium text-left">Role</th>
             <th width="15%" className="px-4 py-3  tracking-[-0.04em] text-sm font-medium text-left">Email</th>
-            <th width="45%" className="px-4 py-3  tracking-[-0.04em] text-sm font-medium text-left">Address</th>
-            <th width="10%" className="px-4 py-3  tracking-[-0.04em] text-sm font-medium text-left">Contact</th>
+            <th width="15%" className="px-4 py-3  tracking-[-0.04em] text-sm font-medium text-left">Contact</th>
+            <th width="40%" className="px-4 py-3  tracking-[-0.04em] text-sm font-medium text-left">Address</th>
           </tr>
         </thead>
         <tbody>
@@ -23,8 +23,8 @@ export default function UsersTable({ listing }) {
               <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left capitalize">{data?.user_id_ref?.name}</td>
               <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left capitalize">{data?.user_id_ref?.role}</td>
               <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">{data?.user_id_ref?.email}</td>
-              <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">{data?.address}</td>
               <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">{data?.user_id_ref?.contact}</td>
+              <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">{data?.address}</td>
             </tr>
           ))}
         </tbody>

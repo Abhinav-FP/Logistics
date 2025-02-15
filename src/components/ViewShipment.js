@@ -172,15 +172,6 @@ export default function ViewShipment({ isOpen, onClose, data }) {
 
         <div>
           <p className="text-left text-[#70708D] border-0 py-.5  lg:py-.5  tracking-[-0.04em] text-[15px] font-medium">
-            Description:
-          </p>
-          <p className="text-left text-[#70708D] border-0 py-.5 lg:py-.5 tracking-[-0.04em] text-[15px] font-normal capitalize">
-            {data?.description}
-          </p>
-        </div>
-
-        <div>
-          <p className="text-left text-[#70708D] border-0 py-.5  lg:py-.5  tracking-[-0.04em] text-[15px] font-medium">
             Pickup Location:
           </p>
           <p className="text-left text-[#70708D] border-0 py-.5 lg:py-.5 tracking-[-0.04em] text-[15px] font-normal capitalize">
@@ -195,6 +186,17 @@ export default function ViewShipment({ isOpen, onClose, data }) {
             {data?.drop_location}
           </p>
         </div>
+
+
+        <div>
+          <p className="text-left text-[#70708D] border-0 py-.5  lg:py-.5  tracking-[-0.04em] text-[15px] font-medium">
+            Description:
+          </p>
+          <p className="text-left text-[#70708D] border-0 py-.5 lg:py-.5 tracking-[-0.04em] text-[15px] font-normal capitalize">
+            {data?.description}
+          </p>
+        </div>
+
         {/* <div>
           <p className="text-left text-[#70708D] border-0 py-.5  lg:py-.5  tracking-[-0.04em] text-[15px] font-medium">
             Current Location:

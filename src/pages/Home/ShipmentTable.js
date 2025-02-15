@@ -20,8 +20,9 @@ import DriverAssign from "@/components/DriverAssign";
 import ConsignmentPopup from "@/components/ConsignmentPopup";
 import { createPortal } from "react-dom";
 import { MdStarRate } from "react-icons/md";
-import { MdOutlineNotListedLocation } from "react-icons/md";
 import NoData from "@/components/NoData";
+import { FaLocationDot } from "react-icons/fa6";
+
 
 export default function ShipmentTable({
   shipments,
@@ -240,16 +241,16 @@ export default function ShipmentTable({
                           }}
                         />
                         {shipment?.status !== "delivered" && (
-                        <Link href={`/shipment/add/${shipment?._id}`}>
-                          <GrEdit
-                            size={18}
-                            className="cursor-pointer"
-                            color="#16A34A"
-                          />
-                        </Link>)}
+                          <Link href={`/shipment/add/${shipment?._id}`}>
+                            <GrEdit
+                              size={18}
+                              className="cursor-pointer"
+                              color="#16A34A"
+                            />
+                          </Link>)}
                         {shipment?.status === "transit" && (
-                          <MdOutlineNotListedLocation
-                            size={24}
+                          <FaLocationDot
+                            size={18}
                             className="cursor-pointer"
                             color="#3b82f6"
                             onClick={() => {
@@ -259,12 +260,12 @@ export default function ShipmentTable({
                           />
                         )}
                         {shipment?.status !== "delivered" && (
-                        <Delete
-                          step={1}
-                          Id={shipment?._id}
-                          getShipments={getShipments}
-                          role={role}
-                        />)}
+                          <Delete
+                            step={1}
+                            Id={shipment?._id}
+                            getShipments={getShipments}
+                            role={role}
+                          />)}
                       </div>
                     </td>
                   ) : role === "broker" ? (
@@ -530,7 +531,7 @@ export default function ShipmentTable({
                                       handleDownloadBOL(shipment?._id);
                                     }}
                                   >
-                                  {BolLoading ? (
+                                    {BolLoading ? (
                                       "Downloading..."
                                     ) : (
                                       <>
@@ -641,7 +642,7 @@ export default function ShipmentTable({
                                       handleDownloadBOL(shipment?._id);
                                     }}
                                   >
-                                   {BolLoading ? (
+                                    {BolLoading ? (
                                       "Downloading..."
                                     ) : (
                                       <>
@@ -745,7 +746,7 @@ export default function ShipmentTable({
                           }}
                         >
                           {selectedCarrier &&
-                          selectedCarrier === carrier?.career_id_ref?._id ? (
+                            selectedCarrier === carrier?.career_id_ref?._id ? (
                             <svg
                               width="24"
                               height="24"
@@ -816,11 +817,10 @@ export default function ShipmentTable({
             <li>
               <button
                 onClick={() => setActiveTab("shippingInfo")}
-                className={`px-4 py-2.5 text-[#646567] tracking-[-0.04em] text-base font-medium ${
-                  activeTab === "shippingInfo"
+                className={`px-4 py-2.5 text-[#646567] tracking-[-0.04em] text-base font-medium ${activeTab === "shippingInfo"
                     ? "border-b border-[#1C5FE8]"
                     : "border-b border-[#1C5FE8] border-opacity-0"
-                }`}
+                  }`}
               >
                 {" "}
                 Shipping Info
@@ -829,11 +829,10 @@ export default function ShipmentTable({
             <li>
               <button
                 onClick={() => setActiveTab("vehicleInfo")}
-                className={`px-4 py-2.5 text-[#646567] tracking-[-0.04em] text-base font-medium ${
-                  activeTab === "vehicleInfo"
+                className={`px-4 py-2.5 text-[#646567] tracking-[-0.04em] text-base font-medium ${activeTab === "vehicleInfo"
                     ? "border-b border-[#1C5FE8]"
                     : "border-b border-[#1C5FE8] border-opacity-0"
-                }`}
+                  }`}
               >
                 Driver Info
               </button>
