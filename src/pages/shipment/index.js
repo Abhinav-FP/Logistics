@@ -14,7 +14,7 @@ export default function Index() {
   const [filter, setFilter] = useState("");
   const router = useRouter();
 
-  const getShipments = async (name="") => {
+  const getShipments = async (name = "") => {
     setLoading(true);
     try {
       const main = new Details();
@@ -92,37 +92,38 @@ export default function Index() {
           </div> */}
           <div className="">
             {user?.role !== "admin" && (
-            <div className="flex justify-between flex-wrap gap-4 items-baseline">
-              <div className="flex overflow-x-auto align-items-center py-2 sm:space-x-4 space-x-1">
-                <select
-                  className="font-inter font-medium lg:text-[16px] text-[14px] leading-tight text-center xxl:w-52 px-4 border-2 p-3 mb-2 rounded-lg lg:rounded-xl focus:outline-none "
-                  value={filter}
-                  onChange={(e) => handleFilterChange(e.target.value)}
-                >
-                   <option value="" className="text-left">
-                    All
-                  </option>
-                  <option value="pending" className="text-left">
-                    Pending
-                  </option>
-                  <option value="transit" className="text-left">
-                    Transit
-                  </option>
-                  <option value="delivered" className="text-left">
-                    Delivered
-                  </option>
-                </select>
-              </div>
+              <div className="flex justify-between flex-wrap gap-4 items-baseline">
+                <div className="flex overflow-x-auto align-items-center py-2 sm:space-x-4 space-x-1">
+                  <select
+                    className="font-inter font-medium lg:text-[16px] text-[14px] leading-tight text-center xxl:w-52 px-4 border-2 p-3 mb-2 rounded-lg lg:rounded-xl focus:outline-none "
+                    value={filter}
+                    onChange={(e) => handleFilterChange(e.target.value)}
+                  >
+                    <option value="" className="text-left">
+                      All
+                    </option>
+                    <option value="pending" className="text-left">
+                      Pending
+                    </option>
+                    <option value="transit" className="text-left">
+                      Transit
+                    </option>
+                    <option value="delivered" className="text-left">
+                      Delivered
+                    </option>
+                  </select>
+                </div>
 
-              {user?.role === "shipper" && (
-                <Link
-                  href="/shipment/add"
-                  className="bg-[#1C5FE8] hover:bg-[#0a3fab] inline-block font-medium text-base text-white tracking-[-0.04em] rounded-lg lg:rounded-xl px-5 py-3"
-                >
-                  <span className="mr-1">+</span> New Shipments
-                </Link>
-              )}
-            </div>)}
+                {user?.role === "shipper" && (
+                  <Link
+                    href="/shipment/add"
+                    className="bg-[#1C5FE8] hover:bg-[#0a3fab] inline-block font-medium text-base text-white tracking-[-0.04em] rounded-lg lg:rounded-xl px-5 py-3"
+                  >
+                    <span className="mr-1">+</span> New Shipments
+                  </Link>
+                )}
+              </div>
+            )}
           </div>
         </div>
         <div className="bg-white mt-6 lg:mt-[30px] px-6 py-[30px] rounded-md lg:rounded-xl border border-black border-opacity-10">
