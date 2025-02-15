@@ -55,18 +55,33 @@ export default function Index() {
     getBrokerandCustomer();
   }, []);
 
+
+  const formatDate = (date) => {
+    if (!date) return "";
+    const d = new Date(date);
+    return d.toLocaleDateString("en-GB"); // Formats as DD/MM/YYYY
+  };
+  
+  
   const handleChange = (e) => {
     const { name, value } = e.target;
-    if (name === 'deliveryDate' && new Date(value) < new Date(formData.shippingDate)) {
+  
+    // Convert selected date and shipment date to comparable format (YYYY-MM-DD)
+    const selectedDate = new Date(value).setHours(0, 0, 0, 0);
+    const shipmentDate = formData.shippingDate ? new Date(formData.shippingDate).setHours(0, 0, 0, 0) : null;
+  
+    // Validation for Delivery Date
+    if (name === 'deliveryDate' && shipmentDate && selectedDate < shipmentDate) {
       toast.error('Delivery Date cannot be earlier than Shipment Date.');
       return;
-    }  
-    setFormData({
-      ...formData,
+    }
+  
+    setFormData((prevData) => ({
+      ...prevData,
       [name]: value,
-    });
+    }));
   };
-
+  
   const handleUpload = (event) => {
     const file = event.target.files[0]; // Get the first uploaded file
     if (file) {
@@ -221,7 +236,7 @@ export default function Index() {
                     <input
                       type="date"
                       name="shippingDate"
-                      value={formData.shippingDate}
+                      value={formData.shippingDate ? new Date(formData.shippingDate).toISOString().split("T")[0] : ""}
                       onChange={handleChange}
                       className="w-full h-11 lg:h-[48px] appearance-none block bg-white text-[#000] text-base border border-black border-opacity-10 rounded-md lg:rounded-xl py-2 px-4 leading-tight focus:outline-none"
                       placeholder=""
@@ -237,7 +252,7 @@ export default function Index() {
                     <input
                       type="date"
                       name="deliveryDate"
-                      value={formData.deliveryDate}
+                      value={formData.deliveryDate ? new Date(formData.deliveryDate).toISOString().split("T")[0] : ""}
                       onChange={handleChange}
                       className="w-full h-11 lg:h-[48px] appearance-none block bg-white text-[#000] text-base border border-black border-opacity-10 rounded-md lg:rounded-xl py-2 px-4 leading-tight focus:outline-none"
                       placeholder=""
