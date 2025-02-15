@@ -158,7 +158,6 @@ export default function ShipmentTable({
     }
   };
 
-  console.log("shipments", shipments);
 
   return (
     <div className="overflow-x-auto">
@@ -351,7 +350,7 @@ export default function ShipmentTable({
                                     </button>
                                   </li>
                                 )}
-                                {!shipment?.status === "transit" && (
+                                {shipment?.status === "transit" && (
                                   <li className="py-2 tracking-[-0.04em] [&:not(:last-child)]:border-b border-black border-opacity-10 px-4 lg:px-6">
                                     <button
                                       className="flex gap-2 items-center text-[#1B1B1B] bg-transparent border-none text-sm font-medium"
@@ -690,7 +689,7 @@ export default function ShipmentTable({
         </table>
       ) : (
         <NoData
-          Heading={"No Data available"}
+          Heading={"No Shipment available"}
           content={
             "You don't have any data to view at the moment. Please come later"
           }
