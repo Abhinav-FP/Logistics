@@ -67,29 +67,6 @@ export default function Index() {
           <h2 className="text-[#151547] text-lg tracking-[-0.04em] font-medium m-0">
             Shipment Listing{" "}
           </h2>
-          {/* <div className="flex overflow-x-auto mb-[20px] md:mb-0 align-items-center py-2 sm:space-x-4 space-x-1 upcomming-box">
-            <button className={`font-inter font-medium lg:text-[16px] text-[14px] leading-tight text-center xxl:w-52 px-4 border-2 p-3 mb-2 rounded-full ${filter === "pending"
-                ? "bg-[#1C5FE8]  text-white"
-                : "bg-white text-[#1C5FE8]"
-                }`}
-              onClick={() => handleFilterChange("pending")}>
-                Pending
-            </button>
-            <button className={`font-inter font-medium lg:text-[16px] text-[14px] leading-tight text-center xxl:w-52 px-4 border-2 p-3 mb-2 rounded-full ${filter === "transit"
-                ? "bg-[#1C5FE8]  text-white"
-                : "bg-white text-[#1C5FE8]"
-                }`}
-              onClick={() => handleFilterChange("transit")}>
-                Transit
-            </button>
-            <button className={`font-inter font-medium lg:text-[16px] text-[14px] leading-tight text-center xxl:w-52 px-4 border-2 p-3 mb-2 rounded-full ${filter === "delivered"
-                ? "bg-[#1C5FE8] text-white"
-                : "bg-white text-[#1C5FE8]"
-                }`}
-              onClick={() => handleFilterChange("delivered")}>
-                Delivered
-            </button>
-          </div> */}
           <div className="">
             {user?.role !== "admin" && (
               <div className="flex justify-between flex-wrap gap-4 items-baseline">

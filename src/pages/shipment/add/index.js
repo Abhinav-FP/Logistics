@@ -27,7 +27,7 @@ export default function Index() {
     dimensions1: "",
     dimensions2: "",
     customerName: "",
-    file:null,
+    file: null,
   });
   const [brokers, setBrokers] = useState([]);
   const [customers, setCustomers] = useState([]);
@@ -61,27 +61,27 @@ export default function Index() {
     const d = new Date(date);
     return d.toLocaleDateString("en-GB"); // Formats as DD/MM/YYYY
   };
-  
-  
+
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-  
+
     // Convert selected date and shipment date to comparable format (YYYY-MM-DD)
     const selectedDate = new Date(value).setHours(0, 0, 0, 0);
     const shipmentDate = formData.shippingDate ? new Date(formData.shippingDate).setHours(0, 0, 0, 0) : null;
-  
+
     // Validation for Delivery Date
     if (name === 'deliveryDate' && shipmentDate && selectedDate < shipmentDate) {
       toast.error('Delivery Date cannot be earlier than Shipment Date.');
       return;
     }
-  
+
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
   };
-  
+
   const handleUpload = (event) => {
     const file = event.target.files[0]; // Get the first uploaded file
     if (file) {
@@ -90,7 +90,7 @@ export default function Index() {
         file: file,
       }));
     }
-  };  
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -111,8 +111,8 @@ export default function Index() {
       weight: formData.weight,
       dimensions: `${formData.dimensions1} x ${formData.dimensions2}`,
       typeOfGoods: formData.typeOfGoods,
-      current_location:formData.pickup,
-      file:formData?.file
+      current_location: formData.pickup,
+      file: formData?.file
     });
     response
       .then((res) => {
@@ -135,7 +135,7 @@ export default function Index() {
             dimensions1: "",
             dimensions2: "",
             customerName: "",
-            file:"",
+            file: "",
           })
           router.push("/shipment")
         } else {
@@ -301,14 +301,14 @@ export default function Index() {
                     value={formData.quantity}
                     onChange={handleChange}
                     className="w-full h-11 lg:h-[48px] appearance-none block bg-white text-[#000] text-base border border-black border-opacity-10 rounded-md lg:rounded-xl py-2 px-4 leading-tight focus:outline-none"
-                   placeholder="Enter quantity"
+                    placeholder="Enter quantity"
                     required
                     min={0}
                   />
                 </div>
                 <div className="w-full md:w-6/12 px-2 lg:px-3 mb-4 lg:mb-6">
                   <label className="text-[#70708D] text-sm tracking-[-0.04em] uppercase mb-2 block">
-                    Weight
+                    Weight (In Tonne)
                   </label>
                   <input
                     type="number"
@@ -333,7 +333,7 @@ export default function Index() {
                       value={formData.dimensions1}
                       onChange={handleChange}
                       className="w-1/2 h-11 lg:h-[48px] appearance-none block bg-white text-[#000] text-base border border-black border-opacity-10 rounded-md lg:rounded-xl py-2 px-4 leading-tight focus:outline-none"
-                 placeholder="Enter dimensions"
+                      placeholder="Enter dimensions"
                       min={0}
                       required
                     />
@@ -344,8 +344,8 @@ export default function Index() {
                       value={formData.dimensions2}
                       onChange={handleChange}
                       className="w-1/2 h-11 lg:h-[48px] appearance-none block bg-white text-[#000] text-base border border-black border-opacity-10 rounded-md lg:rounded-xl py-2 px-4 leading-tight focus:outline-none"
-                    
-  placeholder="Enter dimensions"
+
+                      placeholder="Enter dimensions"
                       min={0}
                       required
                     />
@@ -373,7 +373,7 @@ export default function Index() {
                     value={formData.estimatedCost}
                     onChange={handleChange}
                     className="w-full h-11 lg:h-[48px] appearance-none block bg-white text-[#000] text-base border border-black border-opacity-10 rounded-md lg:rounded-xl py-2 px-4 leading-tight focus:outline-none"
-                      placeholder="Enter estimated cost"
+                    placeholder="Enter estimated cost"
                     min={0}
                     required
                   />
