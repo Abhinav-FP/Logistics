@@ -31,7 +31,6 @@ export default function ShipmentTable({
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isCarrierPopupOpen, setIsCarrierPopupOpen] = useState(false);
   const [isSidePopupOpen, setIsSidePopupOpen] = useState(false);
-  const [BolLoading, SetBolLoading] = useState(false);
   const [data, setData] = useState({});
   const [isdropdownopen, setIsdropdownopen] = useState(null);
   const [listing, setLisitng] = useState("");
@@ -129,12 +128,17 @@ export default function ShipmentTable({
         console.log("error", error);
       });
   };
+  const [bolLoading, setBolLoading] = useState(false);
+  const [downloaded, setDownloaded] = useState(false);
 
   const handleDownloadBOL = async (shipmentId) => {
-    if (BolLoading) {
+    if (bolLoading) {
       return;
     }
-    SetBolLoading(true);
+
+    setBolLoading(true);
+    setDownloaded(false); // Reset downloaded state before a new download
+
     const detailsService = new Details();
 
     try {
@@ -152,10 +156,16 @@ export default function ShipmentTable({
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
-      SetBolLoading(false);
+
+      // Delay UI update for better UX
+      setTimeout(() => {
+        setBolLoading(false);
+        setDownloaded(true);
+      }, 3000);
     } catch (error) {
       console.error("Error downloading BOL:", error);
-      SetBolLoading(false);
+      setBolLoading(false);
+      setDownloaded(false); // Ensure state resets on error
     }
   };
 
@@ -318,12 +328,13 @@ export default function ShipmentTable({
                                       handleDownloadBOL(shipment?._id);
                                     }}
                                   >
-                                    {BolLoading ? (
+                                    {bolLoading ? (
                                       "Downloading..."
+                                    ) : downloaded ? (
+                                      "Download Complete ✅"
                                     ) : (
                                       <>
-                                        Download PDF{" "}
-                                        <BsDownload size={18} color="#1C5FE8" />
+                                        Download PDF <BsDownload size={18} color="#1C5FE8" />
                                       </>
                                     )}
                                   </button>
@@ -427,12 +438,13 @@ export default function ShipmentTable({
                                       handleDownloadBOL(shipment?._id);
                                     }}
                                   >
-                                    {BolLoading ? (
+                                    {bolLoading ? (
                                       "Downloading..."
+                                    ) : downloaded ? (
+                                      "Download Complete ✅"
                                     ) : (
                                       <>
-                                        Download PDF{" "}
-                                        <BsDownload size={18} color="#1C5FE8" />
+                                        Download PDF <BsDownload size={18} color="#1C5FE8" />
                                       </>
                                     )}
                                   </button>
@@ -533,12 +545,13 @@ export default function ShipmentTable({
                                       handleDownloadBOL(shipment?._id);
                                     }}
                                   >
-                                    {BolLoading ? (
+                                     {bolLoading ? (
                                       "Downloading..."
+                                    ) : downloaded ? (
+                                      "Download Complete ✅"
                                     ) : (
                                       <>
-                                        Download PDF{" "}
-                                        <BsDownload size={18} color="#1C5FE8" />
+                                        Download PDF <BsDownload size={18} color="#1C5FE8" />
                                       </>
                                     )}
                                   </button>
@@ -644,12 +657,13 @@ export default function ShipmentTable({
                                       handleDownloadBOL(shipment?._id);
                                     }}
                                   >
-                                    {BolLoading ? (
+                                    {bolLoading ? (
                                       "Downloading..."
+                                    ) : downloaded ? (
+                                      "Download Complete ✅"
                                     ) : (
                                       <>
-                                        Download PDF{" "}
-                                        <BsDownload size={18} color="#1C5FE8" />
+                                        Download PDF <BsDownload size={18} color="#1C5FE8" />
                                       </>
                                     )}
                                   </button>
@@ -748,7 +762,7 @@ export default function ShipmentTable({
                           }}
                         >
                           {selectedCarrier &&
-                          selectedCarrier === carrier?.career_id_ref?._id ? (
+                            selectedCarrier === carrier?.career_id_ref?._id ? (
                             <svg
                               width="24"
                               height="24"
@@ -819,11 +833,10 @@ export default function ShipmentTable({
             <li>
               <button
                 onClick={() => setActiveTab("shippingInfo")}
-                className={`px-4 py-2.5 text-[#646567] tracking-[-0.04em] text-base font-medium ${
-                  activeTab === "shippingInfo"
-                    ? "border-b border-[#1C5FE8]"
-                    : "border-b border-[#1C5FE8] border-opacity-0"
-                }`}
+                className={`px-4 py-2.5 text-[#646567] tracking-[-0.04em] text-base font-medium ${activeTab === "shippingInfo"
+                  ? "border-b border-[#1C5FE8]"
+                  : "border-b border-[#1C5FE8] border-opacity-0"
+                  }`}
               >
                 {" "}
                 Shipping Info
@@ -832,11 +845,10 @@ export default function ShipmentTable({
             <li>
               <button
                 onClick={() => setActiveTab("vehicleInfo")}
-                className={`px-4 py-2.5 text-[#646567] tracking-[-0.04em] text-base font-medium ${
-                  activeTab === "vehicleInfo"
-                    ? "border-b border-[#1C5FE8]"
-                    : "border-b border-[#1C5FE8] border-opacity-0"
-                }`}
+                className={`px-4 py-2.5 text-[#646567] tracking-[-0.04em] text-base font-medium ${activeTab === "vehicleInfo"
+                  ? "border-b border-[#1C5FE8]"
+                  : "border-b border-[#1C5FE8] border-opacity-0"
+                  }`}
               >
                 Driver Info
               </button>
