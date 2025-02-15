@@ -22,7 +22,6 @@ import NoData from "@/components/NoData";
 import { MdLocationOn } from "react-icons/md";
 import moment from "moment";
 
-
 export default function ShipmentTable({
   shipments,
   getShipments,
@@ -215,10 +214,14 @@ export default function ShipmentTable({
                     <Status status={shipment?.status} />
                   </td>
                   <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">
-                    {shipment?.shippingDate ? moment(shipment.shippingDate).format("DD/MM/YYYY") : "N/A"}
+                    {shipment?.shippingDate
+                      ? moment(shipment.shippingDate).format("DD/MM/YYYY")
+                      : "N/A"}
                   </td>
                   <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">
-                    {shipment?.deliveryDateExpect ? moment(shipment.deliveryDateExpect).format("DD/MM/YYYY") : "N/A"}
+                    {shipment?.deliveryDateExpect
+                      ? moment(shipment.deliveryDateExpect).format("DD/MM/YYYY")
+                      : "N/A"}
                   </td>
 
                   {/* <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">
