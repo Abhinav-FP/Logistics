@@ -32,7 +32,6 @@ export default function Index() {
     useEffect(() => {
       getusers();
     }, []);
-    console.log("listing",listing);
 
 
   return (

@@ -3,7 +3,6 @@ import Popup from "./Popup";
 import Status from "./Status";
 
 export default function ViewShipment({ isOpen, onClose, data }) {
-  console.log("data", data);
   return (
     <Popup isOpen={isOpen} onClose={onClose} size={"max-w-[800px]"}>
       <div className="p-4 space-y-4">

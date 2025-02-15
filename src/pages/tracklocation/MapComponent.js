@@ -157,7 +157,7 @@ const MapComponent = ({ EndLocation, StartLocation, CurrentLocation, routeDetail
                     </GoogleMap>
                 </div>
             </LoadScript>
-            {/* <DataMap  routesData={routesData}/> */}
+            {/* <DataMap  /> */}
         </>
 
     );
