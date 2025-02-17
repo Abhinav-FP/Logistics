@@ -5,6 +5,7 @@ import RecentShipment from "./RecentShipment";
 import ShipmentTable from "./ShipmentTable";
 import Details from "../api/Listing/Details";
 import Loader from "@/components/Loader";
+import NoData from "@/components/NoData";
 
 export default function CustomerDashboard() {
   const [listing, setLisitng] = useState("");
@@ -72,7 +73,16 @@ export default function CustomerDashboard() {
                   <div className="w-full md:w-4/12 px-2 flex flex-wrap justify-end"></div>
                 </div>
                 <div className="space-y-3 lg:space-y-4">
-                  {listing?.ShipmentData &&
+                {listing &&
+                  listing?.ShipmentData &&
+                  listing?.ShipmentData?.length === 0 ? (
+                    <NoData
+                      Heading={"No Shipment available"}
+                      content={
+                        "You don't have any data to view at the moment. Please come later"
+                      }
+                    />
+                  ) : (listing?.ShipmentData &&
                     listing?.ShipmentData?.slice(0, 2)?.map(
                       (shipmentTrack, index) => (
                         <div
@@ -154,11 +164,23 @@ export default function CustomerDashboard() {
                           </div>
                         </div>
                       )
-                    )}
+                    )
+                  )}
                 </div>
               </div>
               {/* On the way */}
               <div className="w-full lg:w-6/12 px-2.5">
+              {listing &&
+                listing?.ShipmentData &&
+                listing?.ShipmentData?.length === 0 ? (
+                  <NoData
+                    Heading={"No Shipment available"}
+                    content={
+                      "You don't have any data to view at the moment. Please come later"
+                    }
+                  />
+                ) : (
+              <>
                 <div className="flex flex-wrap items-center -mx-2 mb-4 lg:mb-5">
                   <div className="w-full md:w-8/12 px-2 flex flex-wrap items-center">
                     <h3 className="text-[#151547] text-base tracking-[-0.05em] font-medium mb-0">
@@ -246,6 +268,8 @@ export default function CustomerDashboard() {
                     </p>
                   </div>
                 </div>
+                </>
+                )}
               </div>
             </div>
           </div>

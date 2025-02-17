@@ -54,7 +54,7 @@ export default function VehicleInfo({ data }) {
         )}
 
         {data?.driver_id?.vin && (
-          <div className="w-full md:w-6/12 pl-2  ">
+          <div className="w-full md:w-6/12">
             <div>
               <h3 className="text-black  tracking-[-0.04em] text-sm font-medium m-0 capitalize">VIN number</h3>
               <p className="text-[#666666] text-[12px] font-medium tracking-[-0.04em] mb-0">{data?.driver_id?.vin}</p>

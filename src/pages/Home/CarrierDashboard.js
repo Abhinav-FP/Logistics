@@ -6,6 +6,7 @@ import Demo from "./Demo";
 import Details from "../api/Listing/Details";
 import ShipmentTable from "./ShipmentTable";
 import Loader from "@/components/Loader";
+import NoData from "@/components/NoData";
 
 export default function CarrierDashboard() {
   const [listing, setLisitng] = useState("");
@@ -79,6 +80,11 @@ export default function CarrierDashboard() {
     if (str.length <= charLimit) return str;
     return str.slice(0, charLimit) + "...";
   }
+  const formatDate = (isoString) => {
+    if (!isoString) return "";
+    return new Date(isoString)?.toISOString()?.split("T")[0];
+  };
+
   return (
     <>
       {Loading ? (
@@ -146,7 +152,7 @@ export default function CarrierDashboard() {
                     </h3>
                   </div>
                   <div className="w-full md:w-4/12 px-2 flex flex-wrap justify-end">
-                    <button className="border border-black border-opacity-10 py-1 px-2.5 rounded lg:rounded-lg">
+                    {/* <button className="border border-black border-opacity-10 py-1 px-2.5 rounded lg:rounded-lg">
                       <svg
                         className="inline align-middle mr-1.5 -mt-[2px]"
                         width="16"
@@ -164,11 +170,21 @@ export default function CarrierDashboard() {
                         />
                       </svg>
                       Filter
-                    </button>
+                    </button> */}
                   </div>
                 </div>
                 <div className="space-y-3 lg:space-y-4">
-                  {listing?.ShipmentData &&
+                  {listing &&
+                  listing?.ShipmentData &&
+                  listing?.ShipmentData?.length === 0 ? (
+                    <NoData
+                      Heading={"No Shipment available"}
+                      content={
+                        "You don't have any data to view at the moment. Please come later"
+                      }
+                    />
+                  ) : (
+                    listing?.ShipmentData &&
                     listing?.ShipmentData?.slice(0, 2)?.map(
                       (shipmentTrack, index) => (
                         <div
@@ -250,95 +266,116 @@ export default function CarrierDashboard() {
                           </div>
                         </div>
                       )
-                    )}
+                    )
+                  )}
                 </div>
               </div>
               {/* On the way */}
               <div className="w-full lg:w-6/12 px-2.5">
-                <div className="flex flex-wrap items-center -mx-2 mb-4 lg:mb-5">
-                  <div className="w-full md:w-8/12 px-2 flex flex-wrap items-center">
-                    <h3 className="text-[#151547] text-base tracking-[-0.05em] font-medium mb-0">
-                      On the way
-                    </h3>
-                  </div>
-                  <div className="w-full md:w-4/12 px-2 flex flex-wrap justify-end">
-                    <span className="text-[#7A7A7A] text-sm tracking-[-0.04em] font-medium mb-0">
-                      4/12/2024
-                    </span>
-                  </div>
-                </div>
-                <div className="mb-4 lg:mb-6">
-                  <iframe
-                    className="rounded-md md:rounded-xl w-full border-0"
-                    src={`https://www.google.com/maps/embed/v1/directions?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY
-                      }&origin=${(listing &&
-                        listing?.ShipmentData &&
-                        listing?.ShipmentData[0]?.pickup_location) ||
-                      ""
-                      }&destination=${(listing &&
-                        listing?.ShipmentData &&
-                        listing?.ShipmentData[0]?.drop_location) ||
-                      ""
-                      }&mode=driving`}
-                    width="100%"
-                    height="224"
-                    allowfullscreen=""
-                    loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade"
-                  ></iframe>
-                </div>
-                <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-1.5 lg:gap-2 xl:gap-3">
-                  <div className="md:[&:not(:last-child)]:border-r border-black border-opacity-10">
-                    <h3 className="text-sm xl:text-base text-[#7A7A7A] tracking-[-0.04em] font-medium mb-0">
-                      Category
-                    </h3>
-                    <p className="text-base text-[#262626] tracking-[-0.04em] font-medium mb-0 capitalize">
-                      {(listing &&
-                        listing?.ShipmentData &&
-                        listing?.ShipmentData[0]?.typeOfGoods) ||
-                        ""}
-                    </p>
-                  </div>
-                  <div className="md:[&:not(:last-child)]:border-r border-black border-opacity-10">
-                    <h3 className="text-sm xl:text-base text-[#7A7A7A] tracking-[-0.04em] font-medium mb-0">
-                      Distance
-                    </h3>
-                    <p className="text-base text-[#262626] tracking-[-0.04em] font-medium mb-0 capitalize">
-                      N/A
-                    </p>
-                  </div>
-                  <div className="md:[&:not(:last-child)]:border-r border-black border-opacity-10">
-                    <h3 className="text-sm xl:text-base text-[#7A7A7A] tracking-[-0.04em] font-medium mb-0">
-                      Estimation
-                    </h3>
-                    <p className="text-base text-[#262626] tracking-[-0.04em] font-medium mb-0 capitalize">
-                      N/A
-                    </p>
-                  </div>
-                  <div className="md:[&:not(:last-child)]:border-r border-black border-opacity-10">
-                    <h3 className="text-sm xl:text-base text-[#7A7A7A] tracking-[-0.04em] font-medium mb-0">
-                      Weight
-                    </h3>
-                    <p className="text-base text-[#262626] tracking-[-0.04em] font-medium mb-0 capitalize">
-                      {(listing &&
-                        listing?.ShipmentData &&
-                        listing?.ShipmentData[0]?.weight) ||
-                        ""}
-                    </p>
-                  </div>
-                  <div className="md:[&:not(:last-child)]:border-r border-black border-opacity-10">
-                    <h3 className="text-sm xl:text-base text-[#7A7A7A] tracking-[-0.04em] font-medium mb-0">
-                      Fee
-                    </h3>
-                    <p className="text-base text-[#262626] tracking-[-0.04em] font-medium mb-0 capitalize">
-                      ${" "}
-                      {(listing &&
-                        listing?.ShipmentData &&
-                        listing?.ShipmentData[0]?.cost) ||
-                        ""}
-                    </p>
-                  </div>
-                </div>
+                {listing &&
+                listing?.ShipmentData &&
+                listing?.ShipmentData?.length === 0 ? (
+                  <NoData
+                    Heading={"No Shipment available"}
+                    content={
+                      "You don't have any data to view at the moment. Please come later"
+                    }
+                  />
+                ) : (
+                  <>
+                    <div className="flex flex-wrap items-center -mx-2 mb-4 lg:mb-5">
+                      <div className="w-full md:w-8/12 px-2 flex flex-wrap items-center">
+                        <h3 className="text-[#151547] text-base tracking-[-0.05em] font-medium mb-0">
+                          On the way
+                        </h3>
+                      </div>
+                      <div className="w-full md:w-4/12 px-2 flex flex-wrap justify-end">
+                        <span className="text-[#7A7A7A] text-sm tracking-[-0.04em] font-medium mb-0">
+                          {formatDate(
+                            listing &&
+                              listing?.ShipmentData &&
+                              listing?.ShipmentData[0]?.created_at
+                          ) || ""}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="mb-4 lg:mb-6">
+                      <iframe
+                        className="rounded-md md:rounded-xl w-full border-0"
+                        src={`https://www.google.com/maps/embed/v1/directions?key=${
+                          process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY
+                        }&origin=${
+                          (listing &&
+                            listing?.ShipmentData &&
+                            listing?.ShipmentData[0]?.pickup_location) ||
+                          ""
+                        }&destination=${
+                          (listing &&
+                            listing?.ShipmentData &&
+                            listing?.ShipmentData[0]?.drop_location) ||
+                          ""
+                        }&mode=driving`}
+                        width="100%"
+                        height="224"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                      ></iframe>
+                    </div>
+                    <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-1.5 lg:gap-2 xl:gap-3">
+                      <div className="md:[&:not(:last-child)]:border-r border-black border-opacity-10">
+                        <h3 className="text-sm xl:text-base text-[#7A7A7A] tracking-[-0.04em] font-medium mb-0">
+                          Category
+                        </h3>
+                        <p className="text-base text-[#262626] tracking-[-0.04em] font-medium mb-0 capitalize">
+                          {(listing &&
+                            listing?.ShipmentData &&
+                            listing?.ShipmentData[0]?.typeOfGoods) ||
+                            ""}
+                        </p>
+                      </div>
+                      <div className="md:[&:not(:last-child)]:border-r border-black border-opacity-10">
+                        <h3 className="text-sm xl:text-base text-[#7A7A7A] tracking-[-0.04em] font-medium mb-0">
+                          Distance
+                        </h3>
+                        <p className="text-base text-[#262626] tracking-[-0.04em] font-medium mb-0 capitalize">
+                          N/A
+                        </p>
+                      </div>
+                      <div className="md:[&:not(:last-child)]:border-r border-black border-opacity-10">
+                        <h3 className="text-sm xl:text-base text-[#7A7A7A] tracking-[-0.04em] font-medium mb-0">
+                          Estimation
+                        </h3>
+                        <p className="text-base text-[#262626] tracking-[-0.04em] font-medium mb-0 capitalize">
+                          N/A
+                        </p>
+                      </div>
+                      <div className="md:[&:not(:last-child)]:border-r border-black border-opacity-10">
+                        <h3 className="text-sm xl:text-base text-[#7A7A7A] tracking-[-0.04em] font-medium mb-0">
+                          Weight
+                        </h3>
+                        <p className="text-base text-[#262626] tracking-[-0.04em] font-medium mb-0 capitalize">
+                          {(listing &&
+                            listing?.ShipmentData &&
+                            listing?.ShipmentData[0]?.weight) ||
+                            ""}
+                        </p>
+                      </div>
+                      <div className="md:[&:not(:last-child)]:border-r border-black border-opacity-10">
+                        <h3 className="text-sm xl:text-base text-[#7A7A7A] tracking-[-0.04em] font-medium mb-0">
+                          Fee
+                        </h3>
+                        <p className="text-base text-[#262626] tracking-[-0.04em] font-medium mb-0 capitalize">
+                          ${" "}
+                          {(listing &&
+                            listing?.ShipmentData &&
+                            listing?.ShipmentData[0]?.cost) ||
+                            ""}
+                        </p>
+                      </div>
+                    </div>
+                  </>
+                )}
               </div>
             </div>
           </div>
@@ -353,7 +390,6 @@ export default function CarrierDashboard() {
                   Recent Shipment
                 </h3>
               </div>
-
             </div>
 
             {/* <RecentShipment /> */}
