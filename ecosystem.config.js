@@ -1,14 +1,18 @@
 module.exports = {
     apps: [
       {
-        name: 'Logistics',
-        script: 'serve',
-        args: '-s build', // Use serve to serve the build folder
-        cwd: '/home/ubuntu/Logistics', // Update the path to where your app is located
+        name: "Logistics", // Name of your app
+        script: "npm", // We are using npm to start the app
+        args: "run dev", // Command to run your Next.js app in development mode
         env: {
-          NODE_ENV: 'production',
+          PORT: 3000, // Set the port to 3000
+          NODE_ENV: "development" // Set the environment to development
         },
-      },
-    ],
+        env_production: {
+          PORT: 3000, // Set the port to 3000 for production as well
+          NODE_ENV: "production" // Set the environment to production
+        }
+      }
+    ]
   };
   
