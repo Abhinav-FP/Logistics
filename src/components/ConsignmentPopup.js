@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Popup from "./Popup";
 import Details from "@/pages/api/Listing/Details";
 import toast from "react-hot-toast";
+import Loader from "./Loader";
 
 export default function ConsignmentPopup({
   isOpen,
@@ -12,19 +13,23 @@ export default function ConsignmentPopup({
   const [condition, setCondition] = useState("expected");
   const [loading, setLoading] = useState(false);
   const [pdfUrl, setPdfUrl] = useState("");
+  const [pdfLoading, setPdfLoading] = useState(false);
   console.log("data", data);
 
   const BOLShow = () => {
+    setPdfLoading(true);
     const main = new Details();
     main
       .getBOL(data?._id)
       .then((r) => {
         const blob = new Blob([r.data], { type: "application/pdf" });
         const url = URL.createObjectURL(blob);
+        setPdfLoading(false);
         setPdfUrl(url);
       })
       .catch((err) => {
         setPdfUrl("");
+        setPdfLoading(false);
         console.log("error", err);
       });
   };
@@ -62,7 +67,6 @@ export default function ConsignmentPopup({
         setLoading(false);
       });
   };
-  console.log("pdfUrl", pdfUrl);
 
   return (
     <Popup isOpen={isOpen} onClose={onClose} size={"max-w-[856px]"}>
@@ -181,12 +185,18 @@ export default function ConsignmentPopup({
         </div>
         <div className="text-center">
           {/* <img className='max-w-full mx-auto block' src='images/PDF-modal.png' alt='img' /> */}
-          <iframe
-            src={pdfUrl}
-            width="100%"
-            height="600px"
-            title="BOL PDF"
-          ></iframe>
+          {pdfLoading ? (
+            <div className="h-[600px] items-center">
+            <Loader />
+            </div>
+          ) : (
+            <iframe
+              src={pdfUrl}
+              width="100%"
+              height="600px"
+              title="BOL PDF"
+            ></iframe>
+          )}
         </div>
         <div className="flex flex-wrap justify-center items-center gap-3 lg:gap-5 mt-6">
           <button
