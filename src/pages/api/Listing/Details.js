@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Api, ApiallowFile } from "./Api"; 
+import { Api, ApiallowFile } from "./Api";
 
 class Details extends Component {
   async login(data) {
@@ -33,7 +33,6 @@ class Details extends Component {
   async createShipment(data) {
     return ApiallowFile.post("/shipment/create", data);
   }
-  
 
   async getcarrierShipment(data) {
     return Api.get(`/shipment/get-shipment-carrier/${data}`);
@@ -84,7 +83,7 @@ class Details extends Component {
 
   async getBOL(shipmentId) {
     return Api.get(`/shipment/get-bol/${shipmentId}`, {
-      responseType: 'blob', 
+      responseType: 'blob',
     });
   }
 
@@ -120,7 +119,7 @@ class Details extends Component {
   async ShipperDashboard() {
     return Api.get(`/user/dashboard/shipper`);
   }
-  async UserDashboard(){
+  async UserDashboard() {
     return Api.get(`/user/dashboard/customer`);
   }
   async Dashboard() {
@@ -128,7 +127,7 @@ class Details extends Component {
   }
 
   async ForgotEmail(data) {
-    return Api.post(`/app/forget_email` , data);
+    return Api.post(`/app/forget_email`, data);
   }
 
   async ForgotPassword(data) {
