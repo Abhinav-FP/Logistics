@@ -483,7 +483,6 @@ export default function Index() {
                     type="file"
                     onChange={handleUpload} // Correctly handles file input
                     className="w-full h-11 lg:h-[48px] block bg-white text-[#000] text-base border border-black border-opacity-10 rounded-md lg:rounded-xl py-2 px-4 leading-tight focus:outline-none"
-                    required
                   />
                   {/* {formData.file && (
                     <p className="text-sm text-green-600 mt-2">
