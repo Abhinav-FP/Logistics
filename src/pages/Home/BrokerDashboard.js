@@ -7,7 +7,6 @@ import Details from "../api/Listing/Details";
 import ShipmentTable from "./ShipmentTable";
 import Loader from "@/components/Loader";
 import NoData from "@/components/NoData";
-import Payment from "./Payment";
 
 export default function BrokerDashboard() {
   const [listing, setLisitng] = useState("");
