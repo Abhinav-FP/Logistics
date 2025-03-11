@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { RiTruckLine } from "react-icons/ri";
 import Link from "next/link";
-import RecentShipment from "./RecentShipment";
-import Demo from "./Demo";
 import Details from "../api/Listing/Details";
 import ShipmentTable from "./ShipmentTable";
 import Loader from "@/components/Loader";
