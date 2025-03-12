@@ -1,6 +1,7 @@
 module.exports = {
     apps: [
       {
+        watch: true,
         name: "Logistics", // Name of your app
         script: "npm", // We are using npm to start the app
         args: "run dev", // Command to run your Next.js app in development mode
