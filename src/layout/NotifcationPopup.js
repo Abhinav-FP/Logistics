@@ -39,6 +39,8 @@ export default function NotificationPopup() {
             });
     }
 
+    console.log("notifications" ,notifications)
+
     return (
         <div className="relative">
             <div>
@@ -97,6 +99,9 @@ export default function NotificationPopup() {
                                             </p>
                                             <p className="text-xs text-gray-500">
                                                 <strong>Role:</strong> {notification.senderId?.role || "N/A"}
+                                            </p>
+                                            <p className="text-xs text-gray-500">
+                                               {notification.Text|| "N/A"}
                                             </p>
                                             <div className="flex items-center justify-between space-x-4 mt-1">
                                                 <button
