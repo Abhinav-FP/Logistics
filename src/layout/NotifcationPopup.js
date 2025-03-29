@@ -39,6 +39,7 @@ export default function NotificationPopup() {
             });
     }
 
+
     return (
         <div className="relative">
             <div>
@@ -92,12 +93,24 @@ export default function NotificationPopup() {
                                             <Link href={`/shipment`} className="text-sm text-gray-700">
                                                 <strong>Shipment Name:</strong> {notification.ShipmentId?.name}
                                             </Link>
-                                            <p className="text-xs text-gray-500">
-                                                <strong>Email:</strong> {notification.senderId?.email}
-                                            </p>
-                                            <p className="text-xs text-gray-500">
-                                                <strong>Role:</strong> {notification.senderId?.role || "N/A"}
-                                            </p>
+                                            {notification.Text ? (
+                                                 <p className="text-sm font-bold  text-gray-500">
+                                                 {notification.Text|| "N/A"}
+                                              </p>
+                                             
+                                            ) : (
+                                                <>
+
+                                                <p className="text-xs text-gray-500">
+                                              <strong>Email:</strong> {notification.senderId?.email}
+                                          </p>
+                                          <p className="text-xs text-gray-500">
+                                              <strong>Role:</strong> {notification.senderId?.role || "N/A"}
+                                          </p>
+                                              </>
+                                            ) }
+                                          
+                                           
                                             <div className="flex items-center justify-between space-x-4 mt-1">
                                                 <button
                                                     className="text-blue-500 text-sm "

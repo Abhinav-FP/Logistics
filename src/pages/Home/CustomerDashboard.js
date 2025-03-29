@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { RiTruckLine } from "react-icons/ri";
-import Link from "next/link";
-import RecentShipment from "./RecentShipment";
 import ShipmentTable from "./ShipmentTable";
 import Details from "../api/Listing/Details";
 import Loader from "@/components/Loader";
@@ -54,6 +52,7 @@ export default function CustomerDashboard() {
             <ShipmentTable
               shipments={listing?.ShipmentData}
               role={"customer"}
+              getShipments ={getData}
             />
           </div>
 
