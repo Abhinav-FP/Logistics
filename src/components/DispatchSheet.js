@@ -108,7 +108,7 @@ export default function DispatchSheet({
               >
                 Click here
               </a>
-              {role === "broker" && (
+              {role === "broker" && !shipment?.broker_approve && (
                 <p className="text-[12px] text-gray-500 mt-2">
                   Click the below button to approve the carrier uploaded
                   dispatch sheet. Only after your approval, the carrier will be
