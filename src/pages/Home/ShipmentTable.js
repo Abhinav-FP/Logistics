@@ -40,6 +40,7 @@ export default function ShipmentTable({
     top: 0,
     left: 0,
   });
+  const[file,setFile]=useState(null);
   const dropdownRefs = useRef({});
   const toogleButton = (id, e) => {
     e.stopPropagation();
@@ -92,6 +93,14 @@ export default function ShipmentTable({
       });
   };
 
+  const handleFileUpload = (event) => {
+    const uploadedFile = event.target.files[0];
+    if (uploadedFile) {
+      setFile(uploadedFile);
+      console.log("File selected:", uploadedFile.name);
+    }
+  }
+
   useEffect(() => {
     if (role === "broker") getcarriers();
   }, []);
@@ -109,9 +118,20 @@ export default function ShipmentTable({
   const closeConsignment = () => setIsConsignmentOpen(false);
 
   const assigncarrier = () => {
+    if(!selectedCarrier || selectedCarrier=== null)
+     {
+       toast.error("Please select a carrier");
+       return;
+     }
+    if(!file || file=== null)
+      {
+        toast.error("Please upload dispatch sheet");
+        return;
+      }
     const main = new Details();
     const response = main.UpdateShipment(selectedShipment, {
       carrier_id: selectedCarrier,
+      file:file,
     });
     response
       .then((res) => {
@@ -801,6 +821,14 @@ export default function ShipmentTable({
                   ))}
               </tbody>
             </table>
+          </div>
+          {/* File Uploader */}
+          <div className="mt-6 flex justify-center">
+            <input
+              type="file"
+              className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
+              onChange={(e) => handleFileUpload(e)}
+            />
           </div>
           <button
             className="bg-[#1C5FE8] hover:bg-[#0a3fab] px-10 py-2.5 text-white flex mx-auto mt-6 rounded-lg"
