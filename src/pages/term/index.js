@@ -6,7 +6,7 @@ const Index = () => {
             <p className="text-gray-600 text-sm mb-2 font-bold">Last Updated: [3/30/25] </p>
             <section className="mb-6">
                 <h2 className="text-xl font-semibold text-gray-700 mb-2">1. Introduction</h2>
-                <p className="text-gray-600">Welcome to Tracebill (the App). These Terms and Conditions (Terms) govern your use of our logistics-based mobile application and services. By accessing or using the App, you agree to abide by these Terms. </p>
+                <p className="text-gray-600">Welcome to Tracebill (`the App`). These Terms and Conditions (`Terms`) govern your use of our logistics-based mobile application and services. By accessing or using the App, you agree to abide by these Terms. </p>
             </section>
             <section className="mb-6">
                 <h2 className="text-xl font-semibold text-gray-700 mb-2">2. Eligibility</h2>
