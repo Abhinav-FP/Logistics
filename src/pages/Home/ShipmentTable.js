@@ -21,6 +21,8 @@ import { MdStarRate } from "react-icons/md";
 import NoData from "@/components/NoData";
 import { MdLocationOn } from "react-icons/md";
 import moment from "moment";
+import DispatchSheet from "@/components/DispatchSheet";
+import { LuFileSpreadsheet } from "react-icons/lu";
 
 export default function ShipmentTable({
   shipments,
@@ -79,6 +81,7 @@ export default function ShipmentTable({
 
   const [activeTab, setActiveTab] = useState("shippingInfo");
   const [isConsignmentOpen, setIsConsignmentOpen] = useState(false);
+  const [isDispatchOpen, setIsDispatchOpen] = useState(false);
 
   const getcarriers = () => {
     const main = new Details();
@@ -97,7 +100,6 @@ export default function ShipmentTable({
     const uploadedFile = event.target.files[0];
     if (uploadedFile) {
       setFile(uploadedFile);
-      console.log("File selected:", uploadedFile.name);
     }
   }
 
@@ -116,38 +118,41 @@ export default function ShipmentTable({
 
   const ConsignmentOpen = () => setIsConsignmentOpen(true);
   const closeConsignment = () => setIsConsignmentOpen(false);
+  
+  const DispatchOpen = () => setIsDispatchOpen(true);
+  const closeDispatch = () => setIsDispatchOpen(false);
 
-  const assigncarrier = () => {
-    if(!selectedCarrier || selectedCarrier=== null)
-     {
-       toast.error("Please select a carrier");
-       return;
-     }
-    if(!file || file=== null)
-      {
+  const assigncarrier = async () => {
+    try {
+      if (!selectedCarrier || selectedCarrier === null) {
+        toast.error("Please select a carrier");
+        return;
+      }
+      if (!file || file === null) {
         toast.error("Please upload dispatch sheet");
         return;
       }
-    const main = new Details();
-    const response = main.UpdateShipment(selectedShipment, {
-      carrier_id: selectedCarrier,
-      file:file,
-    });
-    response
-      .then((res) => {
-        if (res && res?.data && res?.data?.status) {
-          toast.success(res.data.message);
-          closeCarrierPopup();
-          getShipments();
-        } else {
-          toast.error(res.data.message);
-        }
-      })
-      .catch((error) => {
-        toast.error(error?.response?.data?.message);
-        console.log("error", error);
-      });
+  
+      const formData = new FormData();
+      formData.append("carrier_id", selectedCarrier);
+      formData.append("file", file); // Append file properly
+  
+      const main = new Details();
+      const response = await main.DispatchSheet(selectedShipment, formData); // Send FormData
+  
+      if (response && response?.data && response?.data?.status) {
+        toast.success(response.data.message);
+        closeCarrierPopup();
+        getShipments();
+      } else {
+        toast.error(response.data.message);
+      }
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+      console.error("error", error);
+    }
   };
+    
   const [bolLoading, setBolLoading] = useState(false);
   const [downloaded, setDownloaded] = useState(false);
 
@@ -387,6 +392,20 @@ export default function ShipmentTable({
                                     </button>
                                   </li>
                                 )}
+                                {shipment?.broker_dispatch_sheet && 
+                                 <li className="py-2 tracking-[-0.04em] [&:not(:last-child)]:border-b border-black border-opacity-10 px-4 lg:px-6">
+                                  <button
+                                    className="flex gap-2 items-center text-[#1B1B1B] bg-transparent border-none text-sm font-medium"
+                                    onClick={() => {
+                                      setData(shipment);
+                                      DispatchOpen();
+                                      setIsdropdownopen(null);
+                                    }}
+                                  >
+                                    Dispatch Sheet{" "}
+                                    <LuFileSpreadsheet size={16} />
+                                  </button>
+                                  </li>}
                                 {shipment?.status === "transit" && (
                                   <li className="py-2 tracking-[-0.04em] [&:not(:last-child)]:border-b border-black border-opacity-10 px-4 lg:px-6">
                                     <button
@@ -482,9 +501,20 @@ export default function ShipmentTable({
                                     <IoInformationCircleOutline size={18} />
                                   </button>
                                 </li>
-                                {shipment?.driver_id?.name ? (
-                                  <></>
-                                ) : (
+                                  <li className="py-2 tracking-[-0.04em] [&:not(:last-child)]:border-b border-black border-opacity-10 px-4 lg:px-6">
+                                  <button
+                                    className="flex gap-2 items-center text-[#1B1B1B] bg-transparent border-none text-sm font-medium"
+                                    onClick={() => {
+                                      setData(shipment);
+                                      DispatchOpen();
+                                      setIsdropdownopen(null);
+                                    }}
+                                  >
+                                    Dispatch Sheet{" "}
+                                    <LuFileSpreadsheet size={16} />
+                                  </button>
+                                  </li>
+                                {shipment?.broker_approve && !shipment?.driver_id?.name && (
                                   <li className="py-2 tracking-[-0.04em] [&:not(:last-child)]:border-b border-black border-opacity-10 px-4 lg:px-6">
                                     <DriverAssign
                                       Id={shipment?._id}
@@ -900,6 +930,13 @@ export default function ShipmentTable({
         onClose={closeConsignment}
         data={data}
         getShipments={getShipments}
+      />
+      <DispatchSheet
+      isOpen={isDispatchOpen}
+      onClose={closeDispatch}
+      shipment={data}
+      getShipments={getShipments}
+      role={role}
       />
     </div>
   );

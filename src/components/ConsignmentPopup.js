@@ -14,7 +14,7 @@ export default function ConsignmentPopup({
   const [loading, setLoading] = useState(false);
   const [pdfUrl, setPdfUrl] = useState("");
   const [pdfLoading, setPdfLoading] = useState(false);
-  console.log("data", data);
+  // console.log("data", data);
 
   const BOLShow = () => {
     setPdfLoading(true);

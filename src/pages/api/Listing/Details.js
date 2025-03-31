@@ -46,6 +46,10 @@ class Details extends Component {
     return Api.post(`/shipment/update/${Id}`, data);
   }
 
+  async DispatchSheet(Id, data) {
+    return Api.post(`/shipment/update-sheet/${Id}`, data);
+  }
+
   async getShipment() {
     return Api.get("/shipment/get");
   }
