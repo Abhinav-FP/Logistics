@@ -29,7 +29,7 @@ export default function DispatchSheet({
   
       const main = new Details();
       const response = await main.DispatchSheet(shipment?._id, formData);
-      console.log("response", response);
+      // console.log("response", response);
   
       if (response && response?.data && response?.data?.status) {
         toast.success(response.data.message);

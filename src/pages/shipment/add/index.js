@@ -84,7 +84,7 @@ export default function Index() {
 
   const handleUpload = (event) => {
     const file = event.target.files[0]; // Get the first uploaded file
-    console.log("")
+    // console.log("")
     if (file) {
       setFormData((prevData) => ({
         ...prevData,

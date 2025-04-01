@@ -85,7 +85,7 @@ export default function BrokerDashboard() {
     return new Date(isoString)?.toISOString()?.split("T")[0];
   };
 
-  console.log("listing", listing);
+  // console.log("listing", listing);
   return (
     <>
       {Loading ? (

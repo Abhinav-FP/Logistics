@@ -5,7 +5,7 @@ import React, { useState, useEffect } from 'react';
 export default function NotificationPopup() {
     const [Record, setRecord] = useState(0);
     const [notifications, setNotifications] = useState([]);
-    console.log("notifications", notifications)
+    // console.log("notifications", notifications)
     const [isPopupOpen, setIsPopupOpen] = useState(false);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -31,7 +31,7 @@ export default function NotificationPopup() {
 
     function markAsRead(notificationId) {
         const main = new Details();
-        main.MarkNotificationAsRead({ shipmentId: notificationId })
+        main.MarkNotificationAsRead({ id : notificationId })
             .then(() => {
                 GetNotifications();
             })
@@ -39,7 +39,6 @@ export default function NotificationPopup() {
                 setError('Error marking notification as read');
             });
     }
-
 
     return (
         <div className="relative">
@@ -108,8 +107,8 @@ export default function NotificationPopup() {
                                             <div className="flex items-center justify-between space-x-4 mt-1">
                                                 <button
                                                     className="text-blue-500 text-sm "
-                                                    onClick={() => markAsRead(notification.ShipmentId?._id)}
-                                                    aria-label={`Mark notification ${notification.ShipmentId?._id} as read`}
+                                                    onClick={() => markAsRead(notification._id)}
+                                                    aria-label={`Mark notification ${notification._id} as read`}
                                                 >
                                                     Mark as Read
                                                 </button>
