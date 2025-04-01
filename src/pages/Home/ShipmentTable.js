@@ -139,7 +139,6 @@ export default function ShipmentTable({
   
       const main = new Details();
       const response = await main.DispatchSheet(selectedShipment, formData); // Send FormData
-  
       if (response && response?.data && response?.data?.status) {
         toast.success(response.data.message);
         closeCarrierPopup();

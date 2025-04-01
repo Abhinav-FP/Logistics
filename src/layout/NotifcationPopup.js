@@ -5,6 +5,7 @@ import React, { useState, useEffect } from 'react';
 export default function NotificationPopup() {
     const [Record, setRecord] = useState(0);
     const [notifications, setNotifications] = useState([]);
+    console.log("notifications", notifications)
     const [isPopupOpen, setIsPopupOpen] = useState(false);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -93,24 +94,17 @@ export default function NotificationPopup() {
                                             <Link href={`/shipment`} className="text-sm text-gray-700">
                                                 <strong>Shipment Name:</strong> {notification.ShipmentId?.name}
                                             </Link>
-                                            {notification.Text ? (
-                                                 <p className="text-sm font-bold  text-gray-500">
-                                                 {notification.Text|| "N/A"}
-                                              </p>
-                                             
-                                            ) : (
-                                                <>
 
+  <p className="text-xs text-gray-500">
+                                                    {notification.text || "N/A"}
+                                                </p> 
+                                            <p className="text-xs text-gray-500">
+                                                    <strong>Name:</strong> {notification?.SenderId?.name}
+                                                </p>
                                                 <p className="text-xs text-gray-500">
-                                              <strong>Email:</strong> {notification.senderId?.email}
-                                          </p>
-                                          <p className="text-xs text-gray-500">
-                                              <strong>Role:</strong> {notification.senderId?.role || "N/A"}
-                                          </p>
-                                              </>
-                                            ) }
-                                          
-                                           
+                                                    <strong>Role:</strong> {notification.SenderId?.role || "N/A"}
+                                                </p> 
+
                                             <div className="flex items-center justify-between space-x-4 mt-1">
                                                 <button
                                                     className="text-blue-500 text-sm "
