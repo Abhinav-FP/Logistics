@@ -29,7 +29,7 @@ export default function Layout({ children, page }) {
     },
     {
       name: "customer",
-      route_permissions: ["/","/shipment","/settings"],
+      route_permissions: ["/","/shipment","/settings","/users/review","/users/review/:anything"],
     },
     {
       name: "admin",

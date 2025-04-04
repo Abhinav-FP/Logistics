@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/router";
 import ForgetPassword from "../forget/forgetlink";
 import { IoEye, IoEyeOff } from "react-icons/io5";
+import { useSearchParams } from "next/navigation";
 export default function Index() {
   const [formData, setFormData] = useState({
     email: "",
@@ -13,6 +14,10 @@ export default function Index() {
   const [loading, setLoading] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const router = useRouter();
+
+  const searchParams = useSearchParams();
+  const redirect = searchParams.get('redirect');
+  console.log("redirect",redirect);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -35,7 +40,10 @@ export default function Index() {
         if (res && res?.data && res?.data?.status) {
           toast.success(res.data.message);
           localStorage && localStorage.setItem("token", res?.data?.token);
-          router.push("/");
+          if(redirect){
+            router.push(`${redirect}`);
+          }
+          else{router.push("/");}
           setLoading(false);
         } else {
           toast.error(res.data.message);
