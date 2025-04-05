@@ -6,6 +6,7 @@ import Details from "../api/Listing/Details";
 import Loader from "@/components/Loader";
 import { useRole } from "@/context/RoleContext";
 import { useRouter } from "next/router";
+import Barcode from "../Barcode/Index"
 
 export default function Index() {
   const { user } = useRole();
@@ -59,7 +60,6 @@ export default function Index() {
     setFilter(name);
     getShipments(name);
   };
-
   return (
     <Layout page={"Shipment"}>
       <div>
@@ -67,7 +67,10 @@ export default function Index() {
           <h2 className="text-[#151547] text-lg tracking-[-0.04em] font-medium m-0">
             Shipment Listing{" "}
           </h2>
-          <div className="">
+          <div className="flex  gap-6  items-center ">
+            {user?.role === "customer" && (
+              <Barcode />
+            )}
             {user?.role !== "admin" && (
               <div className="flex justify-between flex-wrap gap-4 items-baseline">
                 <div className="flex overflow-x-auto align-items-center py-2 sm:space-x-4 space-x-1">
