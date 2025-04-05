@@ -11,7 +11,7 @@ const Index = () => {
     const toggleModal = () => {
         setIsOpen(!isOpen);
     };
-    const [scannedData, setScannedData] = useState("null");
+    const [scannedData, setScannedData] = useState(null);
     const [cameraError, setCameraError] = useState(null);
     const [scanning, setScanning] = useState(true);
     const videoRef = useRef(null);
@@ -38,7 +38,7 @@ const Index = () => {
                     videoRef.current,
                     (result, error) => {
                         if (result) {
-                            router.push(result.text)
+                            window.location.href(result.text)
                             setScannedData(result.text);
                             console.log('Scanned Barcode Data:', result.text);
                             setScanning(false);
@@ -79,7 +79,7 @@ const Index = () => {
         <>
             <button
                 onClick={toggleModal}
-                className='font-inter font-medium lg:text-[16px] text-[14px] gap-2 leading-tight items-center  text-center xxl:w-52 px-4 border-2 py-3  mb-2 rounded-lg lg:rounded-xl focus:outline-none  flex bg-white  '
+                className='font-inter font-medium lg:text-[16px] text-[14px] gap-2 leading-tight items-center  text-center xxl:w-52 px-4 border-2 py-3  mb-2 rounded-lg lg:rounded-xl focus:outline-none  flex  '
             >
                 <BsQrCodeScan size={20} className='text-black-600 hover:text-black-700' /> Scan
             </button>
