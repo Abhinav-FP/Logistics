@@ -72,7 +72,7 @@ export default function Index() {
 
       if (err.response) {
         if (err.response.status === 401) {
-          router.push("/login");
+          router.push(`/login?redirect=${router.asPath}`);
         } else if (err.response.status === 403) {
           router.push("/forbidden");
         }
