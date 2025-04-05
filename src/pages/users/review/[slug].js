@@ -2,8 +2,9 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import Loader from '@/components/Loader';
 import Details from '@/pages/api/Listing/Details';
 import { useRouter } from 'next/router';
-import Layout from '@/layout/Layout';
 import toast from 'react-hot-toast';
+import SignatureCapture from '@/components/SignatureCapture';
+import ReviewLayout from '@/layout/ReviewLayout';
 
 export default function Index() {
   const [condition, setCondition] = useState("expected");
@@ -12,9 +13,31 @@ export default function Index() {
   const [pdfLoading, setPdfLoading] = useState(false);
   const [data, setData] = useState("");
   const [text, setText] = useState('');
+  const [signatureFile, setSignatureFile] = useState(null);
+  const [signaturePreview, setSignaturePreview] = useState(null);
   const router = useRouter();
   const { slug } = router.query;
-  console.log("slug",slug);
+
+  const handleSignatureSave = (base64Image) => {
+    const file = base64ToFile(base64Image, 'signature.png');
+    setSignatureFile(file);
+    setSignaturePreview(base64Image); // store base64 for preview
+  };
+
+  // Utility to convert base64 to File
+  const base64ToFile = (dataURL, filename) => {
+    const arr = dataURL.split(',');
+    const mime = arr[0].match(/:(.*?);/)[1];
+    const bstr = atob(arr[1]);
+    let n = bstr.length;
+    const u8arr = new Uint8Array(n);
+    while (n--) {
+      u8arr[n] = bstr.charCodeAt(n);
+    }
+    return new File([u8arr], filename, { type: mime });
+  };
+
+  console.log("signatureFile",signatureFile);
 
   const handleChange = (e) => {
     setText(e.target.value);
@@ -49,7 +72,7 @@ export default function Index() {
 
       if (err.response) {
         if (err.response.status === 401) {
-          router.push("/login");
+          router.push(`/login?redirect=${router.asPath}`);
         } else if (err.response.status === 403) {
           router.push("/forbidden");
         }
@@ -71,34 +94,50 @@ export default function Index() {
       BOLShow();
   }, [data]);
 
+  
   const submitRating = () => {
     if (loading) {
       return;
     }
+    if (condition !== "expected" && text === "") {
+      toast.error("Please provide a reason for the rating.");
+      return;
+    }
+    if (!signatureFile) {
+      toast.error("Please provide signature.");
+      return;
+    }
     setLoading(true);
     const main = new Details();
-    const response = main.UpdateShipment(data?._id, {
+    // Prepare the payload
+    const payload = {
       review: condition,
-    });
+      file: signatureFile,
+    };
+    // Conditionally include reviewText
+    if (text.trim() !== "") {
+      payload.reviewText = text.trim();
+    }
+    const response = main.UpdateShipment(data?._id, payload);
     response
       .then((res) => {
-        if (res && res?.data && res?.data?.status) {
-          toast.success("Rating submitting successfully");
+        if (res?.data?.status) {
+          toast.success("Rating submitted successfully");
           router.push("/");
-          setLoading(false);
         } else {
           toast.error(res.data.message);
-          setLoading(false);
         }
+        setLoading(false);
       })
       .catch((error) => {
-        toast.error(error?.response?.data?.message);
-        console.log("error", error);
+        toast.error(error?.response?.data?.message || "Something went wrong");
+        console.error("error", error);
         setLoading(false);
       });
-  };
+  };  
 
   return (
+    <ReviewLayout>
       <div className="py-6 p-6 md:px-8 lg:px-16">
         <div className="h-12 w-12 rounded-full bg-[#1C5FE8] bg-opacity-10 flex mx-auto mb-5 flex justify-center items-center ">
           <svg
@@ -238,6 +277,22 @@ export default function Index() {
             ></iframe>
           )}
         </div>
+         {/* Signature box */}
+         <div className="">
+          <SignatureCapture onSave={handleSignatureSave} />
+            {signatureFile && (
+              // <div className="mt-6 ">
+                <p className="text-center pt-2 text-sm text-gray-600 mb-2">
+                  Signature saved. You can now submit the form.
+                </p>
+                /* <img
+                  src={signaturePreview}
+                  alt="Signature Preview"
+                  className="mx-auto border rounded shadow max-w-sm"
+                /> */
+              /* </div> */
+            )}
+        </div>
         <div className="flex flex-wrap justify-center items-center gap-3 lg:gap-5 mt-6">
           <button
             className="bg-[#1C5FE8] hover:bg-[#0a3fab] border boder-[#1C5FE8] hover:boder-[#0a3fab]  inline-block font-medium text-base text-white tracking-[-0.04em] rounded-lg lg:rounded-xl px-16 py-3 uppercase"
@@ -249,5 +304,6 @@ export default function Index() {
           </button>
         </div>
       </div>
+      </ReviewLayout>
   );
 }

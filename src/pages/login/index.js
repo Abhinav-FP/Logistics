@@ -17,7 +17,6 @@ export default function Index() {
 
   const searchParams = useSearchParams();
   const redirect = searchParams.get('redirect');
-  console.log("redirect",redirect);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
