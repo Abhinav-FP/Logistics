@@ -6,8 +6,12 @@ import Details from "../api/Listing/Details";
 import Loader from "@/components/Loader";
 import { useRole } from "@/context/RoleContext";
 import { useRouter } from "next/router";
-import Barcode from "../Barcode/Index"
+import dynamic from 'next/dynamic';
 
+
+const Scanner = dynamic(() => import('../Barcode/Index'), {
+  ssr: false, // 👈 disables server-side rendering
+});
 export default function Index() {
   const { user } = useRole();
   const [listing, setListing] = useState("");
@@ -69,7 +73,7 @@ export default function Index() {
           </h2>
           <div className="flex  gap-6  items-center ">
             {user?.role === "customer" && (
-              <Barcode />
+                <Scanner />
             )}
             {user?.role !== "admin" && (
               <div className="flex justify-between flex-wrap gap-4 items-baseline">
