@@ -40,7 +40,7 @@ export default function Layout({ children, page }) {
   const fetchData = async (signal) => {
     try {
       const main = new Details();
-      const response = await main.profileVerify(signal);
+      const response = await main.profileVerify(signal); 
       if (response.data) {
         setUser(response.data.data);
       }
