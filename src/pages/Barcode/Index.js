@@ -16,11 +16,11 @@ export default function QRScanner() {
   };
 
   const handleScan = (result) => {
-    console.log("result", result)
+    // console.log("result", result)
     if (result) {
       try {
-        console.log("result", result)
-        console.log("result[0]?.rawValue", result[0]?.rawValue)
+        // console.log("result", result)
+        // console.log("result[0]?.rawValue", result[0]?.rawValue)
         setData(result[0]?.rawValue);
         router.push(result[0]?.rawValue);
       } catch (e) {

@@ -41,7 +41,7 @@ export default function ReviewLayout({ children }) {
     } catch (error) {
       console.log("error", error);
       localStorage?.removeItem("token");
-      console.log("Hello");
+      // console.log("Hello");
       router.push(`/login?redirect=${router.asPath}`);
       toast.error("Please log in first.");
     }
