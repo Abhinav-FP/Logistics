@@ -23,8 +23,6 @@ export default function QRScanner() {
         console.log("result[0]?.rawValue", result[0]?.rawValue)
         setData(result[0]?.rawValue);
         router.push(result[0]?.rawValue);
-        // const url = new URL(result); // Throws an error if not a valid URL
-        // router.push(url.href); // Redirect to the scanned URL
       } catch (e) {
         toast.error("Scanned data is not a valid URL");
       }
