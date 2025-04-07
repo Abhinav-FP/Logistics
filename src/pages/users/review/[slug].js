@@ -278,7 +278,7 @@ export default function Index() {
           )}
         </div>
          {/* Signature box */}
-         <div className="">
+         <div className="mt-1">
           <SignatureCapture onSave={handleSignatureSave} />
             {signatureFile && (
               // <div className="mt-6 ">

@@ -20,7 +20,7 @@ const SignatureCapture = ({ onSave }) => {
   };
 
   return (
-    <div className="max-w-xl mx-auto p-6 bg-white shadow-md rounded-lg flex flex-col items-center">
+    <div className="max-w-xl mx-auto p-6 bg-white flex flex-col items-center">
       <h2 className="text-xl font-semibold mb-4 text-center">
         Customer Signature
       </h2>
