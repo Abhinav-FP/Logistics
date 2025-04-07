@@ -6,7 +6,7 @@ import dynamic from 'next/dynamic';
 // Dynamically load the QR Reader
 const QrReader = dynamic(() => import('modern-react-qr-reader'), { ssr: false });
 
-const Index = () => {
+const QRScanner = () => {
   const [result, setResult] = useState('No result');
   const [error, setError] = useState(null);
 
@@ -44,4 +44,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default QRScanner;
