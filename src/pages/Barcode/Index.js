@@ -1,15 +1,24 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Scanner } from "@yudiel/react-qr-scanner";
 
 export default function QRScanner() {
   const [data, setData] = useState("");
+  const router = useRouter();
 
   const handleScan = (result) => {
     if (result) {
       setData(result);
-      alert(`Scanned Data: ${result}`);
+
+      // Check if scanned data is a valid URL
+      try {
+        const url = new URL(result); // Throws an error if not a valid URL
+        router.push(url.href); // Redirect to the scanned URL
+      } catch (e) {
+        alert("Scanned data is not a valid URL");
+      }
     }
   };
 
