@@ -10,9 +10,9 @@ export default function QRScanner() {
 
   const handleScan = (result) => {
     if (result) {
+      console.log("result" , result)
       setData(result);
-
-      // Check if scanned data is a valid URL
+router.push(result);
       try {
         const url = new URL(result); // Throws an error if not a valid URL
         router.push(url.href); // Redirect to the scanned URL
