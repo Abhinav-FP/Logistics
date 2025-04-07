@@ -3,6 +3,7 @@ import Popup from "./Popup";
 import Status from "./Status";
 
 export default function ViewShipment({ isOpen, onClose, data }) {
+  console.log("data" ,data)
   return (
     <Popup isOpen={isOpen} onClose={onClose} size={"max-w-[800px]"}>
       <div className="p-4 space-y-4">
@@ -150,6 +151,26 @@ export default function ViewShipment({ isOpen, onClose, data }) {
               </p>
               <p className="text-left text-[#70708D] border-0  capitalize tracking-[-0.04em] text-[15px] font-normal max-w-fit py-1">
                 {data?.driver_id?.name}
+              </p>
+            </div>
+          )}
+            {data?.review && (
+            <div>
+              <p className="text-left text-[#70708D] border-0 py-.5  lg:py-.5  tracking-[-0.04em] text-[15px] font-medium">
+                Review Status:
+              </p>
+              <p className="text-left text-[#70708D] border-0  capitalize tracking-[-0.04em] text-[15px] font-normal max-w-fit py-1">
+              <Status status={data?.review} />
+              </p>
+            </div>
+          )}
+            {data?.review && (
+            <div>
+              <p className="text-left text-[#70708D] border-0 py-.5  lg:py-.5  tracking-[-0.04em] text-[15px] font-medium">
+              Review Reasons:
+              </p>
+              <p className="text-left text-[#70708D] border-0  capitalize tracking-[-0.04em] text-[15px] font-normal max-w-fit py-1">
+                {data?.reviewText                }
               </p>
             </div>
           )}
