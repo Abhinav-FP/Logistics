@@ -78,6 +78,6 @@ export default function ReviewLayout({ children }) {
   }, [user, router.pathname]);
 
   return (
-        <div className="">{children}</div>
+        <div className="">{children}</div> 
   );
 }
