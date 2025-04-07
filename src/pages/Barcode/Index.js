@@ -3,30 +3,33 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Scanner } from "@yudiel/react-qr-scanner";
+import toast from "react-hot-toast";
 
 export default function QRScanner() {
   const [data, setData] = useState("");
   const router = useRouter();
 
   const handleScan = (result) => {
+    console.log("result", result)
     if (result) {
-      console.log("result" , result)
-      setData(result);
-router.push(result);
       try {
-        const url = new URL(result); // Throws an error if not a valid URL
-        router.push(url.href); // Redirect to the scanned URL
+        console.log("result", result)
+        console.log("result[0]?.rawValue", result[0]?.rawValue)
+        setData(result[0]?.rawValue);
+        router.push(result[0]?.rawValue);
+        // const url = new URL(result); // Throws an error if not a valid URL
+        // router.push(url.href); // Redirect to the scanned URL
       } catch (e) {
-        alert("Scanned data is not a valid URL");
+        toast.error("Scanned data is not a valid URL");
       }
     }
   };
 
   return (
     <div>
+      <p>Scanned Data: {data}</p>
       <h1>QR Code Scanner</h1>
       <Scanner onScan={handleScan} />
-      <p>Scanned Data: {data}</p>
     </div>
   );
 }
