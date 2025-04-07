@@ -42,13 +42,10 @@ export default function QRScanner() {
         <Popup isOpen={isOpen} onClose={toggleModal} size={"max-w-[400px]"} >
           <div className="p-4 space-y-4">
             <h2 className="text-xl font-semibold text-gray-800">
-              Scan Qrcode
+              Scan Qr Code
             </h2>
             <div className="scanner-wrapper">
-              <p>Scanned Data: {data}</p>
-              <h1>QR Code Scanner</h1>
               <Scanner onScan={handleScan} />
-
             </div>
           </div>
         </Popup>
