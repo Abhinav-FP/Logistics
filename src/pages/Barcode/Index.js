@@ -14,11 +14,14 @@ const Index = () => {
     };
 
     const [data, setData] = useState("No result");
+    console.log("data" ,data)
     const [showModal, setShowModal] = useState(false);
     const qrRef = useRef(null);
 
     const handleScan = (result, error) => {
+        console.log("resliut" ,result)
         if (!!result) {
+
             setData(result?.text);
             setShowModal(true);
             qrRef.current.stop();
@@ -41,7 +44,7 @@ const Index = () => {
                 <Popup isOpen={isOpen} onClose={toggleModal} size={"max-w-[400px]"} >
                     <div className="p-4 space-y-4">
                         <h2 className="text-xl font-semibold text-gray-800">
-                            Scan Qrcode
+                            Scan Qrcode  {data}
                         </h2>
                         <main className="flex flex-col mt-[5rem] justify-center items-center">
                             <div className="flex flex-col justify-center items-center">
