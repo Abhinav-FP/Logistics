@@ -155,7 +155,7 @@ export default function DispatchSheet({
           </p>
         )}
 
-        {!shipment?.carrier_dispatch_sheet && (
+        {role === "carrier" && !shipment?.carrier_dispatch_sheet && (
           <button
             className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg transition duration-200 w-full mt-6"
             onClick={() => {
