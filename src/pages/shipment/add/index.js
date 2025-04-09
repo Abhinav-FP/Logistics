@@ -90,6 +90,7 @@ export default function Index() {
         ...prevData,
         file: file,
       }));
+      window.scrollTo({ top: 0, behavior: 'smooth' }); 
     }
   };
 

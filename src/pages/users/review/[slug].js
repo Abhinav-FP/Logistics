@@ -129,7 +129,7 @@ export default function Index() {
     <ReviewLayout>
       {pageLoading ? (
         <Loader />
-      ) : data?.review ? (
+      ) : false ? (
         <div className="min-h-screen bg-white flex items-center justify-center p-6">
           <div className="bg-white p-8 max-w-md w-full text-center">
             <FaCheckCircle
