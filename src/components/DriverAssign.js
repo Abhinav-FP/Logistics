@@ -2,13 +2,9 @@ import Popup from '@/components/Popup';
 import React, { useEffect, useState } from 'react'
 import Details from '../pages/api/Listing/Details';
 import toast from 'react-hot-toast';
-import { MdAssignment } from "react-icons/md";
 
-export default function DriverAssign({ Id, getShipments, role }) {
-    const [isdriverPopupOpen, setIsDriverPopupOpen] = useState(false);
+export default function DriverAssign({ getShipments, isOpen, onClose, data }) {
     const [Selecteddriver, setSelecteddriver] = useState();
-    const opendriverPopup = () => setIsDriverPopupOpen(true);
-    const closeDrivePopup = () => setIsDriverPopupOpen(false);
     const [listing, setLisitng] = useState("");
     const getDrivers = () => {
         const main = new Details();
@@ -29,7 +25,7 @@ export default function DriverAssign({ Id, getShipments, role }) {
 
     const assigndriver = () => {
         const main = new Details();
-        const response = main.UpdateShipment(Id, {
+        const response = main.UpdateShipment(data?._id, {
             driver_id: Selecteddriver,
             driverAccept: "true",
             status : "transit"
@@ -38,7 +34,7 @@ export default function DriverAssign({ Id, getShipments, role }) {
             .then((res) => {
                 if (res && res?.data && res?.data?.status) {
                     toast.success(res.data.message);
-                    closeDrivePopup();
+                    onClose();
                     getShipments();
                 } else {
                     toast.error(res.data.message);
@@ -50,20 +46,7 @@ export default function DriverAssign({ Id, getShipments, role }) {
             });
     }
     return (
-        <>
-            <button
-                className="flex gap-2 text-[#1B1B1B] bg-transparent border-none text-sm font-medium"
-                onClick={() => {
-                    opendriverPopup();
-                }}
-            >
-                Assign Driver <MdAssignment size={24} />
-            </button>
-            <Popup
-                isOpen={isdriverPopupOpen}
-                onClose={closeDrivePopup}
-                size={"max-w-[700px]"}
-            >
+            <Popup isOpen={isOpen} onClose={onClose} size={"max-w-[800px]"}>
                 <div className="lg:px-2.5 lg:pb-2.5">
                     <div className="overflow-x-auto mt-8">
                         <table className="w-full border-none">
@@ -129,6 +112,5 @@ export default function DriverAssign({ Id, getShipments, role }) {
                     </button>
                 </div>
             </Popup>
-        </>
     )
 }

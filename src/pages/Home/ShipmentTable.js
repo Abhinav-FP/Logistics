@@ -23,6 +23,7 @@ import { MdLocationOn } from "react-icons/md";
 import moment from "moment";
 import DispatchSheet from "@/components/DispatchSheet";
 import { LuFileSpreadsheet } from "react-icons/lu";
+import { MdAssignment } from "react-icons/md";
 
 export default function ShipmentTable({
   shipments,
@@ -81,6 +82,7 @@ export default function ShipmentTable({
 
   const [activeTab, setActiveTab] = useState("shippingInfo");
   const [isConsignmentOpen, setIsConsignmentOpen] = useState(false);
+  const [isDriverOpen, setIsDriverOpen] = useState(false);
   const [isDispatchOpen, setIsDispatchOpen] = useState(false);
 
   const getcarriers = () => {
@@ -121,6 +123,9 @@ export default function ShipmentTable({
   
   const DispatchOpen = () => setIsDispatchOpen(true);
   const closeDispatch = () => setIsDispatchOpen(false);
+
+  const DriverOpen = () => setIsDriverOpen(true);
+  const closeDriver = () => setIsDriverOpen(false);
 
   const assigncarrier = async () => {
     try {
@@ -515,12 +520,16 @@ export default function ShipmentTable({
                                   </li>
                                 {shipment?.broker_approve && !shipment?.driver_id?.name && (
                                   <li className="py-2 tracking-[-0.04em] [&:not(:last-child)]:border-b border-black border-opacity-10 px-4 lg:px-6">
-                                    <DriverAssign
-                                      Id={shipment?._id}
-                                      CarrierId={shipment?.carrier_id}
-                                      getShipments={getShipments}
-                                      role={role}
-                                    />
+                                    <button
+                                    className="flex gap-2 text-[#1B1B1B] bg-transparent border-none text-sm font-medium"
+                                    onClick={() => {
+                                      setData(shipment);
+                                      DriverOpen();
+                                      setIsdropdownopen(null);
+                                    }}
+                                  >
+                                    Assign Driver <MdAssignment size={24} />
+                                  </button>
                                   </li>
                                 )}
                                 {shipment?.status === "transit" && (
@@ -927,6 +936,12 @@ export default function ShipmentTable({
       <ConsignmentPopup
         isOpen={isConsignmentOpen}
         onClose={closeConsignment}
+        data={data}
+        getShipments={getShipments}
+      />
+      <DriverAssign
+        isOpen={isDriverOpen}
+        onClose={closeDriver}
         data={data}
         getShipments={getShipments}
       />

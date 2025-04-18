@@ -20,21 +20,23 @@ const SignatureCapture = ({ onSave }) => {
   };
 
   return (
-    <div className="max-w-xl mx-auto p-6 bg-white flex flex-col items-center">
+    <div className="max-w-xl mx-auto p-6 bg-white shadow-md rounded-lg flex flex-col items-center">
       <h2 className="text-xl font-semibold mb-4 text-center">
         Customer Signature
       </h2>
 
-      <SignatureCanvas
-        ref={sigCanvasRef}
-        penColor="black"
-        canvasProps={{
-          width: 500,
-          height: 200,
-          className: "rounded border border-gray-300 shadow-sm",
-        }}
-        backgroundColor="#fff"
-      />
+      <div className="w-[300px] sm:w-[500px]">
+        <SignatureCanvas
+          ref={sigCanvasRef}
+          penColor="black"
+          canvasProps={{
+            width: 500, // keep this max; it will be scaled down via CSS
+            height: 200,
+            className: "w-full rounded border border-gray-300 shadow-sm", // responsive width
+          }}
+          backgroundColor="#fff"
+        />
+      </div>
 
       <div className="flex gap-4 mt-4">
         <button
