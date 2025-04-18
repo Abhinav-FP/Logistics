@@ -126,6 +126,22 @@ export default function Index() {
       });
   };
 
+  const handleDownloadBOL = async (shipmentId) => {
+    const detailsService = new Details();
+    try {
+      const response = await detailsService.getBOL(shipmentId);
+      const blob = new Blob([response.data], { type: "application/pdf" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "BOL.pdf"; // Set file name
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (error) {
+      console.error("Error downloading BOL:", error);
+    }
+  };
+
   return (
     <ReviewLayout>
       {pageLoading ? (
@@ -291,6 +307,14 @@ export default function Index() {
                 title="BOL PDF"
               ></iframe>
             )}
+            <p className="text-center pt-2 text-sm text-black mt-2">
+                If you're unable to view the BOL, click here to download it. 
+                <span className="cursor-pointer" onClick={()=>{
+                  handleDownloadBOL(slug);
+                }}>
+                  Click here.
+                  </span>
+              </p>
           </div>
           {/* Signature box */}
           <div className="">
