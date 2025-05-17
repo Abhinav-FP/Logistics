@@ -81,11 +81,12 @@ export default function CustomerDashboard() {
                         "You don't have any data to view at the moment. Please come later"
                       }
                     />
-                  ) : (listing?.ShipmentData &&
-                    listing?.ShipmentData?.slice(0, 2)?.map(
-                      (shipmentTrack, index) => (
+                  ) : (
+                    // listing?.ShipmentData &&
+                    // listing?.ShipmentData?.slice(0, 2)?.map(
+                    //   (shipmentTrack, index) => (
                         <div
-                          key={index}
+                          // key={index}
                           className="border border-black border-opacity-10 p-4 lg:p-5 rounded-md lg:rounded-xl flex flex-wrap"
                         >
                           <div className="w-full md:w-7/12 pr-3">
@@ -93,7 +94,8 @@ export default function CustomerDashboard() {
                               shipment name
                             </div>
                             <h3 className="text-[#262626] font-medium text-xl lg:text-2xl tracking-[-0.06em] mb-2 capitalize">
-                              {truncateString(shipmentTrack?.name, 15) || ""}
+                              {truncateString(listing &&
+                            listing?.ShipmentData && listing?.ShipmentData[0]?.name, 15) || ""}
                             </h3>
                             <div className="flex flex-wrap items-center lg:space-x-2">
                               <svg
@@ -112,8 +114,9 @@ export default function CustomerDashboard() {
                                 />
                               </svg>
                               <span className="text-[#666666] text-[13px] tracking-[-0.06em]">
-                                {truncateString(
-                                  shipmentTrack?.pickup_location,
+                                {truncateString(listing &&
+                                  listing?.ShipmentData && 
+                                  listing?.ShipmentData[0]?.pickup_location,
                                   10
                                 )}
                               </span>
@@ -147,8 +150,9 @@ export default function CustomerDashboard() {
                                 />
                               </svg>
                               <span className="text-[#666666] text-[13px] tracking-[-0.06em]">
-                                {truncateString(
-                                  shipmentTrack?.drop_location,
+                                {truncateString(listing &&
+                                  listing?.ShipmentData && 
+                                  listing?.ShipmentData[0]?.drop_location,
                                   10
                                 )}
                               </span>
@@ -162,8 +166,8 @@ export default function CustomerDashboard() {
                             />
                           </div>
                         </div>
-                      )
-                    )
+                    //   )
+                    // )
                   )}
                 </div>
               </div>
@@ -227,36 +231,42 @@ export default function CustomerDashboard() {
                         ""}
                     </p>
                   </div>
+                   <div className="md:[&:not(:last-child)]:border-r border-black border-opacity-10">
+                        <h3 className="text-sm xl:text-base text-[#7A7A7A] tracking-[-0.04em] font-medium mb-0">
+                          Dimensions
+                        </h3>
+                        <p className="text-base text-[#262626] tracking-[-0.04em] font-medium mb-0 capitalize">
+                          {(listing &&
+                            listing?.ShipmentData &&
+                            listing?.ShipmentData[0]?.dimensions) ||
+                            ""}
+                        </p>
+                      </div>
+                      <div className="md:[&:not(:last-child)]:border-r border-black border-opacity-10">
+                        <h3 className="text-sm xl:text-base text-[#7A7A7A] tracking-[-0.04em] font-medium mb-0">
+                          Weight
+                        </h3>
+                        <p className="text-base text-[#262626] tracking-[-0.04em] font-medium mb-0 capitalize">
+                          {(listing &&
+                            listing?.ShipmentData &&
+                            listing?.ShipmentData[0]?.weight) ||
+                            ""}
+                        </p>
+                      </div>
+                      <div className="md:[&:not(:last-child)]:border-r border-black border-opacity-10">
+                        <h3 className="text-sm xl:text-base text-[#7A7A7A] tracking-[-0.04em] font-medium mb-0">
+                          Payment
+                        </h3>
+                        <p className="text-base text-[#262626] tracking-[-0.04em] font-medium mb-0 capitalize">
+                          {(listing &&
+                            listing?.ShipmentData &&
+                            listing?.ShipmentData[0]?.paymentStatus) ||
+                            ""}
+                        </p>
+                      </div>
                   <div className="md:[&:not(:last-child)]:border-r border-black border-opacity-10">
                     <h3 className="text-sm xl:text-base text-[#7A7A7A] tracking-[-0.04em] font-medium mb-0">
-                      Distance
-                    </h3>
-                    <p className="text-base text-[#262626] tracking-[-0.04em] font-medium mb-0 capitalize">
-                      N/A
-                    </p>
-                  </div>
-                  <div className="md:[&:not(:last-child)]:border-r border-black border-opacity-10">
-                    <h3 className="text-sm xl:text-base text-[#7A7A7A] tracking-[-0.04em] font-medium mb-0">
-                      Estimation
-                    </h3>
-                    <p className="text-base text-[#262626] tracking-[-0.04em] font-medium mb-0 capitalize">
-                      N/A
-                    </p>
-                  </div>
-                  <div className="md:[&:not(:last-child)]:border-r border-black border-opacity-10">
-                    <h3 className="text-sm xl:text-base text-[#7A7A7A] tracking-[-0.04em] font-medium mb-0">
-                      Weight
-                    </h3>
-                    <p className="text-base text-[#262626] tracking-[-0.04em] font-medium mb-0 capitalize">
-                      {(listing &&
-                        listing?.ShipmentData &&
-                        listing?.ShipmentData[0]?.weight) ||
-                        ""}
-                    </p>
-                  </div>
-                  <div className="md:[&:not(:last-child)]:border-r border-black border-opacity-10">
-                    <h3 className="text-sm xl:text-base text-[#7A7A7A] tracking-[-0.04em] font-medium mb-0">
-                      Fee
+                      Cost
                     </h3>
                     <p className="text-base text-[#262626] tracking-[-0.04em] font-medium mb-0 capitalize">
                       ${" "}
