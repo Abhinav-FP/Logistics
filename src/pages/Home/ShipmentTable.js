@@ -59,6 +59,7 @@ export default function ShipmentTable({
       setIsdropdownopen(id);
     }
   };
+  // console.log("carrier",listing);
 
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -776,7 +777,7 @@ export default function ShipmentTable({
       <Popup
         isOpen={isCarrierPopupOpen}
         onClose={closeCarrierPopup}
-        size={"max-w-[570px]"}
+        size={"max-w-[800px]"}
       >
         <div className="lg:px-2.5 lg:pb-2.5">
           <div className="overflow-x-auto mt-8">
@@ -788,6 +789,9 @@ export default function ShipmentTable({
                   </th>
                   <th className="px-4 py-3  tracking-[-0.04em] text-sm font-medium text-left">
                     Carrier Name
+                  </th>
+                  <th className="px-4 py-3  tracking-[-0.04em] text-sm font-medium text-left">
+                    Carrier Email
                   </th>
                   <th className="px-4 py-3  tracking-[-0.04em] text-sm font-medium text-left">
                     Company Name
@@ -809,6 +813,9 @@ export default function ShipmentTable({
                       </td>
                       <td className="px-4 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">
                         {carrier?.career_id_ref?.name}
+                      </td>
+                      <td className="px-4 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">
+                        {carrier?.career_id_ref?.email}
                       </td>
                       <td className="px-4 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">
                         {carrier?.companyname}
