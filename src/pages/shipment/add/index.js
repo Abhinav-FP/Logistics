@@ -96,6 +96,10 @@ export default function Index() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if(formData?.pickup === formData?.delivery){
+      toast.error("Pickup and Delivery location cannot be same");
+      return;
+    }
     setLoading(true);
     const main = new Details();
     const response = main.createShipment({
@@ -238,6 +242,7 @@ export default function Index() {
                     <input
                       type="date"
                       name="shippingDate"
+                      min={new Date().toISOString().split("T")[0]} // Prevent past dates
                       value={formData.shippingDate ? new Date(formData.shippingDate).toISOString().split("T")[0] : ""}
                       onChange={handleChange}
                       className="w-full h-11 lg:h-[48px] appearance-none block bg-white text-[#000] text-base border border-black border-opacity-10 rounded-md lg:rounded-xl py-2 px-4 leading-tight focus:outline-none"
@@ -254,6 +259,7 @@ export default function Index() {
                     <input
                       type="date"
                       name="deliveryDate"
+                      min={new Date().toISOString().split("T")[0]} // Prevent past dates
                       value={formData.deliveryDate ? new Date(formData.deliveryDate).toISOString().split("T")[0] : ""}
                       onChange={handleChange}
                       className="w-full h-11 lg:h-[48px] appearance-none block bg-white text-[#000] text-base border border-black border-opacity-10 rounded-md lg:rounded-xl py-2 px-4 leading-tight focus:outline-none"
@@ -298,10 +304,16 @@ export default function Index() {
                     Quantity (No. of Items)
                   </label>
                   <input
-                    type="number"
+                    type="text"
                     name="quantity"
                     value={formData.quantity}
-                    onChange={handleChange}
+                    onChange={(e) => {
+                  if (
+                    /^[0-9]*$/.test(e.target.value)
+                  ) {
+                    handleChange(e);
+                  }
+                }}
                     className="w-full h-11 lg:h-[48px] appearance-none block bg-white text-[#000] text-base border border-black border-opacity-10 rounded-md lg:rounded-xl py-2 px-4 leading-tight focus:outline-none"
                     placeholder="Enter quantity"
                     required
