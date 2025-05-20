@@ -34,32 +34,32 @@ export default function Index() {
     getcarriers();
   }, []);
 
-  const carriersData = [
-    {
-      id: "SHP-001",
-      CarrierName: "John Carter",
-      companyName: "John Carter",
-      information: "2024-12-01 | 04:30 PM",
-      size: "40",
-      vehicleTypes: ["Truck", "Van"],
-    },
-    {
-      id: "SHP-001",
-      CarrierName: "John Carter",
-      companyName: "John Carter",
-      information: "2024-12-01 | 04:30 PM",
-      size: "40",
-      vehicleTypes: ["Truck", "Van"],
-    },
-    {
-      id: "SHP-001",
-      CarrierName: "John Carter",
-      companyName: "John Carter",
-      information: "2024-12-01 | 04:30 PM",
-      size: "40",
-      vehicleTypes: ["Truck", "Van"],
-    },
-  ];
+  // const carriersData = [
+  //   {
+  //     id: "SHP-001",
+  //     CarrierName: "John Carter",
+  //     companyName: "John Carter",
+  //     information: "2024-12-01 | 04:30 PM",
+  //     size: "40",
+  //     vehicleTypes: ["Truck", "Van"],
+  //   },
+  //   {
+  //     id: "SHP-001",
+  //     CarrierName: "John Carter",
+  //     companyName: "John Carter",
+  //     information: "2024-12-01 | 04:30 PM",
+  //     size: "40",
+  //     vehicleTypes: ["Truck", "Van"],
+  //   },
+  //   {
+  //     id: "SHP-001",
+  //     CarrierName: "John Carter",
+  //     companyName: "John Carter",
+  //     information: "2024-12-01 | 04:30 PM",
+  //     size: "40",
+  //     vehicleTypes: ["Truck", "Van"],
+  //   },
+  // ];
 
   return (
     <>
@@ -94,6 +94,9 @@ export default function Index() {
                         Carrier Name
                       </th>
                       <th className="px-4 py-3  tracking-[-0.04em] text-sm font-medium text-left">
+                        Email
+                      </th>
+                      <th className="px-4 py-3  tracking-[-0.04em] text-sm font-medium text-left">
                         Company Name
                       </th>
                       <th className="px-4 py-3  tracking-[-0.04em] text-sm font-medium text-left">
@@ -119,6 +122,9 @@ export default function Index() {
                           </td>
                           <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">
                             {carrier?.career_id_ref?.name}
+                          </td>
+                          <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">
+                            {carrier?.career_id_ref?.email}
                           </td>
                           <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">
                             {carrier?.companyname}

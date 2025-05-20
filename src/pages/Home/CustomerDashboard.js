@@ -30,6 +30,7 @@ export default function CustomerDashboard() {
   }, []);
 
   function truncateString(str, charLimit) {
+    if(!str) return "";
     if (str.length <= charLimit) return str;
     return str.slice(0, charLimit) + "...";
   }
