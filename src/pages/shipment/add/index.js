@@ -115,7 +115,7 @@ export default function Index() {
       paymentStatus: formData.paymentStatus,
       quantity: formData.quantity,
       weight: formData.weight,
-      dimensions: `${formData.dimensions1} x ${formData.dimensions2}`,
+      dimensions: `${formData.dimensions1}m x ${formData.dimensions2}m`,
       typeOfGoods: formData.typeOfGoods,
       current_location: formData.pickup,
       file: formData?.file
@@ -338,7 +338,7 @@ export default function Index() {
                 </div>
                 <div className="w-full md:w-6/12 px-2 lg:px-3 mb-4 lg:mb-6">
                   <label className="text-[#70708D] text-sm tracking-[-0.04em] uppercase mb-2 block">
-                    Dimensions
+                    Dimensions (in m)
                   </label>
                   <div className="flex gap-2 items-center">
                     <input
