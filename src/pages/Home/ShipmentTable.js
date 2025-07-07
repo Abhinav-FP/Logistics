@@ -186,11 +186,10 @@ export default function ShipmentTable({
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
-
       // Delay UI update for better UX
+      setBolLoading(false);
       setTimeout(() => {
-        setBolLoading(false);
-        setDownloaded(true);
+        setDownloaded(false);
       }, 3000);
     } catch (error) {
       console.error("Error downloading BOL:", error);
@@ -198,6 +197,22 @@ export default function ShipmentTable({
       setDownloaded(false); // Ensure state resets on error
     }
   };
+
+  const handleShowBOL = async(id) => {
+    try{
+      const main = new Details();
+      const response = await main.ShowBOL(id); 
+      if (response && response?.data && response?.data?.status) {
+        toast.success(response.data.message);
+        getShipments();
+      } else {
+        toast.error(response.data.message);
+      }
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+      console.error("error", error);
+    }
+  }
 
   return (
     <div className="overflow-x-auto">
@@ -229,6 +244,10 @@ export default function ShipmentTable({
               <th className="px-4 py-3 tracking-[-0.04em] text-sm font-medium text-left whitespace-nowrap">
                 Action
               </th>
+              {role === "shipper" &&
+                <th className="px-4 py-3 tracking-[-0.04em] text-sm font-medium text-left whitespace-nowrap">
+                BOL Access
+              </th>}
             </tr>
           </thead>
           <tbody>
@@ -269,6 +288,7 @@ export default function ShipmentTable({
                 </td> */}
 
                   {role === "shipper" ? (
+                    <>
                     <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">
                       <div className="flex gap-2 items-center">
                         <FaEye
@@ -310,6 +330,23 @@ export default function ShipmentTable({
                         )}
                       </div>
                     </td>
+                    <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">
+                      {shipment?.driver_id == null && !shipment?.showBOL ? (
+                        "N/A"
+                      ) : shipment?.driver_id != null && !shipment?.showBOL ? (
+                        <button
+                          onClick={() => handleShowBOL(shipment?._id)}
+                          className="bg-[#1C5FE8] text-white text-xs px-4 py-1.5 rounded-md hover:bg-[#174dc4] transition duration-200"
+                        >
+                          Show BOL
+                        </button>
+                      ) : shipment?.driver_id != null && shipment?.showBOL ? (
+                        "Access already given"
+                      ) : (
+                        ""
+                      )}
+                    </td>
+                    </>
                   ) : role === "broker" ? (
                     <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">
                       <div className="relative">
@@ -353,8 +390,14 @@ export default function ShipmentTable({
                               <ul>
                                 <li className="py-2 tracking-[-0.04em] [&:not(:last-child)]:border-b border-black border-opacity-10 px-4 lg:px-6">
                                   <button
-                                    className="flex gap-2 text-[#1B1B1B] bg-transparent border-none text-sm font-medium"
+                                    className={`flex gap-2 text-[#1B1B1B] 
+                                      ${shipment?.showBOL ? "bg-transparent " : "opacity-50 cursor-not-allowed"} 
+                                      border-none text-sm font-medium`}
                                     onClick={() => {
+                                      if (!shipment?.showBOL) {
+                                        toast.error("BOL access not provided yet");
+                                        return;
+                                      }
                                       handleDownloadBOL(shipment?._id);
                                     }}
                                   >
@@ -477,11 +520,17 @@ export default function ShipmentTable({
                               <ul>
                                 <li className="py-2 tracking-[-0.04em] [&:not(:last-child)]:border-b border-black border-opacity-10 px-4 lg:px-6">
                                   <button
-                                    className="flex gap-2 text-[#1B1B1B] bg-transparent border-none text-sm font-medium"
+                                    className={`flex gap-2 text-[#1B1B1B] 
+                                      ${shipment?.showBOL ? "bg-transparent " : "opacity-50 cursor-not-allowed"}
+                                      border-none text-sm font-medium`}
                                     onClick={() => {
-                                      handleDownloadBOL(shipment?._id);
-                                    }}
-                                  >
+                                      if (!shipment?.showBOL) {
+                                          toast.error("BOL access not provided yet");
+                                          return;
+                                        }
+                                        handleDownloadBOL(shipment?._id);
+                                      }}
+                                    >
                                     {bolLoading ? (
                                       "Downloading..."
                                     ) : downloaded ? (
@@ -599,11 +648,17 @@ export default function ShipmentTable({
                               <ul>
                                 <li className="py-2 tracking-[-0.04em] [&:not(:last-child)]:border-b border-black border-opacity-10 px-4 lg:px-6">
                                   <button
-                                    className="flex gap-2 text-[#1B1B1B] bg-transparent border-none text-sm font-medium"
+                                    className={`flex gap-2 text-[#1B1B1B] 
+                                       ${shipment?.showBOL ? "bg-transparent" : "opacity-50 cursor-not-allowed"}
+                                      border-none text-sm font-medium`}
                                     onClick={() => {
-                                      handleDownloadBOL(shipment?._id);
-                                    }}
-                                  >
+                                        if (!shipment?.showBOL) {
+                                          toast.error("BOL access not provided yet");
+                                          return;
+                                        }
+                                        handleDownloadBOL(shipment?._id);
+                                      }}
+                                    >
                                      {bolLoading ? (
                                       "Downloading..."
                                     ) : downloaded ? (

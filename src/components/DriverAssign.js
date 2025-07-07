@@ -2,10 +2,13 @@ import Popup from '@/components/Popup';
 import React, { useEffect, useState } from 'react'
 import Details from '../pages/api/Listing/Details';
 import toast from 'react-hot-toast';
+import { useRole } from '@/context/RoleContext';
 
 export default function DriverAssign({ getShipments, isOpen, onClose, data }) {
     const [Selecteddriver, setSelecteddriver] = useState();
     const [listing, setLisitng] = useState("");
+    const { user } = useRole();
+
     const getDrivers = () => {
         const main = new Details();
         main
@@ -20,7 +23,9 @@ export default function DriverAssign({ getShipments, isOpen, onClose, data }) {
     };
 
     useEffect(() => {
-        getDrivers();
+        if(user && user?.role === "carrier"){
+            getDrivers();
+        }
     }, []);
 
     const assigndriver = () => {
@@ -28,7 +33,7 @@ export default function DriverAssign({ getShipments, isOpen, onClose, data }) {
         const response = main.UpdateShipment(data?._id, {
             driver_id: Selecteddriver,
             driverAccept: "true",
-            status : "transit"
+            // status : "transit"
         });
         response
             .then((res) => {

@@ -91,6 +91,9 @@ class Details extends Component {
     });
   }
 
+  async ShowBOL(data) {
+    return Api.get(`/shipment/showBol/${data}`);
+  }
 
   // ?direction
   async direction(data) {
