@@ -269,7 +269,7 @@ export default function ShipmentTable({
                   <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left capitalize">
                     {shipment?.drop_location}
                   </td>
-                  <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left capitalize">
+                  <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left capitalize whitespace-nowrap">
                     <Status status={shipment?.status} />
                   </td>
                   <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">

@@ -11,6 +11,7 @@ const Status = ({ status }) => {
     "damaged": "bg-[#C2970A1A] text-[#C2970A]",
     "expected": "bg-[#0BB6351A] text-[#0BB635]",
     "pending": "bg-[#E1F1FF] text-[#0367F7]",
+    "driver assigned": "bg-[#E1F1FF] text-[#0367F7]",
     "pick-up": "bg-[#759D3D1A] text-[#C2970A]",
   };
 
@@ -18,7 +19,9 @@ const Status = ({ status }) => {
 
   return (
     <p
-      className={`px-2 py-1 ${getStatusStyles(status)} flex justify-center items-center rounded-md  capitalize`}
+      className={`px-2 py-1 ${getStatusStyles(status)} flex justify-center items-center rounded-md  capitalize
+      ${status == "Driver Assigned" ? "text-sm" : ""}
+      `}
     >
       {status === "PayOnDelivery" ? "pay on delivery" : status || "Unknown"}
     </p>
