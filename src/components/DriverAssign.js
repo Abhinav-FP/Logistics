@@ -33,7 +33,7 @@ export default function DriverAssign({ getShipments, isOpen, onClose, data }) {
         const response = main.UpdateShipment(data?._id, {
             driver_id: Selecteddriver,
             driverAccept: "true",
-            // status : "transit"
+            status : "Driver Assigned"
         });
         response
             .then((res) => {

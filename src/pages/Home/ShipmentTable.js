@@ -289,7 +289,7 @@ export default function ShipmentTable({
 
                   {role === "shipper" ? (
                     <>
-                    <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-left">
+                    <td className="px-3 py-5 text-[#1D1D42] tracking-[-0.04em] text-sm font-medium text-center">
                       <div className="flex gap-2 items-center">
                         <FaEye
                           size={18}
