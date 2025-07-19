@@ -34,10 +34,10 @@ const TravelMap = () => {
     }
   };
 
+  const  apiKey =  process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
 
   useEffect(() => {
-    // Fetch Road Data
-    const roadUrl = `https://maps.googleapis.com/maps/api/directions/json?origin=${origin}&destination=${destination}&mode=driving&key=AIzaSyAZdS5ILSddnuGPqz1TbLNd24wApLunFGU`;
+    const roadUrl = `https://maps.googleapis.com/maps/api/directions/json?origin=${origin}&destination=${destination}&mode=driving&key=${apiKey}`;
     fetch(roadUrl)
       .then(res => res.json())
       .then(data => {
@@ -47,9 +47,8 @@ const TravelMap = () => {
       })
       .catch(error => console.error("Error fetching road data:", error));
 
-
     // Fetch Transit (Train) Data
-    const transitUrl = `https://maps.googleapis.com/maps/api/directions/json?origin=${origin}&destination=${destination}&mode=transit&key=AIzaSyAZdS5ILSddnuGPqz1TbLNd24wApLunFGU`;
+    const transitUrl = `https://maps.googleapis.com/maps/api/directions/json?origin=${origin}&destination=${destination}&mode=transit&key=${apiKey}`;
     fetch(transitUrl)
       .then(res => res.json())
       .then(data => {
@@ -79,7 +78,7 @@ const TravelMap = () => {
         <li>✈️ By Flight: {flightDetails}</li>
       </ul>
 
-      <LoadScript googleMapsApiKey="AIzaSyAZdS5ILSddnuGPqz1TbLNd24wApLunFGU">
+      <LoadScript googleMapsApiKey={apiKey}>
         <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={6}>
           {roadResponse && (
             <DirectionsRenderer directions={roadResponse} options={{
