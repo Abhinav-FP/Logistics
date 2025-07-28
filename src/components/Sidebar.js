@@ -37,7 +37,8 @@ function SideBar({ role }) {
       >
         <div className="px-3 md:px-4 lg:px-6">
           <div className="flex items-center border-b border-gray-200  py-4 lg:py-6 ">
-            <img src="/Logo.png" alt="FriegtFlow Logo" className="h-[41px] w-[98px] mr-2" />
+            <img src="/Truck.png" alt="FriegtFlow Logo" className="h-[41px] w-[98px] mr-2" />
+            {/* <img src="/Logo.png" alt="FriegtFlow Logo" className="h-[41px] w-[98px] mr-2" /> */}
             <div className="flex flex-col">
               <span className="text-lg font-medium text-[#151547] tracking-[-0.04em] mb-1 leading-tight">Freight Flow</span>
               <span className="text-xs font-medium text-[#727272] tracking-[-0.06em] capitalize">{role}</span>
